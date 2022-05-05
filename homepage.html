@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Bootstrap </title>
+
+    <link rel="canonical" href="https://bootstrap5.hexschool.com/docs/5.1/examples/sidebars/">
+
+    <!-- fontawesome. -->
+    <script src="https://kit.fontawesome.com/365e4b1444.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+       ` crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+    <style>
+        section div li[class="nav-item"] {
+            padding: 10px 10px;
+        }
+
+        .togglepad1 {
+            width: 8vw;
+        }
+
+        .togglepad2 {
+            width: 92vw;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- 整塊板子 -->
+    <section style="width: 100%;height: 100%;">
+        <div class="conatiner">
+            <div class="row" style="width: 100vw; height: 100vh;">
+                <!-- 畫面比例 :2 -->
+                <div id="pad1" class="col-md-2 " style="padding: 0; box-shadow: 8px 0px 5px 0px #AEAFB7;z-index: 1;">
+                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark bg-gradient"
+                        style="width: 100%; height: 100%;">
+                        <a href="#"
+                            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <img src="./img/456.png" alt="我不見了" style="height: 65px;">
+                            <span class="fs-4">OrderHippo</span>
+                        </a>
+                        <hr>
+                        <ul class="nav nav-pills flex-column mb-auto">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link text-white" aria-current="page">
+                                    <i class="fa-solid fa-house" style="padding: 10px;"></i>
+                                    首頁
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                    <i class="fa-solid fa-file-invoice" style="padding: 10px;"></i>
+                                    訂單
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                    <i class="fa-solid fa-chart-line" style="padding: 10px;"></i>
+                                    分析資料
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                    <i class="fa-solid fa-file-invoice-dollar" style="padding: 10px;"></i>
+                                    對帳單
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                    <i class="fa-solid fa-utensils" style="padding: 10px;"></i>
+                                    菜單管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                    <i class="fa-solid fa-clock" style="padding: 10px;"> </i>
+                                    營業時間
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                    <i class="fa-solid fa-magnifying-glass-chart" style="padding: 10px;"></i>
+                                    營養成分表
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                    
+                                    顧客管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link text-white">
+                                   
+                                    廣播訊息設定
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="dropdown">
+                            <!-- <a href="#"
+                                class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                                id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+                                    class="rounded-circle me-2">
+                                <strong>mdo</strong>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow"
+                                aria-labelledby="dropdownUser1">
+                                <li><a class="dropdown-item" href="#">New project...</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            </ul> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- 畫面比例 :10 -->
+                <div id="Pad2" class="col-md-10" style="padding: 0;">
+                    <div class="row">
+                        <div class="col-md-6" style="height: 8vh;">
+
+                        </div>
+                        <div class="col-md-6" style="height: 8vh;">
+                            <nav class="navbar navbar-light  justify-content-end">
+                                <ul class="nav justify-content-end">
+                                    <li class="nav-item">
+                                        <i class="fa-solid fa-circle-question"></i>
+                                    </li>
+                                    <li class="nav-item">
+                                        <!-- <a class="nav-link active" aria-current="page" href="#">Active</a> -->
+                                        <i class="fa-solid fa-bell"></i>
+                                    </li>
+                                    <li class="nav-item">
+                                        <!-- <a class="nav-link" href="#">Link</a> -->
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </li>
+                                    <li class="nav-item">
+                                        <!-- <a class="nav-link" href="#">Link</a> -->
+                                        <i class="fa-solid fa-circle-user"></i>
+                                    </li>
+                                    <li class="nav-item">
+                                        <!-- <a class="nav-link disabled">Disabled</a> -->
+                                        名悅便當店
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-md-12"
+                            style="overflow-y:auto;height: 82vh; background-color: rgb(218, 221, 226);">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="./img/Group 1.png">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="./img/Group 2.png">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="./img/Group 3.png">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="./img/Group 4.png">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top:70px ;">
+                                    <img src="./img/Group 5.png" alt="">
+                                </div>
+                                <div class="row" style="padding-top:70px ;">
+                                    <div class="col-md-6">
+                                        <img src="./img/Rectangle 11.png" alt="">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="./img/Rectangle 11.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top:70px ;">
+                                    <div class="col-md-6">
+                                        <img src="./img/Rectangle 11.png" alt="">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="./img/Rectangle 11.png" alt="">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="height: 10vh; font-size: 50%;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-2 text-left">
+                                        <img src="./img/456.png" style="height: 65px;">
+                                        OrderHippo後台管理
+
+                                    </div>
+
+                                    <div class="col-md-4 text-left">
+                                        <!-- <h4>連結</h4> -->
+                                        <ul style="float: left; padding-right: 50px;">
+                                            <li><a href="#">主頁</a></li>
+                                            <li><a href="#">常見問題</a></li>
+                                            <li><a href="#">聯絡我們</a></li>
+                                        </ul>
+                                        <p> 台中市資策會<br>
+                                            Phone: (12) 3456-7891 <br>
+                                            E-Mail: <a href="mailto:xxx@gmail.com   "> xxx@gmail.com</a></p>
+                                    </div>
+                                    <div class="col-md-4 text-left">
+                                        <!-- <h4>聯絡我們</h4> -->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+</body>
+
+
+</html>
