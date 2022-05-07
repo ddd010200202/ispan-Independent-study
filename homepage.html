@@ -35,6 +35,10 @@
         .togglepad2 {
             width: 92vw;
         }
+        section div ul li{
+           height: 60px;
+
+        }
     </style>
 
 </head>
@@ -54,15 +58,15 @@
                             <span class="fs-4">OrderHippo</span>
                         </a>
                         <hr>
-                        <ul class="nav nav-pills flex-column mb-auto">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link text-white" aria-current="page">
+                        <ul class="nav nav-pills flex-column mb-auto btn  " id="pills-tab" role="tablist" >
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white active bg-transparent"  data-bs-toggle="pill" data-bs-target="#pills-home"  role="tab" aria-controls="pills-home" aria-selected="true" >
                                     <i class="fa-solid fa-house" style="padding: 10px;"></i>
                                     首頁
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" class="nav-link text-white">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white bg-transparent" data-bs-toggle="pill" data-bs-target="#pills-profile"  role="tab" aria-controls="pills-profile" aria-selected="false">
                                     <i class="fa-solid fa-file-invoice" style="padding: 10px;"></i>
                                     訂單
                                 </a>
@@ -99,7 +103,7 @@
                             </li>
                             <li>
                                 <a href="#" class="nav-link text-white">
-                                    
+                                    <i class="fa-solid fa-circle-user"></i>    
                                     顧客管理
                                 </a>
                             </li>
@@ -153,25 +157,57 @@
                                         <i class="fa-solid fa-envelope"></i>
                                     </li>
                                     <li class="nav-item">
-                                        <!-- <a class="nav-link" href="#">Link</a> -->
-                                        <i class="fa-solid fa-circle-user"></i>
-                                    </li>
-                                    <li class="nav-item">
                                         <!-- <a class="nav-link disabled">Disabled</a> -->
                                         名悅便當店
                                     </li>
                                 </ul>
                             </nav>
                         </div>
-                        <div class="col-md-12"
+                        <div class="col-md-12 tab-content" id="pills-tabContent"
                             style="overflow-y:auto;height: 82vh; background-color: rgb(218, 221, 226);">
-                            <div class="container">
-                                <div class="row">
+                            <div class="container tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                <div class="row tab-content" >
                                     <div class="col-md-3">
                                         <img src="./img/Group 1.png">
                                     </div>
                                     <div class="col-md-3">
                                         <img src="./img/Group 2.png">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="./img/Group 3.png">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="./img/Group 4.png">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top:70px ;">
+                                    <img src="./img/Group 5.png" alt="">
+                                </div>
+                                <div class="row" style="padding-top:70px ;">
+                                    <div class="col-md-6">
+                                        <img src="./img/Rectangle 11.png" alt="">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="./img/Rectangle 11.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top:70px ;">
+                                    <div class="col-md-6">
+                                        <img src="./img/Rectangle 11.png" alt="">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="./img/Rectangle 11.png" alt="">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="container tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <div class="row tab-content" >
+                                    <div class="col-md-3">
+                                        <img src="./img/Group 2.png">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="./img/Group 1.png">
                                     </div>
                                     <div class="col-md-3">
                                         <img src="./img/Group 3.png">
@@ -214,9 +250,9 @@
                                     <div class="col-md-4 text-left">
                                         <!-- <h4>連結</h4> -->
                                         <ul style="float: left; padding-right: 50px;">
-                                            <li><a href="#">主頁</a></li>
+                                            <!-- <li><a href="#">主頁</a></li>
                                             <li><a href="#">常見問題</a></li>
-                                            <li><a href="#">聯絡我們</a></li>
+                                            <li><a href="#">聯絡我們</a></li> -->
                                         </ul>
                                         <p> 台中市資策會<br>
                                             Phone: (12) 3456-7891 <br>
