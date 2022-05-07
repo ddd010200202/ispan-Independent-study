@@ -8,7 +8,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Bootstrap </title>
-
+    
     <link rel="canonical" href="https://bootstrap5.hexschool.com/docs/5.1/examples/sidebars/">
 
     <!-- fontawesome. -->
@@ -24,80 +24,108 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
     <style>
-        section div li[class="nav-item"] {
+        <!---->
+        section{
+            width: 100vh;
+            height: 100vh;
+        }
+        section div[id="Padright_navbar"] li[class="nav-item"] {
             padding: 10px 10px;
         }
-
-        .togglepad1 {
-            width: 8vw;
+        section>div>div[class="row"]{
+            width: 100vw;
+            height: 100vh;
         }
 
-        .togglepad2 {
-            width: 92vw;
+
+        section div[id="padleft"]>div{
+            width: 100%; height: 100%;
         }
-        section div ul li{
+        div[id="padleft"] div ul li{
            height: 60px;
 
         }
-    </style>
+        div[id="padleft"]>div>a>img{
+            height: 65px;
+        }
+        div[id="padleft"] ul li i{
+            padding: 10px;
+        }
+        div[id="padleft"]>div{
+            height: 100vh;
+        }
+        div[id="padleft"]{
+            padding: 0; box-shadow: 8px 0px 5px 0px #AEAFB7;z-index: 1;height: 100vh;;
+        }
+        div[id="padright"]{
+            height: 100vh;
+        }
+        #padright{
+            padding: 0  px;
+            height: 100vh;
+        }
 
+        #Padright_navbar{
+            height: 8vh;
+        }
+        #pills-home div[class="row tab-content"] img{
+            height: 150px;
+
+        }
+        
+    </style>
+    <link rel="stylesheet" href="./style/mystyle.css">
 </head>
 
 <body>
     <!-- 整塊板子 -->
-    <section style="width: 100%;height: 100%;">
+    <section >
         <div class="conatiner">
-            <div class="row" style="width: 100vw; height: 100vh;">
-                <!-- 畫面比例 :2 -->
-                <div id="pad1" class="col-md-2 " style="padding: 0; box-shadow: 8px 0px 5px 0px #AEAFB7;z-index: 1;">
-                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark bg-gradient"
-                        style="width: 100%; height: 100%;">
+            <div class="row">
+                <!-- 畫面比例 :2 導覽nav-->
+                <div id="padleft" class="col-md-2 " >
+                    <div  class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark bg-gradient">
                         <a href="#"
                             class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                            <img src="./img/456.png" alt="我不見了" style="height: 65px;">
+                            <img src="./img/456.png" alt="我不見了" >
                             <span class="fs-4">OrderHippo</span>
                         </a>
                         <hr>
                         <ul class="nav nav-pills flex-column mb-auto btn  " id="pills-tab" role="tablist" >
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link text-white active bg-transparent"  data-bs-toggle="pill" data-bs-target="#pills-home"  role="tab" aria-controls="pills-home" aria-selected="true" >
-                                    <i class="fa-solid fa-house" style="padding: 10px;"></i>
+                                    <i class="fa-solid fa-house" ></i>
                                     首頁
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link text-white bg-transparent" data-bs-toggle="pill" data-bs-target="#pills-profile"  role="tab" aria-controls="pills-profile" aria-selected="false">
-                                    <i class="fa-solid fa-file-invoice" style="padding: 10px;"></i>
-                                    訂單
+                                    <i class="fa-solid fa-utensils" ></i>
+                                    菜單管理
+
                                 </a>
                             </li>
                             <li>
                                 <a href="#" class="nav-link text-white">
-                                    <i class="fa-solid fa-chart-line" style="padding: 10px;"></i>
+                                    <i class="fa-solid fa-chart-line"></i>
                                     分析資料
                                 </a>
                             </li>
                             <li>
                                 <a href="#" class="nav-link text-white">
-                                    <i class="fa-solid fa-file-invoice-dollar" style="padding: 10px;"></i>
+                                    <i class="fa-solid fa-file-invoice-dollar" ></i>
                                     對帳單
                                 </a>
                             </li>
                             <li>
                                 <a href="#" class="nav-link text-white">
-                                    <i class="fa-solid fa-utensils" style="padding: 10px;"></i>
-                                    菜單管理
+                                    <i class="fa-solid fa-file-invoice"></i>
+                                    訂單
                                 </a>
                             </li>
                             <li>
                                 <a href="#" class="nav-link text-white">
-                                    <i class="fa-solid fa-clock" style="padding: 10px;"> </i>
-                                    營業時間
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link text-white">
-                                    <i class="fa-solid fa-magnifying-glass-chart" style="padding: 10px;"></i>
+                                    <i class="fa-solid fa-magnifying-glass-chart" ></i>
                                     營養成分表
                                 </a>
                             </li>
@@ -109,7 +137,7 @@
                             </li>
                             <li>
                                 <a href="#" class="nav-link text-white">
-                                   
+                                    <i class="fa-solid fa-bullhorn"></i>   
                                     廣播訊息設定
                                 </a>
                             </li>
@@ -137,12 +165,9 @@
                     </div>
                 </div>
                 <!-- 畫面比例 :10 -->
-                <div id="Pad2" class="col-md-10" style="padding: 0;">
-                    <div class="row">
-                        <div class="col-md-6" style="height: 8vh;">
-
-                        </div>
-                        <div class="col-md-6" style="height: 8vh;">
+                <div id="padright" class="col-md-10">
+                    <div class="row" style="height: 100vh; ">
+                        <div id="Padright_navbar" class="col-md-12" >
                             <nav class="navbar navbar-light  justify-content-end">
                                 <ul class="nav justify-content-end">
                                     <li class="nav-item">
@@ -164,7 +189,7 @@
                             </nav>
                         </div>
                         <div class="col-md-12 tab-content" id="pills-tabContent"
-                            style="overflow-y:auto;height: 82vh; background-color: rgb(218, 221, 226);">
+                            style="overflow-y:auto;height: 90vh; background-color: rgb(218, 221, 226);" >
                             <div class="container tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                 <div class="row tab-content" >
                                     <div class="col-md-3">
@@ -184,104 +209,335 @@
                                     <img src="./img/Group 5.png" alt="">
                                 </div>
                                 <div class="row" style="padding-top:70px ;">
-                                    <div class="col-md-6">
-                                        <img src="./img/Rectangle 11.png" alt="">
+                                    <div class="col-md-6" >
+                                        
+                                        <img src="./img/Rectangle 11.png" style="object-fit:contain; width: 100%;" alt="我不見了">
+                                        
                                     </div>
-                                    <div class="col-md-6">
-                                        <img src="./img/Rectangle 11.png" alt="">
-                                    </div>
+                                    <div class="col-md-6" >
+                                        
+                                        <img src="./img/Rectangle 11.png" style="object-fit:contain; width: 100%" alt="我不見了">
+                                        
+                                    </div> 
                                 </div>
                                 <div class="row" style="padding-top:70px ;">
-                                    <div class="col-md-6">
-                                        <img src="./img/Rectangle 11.png" alt="">
+                                    <div class="col-md-6" >
+                                        
+                                        <img src="./img/Rectangle 11.png" style="object-fit:contain; width: 100%" alt="我不見了">
+                                        
                                     </div>
-                                    <div class="col-md-6">
-                                        <img src="./img/Rectangle 11.png" alt="">
+                                    <div class="col-md-6" >
+                                        
+                                        <img src="./img/Rectangle 11.png" style="object-fit:contain; width: 100%" alt="我不見了">
+                                        
                                     </div>
                                 </div>
 
                             </div>
                             <div class="container tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                 <div class="row tab-content" >
-                                    <div class="col-md-3">
-                                        <img src="./img/Group 2.png">
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class=" modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>
+                                                        <table>
+                                                            <tr>
+                                                                <td>餐點名稱</td>
+                                                                <td>餐點種類</td>
+                                                                <td>餐點圖檔</td>
+                                                                <td>售價</td>
+                                                                <td>餐點食材</td>
+                                                                <td>食材克數</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>456</td>
+                                                                <td>789</td>
+                                                                <td>987</td>
+                                                                <td>654</td>
+                                                                <td>321</td>
+                                                                <td>123</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>456</td>
+                                                                <td>789</td>
+                                                                <td>987</td>
+                                                                <td>654</td>
+                                                                <td>321</td>
+                                                                <td>123</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>456</td>
+                                                                <td>789</td>
+                                                                <td>987</td>
+                                                                <td>654</td>
+                                                                <td>321</td>
+                                                                <td>123</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>456</td>
+                                                                <td>789</td>
+                                                                <td>987</td>
+                                                                <td>654</td>
+                                                                <td>321</td>
+                                                                <td>123</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>456</td>
+                                                                <td>789</td>
+                                                                <td>987</td>
+                                                                <td>654</td>
+                                                                <td>321</td>
+                                                                <td>123</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>456</td>
+                                                                <td>789</td>
+                                                                <td>987</td>
+                                                                <td>654</td>
+                                                                <td>321</td>
+                                                                <td>123</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <img src="./img/Group 1.png">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <img src="./img/Group 3.png">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <img src="./img/Group 4.png">
-                                    </div>
-                                </div>
-                                <div class="row" style="padding-top:70px ;">
-                                    <img src="./img/Group 5.png" alt="">
-                                </div>
-                                <div class="row" style="padding-top:70px ;">
-                                    <div class="col-md-6">
-                                        <img src="./img/Rectangle 11.png" alt="">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <img src="./img/Rectangle 11.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="row" style="padding-top:70px ;">
-                                    <div class="col-md-6">
-                                        <img src="./img/Rectangle 11.png" alt="">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <img src="./img/Rectangle 11.png" alt="">
-                                    </div>
+                                    <table class="" width="540" id="table1" style="text-align: center;">
+                                        <tr>
+                                            <th colspan="7" class="myMenu" style="background-color: rgb(139, 177, 220);">
+                                                <div>
+                                                    <div class="row"style="padding: 10px 0px 10px 0px;">
+                                                        <div class="col-2">
+                                                            <span  style="text-align: left;font-size: 25px;"> menu</span>
+                                                        </div>
+                                                        <div class="col-2"></div>
+                                                        <div class="col-8">
+                                                            <span style="text-align: right; padding-right: 0px;">
+                                                                <div class="my-span" >
+                                                                    <button type="button" class=" my-btn-color1" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border-radius:3px 0 0 3px">
+                                                                        新增菜單
+                                                                    </button>
+                                                                    <button type="button" class=" my-btn-color1">
+                                                                        刪除
+                                                                    </button>
+                                                                    <button type="button" class=" my-btn-color1" >
+                                                                        修改
+                                                                    </button>
+                                                                    <input type="text" class="my-type-css" name="" id="" placeholder="搜尋餐點">
+                                                                    <button id="search" type="submit" class=" my-btn-color1">
+                                                                        <i class="fas fa-search"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                               
+                                             
+                                                     
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>餐點名稱</td>
+                                            <td>餐點種類</td>
+                                            <td>餐點圖檔</td>
+                                            <td>售價</td>
+                                            <td>餐點食材</td>
+                                            <td>食材克數</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>456</td>
+                                            <td>789</td>
+                                            <td>987</td>
+                                            <td>654</td>
+                                            <td>321</td>
+                                            <td>123</td>
+                                        </tr>
+                            
+                                    </table>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="col-md-12" style="height: 10vh; font-size: 50%;">
-                            <div class="container">
+                        <!-- <div class="col-md-12" style="height: 10vh; font-size: 20%;" >
+                            <div class="container" >
                                 <div class="row">
-                                    <div class="col-md-2 text-left">
-                                        <img src="./img/456.png" style="height: 65px;">
-                                        OrderHippo後台管理
+                                    <div class="col-md-3 text-left " style="padding-top:10px ;padding-bottom: 0px;">
+                                        <img src="./img/456.png" style="height: 50px;">
+                                        OrderHippoc後臺管理系統
 
                                     </div>
 
-                                    <div class="col-md-4 text-left">
-                                        <!-- <h4>連結</h4> -->
+                                    <div class="col-md-4 text-left"  >
+                                        
                                         <ul style="float: left; padding-right: 50px;">
-                                            <!-- <li><a href="#">主頁</a></li>
+                                            <li><a href="#">主頁</a></li>
                                             <li><a href="#">常見問題</a></li>
-                                            <li><a href="#">聯絡我們</a></li> -->
+                                            <li><a href="#">聯絡我們</a></li>
                                         </ul>
+                                    </div>
+                                    <div class="col-md-4 text-left" >
                                         <p> 台中市資策會<br>
                                             Phone: (12) 3456-7891 <br>
                                             E-Mail: <a href="mailto:xxx@gmail.com   "> xxx@gmail.com</a></p>
                                     </div>
-                                    <div class="col-md-4 text-left">
-                                        <!-- <h4>聯絡我們</h4> -->
+                                    <div class="col-md-1 text-left" style="object-fit: contain;height: 100%;">
+                                        
 
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-
-
-
-
-
-
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
 </body>
 
 

@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+
+
+table {
+    background-color: #fff;
+    border-collapse: collapse;
+    
+}
+
+table,
+th,
+td {
+    border: 1px solid #010101;
+}
+.myMenu{
+    color: #ffffff;
+    height:30px;
+    width: 200px;
+    /* text-align:left; */
+    font-size: 10px;
+    font-family: "LiGothic", "FangSong", Arial, serif;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.btn-check:focus+.btn-primary1,.btn-primary1:focus{
+    color:rgb(255, 0, 0);
+    background-color:#0800ff;
+    border-color:#00ff62;
+    box-shadow:0 0 0 .25rem rgba(255, 255, 255, 0.5)
+}
+.btn-check:active+.btn-primary1,.btn-check:checked+.btn-primary1,.btn-primary1.active,.btn-primary1:active,.show>.btn-primary1.dropdown-toggle{
+    color:#fff;
+    background-color:#ffffff;
+    border-color:#ffffff
+}
+.btn-check:active+.btn-primary1:focus,.btn-check:checked+.btn-primary1:focus,.btn-primary1.active:focus,.btn-primary1:active:focus,.show>.btn-primary1dropdown-toggle:focus{
+    box-shadow:0 0 0 .25rem rgba(255, 255, 255, 0.5)
+}
+.btn-primary1.disabled,.btn-primary:disabled{
+    color:#fff;
+    background-color:#ffffff;
+    border-color:#ffffff
+}
+@media (prefers-reduced-motion:reduce){
+    .btn{
+        transition:none}
+    }
+.btn:hover{color:#212529}.btn-check:focus+.btn,.btn:focus{outline:0;box-shadow:0 0 0 .25rem rgba(13,110,253,.25)}.btn.disabled,.btn:disabled,fieldset:disabled .btn{pointer-events:none;opacity:.65}
+
+.my-btn-color1{
+    color:rgb(255, 255, 255);
+    background-color: rgb(86, 113, 143);
+    border-color: rgb(92, 92, 92);
+    
+
+    border: none;
+    /* color: white; */
+    padding: 10px;
+    text-align: center;
+    /* text-decoration: none; */
+    /* display: inline-block; */
+    /* font-size: 16px; */
+    /* margin: 10px 0px; */
+    /* cursor: pointer; */
+
+    
+}
+.my-btn-color1:hover{
+    color:rgb(239, 241, 255);
+    background-color: rgb(50, 76, 103);
+    border-color:  rgb(196, 196, 196);
+}
+.my-span{
+    width: 322px;
+    background-color: #b9b9b9bd;
+    border-radius:3px;
+    text-align:left;
+    margin: 1px;
+}
+.my-type-css{
+    width: 151px;
+    height: 38px;
+    border-radius: 0px 3px 3px 0px;
+    border: 1px solid rgb(196, 196, 196);
+    padding-left: 10px;
+    outline:none;
+}
+
+
+#search{
+    /* font-size: 25px; */
+    width: 40px;
+    height: 38px;
+    margin-left: -41px;
+    border-radius: 0px 3px 3px 0px;
+}
