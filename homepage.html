@@ -10,7 +10,8 @@
     <title>Bootstrap </title>
 
     <link rel="canonical" href="https://bootstrap5.hexschool.com/docs/5.1/examples/sidebars/">
-
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- fontawesome. -->
     <script src="https://kit.fontawesome.com/365e4b1444.js" crossorigin="anonymous"></script>
 
@@ -108,16 +109,12 @@
         height:
         100vh;
         }
-        #padright
-        {
-        padding:
-        0
-        px;
+        #padright{
+        padding:0px;
         height:
         100vh;
         }
-        #Padright_navbar
-        {
+        #Padright_navbar{
         height:
         8vh;
         }
@@ -125,6 +122,81 @@
         height:
         150px;
         }
+        
+        .table-box {
+            margin: 100px auto;
+            width: 1024px;
+        }
+ 
+        /* 卷軸寬度 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background-color: transparent;
+        }
+ 
+        /* 卷軸顏色 */
+        ::-webkit-scrollbar-thumb {
+            background-color: #27314d;
+        }
+ 
+        #pills-nutrientContent {
+            width: 100%;
+            border-spacing: 0px;
+            border-collapse: collapse;
+        }
+ 
+        #pills-nutrientContent caption{
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 50px;
+        }
+ 
+        #pills-nutrientContent th, #pills-nutrientContent td {
+            height: 50px;
+            text-align: center;
+            border: 1px solid gray;
+        }
+ 
+        #pills-nutrientContent thead {
+            color: white;
+            background-color: #38F;
+        }
+ 
+        #pills-nutrientContent tbody {
+            display: block;
+            width: calc(100% + 8px); /*這裡的8px是卷軸的寬度*/
+            height: 300px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+ 
+        #pills-nutrientContent tfoot {
+            background-color: #71ea71;
+        }
+ 
+        #pills-nutrientContent thead tr, #pills-nutrientContent tbody tr, #pills-nutrientContent tfoot tr {
+            box-sizing: border-box;
+            table-layout: fixed;
+            display: table;
+            width: 100%;
+        }
+ 
+        #pills-nutrientContent tbody tr:nth-of-type(odd) {
+            background: #EEE;
+        }
+ 
+        #pills-nutrientContent tbody tr:nth-of-type(even) {
+            background: #FFF;
+        }
+ 
+        #pills-nutrientContent tbody tr td{
+            border-bottom: none;
+        }
+        #pills-nutrientContent{
+            margin-top: 100px;
+            
+        }
+    </style>
 
     </style>
     <link rel="stylesheet" href="./style/mystyle.css">
@@ -182,10 +254,12 @@
                                     訂單管理
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" class="nav-link text-white">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white bg-transparent" data-bs-toggle="pill"
+                                    data-bs-target="#pills-nutrientContent" role="tab" aria-controls="pills-nutrientContent"
+                                    aria-selected="false">
                                     <i class="fa-solid fa-magnifying-glass-chart"></i>
-                                    營養成分表
+                                    營養成份表
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -561,6 +635,7 @@
                                             <button >搜尋訂單</button><input  type="text" >
                                           </div>
                                         </div>
+                                        <hr>
                                     <div class="col-md-12 pt-2" >
                                       <!--餐點名稱 會員編號 餐點數量  餐點金額 訂單狀態-->
                                       <div style="width: 100%;">
@@ -687,6 +762,35 @@
                                 </div>
                             
                             </div>
+                            <div class="container tab-pane fade" id="pills-nutrientContent" role="tabpanel" aria-labelledby="pills-nutrientContent-tab">
+                                <table class="table table-dark table-hover" id="nutrientContenttable">
+                                <thead>
+                                    <tr>
+                                        <th class="">食材編號</th>
+                                        <th>俗名</th>
+                                        <th>食材分類</th>
+                                        <th>食材描述</th>
+                                        <th>熱量</th>
+                                        <th>碳水化合物</th>
+                                        <th>脂肪</th>
+                                        <th>蛋白質</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="nutrientContenttabletbody">
+
+                                </tbody>
+                                <tfoot>
+                                    <tr></tr>
+                                    <tr></tr>
+                                    <tr></tr>
+                                    <tr></tr>
+                                    <tr></tr>
+                                    <tr></tr>
+                                    <tr></tr>
+                                    <tr></tr>
+                                </tfoot>
+                                </table>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -724,6 +828,63 @@
             </div>
         </div>
         </div>
+        <script>
+            // var URL="https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=wxV177kLhEE3"
+            // var a= function test(){
+            //     $.ajax({
+            //         url:URL,
+            //         type:"get",
+            //         success:doSuccess,
+            //         error:doError
+            //     })
+            // }();
+            // function doSuccess(json){
+            //     var jsonObj =$.parseJSON(json)
+            // 		$('#table').empty();
+            // 		$(json).each(
+            // 			function(i,val){
+            // 				console.log(val.ID + ":" + val.fname);
+    
+            // 			}
+            // 		);
+            // 	}
+            // function doError(){
+            //     console.log("no")
+            // }
+            
+                var b=function (){
+                    $.ajax("./Jsontest.json")//toarry
+                    .done(function (apple) {
+                        for (var a of apple) {
+                                $('#nutrientContenttabletbody').append(
+                                '<tr>' +
+                                '<td>' + `${a.INGREDIENT_ID}`+ '</td>' + 
+                                '<td>' + `${a.INGREDIENT_NAME}` + '</td>' + 
+                                '<td>' + `${a.INGREDIENT_CATEGORY}` + '</td>' + 
+                                '<td>' + `${a.INGREDIENT_DESC}` + '</td>' + 
+                                '<td>' + `${a.CALORIE}` + '</td>' + 
+                                '<td>' + `${a.CARB}` + '</td>' + 
+                                '<td>' + `${a.FAT}` + '</td>' + 
+                                '<td>' + `${a.PROTEIN}` + '</td>' + 
+                                '</tr>'
+                                )
+                            
+                        }
+                        // alert("success");
+                    })
+                    // .fail(function () {
+                    //     alert("error");
+                    // })
+                    // .always(function () {
+                    //     alert("complete");
+                    // });
+                }();
+                
+    
+            
+            
+        
+        </script>
 </body>
 
 
