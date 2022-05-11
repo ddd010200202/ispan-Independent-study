@@ -197,7 +197,7 @@
         #pills-nutrientContent{
             margin-top: 10px;
         }
-        /*搜尋欄*/
+        
         #nutrientContentsearch
         {
         left: 50%;
@@ -243,7 +243,7 @@
     <!-- 分析資料表 -->
     <script>
                 const labels = [
-          'January',
+          'aaaa',
           'February',
           'March',
           'April',
@@ -257,7 +257,7 @@
             label: 'My First dataset',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
+            data: [100, 10, 5, 2, 20, 30, 45],
           }]
         };
       
@@ -312,12 +312,12 @@
 
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="#" class="nav-link text-white">
                                     <i class="fa-solid fa-file-invoice-dollar"></i>
                                     對帳單
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link text-white bg-transparent" data-bs-toggle="pill"
                                     data-bs-target="#pills-order" role="tab" aria-controls="pills-order"
@@ -379,8 +379,8 @@
                         <div id="Padright_navbar" class="col-md-12">
                             <nav class="navbar navbar-light  justify-content-end">
                                 <ul class="nav justify-content-end">
-                                    <li class="nav-item">
-                                        <i class="fa-solid fa-circle-question"></i>
+                                    <li class="nav-item" >
+                                        <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="left"  title='聯絡資訊:aaa@gmail.com'></i>
                                     </li>
                                     <li class="nav-item">
                                         <!-- <a class="nav-link active" aria-current="page" href="#">Active</a> -->
@@ -388,7 +388,8 @@
                                     </li>
                                     <li class="nav-item">
                                         <!-- <a class="nav-link" href="#">Link</a> -->
-                                        <i class="fa-solid fa-envelope"></i>
+                                        <a href="mailto:xxx@gmail.com   " style="color:black ;"> <i class="fa-solid fa-envelope" ></i></a>
+                                        
                                     </li>
                                     <li class="nav-item">
                                         <!-- <a class="nav-link disabled">Disabled</a> -->
@@ -838,12 +839,12 @@
                                 <h1 class="display-2">營養成分表</h1>
                                 <div>
                                     <input id="nutrientContentsearch"><div class="div1"></div></input>
+                                    <!-- <input type="submit"  onclick="b()" value="確認"> -->
                                 </div>
                                 
                                 <table class="table table-dark table-hover" id="nutrientContenttable">
                                 <thead>
                                     <tr>
-                                        <th class="">食材編號</th>
                                         <th>俗名</th>
                                         <th>食材分類</th>
                                         <th>食材描述</th>
@@ -933,23 +934,40 @@
             // function doError(){
             //     console.log("no")
             // }
-            
+            $("#nutrientContentsearch").keyup(function () {
+                    //將輸入值轉為小寫去除空格
+                    var keyword = this.value.toLowerCase().trim();
+
+                    $("table tr").each(function (index) {
+                        if (!index) return;
+                        $(this).find("td").each(function () {
+                            var id = $(this).text().toLowerCase().trim();
+                            var unfound = (id.indexOf(keyword) == -1);
+                            //.closest由tr開始搜尋/tr結束
+                            //.toggle()=>hide()、show切換
+                            $(this).closest('tr').toggle(!unfound);
+                            return unfound;
+                        });
+                    });
+                });
                 var b=function (){
                     $.ajax("./Jsontest.json")//toarry
                     .done(function (apple) {
                         for (var a of apple) {
+                            console.log($('#nutrientContentsearch').val())
                                 $('#nutrientContenttabletbody').append(
                                 '<tr>' +
-                                '<td>' + `${a.INGREDIENT_ID}`+ '</td>' + 
+
                                 '<td>' + `${a.INGREDIENT_NAME}` + '</td>' + 
                                 '<td>' + `${a.INGREDIENT_CATEGORY}` + '</td>' + 
                                 '<td>' + `${a.INGREDIENT_DESC}` + '</td>' + 
-                                '<td>' + `${a.CALORIE}` + '</td>' + 
-                                '<td>' + `${a.CARB}` + '</td>' + 
-                                '<td>' + `${a.FAT}` + '</td>' + 
-                                '<td>' + `${a.PROTEIN}` + '</td>' + 
+                                '<td>' + `${a.CALORIE}` + 'kcal</td>' + 
+                                '<td>' + `${a.CARB}` + 'g</td>' + 
+                                '<td>' + `${a.FAT}` + 'g</td>' + 
+                                '<td>' + `${a.PROTEIN}` + 'g</td>' + 
                                 '</tr>'
                                 )
+                            
                             
                         }
                         // alert("success");
@@ -962,7 +980,7 @@
                     // });
                 }();
                 
-    
+
             
             
         
