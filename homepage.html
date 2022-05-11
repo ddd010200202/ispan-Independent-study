@@ -10,6 +10,8 @@
     <title>Bootstrap </title>
 
     <link rel="canonical" href="https://bootstrap5.hexschool.com/docs/5.1/examples/sidebars/">
+    <!--chart.js-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!--jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- fontawesome. -->
@@ -122,7 +124,7 @@
         height:
         150px;
         }
-        
+        /* 營養成分表*/
         .table-box {
             margin: 100px auto;
             width: 1024px;
@@ -152,7 +154,7 @@
         }
  
         #pills-nutrientContent th, #pills-nutrientContent td {
-            height: 50px;
+            height: 20px;
             text-align: center;
             border: 1px solid gray;
         }
@@ -165,7 +167,7 @@
         #pills-nutrientContent tbody {
             display: block;
             width: calc(100% + 8px); /*這裡的8px是卷軸的寬度*/
-            height: 300px;
+            height: 500px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -193,12 +195,79 @@
             border-bottom: none;
         }
         #pills-nutrientContent{
-            margin-top: 100px;
-            
+            margin-top: 10px;
+        }
+        /*搜尋欄*/
+        #nutrientContentsearch
+        {
+        left: 50%;
+        position:relative;
+        -webkit-transform:translate(-50%,-50%);
+        width:40px;
+        height:40px;
+        border-style:none;
+        border-radius:20px;
+        padding:10px;
+        background-color:#081925;
+        outline:none;
+        transition-duration:500ms;
+        cursor:pointer;
+        background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjExR/NCNwAAAWpJREFUWEfNljFOxDAQRbehoKDnIjTcgYtwAHpOwhE4BA3Vig6Je9ABYZ60kZbVc5xkifRHelrleRzP2rGT3TAM0ahMQmUSKpNQmYTKJFQmoTIJlUmonMFlcV88FW/F5+GXazzt1m8xKjvcFh/FVNBOnvVfhMoJHorvgtgXzNZNcXX45RpPkEe+3Wc2KhswIwz6VTwWF4Xl4Wknj/yzZlKlwDM1LiuDW84p5BH0W/1MqhRYOoLla83cKeSNy01/y+miUmB3EksHGv8Y/a29i0qBI4RgI1h7C/IJ+lt7F5UC5xzBbrX2FuQT9Lf2LiqF+BmMfwbHgWJ3cfw5CEvfJD8FcVdY3ixUTrDkXTzGe3Fd2P26qOww92uGmaM4YnWRKmfAM8VssTs5QlrfgxR1VpEq/5mzilS5AauLVLkRq4pUuSHHRb4WlvMHlRtDkS/F85FrojIJlUmoTEJlEiqTUJmEyiRUJqEyh2H3Cz4WH1fC57RBAAAAAElFTkSuQmCC);
+        background-repeat:no-repeat;
+        font-family:'Segoe UI';
+        font-size:15px;
+        color:transparent;
+        overflow:hidden;
+        }
+        #nutrientContentsearch:focus
+        {
+        width:200px;
+        cursor:text;
+        padding-left:40px;
+        color:#A0A0A0;
+        }
+        #nutrientContentsearch:hover,#nutrientContentsearch:focus
+        {
+        background-color:#FFFFFF;
+        background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJTSURBVFiF7ZdNSxtRFIafM5PgJGqXxXy4DIziJhBdFLrwnyi4cym40S4ClkJ/g2B/Qv+BC0s3CtkIDWYZasWtXxEzebswQxGt3sk0Nou8cHfnPTycc+fOOSaJUZb3vwFe0hgwrcaAaTUGTKuRB8wMYrLZ2dxEd3rVPC2aqAoqBi0ZDfXs8DZzsad2++ZfAFrSP0m+NPdO4gtQeSasZcbK9c8f39PAQcIW50vzmxIHQEXQkGzdU2+pc6c3nnpLkq0LGkBF4iBfmt9MC+hcwX7lDgBhfOycTu5IR3ePElotGxSvthFbgJnxPlUlJb14KJdzQSE8CQqhgmJYd/EExbAeFEIFhfCEcjnn4nnqOLV4oju9Sr+tndPJHRdP53RyJ2533z+QnADN0yIAst2n2vqUpKM7ZLsP/EMDFFUAn+gwSfI4PvYPIidA9Z+U6641kySP4/X8k/Ss3CoILYB8RmGS5HF87B9EbhU0GgARfqK7FMfH/kHkBtiz+7tnWjOrZV08ZrUsprUH/mEB3mYu9oCWQTUoXm27eILi1bZBFWj1/cMDVLt9Y8YK0ENs5Upz9b9V0qyWzZXm6ogPAF6PjTSDQ6Jh4f5frE+AJ2gg2/WJDq+71sxnFEb4i5jW+pWL1fS7/vLl+fHZ0AHvId2mGa/HRs/jMxCmgUwMCO7z4NTbhZkoE+2ngRwIMInSQg595L88Pz7zu/4y0ATCKBPtT71dmHH1v8pOkgby1ZamR5DZ6KuL71W3uj+Q9k3SLxfP0D+StBr5vXgMmFZjwLQaA6bVyAP+BkJqfmMbSKF/AAAAAElFTkSuQmCC);
+        }
+        .div1
+        {
+        position:absolute;
+        left:0px;
+        top:45px;
+        width:50px;
+        height:5px;
         }
     </style>
-
-    </style>
+    <!-- 分析資料表 -->
+    <script>
+                const labels = [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+        ];
+      
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45],
+          }]
+        };
+      
+        const config = {
+          type: 'line',
+          data: data,
+          options: {}
+        };
+    </script>
+    
     <link rel="stylesheet" href="./style/mystyle.css">
 </head>
 
@@ -234,10 +303,13 @@
 
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" class="nav-link text-white">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white bg-transparent" data-bs-toggle="pill"
+                                    data-bs-target="#pills-analyze" role="tab" aria-controls="pills-analyze"
+                                    aria-selected="false">
                                     <i class="fa-solid fa-chart-line"></i>
                                     分析資料
+
                                 </a>
                             </li>
                             <li>
@@ -763,6 +835,11 @@
                             
                             </div>
                             <div class="container tab-pane fade" id="pills-nutrientContent" role="tabpanel" aria-labelledby="pills-nutrientContent-tab">
+                                <h1 class="display-2">營養成分表</h1>
+                                <div>
+                                    <input id="nutrientContentsearch"><div class="div1"></div></input>
+                                </div>
+                                
                                 <table class="table table-dark table-hover" id="nutrientContenttable">
                                 <thead>
                                     <tr>
@@ -790,6 +867,11 @@
                                     <tr></tr>
                                 </tfoot>
                                 </table>
+                            </div>
+                            <div class="container tab-pane fade" id="pills-analyze" role="tabpanel" aria-labelledby="pills-analyze-tab">
+                                <div>
+                                    <canvas id="myChart"></canvas>
+                                </div>
                             </div>
                             </div>
                         </div>
@@ -884,6 +966,12 @@
             
             
         
+        </script>
+        <script>
+                const myChart = new Chart(
+                  document.getElementById('myChart'),
+                  config
+                );
         </script>
 </body>
 
