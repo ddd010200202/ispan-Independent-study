@@ -31,9 +31,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Open+Sans&display=swap" rel="stylesheet">
     <style>
-    
-        <!--
-        -->
+    /*先放榮庭CSS*/
+        
         section
         {
         width:
@@ -123,6 +122,30 @@
         div[id="pills-home"] div[class="row tab-content"] img{
         height:
         150px;
+        }
+        #pills-tabContent{
+            overflow-y:auto;height: 90vh; background-color: rgb(218, 221, 226);
+        }
+        #bulletinBoard{
+            padding-top:70px ;
+        }
+        #padright>div{
+            height: 100vh;
+        }
+        .content{
+            padding-top:70px ;
+        }
+        .content img{
+            object-fit:contain; width: 100%;
+        }
+        #orderDiv{
+            width: 100%;
+        }
+        #mailUs{
+            color:black 
+        }
+        #floatingTextarea{
+            height: 100px;
         }
         /* 營養成分表*/
         .table-box {
@@ -239,6 +262,7 @@
         width:50px;
         height:5px;
         }
+
     </style>
     <!-- 分析資料表 -->
     <script>
@@ -312,6 +336,7 @@
 
                                 </a>
                             </li>
+                            <!-- 要不要做 -->
                             <!-- <li>
                                 <a href="#" class="nav-link text-white">
                                     <i class="fa-solid fa-file-invoice-dollar"></i>
@@ -375,20 +400,22 @@
                 </div>
                 <!-- 畫面比例 :10 -->
                 <div id="padright" class="col-md-10">
-                    <div class="row" style="height: 100vh; ">
+                    <div class="row" >
                         <div id="Padright_navbar" class="col-md-12">
+                            <!--上頭nav bar-->
                             <nav class="navbar navbar-light  justify-content-end">
                                 <ul class="nav justify-content-end">
+                                        <!-- 聯絡資訊 -->
                                     <li class="nav-item" >
                                         <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="left"  title='聯絡資訊:aaa@gmail.com'></i>
                                     </li>
                                     <li class="nav-item">
-                                        <!-- <a class="nav-link active" aria-current="page" href="#">Active</a> -->
+                                        <!-- 訂單提示 -->
                                         <i class="fa-solid fa-bell"></i>
                                     </li>
                                     <li class="nav-item">
-                                        <!-- <a class="nav-link" href="#">Link</a> -->
-                                        <a href="mailto:xxx@gmail.com   " style="color:black ;"> <i class="fa-solid fa-envelope" ></i></a>
+                                        <!-- 寄信給我們 -->
+                                        <a href="mailto:xxx@gmail.com   " id="mailUs" > <i class="fa-solid fa-envelope" ></i></a>
                                         
                                     </li>
                                     <li class="nav-item">
@@ -398,8 +425,8 @@
                                 </ul>
                             </nav>
                         </div>
-                        <div class="col-md-12 tab-content" id="pills-tabContent"
-                            style="overflow-y:auto;height: 90vh; background-color: rgb(218, 221, 226);">
+                        <!-- 首頁 -->
+                        <div class="col-md-12 tab-content" id="pills-tabContent">
                             <div class="container tab-pane fade show active" id="pills-home" role="tabpanel"
                                 aria-labelledby="pills-home-tab">
                                 <div class="row tab-content">
@@ -416,39 +443,40 @@
                                         <img src="./img/Group 4.png">
                                     </div>
                                 </div>
-                                <div class="row" style="padding-top:70px ;">
+                                <div class="row" id="bulletinBoard" >
                                     <img src="./img/Group 5.png" alt="">
                                 </div>
-                                <div class="row" style="padding-top:70px ;">
+                                <div class="row content"   >
                                     <div class="col-md-6">
 
-                                        <img src="./img/Rectangle 11.png" style="object-fit:contain; width: 100%;"
+                                        <img src="./img/Rectangle 11.png" 
                                             alt="我不見了">
 
                                     </div>
                                     <div class="col-md-6">
 
-                                        <img src="./img/Rectangle 11.png" style="object-fit:contain; width: 100%"
+                                        <img src="./img/Rectangle 11.png" 
                                             alt="我不見了">
 
                                     </div>
                                 </div>
-                                <div class="row" style="padding-top:70px ;">
+                                <div class="row content"  >
                                     <div class="col-md-6">
 
-                                        <img src="./img/Rectangle 11.png" style="object-fit:contain; width: 100%"
+                                        <img src="./img/Rectangle 11.png" 
                                             alt="我不見了">
 
                                     </div>
                                     <div class="col-md-6">
 
-                                        <img src="./img/Rectangle 11.png" style="object-fit:contain; width: 100%"
+                                        <img src="./img/Rectangle 11.png" 
                                             alt="我不見了">
 
                                     </div>
                                 </div>
 
                             </div>
+                            <!-- menu -->
                             <div class="container tab-pane fade" id="pills-menu" role="tabpanel" aria-labelledby="pills-menu-tab">
                                 <div class="row tab-content" >
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -690,6 +718,7 @@
                                 </div>
 
                             </div>
+                            <!-- order -->
                             <div class="container tab-pane fade" id="pills-order" role="tabpanel" aria-labelledby="pills-order-tab">
                                 <div class="row tab-content">
                                         <div class="conatiner" >
@@ -711,7 +740,7 @@
                                         <hr>
                                     <div class="col-md-12 pt-2" >
                                       <!--餐點名稱 會員編號 餐點數量  餐點金額 訂單狀態-->
-                                      <div style="width: 100%;">
+                                      <div id="orderDiv" >
                                         <table class="table table-hover table-light" >
                                           <thead class="">
                                             <tr>
@@ -770,19 +799,20 @@
                                       </div>
                                 </div>
                             </div>
+                            <!-- broadcast -->
                             <div class="container tab-pane fade" id="pills-broadcast" role="tabpanel" aria-labelledby="pills-broadcast-tab">
                                 <h1 class="display-2">廣播訊息設定</h1>
                                 <div class="text-top" >
-                                    <div class="form-floating" style="margin-top:10px ;">
-                                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 100px;"></textarea>
+                                    <div class="form-floating" >
+                                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" ></textarea>
                                         <label for="floatingTextarea">請輸入廣播訊息</label>
                                     </div>
                                     <hr>
-                                    <div style="margin-top:10px ;">
+                                    <div >
                                         <pre>折扣卷：</pre><button class="btn btn-outline-secondary">加入一張折扣卷</button><br>
                                         <pre>商品　：</pre><button class="btn btn-outline-secondary">加入一張商品</button>
                                     </div>
-                                    <div class="input-group mb-3" style="margin-top:10px ;">
+                                    <div class="input-group mb-3" >
                                         <label class="input-group-text" for="inputGroupFile01">上傳圖片</label>
                                         <input type="file" class="form-control" id="inputGroupFile01">
                                       </div>
@@ -790,6 +820,7 @@
                                 </div>
                                     
                             </div >
+                            <!-- member -->
                             <div class="container tab-pane fade" id="pills-member" role="tabpanel" aria-labelledby="pills-member-tab">
                                 <div>
                                     <table class="my-menu-table">
@@ -835,6 +866,7 @@
                                 </div>
                             
                             </div>
+                            <!-- nutrientContent -->
                             <div class="container tab-pane fade" id="pills-nutrientContent" role="tabpanel" aria-labelledby="pills-nutrientContent-tab">
                                 <h1 class="display-2">營養成分表</h1>
                                 <div>
@@ -858,17 +890,14 @@
 
                                 </tbody>
                                 <tfoot>
+                                    
                                     <tr></tr>
-                                    <tr></tr>
-                                    <tr></tr>
-                                    <tr></tr>
-                                    <tr></tr>
-                                    <tr></tr>
-                                    <tr></tr>
+
                                     <tr></tr>
                                 </tfoot>
                                 </table>
                             </div>
+                            <!-- analyze -->
                             <div class="container tab-pane fade" id="pills-analyze" role="tabpanel" aria-labelledby="pills-analyze-tab">
                                 <div>
                                     <canvas id="myChart"></canvas>
@@ -877,40 +906,11 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="col-md-12" style="height: 10vh; font-size: 20%;" >
-                            <div class="container" >
-                                <div class="row">
-                                    <div class="col-md-3 text-left " style="padding-top:10px ;padding-bottom: 0px;">
-                                        <img src="./img/456.png" style="height: 50px;">
-                                        OrderHippoc後臺管理系統
-
-                                    </div>
-
-                                    <div class="col-md-4 text-left"  >
-                                        
-                                        <ul style="float: left; padding-right: 50px;">
-                                            <li><a href="#">主頁</a></li>
-                                            <li><a href="#">常見問題</a></li>
-                                            <li><a href="#">聯絡我們</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4 text-left" >
-                                        <p> 台中市資策會<br>
-                                            Phone: (12) 3456-7891 <br>
-                                            E-Mail: <a href="mailto:xxx@gmail.com   "> xxx@gmail.com</a></p>
-                                    </div>
-                                    <div class="col-md-1 text-left" style="object-fit: contain;height: 100%;">
-                                        
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                 </div>
             </div>
         </div>
         </div>
+         </section>
         <script>
             // var URL="https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=wxV177kLhEE3"
             // var a= function test(){
@@ -970,27 +970,24 @@
                             
                             
                         }
-                        // alert("success");
                     })
-                    // .fail(function () {
-                    //     alert("error");
-                    // })
+                    .fail(function () {
+                        alert("error");
+                    })
                     // .always(function () {
                     //     alert("complete");
                     // });
                 }();
-                
-
-            
-            
-        
-        </script>
-        <script>
+                /*畫分析圖表*/
                 const myChart = new Chart(
                   document.getElementById('myChart'),
                   config
                 );
+            
+            
+        
         </script>
+
 </body>
 
 
