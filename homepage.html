@@ -812,11 +812,17 @@
                                         <pre>折扣卷：</pre><button class="btn btn-outline-secondary">加入一張折扣卷</button><br>
                                         <pre>商品　：</pre><button class="btn btn-outline-secondary">加入一張商品</button>
                                     </div>
-                                    <div class="input-group mb-3" >
-                                        <label class="input-group-text" for="inputGroupFile01">上傳圖片</label>
-                                        <input type="file" class="form-control" id="inputGroupFile01">
-                                      </div>
-                                    <div><button class="btn btn-secondary">送出</button></div>
+                                    <div id="myDiv">
+                                        <label for="upload">選擇上傳圖檔</label>
+                                
+                                        <!-- 選取圖片的 input -->
+                                        <input id="upload" type="file" accept="image/*">
+                                        <p id="url"></p>
+                                        <img id="showImg" src="" referrerpolicy="no-referrer">
+                                
+                                        <!-- 上傳按鈕 -->
+                                    </div>
+                                    <div><button class="btn btn-secondary" id="myBtn" type="button">送出</button></div>
                                 </div>
                                     
                             </div >
@@ -911,6 +917,7 @@
         </div>
         </div>
          </section>
+         <script src="./app/app.js"></script>
         <script>
             // var URL="https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=wxV177kLhEE3"
             // var a= function test(){
