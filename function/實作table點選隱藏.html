@@ -11,7 +11,8 @@
         .textBlock {
             overflow: hidden;
             text-overflow : ellipsis;
-            word-break:normal
+            
+            white-space: nowrap; 
         }
         table{
             table-layout:fixed; width: 600px;
@@ -24,11 +25,11 @@
 <table border="1">
     <tbody>
         <tr id="">
-            <td class="textBlock" style="width: 120px;">1111111111111111111111111111</td>
+            <td class="textBlock" style="width: 120px;">你你你你你你你你你你你你你你你你</td>
             <td id="">222222222222222222222222</td>
         </tr>
         <tr>
-            <td class="textBlock" style="width: 120px;">111111111111111111111111111111</td>
+            <td class="textBlock" style="width: 120px;">你你你你你你你你你你你你你你你你</td>
             <td>111111111111111111111111111111</td>
         </tr>
     </tbody>
@@ -38,17 +39,18 @@
     <script>  
         $('td').on('click',function(){
             if($(this).css('word-break')=='normal'){
-                $(this).css({
-             "word-break":"break-all"
+                $(this).css({//可以改變多個css
+             "word-break":"break-all",
+             'white-space': 'normal'
+
             })
             }else{
                 $(this).css({
-             "word-break":"normal"
+             "word-break":"normal",
+             'white-space': 'nowrap'
             })
             }          
-        })
-
-
+        });
     </script>
 </body>
 

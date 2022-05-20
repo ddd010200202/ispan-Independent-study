@@ -1,11 +1,9 @@
 @charset "UTF-8";
 
 #tableMenu , #tableMember{
+    
     background-color:rgb(255, 255, 255);
     border-radius: 10px 10px 0px 0px;
-}
-.my-tab-bg{
-    background: linear-gradient(to bottom, rgba(93, 121, 154, 0.563) 0%, rgb(255, 255, 255) 100%);
 }
 #tableMenu thead tr, #tableMenu tbody tr, #tableMenu tfoot tr , #tableMember thead tr, #tableMember tbody tr, #tableMember tfoot tr{
     /* box-sizing: border-box; */
@@ -33,10 +31,13 @@
     background-color: #b882ff33;
 }
 
-td{
+#tableMenu tbody td , #tableMember tbody td{
     border-bottom: 0.1px solid rgb(184, 184, 184);
 }
-
+td{
+    border-bottom: 0.1px solid rgb(184, 184, 184);
+    
+}
 /* tr:hover{
     background-color: #feeafb;
 } */
@@ -74,9 +75,10 @@ td{
     border-color: rgb(59, 77, 99);
     font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
 
+    width:94px;
     border: none;
     /* color: white; */
-    padding: 15px;
+    padding: 17px 15px 13px 15px;
     text-align: center;
     /* text-decoration: none; */
     /* display: inline-block; */
@@ -91,7 +93,7 @@ td{
 }
 .my-btn-box{
     text-align: center;
-    width: 448px;
+    width: 507px;
     height: 55px;
     background-color: #6f6f6fbd;
     border-radius:3px;
@@ -102,7 +104,7 @@ td{
     width: 207px;
     height: 55px;
     border: 1px solid rgb(196, 196, 196);
-    padding-left: 10px;
+    padding: 3px 2px 1px 15px;
     outline:none;
 }
 
@@ -111,7 +113,7 @@ td{
     /* font-size: 25px; */
     width: 57px;
     height: 55px;
-    margin-left: -50px;
+    margin-left: -55px;
 }
 .my-input{
     border:none;
@@ -138,10 +140,24 @@ td{
 }
 .my-search-box{
     text-align: center;
-    width: 219px;
-    height: 56px;
+    width: 213px;
+    height: 55px;
     background-color: #6f6f6fbd;
     border-radius:3px;
     text-align:left;
     margin: 1px;
+}
+.my-td-width4{
+    width: 5%;
+}
+.my-td-width23{
+    width: 23%;
+}
+.my-td-width10{
+    width: 10%;
+}
+.textBlock {
+    overflow: hidden;
+    text-overflow : ellipsis;
+    white-space: nowrap; 
 }
