@@ -150,8 +150,8 @@ td{
 .my-td-width4{
     width: 5%;
 }
-.my-td-width23{
-    width: 23%;
+.my-td-width28{
+    width: 28%;
 }
 .my-td-width10{
     width: 10%;
@@ -160,4 +160,23 @@ td{
     overflow: hidden;
     text-overflow : ellipsis;
     white-space: nowrap; 
+}
+.my-append-btn{
+    color:rgb(240, 240, 240);
+    background-color: rgb(85, 112, 143);
+    border-color: rgb(59, 77, 99);
+    font-weight: 600;
+    font-size: 15px;
+    font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
+
+    /* width:50px; */
+    padding: 10px;
+    /* height:30px; */
+    border: none;
+    text-align: center;
+}
+.my-append-btn:hover{
+    color:rgb(239, 241, 255);
+    background-color: rgb(50, 76, 103);
+    border-color:  rgb(196, 196, 196);
 }

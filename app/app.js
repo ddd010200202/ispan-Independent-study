@@ -94,6 +94,7 @@ function submit() {
         console.log(JSON.parse(res)); // 可以看見上傳成功後回傳的URL
         alert('上傳完成');
     });
+    document.getElementById("preview-img").src="";
 }
 
 // 建議物件
@@ -107,6 +108,28 @@ uploadInput.addEventListener("change", (e) => {
     inputFile.setfileThumbnail(window.URL.createObjectURL(inputFile.uploadFile)); // input的圖片縮圖
     inputFile.setfileTitle(inputFile.uploadFile.name); // 預設 input 的圖檔名稱為圖片上傳時的圖片標題
     inputFile.setfileDesc(inputFile.uploadFile.name); // 圖片描述
+    var file = uploadInput.files[0],imageType = /^image\//,reader = '';
+    // 檔案是否為圖片
+    if (!imageType.test(file.type)) {
+        alert("請選擇圖片！");
+        return;
+    }
+    // 判斷是否支援FileReader  // IE9及以下不支援FileReader
+    if (window.FileReader) {
+        reader = new FileReader();
+    }    else {
+        alert("您的瀏覽器不支援圖片預覽功能，如需該功能請升級您的瀏覽器！");
+        return;
+    }
+     // 讀取完成    
+    reader.onload = function (event) {
+        // 獲取圖片DOM
+        var img = document.getElementById("preview-img");
+        // 圖片路徑設定為讀取的圖片    
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+    document.getElementById("showImg").src=""
 });
 
 // Botton的監聽器

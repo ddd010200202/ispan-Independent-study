@@ -19,90 +19,36 @@
 
 <body>
 
-    <head>
-        <div class="conatiner">
-            <div class="row">
-                <div id="Padright_navbar" class="col-md-12">
-                    <!--上頭nav bar-->
-
-                    <nav class="navbar navbar-light  justify-content-end">
-                        <ul class="nav justify-content-end">
-                            <li class="nav-item">
-                                <input type="checkbox" id="switch" class="switch-input" />
-                                <label for="switch" class="switch"> </label>
-                            </li>
-                            <!-- 聯絡資訊 -->
-                            <li class="nav-item">
-                                <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip" data-bs-placement="left"
-                                    title='聯絡資訊:aaa@gmail.com'></i>
-                            </li>
-                            <li class="nav-item">
-                                <!-- 訂單提示 -->
-                                <i class="fa-solid fa-bell"></i>
-                            </li>
-                            <li class="nav-item">
-                                <!-- 寄信給我們 -->
-                                <a href="mailto:xxx@gmail.com   " id="mailUs"> <i class="fa-solid fa-envelope"></i></a>
-
-                            </li>
-                            <li class="nav-item">
-                                <!-- <a class="nav-link disabled">Disabled</a> -->
-                                名悅便當店
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-    </head>
     <script>
-        function btn() {
-            $.ajax("./Jsontest.json")//toarry
-                .done(function (apple) {
-                    var foodname = document.getElementsByName('foodName');
-                    var foodg = document.getElementsByName('foodG');
-                    var tota=0;
-                    var totb=0;
-                    var totc=0;
-                    var totd=0;
-                    for (var i = 0; i < foodname.length; i++) {
-                        if (foodname[i].value != "" && foodg[i].value != "") {
-                            var CALORIE;
-                            var CARB;
-                            var FAT;
-                            var PROTEIN;
-                            for (var a of apple) {
-                                if (foodname[i].value == a.INGREDIENT_NAME) {
-                                    b = a.INGREDIENT_NAME;
-                                    CALORIE = a.CALORIE;
-                                    CARB = a.CARB;
-                                    FAT = a.FAT;
-                                    PROTEIN = a.PROTEIN
-                                    var catchN = Number(foodg[i].value);
-                                    var a = (100 * catchN) * (CALORIE * 100) / 10000
-                                    var b = (100 * catchN) * (CARB * 100) / 10000;
-                                    var c = (100 * catchN) * (FAT * 100) / 10000;
-                                    var d = (100 * catchN) * (PROTEIN * 100) / 10000;
-                                    tota += a;
-                                    totb += b;
-                                    totc += c;
-                                    totd += d;
-                                }
+// 結帳頁
+                    // 商品數量增減
+                    var count = document.getElementsByName('bb');
+                    var inc = document.getElementsByName("cc");
+                    var dec = document.getElementsByName("aa");
+                    count[i];
 
-                            }
+                    for (var i = 0; i < count.length; i++) {
+                        inc[i].onclick= function () {
+                        count.value[i] = parseInt(count.value[i]) + 1;
+                        console.log(count[i]);
+                        
+                    }; 
+                    dec[i].onclick = function () {
+                        if(count.value[i] > 1){
+                            count.value[i] = parseInt(count.value[i]) - 1;
                         }
+                        console.log(count[i]);
+                    };
                     }
-                    $('#test3').text(
-                        "熱量:" + `${tota}` +
-                        "kcal。碳水化合物:" + `${totb}` +
-                        "g。脂肪:" + `${totc}` +
-                        "g。蛋白質:" + `${totd}` + "g。");
 
-                    console.log(CALORIE + ":" + CARB + ":" + FAT + ":" + PROTEIN);
-                })
-                .fail(function () {
-                    alert("error");
-                })
-       }
+
+                    // dec.onclick = function () {
+                    //     if(count.value > 1){
+                    //         count.value = parseInt(count.value) - 1;
+                    //     }
+                    //     console.log(count);
+                    // };
     </script>
-</body>
+  </body>
 
 </html>
