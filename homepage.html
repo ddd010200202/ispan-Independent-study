@@ -32,10 +32,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Open+Sans&display=swap" rel="stylesheet">
     <style>
         /*先放榮庭CSS*/
-        body{
+        body {
             font-family: 'Noto Sans TC', sans-serif;
-             
+
         }
+
         section {
             width:
                 100%;
@@ -112,7 +113,7 @@
 
         div[id="pills-home"] div[class="row tab-content"] img {
             height:
-                150px;
+                100px;
 
         }
 
@@ -445,6 +446,22 @@
                                     <p style="display:inline-block ; text-align: center;width:120px;">廣播訊息設定</p>
                                 </a>
                             </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
+                                    data-bs-target="#pills-coupon" role="tab" aria-controls="pills-coupon"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-ticket-simple"></i>
+                                    <p style="display:inline-block ; text-align: center;width:120px;">優惠卷</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
+                                    data-bs-target="#pills-information" role="tab" aria-controls="pills-information"
+                                    aria-selected="false">
+                                    <i class="fa-solid fa-shop"></i>
+                                    <p style="display:inline-block ; text-align: center;width:120px;">店家資訊</p>
+                                </a>
+                            </li>
                         </ul>
                         <hr>
                         <div class="dropdown">
@@ -510,16 +527,16 @@
                                         aria-labelledby="pills-home-tab">
                                         <div id="quickLink" class="row tab-content">
                                             <div class="col-md-3">
-                                                <img src="./img/Group 1.png">
+                                                <img src="./img/group1.png">
                                             </div>
                                             <div class="col-md-3">
-                                                <img src="./img/Group 2.png">
+                                                <img src="./img/group1.png">
                                             </div>
                                             <div class="col-md-3">
-                                                <img src="./img/Group 3.png">
+                                                <img src="./img/group1.png">
                                             </div>
                                             <div class="col-md-3">
-                                                <img src="./img/Group 4.png">
+                                                <img src="./img/group1.png">
                                             </div>
                                         </div>
                                         <div class="row" id="bulletinBoard">
@@ -553,212 +570,217 @@
                                     </div>
                                     <!-- menu -->
                                     <div class="container tab-pane fade" id="pills-menu" role="tabpanel"
-                                    aria-labelledby="pills-menu-tab">
-                                    <div class="row tab-content">
-                                        <div class="modal fade" id="exampleModal" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-                                            <div class="modal-dialog modal-dialog-scrollable">
-                                                <div class="modal-content">
-                                                    <div class=" modal-header my-color1">
-                                                        <span class="modal-title my-title-css-2"
-                                                            id="exampleModalLabel">新增菜單</span>
-                                                        <button type="button" class="btn" style="background-color:rgb(34, 46, 60) ;"
-                                                            data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-x" style="color:white;"></i></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div>
-                                                            <table style="width:100%;">
-                                                                <tr>
-                                                                    <th colspan="2">餐點名稱 :</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="2"><input type="text"
-                                                                            class="my-input" placeholder="輸入餐點名稱">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="2">餐點種類 :</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="2"><input type="text"
-                                                                            class="my-input" placeholder="輸入餐點種類">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="2">餐點圖檔 :</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="2">
-                                                                        <!--還不能上傳圖檔-->
-                                                                        <input type="button"
-                                                                            class="my-append-btn my-right-radius my-left-radius"
-                                                                            value="上傳">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="2">售價 :</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="2"><span><input type="number"
-                                                                                class="my-input"
-                                                                                placeholder="輸入售價">TWD</span></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>餐點食材 :
-                                                                    </th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="2">
-                                                                        <ol id="addIngredients">
-                                                                            <li id="examIngredients">
-                                                                                <input list="mealIngredients"
-                                                                                    name="ingredientsName"
-                                                                                    placeholder="選擇食材"
-                                                                                    style="width:70%;"></label>
-                                                                                <datalist id="mealIngredients">
-                                                                                    <!-- 讀取食材 -->
-                                                                                </datalist>
-                                                                                <input type="number"
-                                                                                    name="ingredientsGrams"
-                                                                                    placeholder="輸入克數"
-                                                                                    style="width:20%;"><span>(g)</span>
-                                                                            </li>
+                                        aria-labelledby="pills-menu-tab">
+                                        <div class="row tab-content">
+                                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                                data-bs-backdrop="static">
+                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                        <div class=" modal-header my-color1">
+                                                            <span class="modal-title my-title-css-2"
+                                                                id="exampleModalLabel">新增菜單</span>
+                                                            <button type="button" class="btn"
+                                                                style="background-color:rgb(34, 46, 60) ;"
+                                                                data-bs-dismiss="modal" aria-label="Close"><i
+                                                                    class="fa-solid fa-x"
+                                                                    style="color:white;"></i></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div>
+                                                                <table style="width:100%;">
+                                                                    <tr>
+                                                                        <th colspan="2">餐點名稱 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"><input type="text"
+                                                                                class="my-input" placeholder="輸入餐點名稱">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">餐點種類 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"><input type="text"
+                                                                                class="my-input" placeholder="輸入餐點種類">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">餐點圖檔 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <!--還不能上傳圖檔-->
+                                                                            <input type="button"
+                                                                                class="my-append-btn my-right-radius my-left-radius"
+                                                                                value="上傳">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">售價 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"><span><input type="number"
+                                                                                    class="my-input"
+                                                                                    placeholder="輸入售價">TWD</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>餐點食材 :
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <ol id="addIngredients">
+                                                                                <li id="examIngredients">
+                                                                                    <input list="mealIngredients"
+                                                                                        name="ingredientsName"
+                                                                                        placeholder="選擇食材"
+                                                                                        style="width:70%;"></label>
+                                                                                    <datalist id="mealIngredients">
+                                                                                        <!-- 讀取食材 -->
+                                                                                    </datalist>
+                                                                                    <input type="number"
+                                                                                        name="ingredientsGrams"
+                                                                                        placeholder="輸入克數"
+                                                                                        style="width:20%;"><span>(g)</span>
+                                                                                </li>
 
-                                                                        </ol>
-                                                                        <div>
-                                                                            <span>
-                                                                                <input
-                                                                                    class="my-append-btn my-right-radius my-left-radius"
-                                                                                    type="button"
-                                                                                    onclick="ingredientsAppendBtn()"
-                                                                                    value="新增欄位">
-                                                                                <input
-                                                                                    class="my-append-btn my-right-radius my-left-radius"
-                                                                                    type="button"
-                                                                                    onclick="ingredientsDelBtn()"
-                                                                                    value="刪減欄位">
-                                                                            </span>
-                                                                            <span style="float:right;">
-                                                                                <!-- <div style="text-align:right;"> -->
-                                                                                <input
-                                                                                    class="my-append-btn my-right-radius my-left-radius"
-                                                                                    type="button" onclick="ingredientsOPA()"
-                                                                                    value="計算營養成份表">
-                                                                                <!-- </div> -->
-                                                                            </span>
-                                                                        </div>
+                                                                            </ol>
+                                                                            <div>
+                                                                                <span>
+                                                                                    <input
+                                                                                        class="my-append-btn my-right-radius my-left-radius"
+                                                                                        type="button"
+                                                                                        onclick="ingredientsAppendBtn()"
+                                                                                        value="新增欄位">
+                                                                                    <input
+                                                                                        class="my-append-btn my-right-radius my-left-radius"
+                                                                                        type="button"
+                                                                                        onclick="ingredientsDelBtn()"
+                                                                                        value="刪減欄位">
+                                                                                </span>
+                                                                                <span style="float:right;">
+                                                                                    <!-- <div style="text-align:right;"> -->
+                                                                                    <input
+                                                                                        class="my-append-btn my-right-radius my-left-radius"
+                                                                                        type="button"
+                                                                                        onclick="ingredientsOPA()"
+                                                                                        value="計算營養成份表">
+                                                                                    <!-- </div> -->
+                                                                                </span>
+                                                                            </div>
 
-                                                                        <span id="nutritionOperation"></span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="2">餐點描述 :</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="2">
-                                                                        <textarea style="width:100%"
-                                                                            class="my-input" rows="4"
-                                                                            placeholder="輸入餐點描述"></textarea>
-                                                                </tr>
-                                                            </table>
+                                                                            <span id="nutritionOperation"></span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="2">餐點描述 :</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <textarea style="width:100%"
+                                                                                class="my-input" rows="4"
+                                                                                placeholder="輸入餐點描述"></textarea>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer">
-
-                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="myMenuTable">
-                                            <div class="container-fluid my-web-header">
-                                                <div class="row">
-                                                    <div class=" col-4">
-                                                        <span class="my-title-css"><i
-                                                                class="fa-solid fa-utensils"></i>
-                                                            菜單管理</span>
-                                                    </div>
-                                                    <!-- <div class=" col-5"></div> -->
-                                                    <div class="col-8" >
-                                                        <span style="float:right;">
-                                                            <div class="my-btn-box">
-                                                                <button type="button"
-                                                                    class=" my-btn-color my-left-radius"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal">
-                                                                    新增菜單
-                                                                </button>
-                                                                <button type="button" class=" my-btn-color">
-                                                                    刪除
-                                                                </button>
-                                                                <button type="button" class=" my-btn-color">
-                                                                    修改
-                                                                </button>
-                                                                <input type="text" id="searchMenu"
-                                                                    class="my-search-css my-right-radius"
-                                                                    placeholder="搜尋餐點">
-                                                                <button type="submit" id="menuBtn"
-                                                                    class=" my-btn-color my-btn-search my-right-radius">
-                                                                    <i class="fas fa-search"></i>
-                                                                </button>
-                                                            </div>
-                                                        </span>
+                                            <div id="myMenuTable">
+                                                <div class="container-fluid my-web-header">
+                                                    <div class="row">
+                                                        <div class=" col-4">
+                                                            <span class="my-title-css"><i
+                                                                    class="fa-solid fa-utensils"></i>
+                                                                菜單管理</span>
+                                                        </div>
+                                                        <!-- <div class=" col-5"></div> -->
+                                                        <div class="col-8">
+                                                            <span style="float:right;">
+                                                                <div class="my-btn-box">
+                                                                    <button type="button"
+                                                                        class=" my-btn-color my-left-radius"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#exampleModal">
+                                                                        新增菜單
+                                                                    </button>
+                                                                    <button type="button" class=" my-btn-color">
+                                                                        刪除
+                                                                    </button>
+                                                                    <button type="button" class=" my-btn-color">
+                                                                        修改
+                                                                    </button>
+                                                                    <input type="text" id="searchMenu"
+                                                                        class="my-search-css my-right-radius"
+                                                                        placeholder="搜尋餐點">
+                                                                    <button type="submit" id="menuBtn"
+                                                                        class=" my-btn-color my-btn-search my-right-radius">
+                                                                        <i class="fas fa-search"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
+
+                                                <table border="0" id="tableMenu">
+                                                    <thead>
+
+                                                        <tr>
+                                                            <th class="my-td-width4"></th>
+                                                            <th class="my-td-width10">餐點名稱</th>
+                                                            <th class="my-td-width10">餐點種類</th>
+                                                            <th class="my-td-width10">餐點圖檔</th>
+                                                            <th class="my-td-width28">餐點食材</th>
+                                                            <th class="my-td-width10">售價</th>
+                                                            <th class="my-td-width28">餐點描述</th>
+
+                                                        </tr>
+
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr>
+                                                            <td class="my-td-width4"><input type="checkbox"></td>
+                                                            <td class="my-td-width10">雞腿便當</td>
+                                                            <td class="my-td-width10">便當類</td>
+                                                            <td class="my-td-width10">XXXXXX</td>
+                                                            <td class="my-td-width23 textBlock">
+                                                                土雞腿肉1盒干貝4顆永心鳳茶剝皮辣椒4條剝皮辣椒汁4匙水1500ml脆瓜條10條脆瓜汁4匙魚丸5顆貢丸5顆調味鹽適量麵關廟麵4片煮麵水適量鹽
+                                                            </td>
+                                                            <td class="my-td-width10">100.00TWD</td>
+                                                            <td class="my-td-width23 textBlock">
+                                                                雞腿也是相當大隻呢！！雞腿經特製醬汁滷至而成，帶有淡雅的鹹甜滋味，肉質紮實不乾柴，大口啃食整個超過癮！吃過就回味無窮呢😍
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="my-td-width4"><input type="checkbox"></td>
+                                                            <td class="my-td-width10">三杯雞米便當</td>
+                                                            <td class="my-td-width10">便當類</td>
+                                                            <td class="my-td-width10">YYYYYY</td>
+                                                            <td class="my-td-width23 textBlock">香煎豆皮 豆皮 2 片 三杯雞 帶骨雞肉塊
+                                                                500 g 豆干 10 片 九層塔 適量 米酒 醬油 蠔油 香菇炒芹菜 鮮香菇 4 朵 芹菜 200 g 鹽
+                                                            </td>
+                                                            <td class="my-td-width10">85.00TWD</td>
+                                                            <td class="my-td-width23 textBlock">
+                                                                溫體雞肉扎實Q嫩，包覆著特製的醬汁鹹甜夠味！帶有淡雅的麻油香氣非常銷魂！會讓人忍不住一口接一口呢🥰
+                                                            </td>
+                                                        </tr>
+
+
+
+                                                    </tbody>
+
+                                                </table>
                                             </div>
-
-                                            <table border="0" id="tableMenu">
-                                                <thead>
-
-                                                    <tr>
-                                                        <th class="my-td-width4"></th>
-                                                        <th class="my-td-width10">餐點名稱</th>
-                                                        <th class="my-td-width10">餐點種類</th>
-                                                        <th class="my-td-width10">餐點圖檔</th>
-                                                        <th class="my-td-width28">餐點食材</th>
-                                                        <th class="my-td-width10">售價</th>
-                                                        <th class="my-td-width28">餐點描述</th>
-
-                                                    </tr>
-
-                                                </thead>
-                                                <tbody>
-
-                                                    <tr>
-                                                        <td class="my-td-width4"><input type="checkbox"></td>
-                                                        <td class="my-td-width10">雞腿便當</td>
-                                                        <td class="my-td-width10">便當類</td>
-                                                        <td class="my-td-width10">XXXXXX</td>
-                                                        <td class="my-td-width23 textBlock">
-                                                            土雞腿肉1盒干貝4顆永心鳳茶剝皮辣椒4條剝皮辣椒汁4匙水1500ml脆瓜條10條脆瓜汁4匙魚丸5顆貢丸5顆調味鹽適量麵關廟麵4片煮麵水適量鹽
-                                                        </td>
-                                                        <td class="my-td-width10">100.00TWD</td>
-                                                        <td class="my-td-width23 textBlock">
-                                                            雞腿也是相當大隻呢！！雞腿經特製醬汁滷至而成，帶有淡雅的鹹甜滋味，肉質紮實不乾柴，大口啃食整個超過癮！吃過就回味無窮呢😍
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="my-td-width4"><input type="checkbox"></td>
-                                                        <td class="my-td-width10">三杯雞米便當</td>
-                                                        <td class="my-td-width10">便當類</td>
-                                                        <td class="my-td-width10">YYYYYY</td>
-                                                        <td class="my-td-width23 textBlock">香煎豆皮 豆皮 2 片 三杯雞 帶骨雞肉塊
-                                                            500 g 豆干 10 片 九層塔 適量 米酒 醬油 蠔油 香菇炒芹菜 鮮香菇 4 朵 芹菜 200 g 鹽
-                                                        </td>
-                                                        <td class="my-td-width10">85.00TWD</td>
-                                                        <td class="my-td-width23 textBlock">
-                                                            溫體雞肉扎實Q嫩，包覆著特製的醬汁鹹甜夠味！帶有淡雅的麻油香氣非常銷魂！會讓人忍不住一口接一口呢🥰
-                                                        </td>
-                                                    </tr>
-
-
-
-                                                </tbody>
-
-                                            </table>
                                         </div>
+
                                     </div>
-
-                                </div>
                                     <!-- order -->
                                     <div class="container tab-pane fade" id="pills-order" role="tabpanel"
                                         aria-labelledby="pills-order-tab">
@@ -768,38 +790,47 @@
                                                     <div style="padding-top:75px ;">
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <h1 style="color:rgb(34, 46, 60)white;"><i class="fa-solid fa-file-invoice"></i>訂單管理</h1>
+                                                                <h1 style="color:rgb(34, 46, 60)white;"><i
+                                                                        class="fa-solid fa-file-invoice"></i>訂單管理</h1>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-4">
-                                                                <span style="color:rgb(34, 46, 60);"><a href="#" class="link-dark">全部</a>|<a href="#"
+                                                                <span style="color:rgb(34, 46, 60);"><a href="#"
+                                                                        class="link-dark">全部</a>|<a href="#"
                                                                         class="link-dark">未確認訂單</a>|<a href="#"
                                                                         class="link-dark">已確認訂單</a>|<a href="#"
                                                                         class="link-dark">已完成訂單</a></span>
                                                             </div>
-                                                            <div class="col-md-8  text-end" style="padding-right :50px; ;">
+                                                            <div class="col-md-8  text-end"
+                                                                style="padding-right :50px; ;">
                                                                 <button class="btn btn-outline-secondary">確認訂單</button>
-                                                                <input type="text" style="width: 150px;display:inline;" class="form-control" placeholder="請輸入" aria-label="Example text with button addon" aria-describedby="button-addon1" >
-                                                                <button class="btn btn-outline-secondary" type="button" id="button-addon1">搜尋</button>
-                                                                
+                                                                <input type="text" style="width: 150px;display:inline;"
+                                                                    class="form-control" placeholder="請輸入"
+                                                                    aria-label="Example text with button addon"
+                                                                    aria-describedby="button-addon1">
+                                                                <button class="btn btn-outline-secondary" type="button"
+                                                                    id="button-addon1">搜尋</button>
+
                                                             </div>
                                                         </div>
                                                         <hr>
                                                     </div>
-                                                    
+
                                                     <div class="col-md-12 pt-2">
-                                                        <!--餐點名稱 會員編號 餐點數量  餐點金額 訂單狀態-->
+                                                        <!--餐點名稱 會員姓名 餐點數量  餐點金額 訂單狀態-->
                                                         <div id="orderDiv">
                                                             <table class="table table-hover table-light">
                                                                 <thead class="table-dark">
                                                                     <tr>
                                                                         <th scope="col"></th>
                                                                         <th scope="col">訂單狀態</th>
-                                                                        <th scope="col">會員編號</th>
+                                                                        <th scope="col">會員姓名</th>
+                                                                        <th scope="col">電話</th>
                                                                         <th scope="col">餐點名稱/餐點數量</th>
                                                                         <th scope="col">餐點總計金額</th>
                                                                         <th scope="col">訂單建立時間</th>
+                                                                        <th scope="col">確認/取消</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -808,10 +839,14 @@
                                                                                 id="">
                                                                         </td>
                                                                         <td>未確認訂單</td>
-                                                                        <td>1</td>
+                                                                        <td>joe</td>
+                                                                        <td>0912345678</td>
                                                                         <td>雞肉飯*6</td>
                                                                         <td>100</td>
                                                                         <td>年/月/日</td>
+                                                                        <td><button
+                                                                                class="btn btn-primary">確認</button>／<button
+                                                                                class="btn btn-danger">取消</button></td>
                                                                     </tr>
 
                                                                 </tbody>
@@ -822,9 +857,11 @@
                                                                     <tr>
                                                                         <th scope="col"></th>
                                                                         <th scope="col">訂單狀態</th>
-                                                                        <th scope="col">會員編號</th>
+                                                                        <th scope="col">會員姓名</th>
+                                                                        <th scope="col">電話</th>
                                                                         <th scope="col">餐點名稱/餐點數量</th>
                                                                         <th scope="col">餐點總計金額</th>
+                                                                        <th scope="col">列印</th>
                                                                         <th scope="col">訂單建立時間</th>
                                                                     </tr>
                                                                 </thead>
@@ -835,11 +872,14 @@
                                                                         </td>
                                                                         <td>已確認訂單</td>
                                                                         <td>2</td>
+                                                                        <td>0912345678</td>
                                                                         <td>排骨麵*8</td>
                                                                         <td>200</td>
+                                                                        <td><button class="btn btn-dark">列印</button>
+                                                                        </td>
                                                                         <td>年/月/日</td>
                                                                     </tr>
-     
+
                                                                 </tbody>
 
                                                             </table>
@@ -848,7 +888,8 @@
                                                                     <tr>
                                                                         <th scope="col"></th>
                                                                         <th scope="col">訂單狀態</th>
-                                                                        <th scope="col">會員編號</th>
+                                                                        <th scope="col">會員姓名</th>
+                                                                        <th scope="col">電話</th>
                                                                         <th scope="col">餐點名稱/餐點數量</th>
                                                                         <th scope="col">餐點總計金額</th>
                                                                         <th scope="col">訂單建立時間</th>
@@ -861,6 +902,7 @@
                                                                         </td>
                                                                         <td>取消訂單</td>
                                                                         <td>1</td>
+                                                                        <td>0912345678</td>
                                                                         <td>雞肉飯*6</td>
                                                                         <td>100</td>
                                                                         <td>年/月/日</td>
@@ -874,7 +916,8 @@
                                                                     <tr>
                                                                         <th scope="col"></th>
                                                                         <th scope="col">訂單狀態</th>
-                                                                        <th scope="col">會員編號</th>
+                                                                        <th scope="col">會員姓名</th>
+                                                                        <th scope="col">電話</th>
                                                                         <th scope="col">餐點名稱/餐點數量</th>
                                                                         <th scope="col">餐點總計金額</th>
                                                                         <th scope="col">訂單建立時間</th>
@@ -888,6 +931,7 @@
                                                                         </td>
                                                                         <td>完成訂單 </td>
                                                                         <td>2</td>
+                                                                        <td>0912345678</td>
                                                                         <td>排骨麵*8</td>
                                                                         <td>200</td>
                                                                         <td>年/月/日</td>
@@ -908,18 +952,43 @@
                                     <!-- broadcast -->
                                     <div class="container tab-pane fade" id="pills-broadcast" role="tabpanel"
                                         aria-labelledby="pills-broadcast-tab">
-                                        <h1 class="display-2">廣播訊息設定</h1>
+                                        <h1><i class="fa-solid fa-file-invoice"></i>廣播訊息設定</h1>
                                         <div class="text-top">
+                                            <div class="input-group flex-nowrap" style="width:15%">
+
+                                                <input type="text" class="form-control" placeholder="廣播標題   "
+                                                    aria-label="Username" aria-describedby="addon-wrapping">
+                                            </div>
+                                            <hr>
                                             <div class="form-floating">
                                                 <textarea class="form-control" placeholder="Leave a comment here"
                                                     id="floatingTextarea"></textarea>
                                                 <label for="floatingTextarea">請輸入廣播訊息</label>
                                             </div>
                                             <hr>
-                                            <div>
-                                                <pre>折扣卷：</pre><button
-                                                    class="btn btn-outline-secondary">加入一張折扣卷</button><br>
-                                                <pre>商品　：</pre><button class="btn btn-outline-secondary">加入一張商品</button>
+                                            <div class="dropdown" style="padding-top: 10px; ">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    折扣卷
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                    <li><a class="dropdown-item" href="#">A折扣卷</a></li>
+                                                    <li><a class="dropdown-item" href="#">B折扣卷</a></li>
+                                                    <li><a class="dropdown-item" href="#">C折扣卷</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="dropdown" style="padding-top: 10px;">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    商品
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                    <li><a class="dropdown-item" href="#">雞肉飯</a></li>
+                                                    <li><a class="dropdown-item" href="#">豬排飯</a></li>
+                                                    <li><a class="dropdown-item" href="#">壽司</a></li>
+                                                </ul>
                                             </div>
                                             <div id="myDiv">
                                                 <label for="upload">選擇上傳圖檔</label>
@@ -928,7 +997,8 @@
                                                 <input id="upload" type="file" accept="image/*">
                                                 <p id="url"></p>
                                                 <img id="preview-img" style="width: 150px;" />
-                                                <img id="showImg" src="" referrerpolicy="no-referrer" style="width: 150px;">
+                                                <img id="showImg" src="" referrerpolicy="no-referrer"
+                                                    style="width: 150px;">
 
                                                 <!-- 上傳按鈕 -->
                                             </div>
@@ -998,7 +1068,7 @@
                                         </div>
 
                                         <table class="table table-dark table-hover" id="nutrientContenttable">
-                                            <thead >
+                                            <thead>
                                                 <tr>
                                                     <th>俗名</th>
                                                     <th>食材分類</th>
@@ -1012,7 +1082,7 @@
                                             <tbody id="nutrientContenttabletbody" class="table-light">
 
                                             </tbody>
-                                            <tfoot >
+                                            <tfoot>
 
                                                 <tr></tr>
 
@@ -1040,6 +1110,59 @@
                                                 style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
                                                 <canvas id="Chart4"
                                                     style="background-color: rgb(128, 136, 201);"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--優惠卷-->
+                                    <div class="container tab-pane fade" id="pills-coupon" role="tabpanel"
+                                        aria-labelledby="pills-coupon-tab">
+                                        <form class="row">
+                                            123
+                                        </form>
+                                    </div>
+                                    <!--店家資訊-->
+                                    <div class="container tab-pane fade" id="pills-information" role="tabpanel"
+                                        aria-labelledby="pills-information-tab">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <form style="margin-top: 10px; width:50%; ">
+
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input type="text" id="form6Example1"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form6Example3">店家名稱</label>
+                                                        </div>
+
+                                                        <!-- Text input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input type="text" id="form6Example2"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form6Example4">地址</label>
+                                                        </div>
+
+                                                        <!-- Email input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input type="email" id="form6Example3"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form6Example5">信箱</label>
+                                                        </div>
+
+                                                        <!-- Number input -->
+                                                        <div class="form-outline mb-4">
+                                                            <input type="text" id="form6Example4"
+                                                                class="form-control" />
+                                                            <label class="form-label" for="form6Example4">電話</label>
+                                                        </div>
+
+
+
+                                                        <!-- Submit button -->
+                                                        <button type="submit"
+                                                            class="btn btn-dark btn-block mb-4">送出</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
