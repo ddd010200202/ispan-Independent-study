@@ -20,7 +20,7 @@
     -webkit-overflow-scrolling: touch;
 }
 #tableMenu thead tr , #tableMember thead tr{
-    background-color:rgb(34, 46, 60);
+    background-color:#222e3c;
     /* border-bottom: 2px solid rgb(187, 187, 187); */
     color: #ffffff;
     height:49px;

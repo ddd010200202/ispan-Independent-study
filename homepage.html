@@ -494,6 +494,7 @@
 
                                 <nav class="navbar navbar-light  justify-content-end">
                                     <ul class="nav justify-content-end">
+
                                         <li class="nav-item">
                                             <input type="checkbox" id="switch" class="switch-input" />
                                             <label for="switch" class="switch"> </label>
@@ -523,7 +524,7 @@
                             <!-- 首頁 -->
                             <div>
                                 <div class="col-md-12 tab-content" id="pills-tabContent">
-                                    <div class="container tab-pane fade show active" id="pills-home" role="tabpanel"
+                                    <div class="container tab-pane  show active" id="pills-home" role="tabpanel"
                                         aria-labelledby="pills-home-tab">
                                         <div id="quickLink" class="row tab-content">
                                             <div class="col-md-3">
@@ -533,10 +534,10 @@
                                                 <img src="./img/group1.png">
                                             </div>
                                             <div class="col-md-3">
-                                                <img src="./img/group1.png">
+                                                <img src="./img/group2.png">
                                             </div>
                                             <div class="col-md-3">
-                                                <img src="./img/group1.png">
+                                                <img src="./img/group2.png">
                                             </div>
                                         </div>
                                         <div class="row" id="bulletinBoard">
@@ -569,7 +570,7 @@
 
                                     </div>
                                     <!-- menu -->
-                                    <div class="container tab-pane fade" id="pills-menu" role="tabpanel"
+                                    <div class="container tab-pane " id="pills-menu" role="tabpanel"
                                         aria-labelledby="pills-menu-tab">
                                         <div class="row tab-content">
                                             <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -743,7 +744,7 @@
                                                         </tr>
 
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody id="tableMenubody">
 
                                                         <tr>
                                                             <td class="my-td-width4"><input type="checkbox"></td>
@@ -782,7 +783,7 @@
 
                                     </div>
                                     <!-- order -->
-                                    <div class="container tab-pane fade" id="pills-order" role="tabpanel"
+                                    <div class="container tab-pane " id="pills-order" role="tabpanel"
                                         aria-labelledby="pills-order-tab">
                                         <div class="row tab-content">
                                             <div class="conatiner">
@@ -950,7 +951,7 @@
                                         </div>
                                     </div>
                                     <!-- broadcast -->
-                                    <div class="container tab-pane fade" id="pills-broadcast" role="tabpanel"
+                                    <div class="container tab-pane " id="pills-broadcast" role="tabpanel"
                                         aria-labelledby="pills-broadcast-tab">
                                         <h1><i class="fa-solid fa-file-invoice"></i>廣播訊息設定</h1>
                                         <div class="text-top">
@@ -1008,7 +1009,7 @@
 
                                     </div>
                                     <!-- member -->
-                                    <div class="container tab-pane fade" id="pills-member" role="tabpanel"
+                                    <div class="container tab-pane " id="pills-member" role="tabpanel"
                                         aria-labelledby="pills-member-tab">
 
                                         <div class="container-fluid my-web-header">
@@ -1058,7 +1059,7 @@
                                         </div>
                                     </div>
                                     <!-- nutrientContent -->
-                                    <div class="container tab-pane fade" id="pills-nutrientContent" role="tabpanel"
+                                    <div class="container tab-pane " id="pills-nutrientContent" role="tabpanel"
                                         aria-labelledby="pills-nutrientContent-tab">
                                         <h1><i class="fa-solid fa-magnifying-glass-chart"></i>營養成分表</h1>
                                         <div>
@@ -1092,7 +1093,7 @@
                                     </div>
                                     <!-- analyze -->
                                     <!--銷售統計 商品銷量:圓餅 消費者年齡範圍 銀收:折線圖-->
-                                    <div class="container tab-pane fade" id="pills-analyze" role="tabpanel"
+                                    <div class="container tab-pane " id="pills-analyze" role="tabpanel"
                                         aria-labelledby="pills-analyze-tab">
                                         <div class="row">
                                             <div class="col-md-6" style="width: 600px;margin-top: 75px;">
@@ -1114,14 +1115,14 @@
                                         </div>
                                     </div>
                                     <!--優惠卷-->
-                                    <div class="container tab-pane fade" id="pills-coupon" role="tabpanel"
+                                    <div class="container tab-pane " id="pills-coupon" role="tabpanel"
                                         aria-labelledby="pills-coupon-tab">
                                         <form class="row">
                                             123
                                         </form>
                                     </div>
                                     <!--店家資訊-->
-                                    <div class="container tab-pane fade" id="pills-information" role="tabpanel"
+                                    <div class="container tab-pane " id="pills-information" role="tabpanel"
                                         aria-labelledby="pills-information-tab">
                                         <div class="container">
                                             <div class="row">
@@ -1180,28 +1181,41 @@
     <script src="./app/myscript.js"></script>
     <script src="./app/footerscript.js"></script>
     <script>
-        // var URL="https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=wxV177kLhEE3"
-        // var a= function test(){
-        //     $.ajax({
-        //         url:URL,
-        //         type:"get",
-        //         success:doSuccess,
-        //         error:doError
-        //     })
-        // }();
-        // function doSuccess(json){
-        //     var jsonObj =$.parseJSON(json)
-        // 		$('#table').empty();
-        // 		$(json).each(
-        // 			function(i,val){
-        // 				console.log(val.ID + ":" + val.fname);
+        // 家電總開關   
+        $("#switch")[0].checked = false;
+        function openSwitch(isOpen) {
+            $.ajax({
+                url: "http://localhost:8080/api/S202205_13701d44e08a11ecba319828a620e5eb/stores?token=$2a$10$Ts/H49yJZHCDtJ.Mry3C/uPFBtevhdtjQ2jo.qTCu020XFkFUuU9K",
+                method: 'GET',
+                dataType: 'json',
+                data: '',
+                async: true,
 
-        // 			}
-        // 		);
-        // 	}
-        // function doError(){
-        //     console.log("no")
-        // }
+                success: (res, status) => {
+
+                    console.log('ok')
+                    res[0].STORE_OPEN_STATUS = isOpen
+                    $.ajax({
+                        url: "http://localhost:8080/api/S202205_13701d44e08a11ecba319828a620e5eb/stores?token=$2a$10$Ts/H49yJZHCDtJ.Mry3C/uPFBtevhdtjQ2jo.qTCu020XFkFUuU9K",
+                        method: 'PUT',
+                        contentType: "application/json",
+                        data: JSON.stringify(res[0]),
+                        success: function () { },
+                        error: function () { }
+                    })
+                },
+                error: err => {
+                    console.log(err)
+                },
+            });
+
+        }
+
+        document.getElementById("switch").addEventListener('click', () => {
+            openSwitch($("#switch")[0].checked);
+        });
+
+
         $("#nutrientContentsearch").keyup(function () {
             //將輸入值轉為小寫去除空格
             var keyword = this.value.toLowerCase().trim();
@@ -1218,30 +1232,65 @@
                 });
             });
         });
-        var b = function () {
-            $.ajax("./Jsontest.json")//toarry
-                .done(function (apple) {
-                    for (var a of apple) {
-                        console.log($('#nutrientContentsearch').val())
-                        $('#nutrientContenttabletbody').append(
-                            '<tr>' +
+        $.ajax({
+            url: "http://localhost:8080/api/S202205_13701d44e08a11ecba319828a620e5eb/ingredients?token=$2a$10$Ts/H49yJZHCDtJ.Mry3C/uPFBtevhdtjQ2jo.qTCu020XFkFUuU9K",
+            method: 'GET',
+            success: function (res, status) {
+                for (var nutrient of res) {
+                    $('#nutrientContenttabletbody').append(
+                        '<tr>' +
+                        '<td>' + `${nutrient.ingredientname}` + '</td>' +
+                        '<td>' + `${nutrient.ingredientcategory}` + '</td>' +
+                        '<td>' + `${nutrient.ingredientdesc}` + '</td>' +
+                        '<td>' + `${nutrient.calorie}` + 'kcal</td>' +
+                        '<td>' + `${nutrient.carb}` + 'g</td>' +
+                        '<td>' + `${nutrient.fat}` + 'g</td>' +
+                        '<td>' + `${nutrient.protein}` + 'g</td>' +
+                        '</tr>'
+                    )
 
-                            '<td>' + `${a.INGREDIENT_NAME}` + '</td>' +
-                            '<td>' + `${a.INGREDIENT_CATEGORY}` + '</td>' +
-                            '<td>' + `${a.INGREDIENT_DESC}` + '</td>' +
-                            '<td>' + `${a.CALORIE}` + 'kcal</td>' +
-                            '<td>' + `${a.CARB}` + 'g</td>' +
-                            '<td>' + `${a.FAT}` + 'g</td>' +
-                            '<td>' + `${a.PROTEIN}` + 'g</td>' +
-                            '</tr>'
-                        )
+                }
+            },
+            error: function () { }
+        })
+        $.ajax({
+            url: "http://localhost:8080/api/vmealmealbom?token=$2a$10$Ts/H49yJZHCDtJ.Mry3C/uPFBtevhdtjQ2jo.qTCu020XFkFUuU9K",
+            method: 'GET',
+            success: function (res, status) {
+                $('#tableMenubody').empty();
+                for (var menu of res) {
+                    $('#tableMenubody').append(
+                        '<tr>' +
+                        '<td class="my-td-width4">' +'<input type="checkbox">'+ '</td>' +
+                        '<td class="my-td-width10">' + `${menu.mealname}` + '</td>' +
+                        '<td class="my-td-width10">' + `${menu.mealcategoryname}` + '</td>' +
+                        '<td class="my-td-width10">' + `xxxxx` + '</td>' +
+                        '<td class="my-td-width23 textBlock">' + `${menu.ingredient}` + 'kcal</td>' +
+                        '<td class="my-td-width10">' + `${menu.mealprice}` + ' TWD' + '</td>' +
+                        '<td class="my-td-width23 textBlock">' + `${menu.mealdesc}` + '</td>' +
+                        '</tr>'
+                    )
 
+                }
+                $('tr').on('click', function () {
+                    if ($(this).find('td').css('word-break') == 'normal') {
+                        $(this).find('td').css({//可以改變多個css
+                            "word-break": "break-all",
+                            'white-space': 'normal'
 
+                        })
+                    } else {
+                        $(this).find('td').css({
+                            "word-break": "normal",
+                            'white-space': 'nowrap'
+                        })
                     }
                 })
-                .fail(function () {
-                    alert("error");
-                })
+            },
+            error: function () { }
+        })
+        var b = function () {
+
             // .always(function () {
             //     alert("complete");
             // });
@@ -1265,7 +1314,7 @@
                 ],
                 datasets: [{
                     label: '三都人口', //這些資料都是在講什麼，也就是data 300 500 100是什麼
-                    data: [300, 50, 100], //每一塊的資料分別是什麼，台北：300、台中：50..
+                    data: [57.69, 19.23, 23.08], //每一塊的資料分別是什麼，台北：300、台中：50..
                     backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
                         'rgb(255, 99, 132)',
                         'rgb(54, 162, 235)',
