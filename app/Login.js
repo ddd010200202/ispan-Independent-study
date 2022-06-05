@@ -7,7 +7,12 @@ import {
     signInWithPopup,
     sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-auth.js";
+//如果localstorage有值不進來這頁
 
+if(localStorage.getItem('storeToken') != null){
+    alert("已登入")
+    window.location.href = "homepage.html"
+}
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBqQ5T0uy3_68BVFhfTqS98VNWUmgLkir0",
@@ -128,9 +133,14 @@ function welcomeToUse(storeName) {
         icon: 'success',
         title: `Hi, ${storeName} 歡迎使用`,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1000
     });
+    setTimeout(function(){
+        window.location.href = "homepage.html"
+    },1000)
 }
+
+
 
 function addLocalstorage(storeInfo) {
     localStorage.removeItem('storeinfo');
