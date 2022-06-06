@@ -1,3 +1,53 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+import {
+    getAuth,
+    signOut,
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/9.6.11/firebase-auth.js";
+
+// Initialize Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyBqQ5T0uy3_68BVFhfTqS98VNWUmgLkir0",
+    authDomain: "orderhippo-store.firebaseapp.com",
+    projectId: "orderhippo-store",
+    storageBucket: "orderhippo-store.appspot.com",
+    messagingSenderId: "777247881627",
+    appId: "1:777247881627:web:6bc31c0a8fd80a4def493e"
+};
+
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+
+//setSignBntStatus()
+setSignBntStatus()
+
+function storeSignOut() {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        signOutOK();
+    }).catch((error) => {
+        console.error(error);
+    });
+}
+
+
+function setSignBntStatus() {
+    const auth = getAuth();
+    // const signBnt = document.getElementById("signBnt");
+    auth.onAuthStateChanged((store) => {
+        if (!store) { // 沒有登入
+            window.location.href = "login.html";
+        }
+    });
+}
+
+// signBnt.addEventListener("click", (e) => {
+
+// });
 /*------------榮庭--------------*/
 $(document).ready(function () {
 
@@ -6,8 +56,8 @@ $(document).ready(function () {
 // 拿取Token跟id
 // console.log(localStorage.getItem('storeToken'));
 // console.log(JSON.parse(localStorage.getItem('storeinfo')).STORE_ID);
-let newToken;
-localStorage.getItem('storeToken') == null ? function () { alert("請先登入"); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
+let newToken=localStorage.getItem('storeToken');
+// localStorage.getItem('storeToken') == null ? function () { alert("請先登入"); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
 let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
 
 $("#switch")[0].checked = false;
@@ -29,7 +79,8 @@ function openSwitch(isOpen) {
             })
         },
         error: err => {
-
+            console.log('status change fail')
+            console.log(err)
         },
     }).fail(function () { });
 
@@ -39,48 +90,54 @@ document.getElementById("switch").addEventListener('click', () => {
     openSwitch($("#switch")[0].checked);
 });
 //登出按鍵
-function signOut() {
+$('#signOutbtn').on('click', () => {
+    storeSignOut();
+    localStorage.removeItem("storeinfo");
+    localStorage.removeItem("storeToken");
+    window.location.href = "login.html";
+})
+// function signOutbtn() {
 
-    $.ajax({
-        url: `http://localhost:8080/api/${storeId}/stores?token=${newToken}`,
-        method: 'GET',
-        success: (res, status) => {
+//     // $.ajax({
+//     //     url: `http://localhost:8080/api/${storeId}/stores?token=${newToken}`,
+//     //     method: 'GET',
+//     //     success: (res, status) => {
 
-            console.log('status change ok')
-            res[0].STORE_OPEN_STATUS = false;
-            $.ajax({
-                url: `http://localhost:8080/api/${storeId}/stores?token=${newToken}`,
-                method: 'PUT',
-                contentType: "application/json",
-                data: JSON.stringify(res[0]),
-                success: function () {
-                    localStorage.removeItem("storeinfo");
-                    localStorage.removeItem("storeToken");
-                    window.location.href = "login.html"
-                },
-                error: function () { }
+//     //         console.log('status change ok')
+//     //         res[0].STORE_OPEN_STATUS = false;
+//     //         $.ajax({
+//     //             url: `http://localhost:8080/api/${storeId}/stores?token=${newToken}`,
+//     //             method: 'PUT',
+//     //             contentType: "application/json",
+//     //             data: JSON.stringify(res[0]),
+//     //             success: function () {
+//     //                 localStorage.removeItem("storeinfo");
+//     //                 localStorage.removeItem("storeToken");
+//     //                 window.location.href = "login.html"
+//     //             },
+//     //             error: function () { }
 
-            })
-        },
-        error: err => {
-            console.log(err)
-        },
-    });
+//     //         })
+//     //     },
+//     //     error: err => {
+//     //         console.log(err)
+//     //     },
+//     // });
 
 
-    // $.ajax({
-    //     url: `http://localhost:8080/api/getToken/${storeId}`,
-    //     method: 'GET',
-    //     success: (res, status) => {
-    //         console.log("signOut success")
+//     // $.ajax({
+//     //     url: `http://localhost:8080/api/getToken/${storeId}`,
+//     //     method: 'GET',
+//     //     success: (res, status) => {
+//     //         console.log("signOut success")
 
-    //     },
-    //     error: err => {
-    //         console.log("signOut fale")
-    //         console.log(err)
-    //     },
-    // });
-}
+//     //     },
+//     //     error: err => {
+//     //         console.log("signOut fale")
+//     //         console.log(err)
+//     //     },
+//     // });
+// }
 //首頁銷售前三
 $.ajax({
     url: `http://localhost:8080/api/${storeId}/vsalerank?token=${newToken}`,
@@ -88,9 +145,10 @@ $.ajax({
     success: (res, status) => {
 
         console.log("vsalerankHomepage ok")
+        // console.log(res)
         for (var salserank of res) {
             $('#vsalerankHomepage').append(
-                '<li>' + `${salserank.MEAL_NAME}` + ":" + `${salserank.MEAL_NAME}` + ":" + `${salserank.COUNT}` + '</li>'
+                '<li>' + `${salserank.mealname}` +":" + `${salserank.count}` + '</li>'
             )
 
         }
@@ -105,10 +163,11 @@ $.ajax({
     url: `http://localhost:8080/api/${storeId}/vorderstatuscount?token=${newToken}`,
     method: 'GET',
     success: (res, status) => {
+        console.log(res)
         console.log("vorderstatuscountHomepage ok")
         for (var vorder of res) {
             $('#vorderstatuscountHomepage').append(
-                '<li>' + `${vorder.ORDER_STATUS}` + ":" + `${vorder.ORDER_STATUS_DESC}` + ":" + `${vorder.ORDER_COUNT}` + '</li>'
+                '<li>' + `${vorder.orderstatusdesc}` + ":" + `${vorder.ordercount}` + '</li>'
             )
 
         }
@@ -125,6 +184,7 @@ $.ajax({
 //分析資料-前10熱賣
 //分析資料-男女比例
 //訂單管理
+$.ajax({})
 //搜尋
 $("#nutrientContentsearch").keyup(function () {
     //將輸入值轉為小寫去除空格

@@ -7,12 +7,15 @@ import {
     signInWithPopup,
     sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-auth.js";
-//如果localstorage有值不進來這頁
+//強制驅離login
+// if (localStorage.getItem('storeToken') != null) {
+//     alreadyLogin();
+//     setInterval(() => {
+//         window.location.href = "homepage.html"
+//     }, 1500);
 
-if(localStorage.getItem('storeToken') != null){
-    alert("已登入")
-    window.location.href = "homepage.html"
-}
+// }
+
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBqQ5T0uy3_68BVFhfTqS98VNWUmgLkir0",
@@ -24,8 +27,11 @@ const firebaseConfig = {
 };
 
 
+
 // Initialize Firebase
 initializeApp(firebaseConfig);
+//setSignBntStatus();
+setSignBntStatus();
 
 let email = document.getElementById("email");
 let passwd = document.getElementById("password");
@@ -61,7 +67,7 @@ function storeMailLogin(e) {
 
                     welcomeToUse(queryResult.STORE_NAME);
                     setInterval(() => {
-                        // window.location.href = "homepage.html"
+                        window.location.href = "homepage.html"
                     }, 2000); // 等待2秒導向回到登入頁面
                 })
             })
@@ -133,14 +139,9 @@ function welcomeToUse(storeName) {
         icon: 'success',
         title: `Hi, ${storeName} 歡迎使用`,
         showConfirmButton: false,
-        timer: 1000
+        timer: 1500
     });
-    setTimeout(function(){
-        window.location.href = "homepage.html"
-    },1000)
 }
-
-
 
 function addLocalstorage(storeInfo) {
     localStorage.removeItem('storeinfo');
@@ -154,4 +155,24 @@ mailLoginBnt.addEventListener("click", (e) => {
 resetPasswd.addEventListener("click", (e) => {
     storeChangePasswd(e);
 });
+function alreadyLogin() {
+    Swal.fire({
+        icon: 'success',
+        title: "Hi, 你已經登入囉",
+        showConfirmButton: false,
+        timer: 1500
+    });
 
+}
+function setSignBntStatus() {
+    const auth = getAuth();
+    // const signBnt = document.getElementById("signBnt");
+    auth.onAuthStateChanged((store) => {
+        if (store) { // 有登入
+            alreadyLogin();
+            setInterval(() => {
+                window.location.href = "homepage.html"
+            }, 1500);
+        }
+    });
+}

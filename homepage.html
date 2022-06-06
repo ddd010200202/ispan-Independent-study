@@ -407,13 +407,6 @@
 
                                 </a>
                             </li>
-                            <!-- 要不要做 -->
-                            <!-- <li>
-                                    <a href="#" class="nav-link text-white">
-                                        <i class="fa-solid fa-file-invoice-dollar"></i>
-                                        對帳單
-                                    </a>
-                                </li> -->
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
                                     data-bs-target="#pills-order" role="tab" aria-controls="pills-order"
@@ -450,7 +443,7 @@
                                 <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
                                     data-bs-target="#pills-reconciliationStatement" role="tab"
                                     aria-controls="pills-reconciliationStatement" aria-selected="false">
-                                    <i class="fa-solid fa-ticket-simple"></i>
+                                    <i class="fa-solid fa-file-invoice-dollar"></i>
                                     <p style="display:inline-block ; text-align: center;width:120px;">對帳單</p>
                                 </a>
                             </li>
@@ -519,7 +512,7 @@
                                             名悅便當店
                                         </li>
                                         <li class="nav-item">
-                                            <button class="" onclick="signOut()">登出</button>
+                                            <button id="signOutbtn"  >登出</button>
                                         </li>
                                     </ul>
                                 </nav>
@@ -1172,6 +1165,16 @@
                                         </div>
                                     </div>
                                     <!-- 對帳單 -->
+                                    <div class="container tab-pane " id="pills-reconciliationStatement" role="tabpanel"
+                                        aria-labelledby="pills-reconciliationStatement-tab">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1184,7 +1187,7 @@
     </section>
     <script src="./app/app.js"></script>
     <script src="./app/myscript.js"></script>
-    <script src="./app/footerscript.js"></script>
+    <script type="module" src="./app/footerscript.js"></script>
 
 </body>
 
