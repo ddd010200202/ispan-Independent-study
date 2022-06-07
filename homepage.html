@@ -334,32 +334,7 @@
         }
     </style>
     <!-- 分析資料表 直線 -->
-    <script>
-        const labels = [
-            'aaaa',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-        ];
 
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [100, 10, 5, 2, 20, 30, 45],
-            }]
-        };
-
-        const config = {
-            type: 'line',
-            data: data,
-            options: {}
-        };
-    </script>
     <!-- 分析資料表 圓餅 -->
 
 
@@ -512,7 +487,7 @@
                                             名悅便當店
                                         </li>
                                         <li class="nav-item">
-                                            <button id="signOutbtn"  >登出</button>
+                                            <button id="signOutbtn">登出</button>
                                         </li>
                                     </ul>
                                 </nav>
@@ -537,31 +512,23 @@
                                             </div>
                                         </div>
                                         <div class="row" id="bulletinBoard">
+                                            <h3>每月銷售前三名</h3>
                                             <ol id="vsalerankHomepage"></ol>
+                                            <h3>訂單管理</h3>
                                             <ul id="vorderstatuscountHomepage"></ul>
+                                            <h3>這個月目前總營收</h3>
+                                            <ul id="vmonthreveueHompage" style="list-style-type: none;"></ul>
                                         </div>
                                         <div class="row content">
-                                            <div class="col-md-6">
-
-                                                <img src="./img/Rectangle 11.png" alt="我不見了">
-
+                                            <div class="col-md-6"
+                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                <canvas class="Chart3"
+                                                    style="background-color: rgb(128, 136, 201);"></canvas>
                                             </div>
-                                            <div class="col-md-6">
-
-                                                <img src="./img/Rectangle 11.png" alt="我不見了">
-
-                                            </div>
-                                        </div>
-                                        <div class="row content">
-                                            <div class="col-md-6">
-
-                                                <img src="./img/Rectangle 11.png" alt="我不見了">
-
-                                            </div>
-                                            <div class="col-md-6">
-
-                                                <img src="./img/Rectangle 11.png" alt="我不見了">
-
+                                            <div class="col-md-6"
+                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                <canvas class="Chart4"
+                                                    style="background-color: rgb(255, 255, 255);"></canvas>
                                             </div>
                                         </div>
 
@@ -817,10 +784,9 @@
                                                     <div class="col-md-12 pt-2">
                                                         <!--餐點名稱 會員姓名 餐點數量  餐點金額 訂單狀態-->
                                                         <div id="orderDiv">
-                                                            <table class="table table-hover table-light">
+                                                            <table  class="table table-hover table-light">
                                                                 <thead class="table-dark">
-                                                                    <tr>
-                                                                        <th scope="col"></th>
+                                                                    <tr> 
                                                                         <th scope="col">訂單狀態</th>
                                                                         <th scope="col">會員姓名</th>
                                                                         <th scope="col">電話</th>
@@ -830,43 +796,35 @@
                                                                         <th scope="col">確認/取消</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
+                                                                <tbody id="orderPreview">
                                                                     <tr>
-                                                                        <td scope="row"><input type="checkbox" name=""
-                                                                                id="">
-                                                                        </td>
                                                                         <td>未確認訂單</td>
                                                                         <td>joe</td>
                                                                         <td>0912345678</td>
                                                                         <td>雞肉飯*6</td>
                                                                         <td>100</td>
                                                                         <td>年/月/日</td>
-                                                                        <td><button
-                                                                                class="btn btn-dark">確認</button>／<button
-                                                                                class="btn btn-danger">取消</button></td>
+                                                                        <td><button class="btn btn-primary">確認</button><button class="btn btn-danger">取消</button></td>
                                                                     </tr>
 
                                                                 </tbody>
 
                                                             </table>
-                                                            <table class="table table-hover table-light">
+                                                            <table  class="table table-hover table-light">
                                                                 <thead class="table-dark">
                                                                     <tr>
-                                                                        <th scope="col"></th>
                                                                         <th scope="col">訂單狀態</th>
                                                                         <th scope="col">會員姓名</th>
                                                                         <th scope="col">電話</th>
                                                                         <th scope="col">餐點名稱/餐點數量</th>
                                                                         <th scope="col">餐點總計金額</th>
-                                                                        <th scope="col">列印</th>
+                                                                        
                                                                         <th scope="col">訂單建立時間</th>
+                                                                        <th scope="col">確認列印</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
+                                                                <tbody id="orderAfteview">
                                                                     <tr>
-                                                                        <td scope="row"><input type="checkbox" name=""
-                                                                                id="">
-                                                                        </td>
                                                                         <td>已確認訂單</td>
                                                                         <td>2</td>
                                                                         <td>0912345678</td>
@@ -880,23 +838,19 @@
                                                                 </tbody>
 
                                                             </table>
-                                                            <table class="table table-hover table-light">
+                                                            <table  class="table table-hover table-light">
                                                                 <thead class="table-dark">
                                                                     <tr>
-                                                                        <th scope="col"></th>
                                                                         <th scope="col">訂單狀態</th>
                                                                         <th scope="col">會員姓名</th>
                                                                         <th scope="col">電話</th>
                                                                         <th scope="col">餐點名稱/餐點數量</th>
                                                                         <th scope="col">餐點總計金額</th>
-                                                                        <th scope="col">訂單建立時間</th>
+                                                                        <th scope="col">訂單取消時間</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
+                                                                <tbody id="orderCancel">
                                                                     <tr>
-                                                                        <td scope="row"><input type="checkbox" name=""
-                                                                                id="">
-                                                                        </td>
                                                                         <td>取消訂單</td>
                                                                         <td>1</td>
                                                                         <td>0912345678</td>
@@ -908,24 +862,21 @@
 
                                                             </table>
 
-                                                            <table class="table table-hover table-light">
+                                                            <table  class="table table-hover table-light">
                                                                 <thead class="table-dark">
-                                                                    <tr>
-                                                                        <th scope="col"></th>
+                                                                    <tr >
+                                                            
                                                                         <th scope="col">訂單狀態</th>
                                                                         <th scope="col">會員姓名</th>
                                                                         <th scope="col">電話</th>
                                                                         <th scope="col">餐點名稱/餐點數量</th>
                                                                         <th scope="col">餐點總計金額</th>
-                                                                        <th scope="col">訂單建立時間</th>
+                                                                        <th scope="col">訂單完成時間</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
+                                                                <tbody id="orderComplete">
 
                                                                     <tr>
-                                                                        <td scope="row"><input type="checkbox" name=""
-                                                                                id="">
-                                                                        </td>
                                                                         <td>完成訂單 </td>
                                                                         <td>2</td>
                                                                         <td>0912345678</td>
@@ -1100,21 +1051,27 @@
                                     <div class="container tab-pane " id="pills-analyze" role="tabpanel"
                                         aria-labelledby="pills-analyze-tab">
                                         <div class="row">
-                                            <div class="col-md-6" style="width: 600px;margin-top: 75px;">
-                                                <canvas id="Chart1" style="background-color: white;"></canvas>
-                                            </div>
-                                            <div class="col-md-6" style="width: 600px;margin-top: 75px;">
-                                                <canvas id="Chart2" style="background-color: white;"></canvas>
-                                            </div>
+
                                             <div class="col-md-6"
                                                 style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
-                                                <canvas id="Chart3"
+                                                <canvas class="Chart3"
                                                     style="background-color: rgb(128, 136, 201);"></canvas>
                                             </div>
                                             <div class="col-md-6"
                                                 style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
-                                                <canvas id="Chart4"
-                                                    style="background-color: rgb(128, 136, 201);"></canvas>
+                                                <canvas class="Chart4" style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-md-6"
+                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                <canvas class="Chart5" style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-md-6"
+                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                <canvas class="Chart6" style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-md-6"
+                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                <canvas class="Chart7" style="background-color: white;"></canvas>
                                             </div>
                                         </div>
                                     </div>
@@ -1170,7 +1127,7 @@
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>

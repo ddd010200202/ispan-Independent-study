@@ -1,3 +1,4 @@
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
 import {
     getAuth,
@@ -15,7 +16,7 @@ import {
 //     }, 1500);
 
 // }
-
+let localhost=8081;
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBqQ5T0uy3_68BVFhfTqS98VNWUmgLkir0",
@@ -51,13 +52,13 @@ function storeMailLogin(e) {
             // Signed in 
             let STORE_ID = auth.currentUser.uid;
 
-            fetch(`http://localhost:8080/api/getToken/${STORE_ID}`, {
+            fetch(`http://localhost:${localhost}/api/getToken/${STORE_ID}`, {
                 method: "GET"
             }).then(res => {
                 return res.text();
             }).then(resultToken => {
                 localStorage.setItem('storeToken', resultToken);
-                fetch(`http://localhost:8080/api/${STORE_ID}/stores?token=${resultToken}`, {
+                fetch(`http://localhost:${localhost}/api/${STORE_ID}/stores?token=${resultToken}`, {
                     method: "GET"
                 }).then(res => {
                     return res.json();

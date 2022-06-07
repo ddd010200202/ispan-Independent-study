@@ -1,3 +1,4 @@
+/*firebase*/
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
 import {
     getAuth,
@@ -49,28 +50,29 @@ function setSignBntStatus() {
 
 // });
 /*------------榮庭--------------*/
-$(document).ready(function () {
+//onload
+window.onload=Showloading;
+function Showloading(){
 
-})
-
+}
 // 拿取Token跟id
 // console.log(localStorage.getItem('storeToken'));
 // console.log(JSON.parse(localStorage.getItem('storeinfo')).STORE_ID);
-let newToken=localStorage.getItem('storeToken');
+let newToken = localStorage.getItem('storeToken');
 // localStorage.getItem('storeToken') == null ? function () { alert("請先登入"); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
 let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
-
+let localhost=8081;
 $("#switch")[0].checked = false;
 function openSwitch(isOpen) {
     $.ajax({
-        url: `http://localhost:8080/api/${storeId}/stores?token=${newToken}`,
+        url: `http://localhost:${localhost}/api/${storeId}/stores?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
 
             console.log('status change ok')
             res[0].STORE_OPEN_STATUS = isOpen
             $.ajax({
-                url: `http://localhost:8080/api/${storeId}/stores?token=${newToken}`,
+                url: `http://localhost:${localhost}/api/${storeId}/stores?token=${newToken}`,
                 method: 'PUT',
                 contentType: "application/json",
                 data: JSON.stringify(res[0]),
@@ -96,74 +98,57 @@ $('#signOutbtn').on('click', () => {
     localStorage.removeItem("storeToken");
     window.location.href = "login.html";
 })
-// function signOutbtn() {
-
-//     // $.ajax({
-//     //     url: `http://localhost:8080/api/${storeId}/stores?token=${newToken}`,
-//     //     method: 'GET',
-//     //     success: (res, status) => {
-
-//     //         console.log('status change ok')
-//     //         res[0].STORE_OPEN_STATUS = false;
-//     //         $.ajax({
-//     //             url: `http://localhost:8080/api/${storeId}/stores?token=${newToken}`,
-//     //             method: 'PUT',
-//     //             contentType: "application/json",
-//     //             data: JSON.stringify(res[0]),
-//     //             success: function () {
-//     //                 localStorage.removeItem("storeinfo");
-//     //                 localStorage.removeItem("storeToken");
-//     //                 window.location.href = "login.html"
-//     //             },
-//     //             error: function () { }
-
-//     //         })
-//     //     },
-//     //     error: err => {
-//     //         console.log(err)
-//     //     },
-//     // });
-
-
-//     // $.ajax({
-//     //     url: `http://localhost:8080/api/getToken/${storeId}`,
-//     //     method: 'GET',
-//     //     success: (res, status) => {
-//     //         console.log("signOut success")
-
-//     //     },
-//     //     error: err => {
-//     //         console.log("signOut fale")
-//     //         console.log(err)
-//     //     },
-//     // });
-// }
-//首頁銷售前三
+//首頁銷售前三//分析資料-前10熱賣
 $.ajax({
-    url: `http://localhost:8080/api/${storeId}/vsalerank?token=${newToken}`,
+    url: `http://localhost:${localhost}/api/${storeId}/vsalerank?token=${newToken}`,
     method: 'GET',
     success: (res, status) => {
-
+        var labels = [];
+        var data = [];
         console.log("vsalerankHomepage ok")
         // console.log(res)
         for (var salserank of res) {
             $('#vsalerankHomepage').append(
-                '<li>' + `${salserank.mealname}` +":" + `${salserank.count}` + '</li>'
+                '<li>' + `${salserank.mealname}` + ":" + `${salserank.count}` + '</li>'
             )
-
+            labels.push(salserank.mealname)
+            data.push(salserank.count)
         }
+        // console.log(labels)
+        for (var i = 0; document.getElementsByClassName('Chart3').length > i; i++) {
+            // console.log(document.getElementsByClassName('Chart3'))
+            new Chart(document.getElementsByClassName('Chart3')[i], {
+                type: 'pie', //圖表類型
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '銷售前10', //這些資料都是在講什麼，也就是data 300 500 100是什麼
+                        data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
+                        backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 4
+                    }]
+                }, //設定圖表資料
+                options: {} //圖表的一些其他設定，像是hover時外匡加粗
+            })
+        }
+
+
     },
     error: err => {
         console.log("vsalerankHomepage fale")
         console.log(err)
     },
 });
-//首頁移交情況
+//首頁移交情況TODO
 $.ajax({
-    url: `http://localhost:8080/api/${storeId}/vorderstatuscount?token=${newToken}`,
+    url: `http://localhost:${localhost}/api/${storeId}/vorderstatuscount?token=${newToken}`,
     method: 'GET',
     success: (res, status) => {
-        console.log(res)
+        // console.log(res)
         console.log("vorderstatuscountHomepage ok")
         for (var vorder of res) {
             $('#vorderstatuscountHomepage').append(
@@ -177,14 +162,190 @@ $.ajax({
         console.log(err)
     },
 });
-//目前總營利
-//分析資料-月營業額
-//分析資料-年齡客群
-//分析資料-類別圓餅
-//分析資料-前10熱賣
-//分析資料-男女比例
-//訂單管理
-$.ajax({})
+//目前總營利//分析資料-月營業額
+$.ajax({
+    url: `http://localhost:${localhost}/api/${storeId}/vmonthreveue?token=${newToken}`,
+    method: 'GET',
+    success: (res, status) => {
+        var date = new Date()
+        var nowYear = date.getFullYear();
+        var nowMonth = date.getMonth() + 1;
+        // console.log(res)
+        console.log("vmonthreveueHompage ok")
+        var labels = [];//月份
+        var data = [];//金額
+        var monthEnglish = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Spt", "Oct", "Nov", "Dec"];
+        for (var vmonth of res) {
+            if (vmonth.month == nowMonth) {
+
+                $('#vmonthreveueHompage').append(
+                    '<li>' + `${vmonth.year}` + "年" + `${vmonth.month}` + '月目前總營收:' + `${vmonth.revenueofmonth}` + '</li>'
+                )
+
+            }
+            if (nowYear == vmonth.year) {
+                labels.push(monthEnglish[vmonth.month]);
+                data.push(vmonth.revenueofmonth)
+            }
+
+        }
+        for (var i = 0; document.getElementsByClassName('Chart4').length > i; i++) {
+            // console.log(document.getElementsByClassName('Chart3'))
+            new Chart(document.getElementsByClassName('Chart4')[i], {
+                type: 'line', //圖表類型
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '今年營收', //這些資料都是在講什麼，也就是data 300 500 100是什麼
+                        data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
+                        backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
+                            'rgb(255, 255, 255)',
+                            // 'rgb(54, 162, 235)',
+                            // 'rgb(255, 205, 86)'
+                        ],
+                        lineTension: 0,//曲線哲度
+                        hoverOffset: 4
+                    }]
+                }, //設定圖表資料
+                //圖表的一些其他設定，像是hover時外匡加粗
+                options: {
+                    // responsive: true,
+                    // legend: { //是否要顯示圖示
+                    //     display: true,
+                    // },
+                    // tooltips: { //是否要顯示 tooltip
+                    //     enabled: true
+                    // },
+                    // scales: {  //是否要顯示 x、y 軸
+                    //     xAxes: [{
+                    //         display: true
+                    //     }],
+                    //     yAxes: [{
+                    //         display: true
+                    //     }]
+                    // },
+                }
+            })
+        }
+    },
+    error: err => {
+        console.log("vmonthreveueHompage fale")
+        console.log(err)
+    },
+});
+
+
+//分析資料-年齡客群TODO
+$.ajax({
+    url: `http://localhost:${localhost}/api/${storeId}/vagechart?token=${newToken}`,
+    method: 'GET',
+    success: (res, status) => {
+        // console.log(res)
+        console.log("vagechart ok")
+    },
+    error: err => {
+        console.log("vagechart fale")
+        console.log(err)
+    },
+});
+//分析資料-類別圓餅TODO
+$.ajax({
+    url: `http://localhost:${localhost}/api/${storeId}/vsalecategory?token=${newToken}`,
+    method: 'GET',
+    success: (res, status) => {
+        // console.log(res)
+        console.log("vsalecategory ok")
+    },
+    error: err => {
+        console.log("vsalecategory fale")
+        console.log(err)
+    },
+});
+
+//分析資料-男女比例TODO
+$.ajax({
+    url: `http://localhost:${localhost}/api/${storeId}/vgenderchart?token=${newToken}`,
+    method: 'GET',
+    success: (res, status) => {
+        // console.log(res)
+        
+        console.log("vgenderchart ok")
+    },
+    error: err => {
+        console.log("vgenderchart fale")
+        console.log(err)
+    },
+});
+//訂單管理TODO
+//1:orderPreview 2:orderAfteview 4:orderCancel 3:orderComplete
+$.ajax({
+    url: `http://localhost:${localhost}/api/${storeId}/vorderdisplay?token=${newToken}`,
+    method: 'GET',
+    success: (res, status) => {
+        // console.log(res);
+        console.log("ordersTable ok");
+        $('#orderPreview').empty();
+        $('#orderAfteview').empty();
+        $('#orderCancel').empty();
+        $('#orderComplete').empty();
+        for(var orderInfo of res){
+
+            if(orderInfo.orderstatus=="1"){
+                $('#orderPreview').append(
+                    '<tr>' +
+                    '<td>' + `未確認定單` + '</td>' +
+                    '<td>' + `${orderInfo.username}` + '</td>' +
+                    '<td>' + `${orderInfo.userphone}` + '</td>' +
+                    '<td>' + `${orderInfo.mealorderqty}` + '</td>' +
+                    '<td>' + `${orderInfo.ordersprice}` + '</td>' +
+                    '<td>' + `${orderInfo.createtime}` + '</td>' +
+                    '<td><button class="btn btn-primary">確認列印</button><button class="btn btn-danger">取消</button></td>' +
+                    '</tr>'
+                )
+            }else if(orderInfo.orderstatus=="3"){
+                $('#orderAfteview').append(
+                    '<tr>' +
+                    '<td>' + `已確認定單` + '</td>' +
+                    '<td>' + `${orderInfo.username}` + '</td>' +
+                    '<td>' + `${orderInfo.userphone}` + '</td>' +
+                    '<td>' + `${orderInfo.mealorderqty}` + '</td>' +
+                    '<td>' + `${orderInfo.ordersprice}` + '</td>' +
+                    '<td>' + `${orderInfo.createtime}` + '</td>' +
+                    '<td><button class="btn btn-dark">完成</button></td>' +
+                    
+                    '</tr>'
+                )
+            }else if(orderInfo.orderstatus=="4"){
+                $('#orderCancel').append(
+                    '<tr>' +
+                    '<td>' + `已取消訂單` + '</td>' +
+                    '<td>' + `${orderInfo.username}` + '</td>' +
+                    '<td>' + `${orderInfo.userphone}` + '</td>' +
+                    '<td>' + `${orderInfo.mealorderqty}` + '</td>' +
+                    '<td>' + `${orderInfo.ordersprice}` + '</td>' +
+                    '<td>' + `${orderInfo.createtime}` + '</td>' +
+                    '</tr>'
+                )
+            }else if(orderInfo.orderstatus=="3"){
+                // $('#orderComplete').append(
+                //     '<tr>' +
+                //     '<td>' + `已完成訂單` + '</td>' +
+                //     '<td>' + `${orderInfo.username}` + '</td>' +
+                //     '<td>' + `${orderInfo.userphone}` + '</td>' +
+                //     '<td>' + `${orderInfo.mealorderqty}` + '</td>' +
+                //     '<td>' + `${orderInfo.ordersprice}` + '</td>' +
+                //     '<td>' + `${orderInfo.createtime}` + '</td>' +
+                //     '</tr>'
+                // )
+            }else{console.log("info error")}
+
+        }
+    },
+    error: err => {
+        console.log("ordersTable fale")
+        console.log(err)
+    },
+});
 //搜尋
 $("#nutrientContentsearch").keyup(function () {
     //將輸入值轉為小寫去除空格
@@ -204,7 +365,7 @@ $("#nutrientContentsearch").keyup(function () {
 });
 //營養表格 菜單印出營養素 重點輸出  
 $.ajax({
-    url: `http://localhost:8080/api/${storeId}/ingredients?token=${newToken}`,
+    url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
     method: 'GET',
     success: function (res, status) {
 
@@ -241,7 +402,7 @@ $.ajax({
     })
 //菜單表格
 $.ajax({
-    url: `http://localhost:8080/api/${storeId}/vmealbom?token=${newToken}`,
+    url: `http://localhost:${localhost}/api/${storeId}/vmealbom?token=${newToken}`,
     method: 'GET',
     success: function (res, status) {
         $('#tableMenubody').empty();
@@ -277,10 +438,9 @@ $.ajax({
     },
     error: function () { }
 })
-//訂單管理表格
 //顧客管理表格
 $.ajax({
-    url: `http://localhost:8080/api/${storeId}/users?token=${newToken}`,
+    url: `http://localhost:${localhost}/api/${storeId}/users?token=${newToken}`,
     method: 'GET',
     success: function (res, status) {
         $('#tableMemberbody').empty();
@@ -322,65 +482,88 @@ $.ajax({
     }
 })
 //廣播與優惠卷設定
+
 //對帳單
+
 //店家資訊
 
-
-
 /*畫分析圖表*/
-const Chart1 = new Chart(
-    document.getElementById('Chart1'),
-    config
-);
-const Chart2 = new Chart(
-    document.getElementById('Chart2'),
-    config
-);
-let chart3 = new Chart(document.getElementById('Chart3'), {
-    type: 'pie', //圖表類型
-    data: {
-        labels: [ //圓餅圖的每一塊，分別叫做什麼名字
-            '台北', //第一塊名字
-            '台中', //第二塊名字
-            '高雄'
-        ],
-        datasets: [{
-            label: '三都人口', //這些資料都是在講什麼，也就是data 300 500 100是什麼
-            data: [57.69, 19.23, 23.08], //每一塊的資料分別是什麼，台北：300、台中：50..
-            backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)'
-            ],
-            hoverOffset: 4
-        }]
-    }, //設定圖表資料
-    options: {} //圖表的一些其他設定，像是hover時外匡加粗
-})
+// const labels = [
+//     'aaaa',
+//     'February',
+//     'March',
+//     'April',
+//     'May',
+//     'June',
+// ];
 
-let chart = new Chart(document.getElementById('Chart4'), {
-    type: 'pie', //圖表類型
-    data: {
-        labels: [ //圓餅圖的每一塊，分別叫做什麼名字
-            '台北', //第一塊名字
-            '台中', //第二塊名字
-            '高雄'
-        ],
-        datasets: [{
-            label: '三都人口', //這些資料都是在講什麼，也就是data 300 500 100是什麼
-            data: [300, 50, 100], //每一塊的資料分別是什麼，台北：300、台中：50..
-            backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)'
-            ],
-            hoverOffset: 4
-        }]
-    }, //設定圖表資料
-    options: {} //圖表的一些其他設定，像是hover時外匡加粗
-})
-/*讀取*/
+// const data = {
+//     labels: labels,
+//     datasets: [{
+//         label: 'My First dataset',
+//         backgroundColor: 'rgb(255, 99, 132)',
+//         borderColor: 'rgb(255, 99, 132)',
+//         data: [100, 10, 5, 2, 20, 30, 45],
+//     }]
+// };
 
+// const config = {
+//     type: 'line',
+//     data: data,
+//     options: {}
+// };
+// const Chart1 = new Chart(
+//     document.getElementById('Chart1'),
+//     config
+// );
+// const Chart2 = new Chart(
+//     document.getElementById('Chart2'),
+//     config
+// );
+// let chart3 = new Chart(document.getElementById('Chart3'), {
+//     type: 'pie', //圖表類型
+//     data: {
+//         labels: [ //圓餅圖的每一塊，分別叫做什麼名字
+//             '台北', //第一塊名字
+//             '台中', //第二塊名字
+//             '高雄'
+//         ],
+//         datasets: [{
+//             label: '三都人口', //這些資料都是在講什麼，也就是data 300 500 100是什麼
+//             data: [57.69, 19.23, 23.08], //每一塊的資料分別是什麼，台北：300、台中：50..
+//             backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
+//                 'rgb(255, 99, 132)',
+//                 'rgb(54, 162, 235)',
+//                 'rgb(255, 205, 86)'
+//             ],
+//             hoverOffset: 4
+//         }]
+//     }, //設定圖表資料
+//     options: {} //圖表的一些其他設定，像是hover時外匡加粗
+// })
+
+// let chart = new Chart(document.getElementById('Chart4'), {
+//     type: 'pie', //圖表類型
+//     data: {
+//         labels: [ //圓餅圖的每一塊，分別叫做什麼名字
+//             '台北', //第一塊名字
+//             '台中', //第二塊名字
+//             '高雄'
+//         ],
+//         datasets: [{
+//             label: '三都人口', //這些資料都是在講什麼，也就是data 300 500 100是什麼
+//             data: [300, 50, 100], //每一塊的資料分別是什麼，台北：300、台中：50..
+//             backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
+//                 'rgb(255, 99, 132)',
+//                 'rgb(54, 162, 235)',
+//                 'rgb(255, 205, 86)'
+//             ],
+//             hoverOffset: 4
+//         }]
+//     }, //設定圖表資料
+//     options: {} //圖表的一些其他設定，像是hover時外匡加粗
+// })
+/*畫分析圖表*/
 
 
 /*---------------嘉彬------------*/
@@ -452,7 +635,7 @@ function ingredientsDelBtn() {
 //計算營養成份表
 function ingredientsOPA() {
     $.ajax({
-        url: `http://localhost:8080/api/${storeId}/ingredients?token=${newToken}`,
+        url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
         method: 'GET',
         success: function (res, status) {
             console.log("ingredientsOPA() success");
