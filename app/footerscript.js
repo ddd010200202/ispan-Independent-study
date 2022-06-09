@@ -88,6 +88,7 @@ function openSwitch(isOpen) {
             localStorage.setItem('openstatus', $("#switch")[0].checked)
             console.log('status change ok')
             res[0].STORE_OPEN_STATUS = isOpen
+            console.log(typeof JSON.stringify(res[0]))
             $.ajax({
                 url: `http://localhost:${localhost}/api/${storeId}/stores?token=${newToken}`,
                 method: 'PUT',
@@ -470,10 +471,10 @@ function Analyzepage() {
             console.log("vsalerankHomepage ok");
             var labels = [];
             var data = [];
-            
 
 
-            var backgroundColor = colorRandom(res.length,0.2)
+
+            var backgroundColor = colorRandom(res.length, 0.2)
 
             for (var vage of res) {
                 labels.push(vage.agerange + '歲')
@@ -495,7 +496,7 @@ function Analyzepage() {
                     }]
                 }, //設定圖表資料
                 options: {
-                   
+
                 } //圖表的一些其他設定，像是hover時外匡加粗
             })
         },
@@ -520,44 +521,44 @@ function Analyzepage() {
             var pastaData = [];
             var drinkLabels = [];
             var drinkData = [];
-            var backgroundColor = colorRandom(res.length,0.5)
+            var backgroundColor = colorRandom(res.length, 0.5)
             console.log("vsalerankHomepage ok")
             // console.log(res)
             for (var salecategory of res) {
-                if(salecategory.mealcategoryname=='健康餐盒'){
-                    healthmealLabels.push(salecategory.mealname+'(%)');
+                if (salecategory.mealcategoryname == '健康餐盒') {
+                    healthmealLabels.push(salecategory.mealname + '(%)');
                     healthmealData.push(salecategory.percentage);
-                }else if(salecategory.mealcategoryname=='沙拉'){
-                    saladLabels.push(salecategory.mealname+'(%)');
+                } else if (salecategory.mealcategoryname == '沙拉') {
+                    saladLabels.push(salecategory.mealname + '(%)');
                     saladData.push(salecategory.percentage);
-                }else if(salecategory.mealcategoryname=='義大利麵'){
-                    pastaLabels.push(salecategory.mealname+'(%)');
+                } else if (salecategory.mealcategoryname == '義大利麵') {
+                    pastaLabels.push(salecategory.mealname + '(%)');
                     pastaData.push(salecategory.percentage);
-                }else if(salecategory.mealcategoryname=='飲料'){
-                    drinkLabels.push(salecategory.mealname+'(%)');
+                } else if (salecategory.mealcategoryname == '飲料') {
+                    drinkLabels.push(salecategory.mealname + '(%)');
                     drinkData.push(salecategory.percentage);
-                }else{
+                } else {
                     console.log('mealcategoryname return error')
                 }
             }
-            var Chart6bgColor=backgroundColor.slice(0,healthmealLabels.length);
-            var Chart7bgColor=backgroundColor.slice(
-                healthmealLabels.length-1,healthmealLabels.length+saladLabels.length
-                );
-            var Chart8bgColor=backgroundColor.slice(
-                healthmealLabels.length+saladLabels.length-1,healthmealLabels.length+saladLabels.length+pastaLabels.length
-                );
-            var Chart9bgColor=backgroundColor.slice(
-                healthmealLabels.length+saladLabels.length+pastaLabels.length-1,
-                healthmealLabels.length+saladLabels.length+pastaLabels.length+drinkLabels.length
-                )
+            var Chart6bgColor = backgroundColor.slice(0, healthmealLabels.length);
+            var Chart7bgColor = backgroundColor.slice(
+                healthmealLabels.length - 1, healthmealLabels.length + saladLabels.length
+            );
+            var Chart8bgColor = backgroundColor.slice(
+                healthmealLabels.length + saladLabels.length - 1, healthmealLabels.length + saladLabels.length + pastaLabels.length
+            );
+            var Chart9bgColor = backgroundColor.slice(
+                healthmealLabels.length + saladLabels.length + pastaLabels.length - 1,
+                healthmealLabels.length + saladLabels.length + pastaLabels.length + drinkLabels.length
+            )
             if (Chart6 instanceof Chart) {
                 Chart6.destroy();
                 Chart7.destroy();
                 Chart8.destroy();
                 Chart9.destroy();
             }
-            
+
             Chart6 = new Chart(document.getElementsByClassName('Chart6'), {
                 type: 'pie', //圖表類型
                 data: {
@@ -626,10 +627,10 @@ function Analyzepage() {
             console.log("vgenderchart ok")
             var labels = [];
             var data = [];
-            var backgroundColor = colorRandom(3,0.5);
-            labels.push('男顧客佔比(%)');labels.push('女顧客佔比(%)');labels.push('中性顧客佔比(%)');
+            var backgroundColor = colorRandom(3, 0.5);
+            labels.push('男顧客佔比(%)'); labels.push('女顧客佔比(%)'); labels.push('中性顧客佔比(%)');
             for (var vgender of res) {
-                
+
                 data.push(vgender.percentage)
             }
             if (Chart10 instanceof Chart) {
@@ -648,7 +649,7 @@ function Analyzepage() {
                     }]
                 }, //設定圖表資料
                 options: {
-                   
+
                 } //圖表的一些其他設定，像是hover時外匡加粗
             })
         },
@@ -676,26 +677,28 @@ function Orderpage() {
 
                 if (orderInfo.orderstatus == "1") {
                     $('#orderPreview').append(
-                        '<tr>' +
+                        '<tr class="orderTrr">' +
+                        '<td class="orderTr" style="display: none;">' + `${orderInfo.orderid}` + '</td>' +
                         '<td>' + `未確認定單` + '</td>' +
                         '<td>' + `${orderInfo.username}` + '</td>' +
                         '<td>' + `${orderInfo.userphone}` + '</td>' +
                         '<td>' + `${orderInfo.mealorderqty}` + '</td>' +
                         '<td>' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td>' + `${formatDate(orderInfo.createtime)}` + '</td>' +
-                        '<td><button class="btn btn-primary">確認列印</button><button class="btn btn-danger">取消</button></td>' +
+                        '<td><button  class="orderBtn btn btn-primary">確認列印</button><button  class="orderCBtn btn btn-danger">取消</button></td>' +
                         '</tr>'
                     )
                 } else if (orderInfo.orderstatus == "2") {
                     $('#orderAfteview').append(
-                        '<tr>' +
-                        '<td>' + `已確認定單` + '</td>' +
+                        '<tr  class="orderTrrcom">' +
+                        '<td class="orderTrcom" style="display: none;">' + `${orderInfo.orderid}` + '</td>' +
+                        '<td >' + `已確認定單` + '</td>' +
                         '<td>' + `${orderInfo.username}` + '</td>' +
                         '<td>' + `${orderInfo.userphone}` + '</td>' +
                         '<td>' + `${orderInfo.mealorderqty}` + '</td>' +
                         '<td>' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td>' + `${formatDate(orderInfo.createtime)}` + '</td>' +
-                        '<td><button class="btn btn-dark">完成</button></td>' +
+                        '<td><button class="ordercomBtn btn btn-dark">完成</button></td>' +
 
                         '</tr>'
                     )
@@ -724,13 +727,226 @@ function Orderpage() {
                 } else { console.log("info error") }
 
             }
+            //完成按鈕
+            $('.ordercomBtn').click(function () {
+                var orderid = $('.orderTrcom')[$(this).closest("tr").index()].innerText
+                console.log(orderid)
+                $.ajax({
+                    url: `http://localhost:${localhost}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
+                    method: 'GET',
+                    success: (res, status) => {
+                        res[0].ORDER_STATUS = "3"
+                        var putres = {
+                            "ORDER_ID": `${res[0].ORDER_ID}`,
+                            "STORE_ID": `${res[0].STORE_ID}`,
+                            "USER_ID": `${res[0].USER_ID}`,
+                            "ORDERS_PRICE": res[0].ORDERS_PRICE,
+                            "ORDER_STATUS": `${res[0].ORDER_STATUS}`,
+                            "ORDER_DESC": `${res[0].ORDER_DESC}`
+                        }
+
+                        $.ajax({
+                            url: `http://localhost:${localhost}/api/${storeId}/order?token=${newToken}`,
+                            method: 'PUT',
+                            contentType: "application/JSON",
+                            data: JSON.stringify(putres),
+                            success: (res, status) => {
+                                console.log(res)
+
+
+                            }, error: err => {
+                                console.log("ordersTable put fale")
+                                console.log(err)
+                            },
+                        })
+
+                    }, error: err => {
+                        console.log("ordersTable get fale")
+                        console.log(err)
+                    },
+                })
+                $('.orderTrrcom')[$(this).closest("tr").index()].style.display='none';
+            });
+            //刪除
+            $('.orderCBtn').click(function () {
+                var orderid = $('.orderTr')[$(this).closest("tr").index()].innerText
+                $.ajax({
+                    url: `http://localhost:${localhost}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
+                    method: 'GET',
+                    success: (res, status) => {
+                        res[0].ORDER_STATUS = "4"
+                        var putress = {
+                            "ORDER_ID": `${res[0].ORDER_ID}`,
+                            "STORE_ID": `${res[0].STORE_ID}`,
+                            "USER_ID": `${res[0].USER_ID}`,
+                            "ORDERS_PRICE": res[0].ORDERS_PRICE,
+                            "ORDER_STATUS": `${res[0].ORDER_STATUS}`,
+                            "ORDER_DESC": `${res[0].ORDER_DESC}`
+                        }
+
+                        $.ajax({
+                            url: `http://localhost:${localhost}/api/${storeId}/order?token=${newToken}`,
+                            method: 'PUT',
+                            contentType: "application/JSON",
+                            data: JSON.stringify(putress),
+                            success: (res, status) => {
+                                console.log(res)
+
+
+                            }, error: err => {
+                                console.log("ordersTable put fale")
+                                console.log(err)
+                            },
+                        })
+
+                    }, error: err => {
+                        console.log("ordersTable get fale")
+                        console.log(err)
+                    },
+                })
+                $(' .orderTrr')[$(this).closest("tr").index()].style.display='none';
+            })
+            //確定
+            var getcompletevalue = [];
+            $('.orderBtn').click(function () {
+
+                var orderid = $('.orderTr')[$(this).closest("tr").index()].innerText
+                var selectData = $(this).closest("tr").html().slice(43, -1).slice(0, -109).split("</td><td>");
+                ;
+
+                var nowDate = new Date();
+                var nowTime = nowDate.getFullYear() + "年" + (nowDate.getMonth() + 1) + "月" +
+                    nowDate.getDate() + "日" + nowDate.getHours() + "時" + nowDate.getMinutes() +
+                    "分";
+                // console.log(b)
+                getcompletevalue.push(selectData[0])
+                $('#orderAfteview').append(
+                    '<tr  class="orderTrrcom">' +
+                    '<td class="orderTrcom" style="display: none;">' + `${selectData[0]}` + '</td>' +
+                    '<td>' + `已確認定單` + '</td>' +
+                    '<td>' + `${selectData[2]}` + '</td>' +
+                    '<td>' + `${selectData[3]}` + '</td>' +
+                    '<td>' + `${selectData[4]}` + '</td>' +
+                    '<td>' + `${selectData[5]}` + '</td>' +
+                    '<td>' + `${nowTime}` + '</td>' +
+                    '<td><button  class="ordercomBtn btn btn-dark">完成</button></td>' +
+
+                    '</tr>'
+                )
+
+
+
+                $.ajax({
+                    url: `http://localhost:${localhost}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
+                    method: 'GET',
+                    success: (res, status) => {
+                        //完成按鈕
+                        $('.ordercomBtn').click(function () {
+                            var orderid = $('.orderTrcom')[$(this).closest("tr").index()].innerText
+                            console.log(orderid)
+                            $.ajax({
+                                url: `http://localhost:${localhost}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
+                                method: 'GET',
+                                success: (res, status) => {
+                                    
+                                    console.log("orderid")
+                                    res[0].ORDER_STATUS = "3"
+                                    var putres = {
+                                        "ORDER_ID": `${res[0].ORDER_ID}`,
+                                        "STORE_ID": `${res[0].STORE_ID}`,
+                                        "USER_ID": `${res[0].USER_ID}`,
+                                        "ORDERS_PRICE": res[0].ORDERS_PRICE,
+                                        "ORDER_STATUS": `${res[0].ORDER_STATUS}`,
+                                        "ORDER_DESC": `${res[0].ORDER_DESC}`
+                                    }
+                                    console.log(putres)
+                                    $.ajax({
+                                        url: `http://localhost:${localhost}/api/${storeId}/order?token=${newToken}`,
+                                        method: 'PUT',
+                                        contentType: "application/JSON",
+                                        data: JSON.stringify(putres),
+                                        success: (res, status) => {
+                                            console.log(res)
+                                            console.log("okookokkokkoo")
+
+                                        }, error: err => {
+                                            console.log("ordersTable put fale")
+                                            console.log(err)
+                                        },
+                                    })
+
+                                }, error: err => {
+                                    console.log("ordersTable get fale")
+                                    console.log(err)
+                                },
+                            })
+                            $('.orderTrrcom')[$(this).closest("tr").index()].style.display='none';
+                        });
+                        res[0].ORDER_STATUS = "2"
+                        var putres = {
+                            "ORDER_ID": `${res[0].ORDER_ID}`,
+                            "STORE_ID": `${res[0].STORE_ID}`,
+                            "USER_ID": `${res[0].USER_ID}`,
+                            "ORDERS_PRICE": res[0].ORDERS_PRICE,
+                            "ORDER_STATUS": `${res[0].ORDER_STATUS}`,
+                            "ORDER_DESC": `${res[0].ORDER_DESC}`
+                        }
+
+                        $.ajax({
+                            url: `http://localhost:${localhost}/api/${storeId}/order?token=${newToken}`,
+                            method: 'PUT',
+                            contentType: "application/JSON",
+                            data: JSON.stringify(putres),
+                            success: (res, status) => {
+                                console.log(res)
+
+
+                            }, error: err => {
+                                console.log("ordersTable put fale")
+                                console.log(err)
+                            },
+                        })
+
+                    }, error: err => {
+                        console.log("ordersTable get fale")
+                        console.log(err)
+                    },
+                })
+                $(' .orderTrr')[$(this).closest("tr").index()].style.display='none';
+            });
+
+
+
+
+
         },
         error: err => {
-            console.log("ordersTable fale")
+            console.log("ordersTable get fale")
             console.log(err)
         },
     });
 }
+
+function comOder() {
+    $.ajax({
+        url: xxx,
+        method: 'PUT',
+        data: {
+
+        },
+        success: (res, status) => {
+
+        },
+        error: err => {
+            console.log("ordersTable fale")
+            console.log(err)
+        }
+    })
+}
+//preafterOrder cancelOrder completeOrder
+$('#preafterOrder').on('click', Orderpage)
+$('#cancelOrder').on('click', Orderpage)
+$('#completeOrder').on('click', Orderpage)
 //顧客管理頁面處理
 function Memberpage() {
     $.ajax({
@@ -782,7 +998,59 @@ function Broadcastpage() {
 }
 //對帳單頁面處理
 function ReconciliationStatementpage() {
-
+    $('#table').bootstrapTable({
+        url: 'http://localhost:8081/api/l3rH7uT47PTrQSteWO2V9XqbpRn1/orders?token=$2a$10$WcqSdkG/OIJJkkMgiSJgzONwQ5aQaXkGWcAtQXcE2HcpI5nP7Gjze',         //請求後臺的 URL（*）
+        method: 'get',                      //請求方式（*）
+        // data: data,                      //當不使用上面的後臺請求時，使用data來接收資料
+        toolbar: '#toolbar',                //工具按鈕用哪個容器
+        striped: false,                      //是否顯示行間隔色
+        cache: false,                       //是否使用快取，預設為 true，所以一般情況下需要設定一下這個屬性（*）
+        pagination: true,                   //是否顯示分頁（*）
+        sortable: true,                    //是否啟用排序
+        sortOrder: "asc",                   //排序方式
+        sidePagination: "client",           //分頁方式：client 使用者端分頁，server 伺服器端分頁（*）
+        pageNumber: 1,                       //初始化載入第一頁，預設第一頁
+        pageSize: 5,                        //每頁的記錄行數（*）
+        pageList: [5, 10],        //可供選擇的每頁的行數（*）
+        search: true,                       //是否顯示錶格搜尋，此搜尋是使用者端搜尋，不會進伺服器端，所以個人感覺意義不大
+        strictSearch: false,                 //啟用嚴格搜尋。禁用比較檢查。
+        showColumns: false,                  //是否顯示所有的列
+        showRefresh: true,                  //是否顯示重新整理按鈕
+        minimumCountColumns: 2,             //最少允許的列數
+        clickToSelect: true,                //是否啟用點選選中行
+        // height: 500,                        //行高，如果沒有設定 height 屬性，表格自動根據記錄條數覺得表格高度
+        uniqueId: "ID",                     //每一行的唯一標識，一般為主鍵列
+        showToggle: false,                    //是否顯示詳細檢視和列表檢視的切換按鈕
+        cardView: false,                    //是否顯示詳細檢視
+        detailView: false,                  //是否顯示父子表
+        showExport: false,                   //是否顯示匯出
+        exportDataType: "selected",            //basic', 'all', 'selected'.
+        columns: [{
+            field: 'ID', title: 'ID'       //我們取json中id的值，並將表頭title設定為ID
+        }, {
+            field: 'ORDER_ID', title: 'aa'         //我們取 json 中 username 的值，並將表頭 title 設定為使用者名稱
+        }, {
+            field: 'STORE_ID', title: 'vv'                //我們取 json 中 sex 的值，並將表頭 title 設定為性別
+        }, {
+            field: 'USER_ID', title: 'cc'               //我們取 json 中 city 的值，並將表頭 title 設定為城市
+        }, {
+            field: 'ORDERS_PRICE', title: 'dd'               //我們取 json 中 sign 的值，並將表頭 title 設定為簽名
+        }, {
+            field: 'ORDER_STATUS', title: 'ee'           //我們取 json 中 classify 的值，並將表頭 title 設定為分類
+        }, {
+            //ormatter:function(value,row,index) 對後臺傳入資料 進行操作 對資料重新賦值 返回 return 到前臺
+            // events 觸發事件
+            // field: 'Button',title:"操作",align: 'center',events:operateEvents,formatter:function(value,row,index){
+            //     var del = '<button type="button" class="btn btn-danger delete">刪除</button>'
+            //     return del;
+            // }
+        }
+        ],
+        // responseHandler: function (res) {
+        //     return res.data      //在載入遠端資料之前，處理響應資料格式.
+        //     // 我們取的值在data欄位中，所以需要先進行處理，這樣才能獲取我們想要的結果
+        // }
+    });
 }
 
 
@@ -791,6 +1059,8 @@ function ReconciliationStatementpage() {
 //廣播與優惠卷設定
 
 //對帳單
+//BT
+// fixedScroll = data.fixedScroll ? data.fixedScroll : false;
 
 
 
@@ -800,7 +1070,7 @@ function ReconciliationStatementpage() {
 
 /*utils*/
 //
-var colorRandom = function (j,x) {
+var colorRandom = function (j, x) {
     var color = []
     for (var i = 0; i < j; i++) {
 
@@ -816,24 +1086,78 @@ var colorRandom = function (j,x) {
 //處理時間
 function formatDate(newDate) {
     let date = new Date(newDate);
-    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    return date.getFullYear() + "年" + (date.getMonth() + 1) + "月" +
+        date.getDate() + "日" + date.getHours() + "時" + date.getMinutes() +
+        "分";
 }
+
 function formatDatenotime(newDate) {
     let date = new Date(newDate);
-    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+    return date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + '日'
 }
 
 //搜尋
 $("#nutrientContentsearch").keyup(function () {
-    //將輸入值轉為小寫去除空格
-    var keyword = this.value.toLowerCase().trim();
+    var value = this.value.toLowerCase().trim();
 
-    $("table tr").each(function (index) {
+    $("#nutrientContenttable tr").each(function (index) {
+        if (!index) return;
+        $(this).find("td").each(function () {
+            var id = $(this).text().toLowerCase().trim();
+            var unfound = (id.indexOf(value) == -1);
+            $(this).closest('tr').toggle(!unfound);
+            return unfound;
+        });
+    });
+});
+var eleval = document.getElementById("searchMenu");
+$("#menuBtn").on("click", function () {
+    console.log(eleval.value);
+    //將輸入值轉為小寫去除前後空格
+    var keyword = eleval.value.toLowerCase().trim();
+
+    $("#tableMenu tr").each(function (index) {
         if (!index) return;
         $(this).find("td").each(function () {
             var id = $(this).text().toLowerCase().trim();
             var unfound = (id.indexOf(keyword) == -1);
-            //.closest由tr開始搜尋/tr結束
+            //.closest()由tr開始搜尋/tr結束
+            //.toggle()=>hide()、show切換
+            $(this).closest('tr').toggle(!unfound);
+            return unfound;
+        });
+    });
+});
+var eleval1 = document.getElementById("searchMember");
+$("#memberBtn").on("click", function () {
+    console.log(eleval1.value);
+    //將輸入值轉為小寫去除前後空格
+    var keyword = eleval1.value.toLowerCase().trim();
+
+    $("#tableMember tr").each(function (index) {
+        if (!index) return;
+        $(this).find("td").each(function () {
+            var id = $(this).text().toLowerCase().trim();
+            var unfound = (id.indexOf(keyword) == -1);
+            //.closest()由tr開始搜尋/tr結束
+            //.toggle()=>hide()、show切換
+            $(this).closest('tr').toggle(!unfound);
+            return unfound;
+        });
+    });
+});
+var eleval1 = document.getElementById("searchOrder");
+$("#orderBtn").on("click", function () {
+    console.log(eleval1.value);
+    //將輸入值轉為小寫去除前後空格
+    var keyword = eleval1.value.toLowerCase().trim();
+
+    $("#orderDiv tr").each(function (index) {
+        if (!index) return;
+        $(this).find("td").each(function () {
+            var id = $(this).text().toLowerCase().trim();
+            var unfound = (id.indexOf(keyword) == -1);
+            //.closest()由tr開始搜尋/tr結束
             //.toggle()=>hide()、show切換
             $(this).closest('tr').toggle(!unfound);
             return unfound;
