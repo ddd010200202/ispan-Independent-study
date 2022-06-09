@@ -18,14 +18,17 @@
     <script src="https://kit.fontawesome.com/365e4b1444.js" crossorigin="anonymous"></script>
 
     <!-- Bootstrap core CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+    <link href="./style/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" `
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
+    <!--bootswatch-->
+
     <!--google font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -124,7 +127,8 @@
         }
 
         #bulletinBoard {
-            padding-top: 70px;
+
+            padding: 70px 10px 10px 10px;
         }
 
         #padright>div {
@@ -155,6 +159,80 @@
         #quickLink>div {
             margin-top: 50px;
         }
+
+        #bulletinBoardinfoa {
+            /* width: 200px; */
+            /* height: 200px; */
+            background-color: rgb(190, 174, 226);
+            border-radius: 10px 10px 0px 0px;
+            border-right: 5px solid rgb(190, 174, 226);
+            border-left: 5px solid rgb(190, 174, 226);
+            border-bottom: 5px solid rgb(190, 174, 226);
+            padding: 0px;
+        }
+
+        #bulletinBoardinfoa-a {
+            width: 100%;
+            margin: 0px;
+            /* height: 40px; */
+            background-color: rgb(190, 174, 226);
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        #bulletinBoardinfoa-b {
+            width: 100%;
+            height: 175px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #bulletinBoardinfob {
+            background-color: rgb(183, 229, 221);
+            border-radius: 10px 10px 0px 0px;
+            border-right: 5px solid rgb(183, 229, 221);
+            border-left: 5px solid rgb(183, 229, 221);
+            border-bottom: 5px solid rgb(183, 229, 221);
+            padding: 0px;
+        }
+
+        #bulletinBoardinfob-a {
+            width: 100%;
+            margin: 0px;
+            /* height: 20px; */
+            background-color: rgb(183, 229, 221);
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        #bulletinBoardinfob-b {
+            width: 100%;
+            height: 175px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #bulletinBoardinfoc {
+            background-color: rgb(244, 191, 191);
+            border-radius: 10px 10px 0px 0px;
+            border-right: 5px solid rgb(244, 191, 191);
+            border-left: 5px solid rgb(244, 191, 191);
+            border-bottom: 5px solid rgb(244, 191, 191);
+            padding: 0px;
+        }
+
+        #bulletinBoardinfoc-a {
+            width: 100%;
+            margin: 0px;
+            /* height: 20px; */
+            background-color: rgb(244, 191, 191);
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        #bulletinBoardinfoc-b {
+            width: 100%;
+            height: 175px;
+            background-color: rgb(255, 255, 255);
+
+        }
+
+
 
         /*營業開關*/
         :root {
@@ -348,7 +426,7 @@
             <div class="row" style="margin: 0px;">
                 <!-- 畫面比例 :2 導覽nav-->
                 <div id="padleft" class="col-md-2">
-                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark bg-gradient">
+                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark ">
                         <a href="#"
                             class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                             <img src="./img/456.png" alt="我不見了">
@@ -365,9 +443,9 @@
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
-                                    data-bs-target="#pills-menu" role="tab" aria-controls="pills-menu"
-                                    aria-selected="false">
+                                <a id="test111" class="nav-link text-white bg-transparent text-start"
+                                    data-bs-toggle="pill" data-bs-target="#pills-menu" role="tab"
+                                    aria-controls="pills-menu" aria-selected="false">
                                     <i class="fa-solid fa-utensils"></i>
                                     <p style="display:inline-block ; text-align: center;width:120px;">菜單管理</p>
 
@@ -410,24 +488,17 @@
                                 <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
                                     data-bs-target="#pills-broadcast" role="tab" aria-controls="pills-broadcast"
                                     aria-selected="false">
-                                    <i class="fa-solid fa-file-invoice"></i>
-                                    <p style="display:inline-block ; text-align: center;width:120px;">廣播優惠卷設定</p>
+                                    <i class="fa-solid fa-bullhorn"></i>
+                                    <p style="display:inline-block ; text-align: center;width:120px;">廣播與優惠卷</p>
                                 </a>
                             </li>
+                            <!-- #pills-reconciliationStatement -->
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
                                     data-bs-target="#pills-reconciliationStatement" role="tab"
                                     aria-controls="pills-reconciliationStatement" aria-selected="false">
                                     <i class="fa-solid fa-file-invoice-dollar"></i>
                                     <p style="display:inline-block ; text-align: center;width:120px;">對帳單</p>
-                                </a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
-                                    data-bs-target="#pills-information" role="tab" aria-controls="pills-information"
-                                    aria-selected="false">
-                                    <i class="fa-solid fa-shop"></i>
-                                    <p style="display:inline-block ; text-align: center;width:120px;">店家資訊</p>
                                 </a>
                             </li>
                         </ul>
@@ -487,48 +558,81 @@
                                             名悅便當店
                                         </li>
                                         <li class="nav-item">
-                                            <button id="signOutbtn">登出</button>
+                                            <button class="btn btn-outline-dark" id="signOutbtn"
+                                                style="padding-top: 0px;">登出</button>
                                         </li>
                                     </ul>
                                 </nav>
                             </div>
                             <!-- 首頁 -->
                             <div>
+                                <!-- 首頁 -->
                                 <div class="col-md-12 tab-content" id="pills-tabContent">
+                                    <!-- 首頁 -->
                                     <div class="container tab-pane  show active" id="pills-home" role="tabpanel"
                                         aria-labelledby="pills-home-tab">
                                         <div id="quickLink" class="row tab-content">
-                                            <div class="col-md-3">
-                                                <img src="./img/group1.png">
+                                            <div class="col-md-3" data-tilt data-tilt-max="50">
+                                                <a id="test123"><img src="./img/group1.png"></a>
                                             </div>
-                                            <div class="col-md-3">
-                                                <img src="./img/group1.png">
-                                            </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" data-tilt data-tilt-max="50">
                                                 <img src="./img/group2.png">
                                             </div>
-                                            <div class="col-md-3">
-                                                <img src="./img/group2.png">
+                                            <div class="col-md-3" data-tilt data-tilt-max="50">
+                                                <img src="./img/group3.png">
+                                            </div>
+                                            <div class="col-md-3" data-tilt data-tilt-max="50">
+                                                <img src="./img/group4.png">
                                             </div>
                                         </div>
-                                        <div class="row" id="bulletinBoard">
-                                            <h3>每月銷售前三名</h3>
-                                            <ol id="vsalerankHomepage"></ol>
-                                            <h3>訂單管理</h3>
-                                            <ul id="vorderstatuscountHomepage"></ul>
-                                            <h3>這個月目前總營收</h3>
-                                            <ul id="vmonthreveueHompage" style="list-style-type: none;"></ul>
+                                        <div class="container">
+                                            <div class="row" id="bulletinBoard">
+                                                <div id="bulletinBoardinfoa" class="col-md-3 m-5" data-tilt
+                                                    data-tilt-max="10">
+                                                    <div id="bulletinBoardinfoa-a">
+                                                        <h3 style="color:white;">每月銷售前三名</h3>
+                                                    </div>
+                                                    <div id="bulletinBoardinfoa-b" class="text-left">
+
+                                                        <ol id="vsalerankHomepage"></ol>
+                                                    </div>
+                                                </div>
+                                                <div id="bulletinBoardinfob" class="col-md-3 m-5" data-tilt
+                                                    data-tilt-max="10">
+                                                    <div id="bulletinBoardinfob-a">
+                                                        <h3 style="color:white;">訂單管理</h3>
+                                                    </div>
+                                                    <div id="bulletinBoardinfob-b" class="text-center">
+
+                                                        <ul id="vorderstatuscountHomepage"></ul>
+                                                    </div>
+                                                </div>
+                                                <div id="bulletinBoardinfoc" class="col-md-3 m-5" data-tilt
+                                                    data-tilt-max="10">
+                                                    <div id="bulletinBoardinfoc-a">
+                                                        <h3 style="color:white;">這個月目前總營收</h3>
+                                                    </div>
+                                                    <div id="bulletinBoardinfoc-b" class="text-center">
+
+                                                        <ul id="vmonthreveueHompage" style="list-style-type: none;">
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
                                         </div>
                                         <div class="row content">
-                                            <div class="col-md-6"
-                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                            <div class="col-md-6" data-tilt data-tilt-max="10"
+                                                style="width: 600px;margin-bottom: 75px;">
                                                 <canvas class="Chart3"
-                                                    style="background-color: rgb(128, 136, 201);"></canvas>
+                                                    style="background-color: rgb(219, 223, 253); border-radius: 10px;"></canvas>
                                             </div>
-                                            <div class="col-md-6"
-                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                            <div class="col-md-6" data-tilt data-tilt-max="10"
+                                                style="width: 600px;margin-bottom: 75px;">
                                                 <canvas class="Chart4"
-                                                    style="background-color: rgb(255, 255, 255);"></canvas>
+                                                    style="background-color: rgb(255, 255, 255); border-radius: 10px;"></canvas>
                                             </div>
                                         </div>
 
@@ -784,9 +888,9 @@
                                                     <div class="col-md-12 pt-2">
                                                         <!--餐點名稱 會員姓名 餐點數量  餐點金額 訂單狀態-->
                                                         <div id="orderDiv">
-                                                            <table  class="table table-hover table-light">
+                                                            <table class="table table-hover table-light">
                                                                 <thead class="table-dark">
-                                                                    <tr> 
+                                                                    <tr>
                                                                         <th scope="col">訂單狀態</th>
                                                                         <th scope="col">會員姓名</th>
                                                                         <th scope="col">電話</th>
@@ -804,13 +908,15 @@
                                                                         <td>雞肉飯*6</td>
                                                                         <td>100</td>
                                                                         <td>年/月/日</td>
-                                                                        <td><button class="btn btn-primary">確認</button><button class="btn btn-danger">取消</button></td>
+                                                                        <td><button
+                                                                                class="btn btn-primary">確認</button><button
+                                                                                class="btn btn-danger">取消</button></td>
                                                                     </tr>
 
                                                                 </tbody>
 
                                                             </table>
-                                                            <table  class="table table-hover table-light">
+                                                            <table class="table table-hover table-light">
                                                                 <thead class="table-dark">
                                                                     <tr>
                                                                         <th scope="col">訂單狀態</th>
@@ -818,7 +924,7 @@
                                                                         <th scope="col">電話</th>
                                                                         <th scope="col">餐點名稱/餐點數量</th>
                                                                         <th scope="col">餐點總計金額</th>
-                                                                        
+
                                                                         <th scope="col">訂單建立時間</th>
                                                                         <th scope="col">確認列印</th>
                                                                     </tr>
@@ -838,7 +944,7 @@
                                                                 </tbody>
 
                                                             </table>
-                                                            <table  class="table table-hover table-light">
+                                                            <table class="table table-hover table-light">
                                                                 <thead class="table-dark">
                                                                     <tr>
                                                                         <th scope="col">訂單狀態</th>
@@ -862,10 +968,10 @@
 
                                                             </table>
 
-                                                            <table  class="table table-hover table-light">
+                                                            <table class="table table-hover table-light">
                                                                 <thead class="table-dark">
-                                                                    <tr >
-                                                            
+                                                                    <tr>
+
                                                                         <th scope="col">訂單狀態</th>
                                                                         <th scope="col">會員姓名</th>
                                                                         <th scope="col">電話</th>
@@ -900,7 +1006,7 @@
                                     <!-- broadcast -->
                                     <div class="container tab-pane " id="pills-broadcast" role="tabpanel"
                                         aria-labelledby="pills-broadcast-tab">
-                                        <h1><i class="fa-solid fa-file-invoice"></i>廣播訊息設定</h1>
+                                        <h1><i class="fa-solid fa-bullhorn"></i>廣播與優惠卷</h1>
                                         <div class="text-top">
                                             <div class="input-group flex-nowrap" style="width:15%">
 
@@ -1050,74 +1156,44 @@
                                     <!--銷售統計 商品銷量:圓餅 消費者年齡範圍 銀收:折線圖-->
                                     <div class="container tab-pane " id="pills-analyze" role="tabpanel"
                                         aria-labelledby="pills-analyze-tab">
+                                        <h1 style="color:rgb(34, 46, 60)white; padding-top: 50px;"><i
+                                                class="fa-solid fa-chart-line"></i></i>分析資料表</h1>
                                         <div class="row">
 
                                             <div class="col-md-6"
-                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                style="width: 600px;margin-top: 45px;margin-bottom: 75px;">
                                                 <canvas class="Chart3"
-                                                    style="background-color: rgb(128, 136, 201);"></canvas>
+                                                    style="background-color: rgb(219, 223, 253);"></canvas>
                                             </div>
                                             <div class="col-md-6"
-                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                style="width: 600px;margin-top: 45px;margin-bottom: 75px;">
                                                 <canvas class="Chart4" style="background-color: white;"></canvas>
-                                            </div>
-                                            <div class="col-md-6"
-                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                <hr>
                                                 <canvas class="Chart5" style="background-color: white;"></canvas>
                                             </div>
-                                            <div class="col-md-6"
+                                            <!-- <div class="col-md-6"
                                                 style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                
+                                            </div> -->
+                                            <div class="col-md-3"
+                                                style="margin-top: 75px;margin-bottom: 75px;">
                                                 <canvas class="Chart6" style="background-color: white;"></canvas>
                                             </div>
-                                            <div class="col-md-6"
-                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                            <div class="col-md-3"
+                                                style="margin-top: 75px;margin-bottom: 75px;">
                                                 <canvas class="Chart7" style="background-color: white;"></canvas>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <!--店家資訊-->
-                                    <div class="container tab-pane " id="pills-information" role="tabpanel"
-                                        aria-labelledby="pills-information-tab">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <form style="margin-top: 10px; width:50%; ">
-
-                                                        <!-- Text input -->
-                                                        <div class="form-outline mb-4">
-                                                            <input type="text" id="form6Example1"
-                                                                class="form-control" />
-                                                            <label class="form-label" for="form6Example3">店家名稱</label>
-                                                        </div>
-
-                                                        <!-- Text input -->
-                                                        <div class="form-outline mb-4">
-                                                            <input type="text" id="form6Example2"
-                                                                class="form-control" />
-                                                            <label class="form-label" for="form6Example4">地址</label>
-                                                        </div>
-
-                                                        <!-- Email input -->
-                                                        <div class="form-outline mb-4">
-                                                            <input type="email" id="form6Example3"
-                                                                class="form-control" />
-                                                            <label class="form-label" for="form6Example5">信箱</label>
-                                                        </div>
-
-                                                        <!-- Number input -->
-                                                        <div class="form-outline mb-4">
-                                                            <input type="text" id="form6Example4"
-                                                                class="form-control" />
-                                                            <label class="form-label" for="form6Example4">電話</label>
-                                                        </div>
-
-
-
-                                                        <!-- Submit button -->
-                                                        <button type="submit"
-                                                            class="btn btn-dark btn-block mb-4">送出</button>
-                                                    </form>
-                                                </div>
+                                            <div class="col-md-3"
+                                                style="margin-top: 75px;margin-bottom: 75px;">
+                                                <canvas class="Chart8" style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-md-3"
+                                                style="margin-top: 75px;margin-bottom: 75px;">
+                                                <canvas class="Chart9" style="background-color: white;"></canvas>
+                                            </div>
+                                            <div class="col-md-6"
+                                                style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
+                                                <canvas class="Chart10" style="background-color: white;"></canvas>
                                             </div>
                                         </div>
                                     </div>
@@ -1142,6 +1218,7 @@
         </div>
         </div>
     </section>
+    <script type="text/javascript" src="./app/vanilla-tilt.min.js"></script>
     <script src="./app/app.js"></script>
     <script src="./app/myscript.js"></script>
     <script type="module" src="./app/footerscript.js"></script>
