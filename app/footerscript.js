@@ -69,12 +69,7 @@ if (localStorage.getItem('openstatus') == "true") {
 } else {
     $("#switch")[0].checked = false;
 }
-// function openstatus() {
 
-$('i[class="fa-solid fa-bell"]').on('click', function () {
-    $('a[data-bs-target="#pills-order"]').trigger('click');
-})
-// };
 
 function openSwitch(isOpen) {
     $.ajax({
@@ -106,8 +101,15 @@ function openSwitch(isOpen) {
 document.getElementById("switch").addEventListener('click', () => {
     openSwitch($("#switch")[0].checked);
 });
-
-
+//鈴鐺
+$('#belltest').on('click',function(){
+    $('#padleft .active').removeClass('active');
+    $('#pills-tabContent>div').removeClass('active');
+    $('#pills-tabContent>div').removeClass('show');
+    $('#ordera').attr('class','nav-link text-white bg-transparent text-start');
+    $('#pills-order').attr('class','show active container tab-pane ');
+    
+})
 
 //登出按鍵
 $('#signOutbtn').on('click', () => {
@@ -1015,8 +1017,6 @@ function ReconciliationStatementpage() {
         // }
     });
 }
-
-
 //顧客管理表格
 $("a[data-bs-target='#pills-broadcast']").on('click', couponTable);
 // $('#couponBtn').on('click',couponTable )
@@ -1088,9 +1088,6 @@ var colorRandom = function (j, x) {
 
     return color;
 }
-
-
-
 //處理時間
 function formatDate(newDate) {
     let date = new Date(newDate);
@@ -1172,46 +1169,8 @@ $("#orderBtn").on("click", function () {
         });
     });
 });
+
 //營養表格 菜單印出營養素 重點輸出  
-// $.ajax({
-//     url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
-//     method: 'GET',
-//     success: function (res, status) {
-
-//         console.log("nutrientTable ok")
-//         for (var nutrient of res) {
-//             $('#nutrientContenttabletbody').append(
-//                 '<tr>' +
-//                 '<td>' + `${nutrient.ingredientname}` + '</td>' +
-//                 '<td>' + `${nutrient.ingredientcategory}` + '</td>' +
-//                 '<td>' + `${nutrient.ingredientdesc}` + '</td>' +
-//                 '<td>' + `${nutrient.calorie}` + 'kcal</td>' +
-//                 '<td>' + `${nutrient.carb}` + 'g</td>' +
-//                 '<td>' + `${nutrient.fat}` + 'g</td>' +
-//                 '<td>' + `${nutrient.protein}` + 'g</td>' +
-//                 '</tr>'
-//             )
-
-//         }
-//     },
-//     error: function () { }
-// }).done(function (index) {
-//     console.log("mealIngredients ok")
-//     for (var meal of index) {
-
-//         $('#mealIngredients').append(
-//             `<option value = "${meal.ingredientname}">`
-//         )
-
-
-//     }
-// })
-//     .fail(function () {
-
-// })
-
-
-
 $('#ingredientsTable').bootstrapTable({
     url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,         //請求後臺的 URL（*）
     striped: false,
@@ -1219,6 +1178,7 @@ $('#ingredientsTable').bootstrapTable({
     // data: data,                      //當不使用上面的後臺請求時，使用data來接收資料
     toolbar: '#toolbar',                //工具按鈕用哪個容器
     showFullscreen: true,                    //全平按鈕
+    showExport: true,               //是否顯示匯出
     showColumns: true,
     silentSort: true,
     showPaginationSwitch: true,
@@ -1244,8 +1204,11 @@ $('#ingredientsTable').bootstrapTable({
     showToggle: false,                    //是否顯示詳細檢視和列表檢視的切換按鈕
     cardView: false,                    //是否顯示詳細檢視
     detailView: false,                  //是否顯示父子表
-    showExport: true,                   //是否顯示匯出
-    // exportDataType: "selected",            //basic', 'all', 'selected'.
+
+    exportDataType: "selected",            //basic', 'all', 'selected'.
+    exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel', 'pdf'],
+    exportDataType: $(this).val(),
+
     columns: [{
         field: 'ingredientname', title: '俗名'       //我們取json中id的值，並將表頭title設定為ID
     }, {
@@ -1258,7 +1221,8 @@ $('#ingredientsTable').bootstrapTable({
         field: 'carb', title: '碳水化合物'               //我們取 json 中 sign 的值，並將表頭 title 設定為簽名
     }, {
         field: 'fat', title: '脂肪'         //我們取 json 中 classify 的值，並將表頭 title 設定為分類
-    },{    field: 'protein', title: '蛋白質'           //我們取 json 中 classify 的值，並將表頭 title 設定為分類
+    }, {
+        field: 'protein', title: '蛋白質'           //我們取 json 中 classify 的值，並將表頭 title 設定為分類
     },
 
     ],
@@ -1268,7 +1232,24 @@ $('#ingredientsTable').bootstrapTable({
     // }
 });
 
+$.ajax({
+    url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
+    method: 'GET',
+    success: function (res, status) {
 
+    },
+    error: function () { }
+}).done(function (index) {
+    console.log("mealIngredients ok")
+    for (var meal of index) {
+
+        $('#mealIngredients').append(
+            `<option value = "${meal.ingredientname}">`
+        )
+
+
+    }
+})
 /*utils*/
 /*畫分析圖表*/
 // const labels = [

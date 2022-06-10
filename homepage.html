@@ -29,6 +29,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Open+Sans&display=swap" rel="stylesheet">
+
     <style>
         /*先放榮庭CSS*/
         body {
@@ -459,7 +460,7 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link text-white bg-transparent text-start" data-bs-toggle="pill"
                                     data-bs-target="#pills-order" role="tab" aria-controls="pills-order"
-                                    aria-selected="false">
+                                    aria-selected="false" id="odera">
                                     <i class="fa-solid fa-file-invoice"></i>
                                     <p style="display:inline-block ; text-align: center;width:120px;">訂單管理</p>
                                 </a>
@@ -541,8 +542,8 @@
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <!-- 訂單提示 -->
-                                            <a href="#pills-order" data-bs-target="#pills-order" data-bs-toggle="pill">
-                                                <i class="fa-solid fa-bell"></i></a>
+                                            <a id="belltest"><i class="fa-solid fa-bell"></i></a>
+                                                
 
 
 
@@ -1099,10 +1100,12 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div>
+                                                                        <form>
                                                                         <input type="hidden">
                                                                         <p>名稱:</p><input type="text">
                                                                         <p>折扣內容:</p><input type="text">
                                                                         <button>儲存</button><button>新增</button>
+                                                                        </form>
                                                                     </div>
                                                                     <table class="table table-warning">
                                                                         <thead>
@@ -1117,7 +1120,14 @@
                                                                         <tbody class="table table-white"
                                                                             id="couponTbody">
                                                                             <tr>
-                                                                                <td><input type="checkbox"></td>
+                                                                                <td><input type="radio" name="couponRadio" class="form-check-input couponRadio"></td>
+                                                                                <td style="display:none;">優惠卷id</td>
+                                                                                <td>COUPON_NAME</td>
+                                                                                <td>COUPON_DESC</td>
+
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><input type="radio" name="couponRadio" class="form-check-input couponRadio"></td>
                                                                                 <td style="display:none;">優惠卷id</td>
                                                                                 <td>COUPON_NAME</td>
                                                                                 <td>COUPON_DESC</td>
@@ -1252,8 +1262,8 @@
 
 
                                         <table class="table table-dark table-hover" id="ingredientsTable">
-                                            <!-- <thead>
-                                                <tr>
+                                            <thead>
+                                                <!-- <tr>
                                                     <th>俗名</th>
                                                     <th>食材分類</th>
                                                     <th>食材描述</th>
@@ -1261,17 +1271,17 @@
                                                     <th>碳水化合物</th>
                                                     <th>脂肪</th>
                                                     <th>蛋白質</th>
-                                                </tr>
+                                                </tr> -->
                                             </thead>
-                                            <tbody  class="table-light">
+                                            <tbody class="table-light">
 
                                             </tbody>
                                             <tfoot>
-
+                                                <!-- 
                                                 <tr></tr>
 
-                                                <tr></tr>
-                                            </tfoot> -->
+                                                <tr></tr> -->
+                                            </tfoot>
                                         </table>
                                     </div>
                                     <!-- analyze -->
@@ -1357,6 +1367,15 @@
     <script type="module" src="./app/footerscript.js"></script>
     <script src="./app/UPDATE.js"></script>
     <!-- Latest compiled and minified JavaScript -->
+
+    <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/tableExport.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF/jspdf.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
+    <script
+        src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+
 
 
 </body>
