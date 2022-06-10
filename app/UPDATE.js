@@ -3,12 +3,12 @@ let newToken = localStorage.getItem('storeToken');
 let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
 let localhost = 8081;
 /*---------------嘉彬------------*/
-$('img[src="./img/group1.png"]').on('click', function(){
+$('img[src="./img/group1.png"]').on('click', function () {
     $('#padleft .active').removeClass('active');
     $('#pills-tabContent>div').removeClass('active');
     $('#pills-tabContent>div').removeClass('show');
-    $('a[data-bs-target="#pills-menu"]').attr('class','nav-link text-white bg-transparent text-start');
-    $('#pills-menu').attr('class','show active container tab-pane ');
+    $('a[data-bs-target="#pills-menu"]').attr('class', 'nav-link text-white bg-transparent text-start');
+    $('#pills-menu').attr('class', 'show active container tab-pane ');
     runmenu();
 });
 //新增欄位
@@ -40,12 +40,11 @@ function ingredientsDelBtn() {
 
 
 
-//未給蓉庭
-
 //計算營養成份表(要覆蓋)
 //
 var ingredientsname = document.getElementsByName('ingredientsName');
 var ingredientsgrams = document.getElementsByName('ingredientsGrams');
+var mealtypevalue = document.getElementsByName('mealtypevalue');
 var caloriefloat;
 var carbfloat;
 var fatfloat;
@@ -55,16 +54,13 @@ var ingredientjson = {};
 //
 function ingredientsOPA() {
     $.ajax({
-        url: `http://localhost:8081/api/${storeId}/ingredients?token=${newToken}`,
+        url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
         method: 'GET',
         success: function (res, status) {
-            console.log("ingredientsOPA() success");
         },
         error: function () { console.log("ingredientsOPA() fail"); }
     }).done(function (index) {
 
-        // var ingredientsname = document.getElementsByName('ingredientsName');
-        // var ingredientsgrams = document.getElementsByName('ingredientsGrams');
         var calorietot = 0;
         var carbtot = 0;
         var fattot = 0;
@@ -80,15 +76,10 @@ function ingredientsOPA() {
                 let inputgrams;
 
 
-                // for (var b of index) {
                 var a = index.filter(function (item, index, array) {//
-                    // console.log(item);
                     return item.ingredientname == ingredientsname[i].value;
                 });
-                // a.push(b[0]);
-                // console.log(a);
 
-                // if (ingredientsname[i].value == a.ingredientname) {
 
                 calorie = Number(a[0].calorie);
                 carb = Number(a[0].carb);
@@ -111,7 +102,7 @@ function ingredientsOPA() {
                     "<hr>熱量:" + `${caloriefloat}` +
                     "(kcal)<br>碳水化合物:" + `${carbfloat}` +
                     "(g)<br>脂肪:" + `${fatfloat}` +
-                    "(g)<br>蛋白質:" + `${proteintfloat}` + "(g)" +
+                    "(g)<br>蛋白質:" + `${proteintfloat}` +
                     "(g)<br>餐點總克數" + `${gramstot}` + "(g)");
 
 
@@ -122,7 +113,6 @@ function ingredientsOPA() {
                 break;
             }
         }
-        console.log(calorietot + ":" + carbtot)
         ingredientjson = index;
 
     })
@@ -140,12 +130,11 @@ var vmealjson = {};
 runmenu();
 function runmenu() {
     $.ajax({
-        url: `http://localhost:8081/api/${storeId}/vmealbom?token=${newToken}`,
+        url: `http://localhost:${localhost}/api/${storeId}/vmealbom?token=${newToken}`,
         method: 'GET',
         success: function (res, status) {
             {//res json
                 $('#tableMenubody').empty();
-                console.log("menuTable ok")
                 for (var menu of res) //menu obj
                     $('#tableMenubody').append(
                         '<tr>' +
@@ -162,7 +151,6 @@ function runmenu() {
                     )
 
             }
-            console.log(res);
             vmealjson = res;
 
 
@@ -189,63 +177,70 @@ function runmenu() {
 
 //菜單管理的刪除鍵
 function delField(obj) {
-    $.ajax({
-        url: `http://localhost:8081/api/${storeId}/meals?token=${newToken}`,
-        method:'GET',
-
-    })
-
-
-
     var row = obj.closest('tr');
-    var selectmealname = vmealjson.filter(function (item, index, array) {//
-        // console.log(item);
-        return item.mealname == row.cells[0].textContent;
-    });
-    $.ajax({
-        url: `http://localhost:8081/api/${storeId}/meal?token=${newToken}`,
-        method: 'PUT',
-        contentType: "application/json",
-        data: JSON.stringify(
-            {
-                "MEAL_ID": `${selectmealname[0].mealid}`,
-                "MEAL_NAME": `${selectmealname[0].mealname}`,
-                "MEAL_CATEGORY_ID": "HEALTHMEAL",
-                "MEAL_CATEGORY_NAME": `${document.getElementById('inputMealType').value}`,
-                "STORE_ID": "l3rH7uT47PTrQSteWO2V9XqbpRn1",
-                "MEAL_IMAGE": "https://i.imgur.com/lUrEcXU.jpg",
-                "MEAL_DESC": `${document.getElementById('inputMealDesc').value}`,
-                "MEAL_PRICE": `${document.getElementById('inputMealPrice').value}`,
-                "MEAL_CALORIE": `${caloriefloat}`,
-                "MEAL_CARB": `${carbfloat}`,
-                "MEAL_FAT": `${fatfloat}`,
-                "MEAL_PROTEIN": `${proteintfloat}`,
-                "MEAL_VEGAN": false,
-                "MEAL_HOT": `${$("#mealHotCheck").is(":checked").toString()}`,
-                "MEAL_STATUS": false
 
-            }
-        ),
-        dataType: 'json',
-        success: function () {
-            runmenu();
+    $.ajax({
+        url: `http://localhost:${localhost}/api/${storeId}/meals?token=${newToken}`,
+        method: 'GET',
+        success: (mealid, status) => {
+            var selectmealname = mealid.filter(function (item, index, array) {//
+                return item.MEAL_NAME == row.cells[0].textContent && item.MEAL_DESC == row.cells[6].textContent;
+            });
+
+            selectmealname[0].MEAL_STATUS = false;
+
+            $.ajax({
+                url: `http://localhost:${localhost}/api/${storeId}/meal?token=${newToken}`,
+                method: 'PUT',
+                contentType: "application/json",
+                data: JSON.stringify(
+                    selectmealname[0]
+                    // {
+                    //     "MEAL_ID": `M202206_cf3d24cae82a11ecaa9a708bcd207f49`,
+                    //     "MEAL_NAME": `${selectmealname[0].MEAL_NAME}`,
+                    //     "MEAL_CATEGORY_ID":`${selectmealname[0].MEAL_CATEGORY_ID}`,
+                    //     "MEAL_CATEGORY_NAME": `${selectmealname[0].MEAL_CATEGORY_NAME}`,
+                    //     "STORE_ID": `${selectmealname[0].STORE_ID}`,
+                    //     "MEAL_IMAGE": `${selectmealname[0].MEAL_IMAGE}`,
+                    //     "MEAL_DESC": `${selectmealname[0].MEAL_DESC}`,
+                    //     "MEAL_PRICE": `${selectmealname[0].MEAL_PRICE}`,
+                    //     "MEAL_CALORIE": `${selectmealname[0].MEAL_CALORIE}`,
+                    //     "MEAL_CARB": `${selectmealname[0].MEAL_CARB}`,
+                    //     "MEAL_FAT": `${selectmealname[0].MEAL_FAT}`,
+                    //     "MEAL_PROTEIN": `${selectmealname[0].MEAL_PROTEIN}`,
+                    //     "MEAL_VEGAN": `${selectmealname[0].MEAL_VEGAN}`,
+                    //     "MEAL_HOT": `${selectmealname[0].MEAL_HOT}`,
+                    //     "MEAL_STATUS": false
+                    // }
+                ),
+                success: function () {
+                    runmenu();
+
+
+                },
+                error: function () { }
+            })
+        },
+        error: err => {
 
         },
-        error: function () { }
     })
+
+
+
+
 }
 
 //GET預設修改菜單
-var unitmealid = "";
+var unitmealid;
 function modifyMenuBtn(obj) {
     ingredientsOPA();
     var row = obj.closest('tr');
     var selectmealname = vmealjson.filter(function (item, index, array) {//
-        // console.log(item);
         return item.mealname == row.cells[0].textContent;
     });
     $.ajax({
-        url: `http://localhost:8081/api/${storeId}/vrevisemealdisplay?token=${newToken}&mealid=${selectmealname[0].mealid}`,
+        url: `http://localhost:${localhost}/api/${storeId}/vrevisemealdisplay?token=${newToken}&mealid=${selectmealname[0].mealid}`,
         method: 'GET',
         success: function (res, status) {
             document.getElementById('nutritionOperation').innerHTML = "";
@@ -267,8 +262,6 @@ function modifyMenuBtn(obj) {
                     `${document.getElementById('examIngredients').innerHTML}` +
                     `</li>`
                 );
-                // console.log(nutrient.ingredientname);
-                // console.log(nutrient.mealingredientweight);
             }
             var rows = $('#addIngredients li');
             if (rows.length > ingredientnamearray.length) {
@@ -276,16 +269,14 @@ function modifyMenuBtn(obj) {
                 rows.filter(":last").html('');
                 $('#addIngredients :last').remove();
             }
-            // ingredientjson = res;
-            console.log(ingredientnamearray[0]);
-            console.log(mealingredientweightarray);
+
 
         },
         error: function () { }
     })
         .fail(function () {
-            alert("請先登入/資料庫OR後端有誤");
-            window.location.href = "login.html"
+            // alert("請先登入/資料庫OR後端有誤");
+            // window.location.href = "login.html"
         })
     // var ingredientarray = new Array();
     // var ingredientarray = selectmealname[0].ingredient.split(";");
@@ -295,16 +286,6 @@ function modifyMenuBtn(obj) {
     document.getElementById('inputMealPrice').value = selectmealname[0].mealprice;
     document.getElementById('inputMealDesc').value = selectmealname[0].mealdesc;
     unitmealid = selectmealname[0].mealid;
-    // console.log(row.cells[0].textContent);
-    console.log(selectmealname);
-    // console.log(document.getElementById("exampleModalLabel").innerText);
-
-    // for(var i=0 ; i<ingredientarray.length ; i++ ){
-    //     console.log(ingredientarray[i]);
-    // }
-
-
-
 
 }
 
@@ -326,9 +307,7 @@ appendMenuBtnEle.addEventListener('click', () => {
     function successAction() {
         for (var i = 0; i < reloadEle.length; i++) {
             reloadEle[i].value = '';
-            // reloadEle.value = ''
 
-            console.log(reloadEle[i].value);
         }
     }
     successAction();
@@ -351,6 +330,8 @@ function ingredientsDelAuto() {
 
 //POST 修改菜單主程式
 var ismealhot = $(`#mealHotCheck`).is(':checked').toString();
+var ismealhot = $(`#mealveganCheck`).is(':checked').toString();
+
 
 function saveField() {
     ingredientsOPA();
@@ -359,7 +340,7 @@ function saveField() {
     //如果有MEALID 做PUT更改
     if (unitmealid != "") {
         $.ajax({
-            url: `http://localhost:8081/api/${storeId}/meal?token=${newToken}`,
+            url: `http://localhost:${localhost}/api/${storeId}/meal?token=${newToken}`,
             method: 'PUT',
             contentType: "application/json",
             data: JSON.stringify(
@@ -376,7 +357,7 @@ function saveField() {
                     "MEAL_CARB": `${carbfloat}`,
                     "MEAL_FAT": `${fatfloat}`,
                     "MEAL_PROTEIN": `${proteintfloat}`,
-                    "MEAL_VEGAN": false,
+                    "MEAL_VEGAN": `${$("#mealveganCheck").is(":checked").toString()}`,
                     "MEAL_HOT": `${$("#mealHotCheck").is(":checked").toString()}`,
                     "MEAL_STATUS": true
 
@@ -384,24 +365,21 @@ function saveField() {
             ),
             dataType: 'json',
             success: function (a) {
-                console.log(a);
 
             },
             error: function () { }
         })
-        console.log(unitmealid);
 
         $.ajax({
-            url: `http://localhost:8081/api/${storeId}/mealbom?token=${newToken}&mealid=${unitmealid}`,
+            url: `http://localhost:${localhost}/api/${storeId}/mealbom?token=${newToken}&mealid=${unitmealid}`,
             method: 'DELETE',
             success: function (delesuccess) {
                 if (delesuccess) {
 
                     $.ajax({
-                        url: `http://localhost:8081/api/${storeId}/ingredients?token=${newToken}`,
+                        url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
                         method: 'GET',
                         success: function (ingredientvalue, status) {
-                            console.log(ingredientvalue);
 
 
                             for (var i = 0; i < ingredientsname.length; i++) {
@@ -419,16 +397,8 @@ function saveField() {
                                     var mealingredientcarb = (mealingredientcarbfloat).toFixed(2);
                                     var mealingredientfat = (mealingredientfatfloat).toFixed(2);
                                     var mealingredientprotein = (mealingredientproteinfloat).toFixed(2);
-
-                                    console.log(ingredientfilter[0].ingredientid);
-                                    console.log(ingredientfilter[0].ingredientname);
-                                    console.log(mealingredientcalorie);//計算
-                                    console.log(mealingredientcarb);//計算
-                                    console.log(mealingredientfat);//計算
-                                    console.log(mealingredientprotein);//計算
-
                                     $.ajax({
-                                        url: `http://localhost:8081/api/${storeId}/mealbom?token=${newToken}`,
+                                        url: `http://localhost:${localhost}/api/${storeId}/mealbom?token=${newToken}`,
                                         method: 'POST',
                                         contentType: "application/json",
                                         data: JSON.stringify(
@@ -477,7 +447,7 @@ function saveField() {
         //如果沒有MealID 做POST新增菜單
     } else {
         $.ajax({
-            url: `http://localhost:8081/api/${storeId}/meal?token=${newToken}`,
+            url: `http://localhost:${localhost}/api/${storeId}/meal?token=${newToken}`,
             method: 'POST',
             contentType: "application/json",
             data: JSON.stringify(
@@ -494,7 +464,7 @@ function saveField() {
                     "MEAL_CARB": `${carbfloat}`,
                     "MEAL_FAT": `${fatfloat}`,
                     "MEAL_PROTEIN": `${proteintfloat}`,
-                    "MEAL_VEGAN": false,
+                    "MEAL_VEGAN": `${$("#mealveganCheck").is(":checked").toString()}`,
                     "MEAL_HOT": `${$("#mealHotCheck").is(":checked").toString()}`,
                     "MEAL_STATUS": true
 
@@ -502,18 +472,15 @@ function saveField() {
             ),
             dataType: 'json',
             success: function (a) {
-                console.log(a);
 
                 $.ajax({
-                    url: `http://localhost:8081/api/${storeId}/meals?token=${newToken}`,
+                    url: `http://localhost:${localhost}/api/${storeId}/meals?token=${newToken}`,
                     method: 'GET',
                     success: (mealid, status) => {
 
-                        console.log(mealid[(mealid.length) - 1].MEAL_ID);
-
 
                         $.ajax({
-                            url: `http://localhost:8081/api/${storeId}/ingredients?token=${newToken}`,
+                            url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
                             method: 'GET',
                             success: function (ingredientvalue, status) {
                                 console.log(ingredientvalue);
@@ -522,7 +489,6 @@ function saveField() {
                                 for (var i = 0; i < ingredientsname.length; i++) {
                                     if (ingredientsname[i].value != "" && ingredientsgrams[i].value != "") {
                                         var ingredientfilter = ingredientvalue.filter(function (item, index, array) {//
-                                            // console.log(item);
                                             return item.ingredientname == ingredientsname[i].value;
                                         });
                                         var mealingredientcaloriefloat = parseFloat(ingredientfilter[0].calorie * ingredientsgrams[i].value);//未計算
@@ -535,15 +501,9 @@ function saveField() {
                                         var mealingredientfat = (mealingredientfatfloat).toFixed(2);
                                         var mealingredientprotein = (mealingredientproteinfloat).toFixed(2);
 
-                                        console.log(ingredientfilter[0].ingredientid);
-                                        console.log(ingredientfilter[0].ingredientname);
-                                        console.log(mealingredientcalorie);//計算
-                                        console.log(mealingredientcarb);//計算
-                                        console.log(mealingredientfat);//計算
-                                        console.log(mealingredientprotein);//計算
 
                                         $.ajax({
-                                            url: `http://localhost:8081/api/${storeId}/mealbom?token=${newToken}`,
+                                            url: `http://localhost:${localhost}/api/${storeId}/mealbom?token=${newToken}`,
                                             method: 'POST',
                                             contentType: "application/json",
                                             data: JSON.stringify(
@@ -598,6 +558,38 @@ function saveField() {
     }
 
 }
+
+
+//餐點種類  
+var mealcategoryid = [];
+$.ajax({
+    url: `http://localhost:${localhost}/api/${storeId}/mealcategorys?token=${newToken}`,
+    method: 'GET',
+    success: function (res, status) {
+        console.log(res)
+        var a = res.filter(function (item, index, array) {//
+            // console.log(item);
+            return item.MEAL_CATEGORY_NAME == document.getElementById('inputMealType').value;
+        });
+        console.log(a[0]);
+        for (var meal of res) {
+
+            $('#inputMealType').append(
+                `<option value = "${meal.MEAL_CATEGORY_NAME}">` + `${meal.MEAL_CATEGORY_NAME}` + `</option>`
+            )
+
+            console.log(meal.MEAL_CATEGORY_ID);
+            console.log(document.getElementById('inputMealType').value);
+
+
+        }
+    },
+    error: function () { }
+}).done()
+    .fail(function () {
+        alert("請先登入/資料庫OR後端有誤");
+        window.location.href = "login.html"
+    })
 
 
 

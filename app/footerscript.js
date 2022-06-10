@@ -157,7 +157,9 @@ $("a[data-bs-target='#pills-analyze']").on('click', Analyzepage);
 $("a[data-bs-target='#pills-order']").on('click', Orderpage);
 $("a[data-bs-target='#pills-member']").on('click', Memberpage);
 // $("a[data-bs-target='#pills-broadcast']").on('click', Broadcastpage);
+$("a[data-bs-target='#pills-broadcast']").on('click', couponTable);
 $("a[data-bs-target='#pills-reconciliationStatement']").on('click', ReconciliationStatementpage);
+$("a[data-bs-target='#pills-broadcast']").on('click', broadcastTable);
 
 var Chart3;
 var Chart4;
@@ -167,7 +169,6 @@ var Chart7;
 var Chart8;
 var Chart9;
 var Chart10;
-var colors = [];
 
 //首頁頁面處理
 function Homepage() {
@@ -660,12 +661,12 @@ function Orderpage() {
                         '<tr class="orderTrr">' +
                         '<td class="orderTr" style="display: none;">' + `${orderInfo.orderid}` + '</td>' +
                         '<td>' + `未確認定單` + '</td>' +
-                        '<td>' + `${orderInfo.username}` + '</td>' +
-                        '<td>' + `${orderInfo.userphone}` + '</td>' +
-                        '<td>' + `${orderInfo.mealorderqty}` + '</td>' +
-                        '<td>' + `${orderInfo.ordersprice}` + '</td>' +
-                        '<td>' + `${formatDate(orderInfo.createtime)}` + '</td>' +
-                        '<td><button  class="orderBtn btn btn-primary">確認列印</button><button  class="orderCBtn btn btn-danger">取消</button></td>' +
+                        '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
+                        '<td >' + `${orderInfo.userphone}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.ordersprice}` + '</td>' +
+                        '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
+                        '<td ><button  class="orderBtn btn btn-primary">確認</button><br><button  class="orderCBtn btn btn-danger">取消</button></td>' +
                         '</tr>'
                     )
                 } else if (orderInfo.orderstatus == "2") {
@@ -673,11 +674,11 @@ function Orderpage() {
                         '<tr  class="orderTrrcom">' +
                         '<td class="orderTrcom" style="display: none;">' + `${orderInfo.orderid}` + '</td>' +
                         '<td >' + `已確認定單` + '</td>' +
-                        '<td>' + `${orderInfo.username}` + '</td>' +
-                        '<td>' + `${orderInfo.userphone}` + '</td>' +
-                        '<td>' + `${orderInfo.mealorderqty}` + '</td>' +
-                        '<td>' + `${orderInfo.ordersprice}` + '</td>' +
-                        '<td>' + `${formatDate(orderInfo.createtime)}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
+                        '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '<td><button class="ordercomBtn btn btn-dark">完成</button></td>' +
 
                         '</tr>'
@@ -686,27 +687,84 @@ function Orderpage() {
                     $('#orderCancel').append(
                         '<tr>' +
                         '<td>' + `已取消訂單` + '</td>' +
-                        '<td>' + `${orderInfo.username}` + '</td>' +
-                        '<td>' + `${orderInfo.userphone}` + '</td>' +
-                        '<td>' + `${orderInfo.mealorderqty}` + '</td>' +
-                        '<td>' + `${orderInfo.ordersprice}` + '</td>' +
-                        '<td>' + `${formatDate(orderInfo.createtime)}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
+                        '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '</tr>'
                     )
                 } else if (orderInfo.orderstatus == "3") {
                     $('#orderComplete').append(
                         '<tr>' +
                         '<td>' + `已完成訂單` + '</td>' +
-                        '<td>' + `${orderInfo.username}` + '</td>' +
-                        '<td>' + `${orderInfo.userphone}` + '</td>' +
-                        '<td>' + `${orderInfo.mealorderqty}` + '</td>' +
-                        '<td>' + `${orderInfo.ordersprice}` + '</td>' +
-                        '<td>' + `${formatDate(orderInfo.createtime)}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
+                        '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '</tr>'
                     )
                 } else { console.log("info error") }
 
             }
+            //縮放
+            $('#orderPreview tr').on('click', function () {
+                if ($(this).find('td').css('word-break') == 'normal') {
+                    $(this).find('td').css({//可以改變多個css
+                        "word-break": "break-all",
+                        'white-space': 'normal'
+
+                    })
+                } else {
+                    $(this).find('td').css({
+                        "word-break": "normal",
+                        'white-space': 'nowrap'
+                    })
+                }
+            });
+            // $('#orderAfteview tr').on('click', function () {
+            //     if ($(this).find('td').css('word-break') == 'normal') {
+            //         $(this).find('td').css({//可以改變多個css
+            //             "word-break": "break-all",
+            //             'white-space': 'normal'
+
+            //         })
+            //     } else {
+            //         $(this).find('td').css({
+            //             "word-break": "normal",
+            //             'white-space': 'nowrap'
+            //         })
+            //     }
+            // });
+            // $('#orderCancel tr').on('click', function () {
+            //     if ($(this).find('td').css('word-break') == 'normal') {
+            //         $(this).find('td').css({//可以改變多個css
+            //             "word-break": "break-all",
+            //             'white-space': 'normal'
+
+            //         })
+            //     } else {
+            //         $(this).find('td').css({
+            //             "word-break": "normal",
+            //             'white-space': 'nowrap'
+            //         })
+            //     }
+            // });
+            // $('#orderComplete tr').on('click', function () {
+            //     if ($(this).find('td').css('word-break') == 'normal') {
+            //         $(this).find('td').css({//可以改變多個css
+            //             "word-break": "break-all",
+            //             'white-space': 'normal'
+
+            //         })
+            //     } else {
+            //         $(this).find('td').css({
+            //             "word-break": "normal",
+            //             'white-space': 'nowrap'
+            //         })
+            //     }
+            // });
             //完成按鈕
             $('.ordercomBtn').click(function () {
                 var orderid = $('.orderTrcom')[$(this).closest("tr").index()].innerText
@@ -791,9 +849,21 @@ function Orderpage() {
             $('.orderBtn').click(function () {
 
                 var orderid = $('.orderTr')[$(this).closest("tr").index()].innerText
-                var selectData = $(this).closest("tr").html().slice(43, -1).slice(0, -109).split("</td><td>");
-                ;
 
+                var selectData = [];
+                //['O20220607_d299ac13e5c611ec9c159828a620e5eb', '未確認定單', 'Admin', '0912345679', '雞胸餐盒 * 5', '$100000', '2022年5月7日2時31分', '<']
+                // 0 :O20220607_d299ac13e5c611ec9c159828a620e5eb
+                // 1 未確認定單
+                // 2 Admin
+                // 3 0912345679
+                // 4 雞胸餐盒 * 5
+                // 5 $100000
+                // 6 2022年5月7日2時31分
+                // 7
+                for (var i = 0; i < 7; i++) {
+                    selectData.push($(this).closest("tr")[0].children[i].innerText)
+
+                }
                 var nowDate = new Date();
                 var nowTime = nowDate.getFullYear() + "年" + (nowDate.getMonth() + 1) + "月" +
                     nowDate.getDate() + "日" + nowDate.getHours() + "時" + nowDate.getMinutes() +
@@ -817,8 +887,8 @@ function Orderpage() {
 
                 doc.addFont('SourceHanSans-Normal.ttf', 'SourceHanSans-Normal', 'normal');
                 doc.setFont('SourceHanSans-Normal');
-                doc.text(20, 20, `會員id:${selectData[0]}\r會員姓名:${selectData[2]}\r點餐時間${nowTime}\r餐點內容:${selectData[4]}`);
-                doc.save('已完成確認.pdf');
+                doc.text(20, 20, `會員id:${selectData[0]}\r會員姓名:${selectData[2]}\r點餐時間${nowTime}\r餐點內容:${selectData[4]}\r餐點總金額:${selectData[5]}`);
+                doc.save(`${selectData[2]}的點單.pdf`);
 
 
                 $.ajax({
@@ -981,7 +1051,7 @@ function Memberpage() {
 
 //對帳單頁面處理
 function ReconciliationStatementpage() {
-    $('#table').bootstrapTable({
+    $('#tablepayments').bootstrapTable({
         url: `http://localhost:${localhost}/api/${storeId}/payments?token=${newToken}`,         //請求後臺的 URL（*）
         striped: false,
         method: 'get',                      //請求方式（*）
@@ -1008,7 +1078,7 @@ function ReconciliationStatementpage() {
         showRefresh: true,                  //是否顯示重新整理按鈕
         minimumCountColumns: 2,             //最少允許的列數
         clickToSelect: true,                //是否啟用點選選中行
-        // height: 500,                        //行高，如果沒有設定 height 屬性，表格自動根據記錄條數覺得表格高度
+        // height: 1000,                        //行高，如果沒有設定 height 屬性，表格自動根據記錄條數覺得表格高度
         uniqueId: "ID",                     //每一行的唯一標識，一般為主鍵列
         showToggle: true,                    //是否顯示詳細檢視和列表檢視的切換按鈕
         cardView: true,                    //是否顯示詳細檢視
@@ -1023,14 +1093,20 @@ function ReconciliationStatementpage() {
         }, {
             field: 'ORDER_ID', title: '單據ID'                //我們取 json 中 sex 的值，並將表頭 title 設定為性別
         }, {
-            field: 'PAYMENT_PRICE', title: '價格'               //我們取 json 中 city 的值，並將表頭 title 設定為城市
+            field: 'PAYMENT_PRICE', title: '價格', formatter: function (value, row, index) {
+                // console.log(value);
+                // console.log(row);
+                // console.log(index);
+
+                return '$' + value;
+            }
         }, {
             field: 'PAYMENT_CATEGORY', title: '結帳方式'               //我們取 json 中 sign 的值，並將表頭 title 設定為簽名
         }, {
             field: 'CREATE_TIME', title: '結帳時間', formatter: function (value, row, index) {
-                console.log(value);
-                console.log(row);
-                console.log(index);
+                // console.log(value);
+                // console.log(row);
+                // console.log(index);
 
                 return formatDate(value);
             }          //我們取 json 中 classify 的值，並將表頭 title 設定為分類
@@ -1044,56 +1120,427 @@ function ReconciliationStatementpage() {
     });
 }
 //顧客管理表格
-$("a[data-bs-target='#pills-broadcast']").on('click', couponTable);
+
 // $('#couponBtn').on('click',couponTable )
 //廣播與優惠卷設定
 function couponTable() {
+    document.getElementById('couponName').value = "";
+    document.getElementById('couponText').value = "";
+    var couponid = ""
+    // $('#couponInput').attr('value','');
     $.ajax({
-        url: `http://localhost:${localhost}/api/${storeId}/users?token=${newToken}`,
+
+        url: `http://localhost:${localhost}/api/${storeId}/coupons?token=${newToken}`,
         method: 'GET',
         success: function (res, status) {
-            $('#tableMemberbody').empty();
-            console.log("memberTable ok")
+            $('#couponTbody').empty();
+            console.log("couponTbody ok")
+            console.log(res)
+            $(".couponclass").unbind();
+            $("#couponDelete").unbind();
+            $("#couponSave").unbind();
+            $("#couponInsert").unbind();
+            for (var coupon of res) {
 
-            for (var member of res) {
-
-                $('#tableMemberbody').append(
-                    '<tr>' +
-                    '<td class="textBlock">' + `${member.USER_ID}` + '</td>' +
-                    '<td>' + `${member.USER_NAME}` + '</td>' +
-                    '<td>' + `${member.USER_GENDER}` + '</td>' +
-                    '<td>' + `${member.USER_PHONE}` + '</td>' +
-                    '<td class="textBlock">' + `${member.USER_MAIL}` + '</td>' +
-                    '<td class="textBlock">' + `${formatDatenotime(member.USER_BIRTH)}` + '</td>' +
-                    '<td>' + `${member.USER_AGE}` + '</td>' +
+                $('#couponTbody').append(
+                    '<tr class="couponTr">' +
+                    '<td>' + `<input  class="couponclass" type="radio" value="${coupon.COUPON_ID}"
+                    name="couponRadio"
+                    class="form-check-input couponClass">` + '</td>' +
+                    '<td style="display:none;">' + `${coupon.COUPON_ID}` + '</td>' +
+                    '<td class="teet" id="couponNAME">' + `${coupon.COUPON_NAME}` + '</td>' +
+                    '<td id="couponDESC">' + `${coupon.COUPON_DESC}` + '</td>' +
                     '</tr>'
                 )
 
 
             }
-            $('#tableMemberbody tr').on('click', function () {
-                if ($(this).find('td').css('word-break') == 'normal') {
-                    $(this).find('td').css({//可以改變多個css
-                        "word-break": "break-all",
-                        'white-space': 'normal'
 
-                    })
-                } else {
-                    $(this).find('td').css({
-                        "word-break": "normal",
-                        'white-space': 'nowrap'
-                    })
-                }
+
+            $('.couponclass').on('change', function () {
+                // var couponid = $('input:radio:checked[name="couponRadio"]').val();
+                var len = $('input:radio:checked[name="couponRadio"]').closest('tr').index();
+                //.innerText.split("  ")[0].split('\t');
+                //子節點集合
+                var Texta = $('.couponTr')[len].childNodes[2].innerText;
+                var Textb = $('.couponTr')[len].childNodes[3].innerText;
+
+                document.getElementById('couponName').value = Texta;
+                document.getElementById('couponText').value = Textb;
+
             })
+            // [$(this).closest("tr").index()]
+            //修改
+            $('#couponSave').on('click', function () {
+
+                couponid = $('input:radio:checked[name="couponRadio"]').val();
+                var couponName = document.getElementById('couponName').value;
+                var couponText = document.getElementById('couponText').value;
+                var data = {
+                    "COUPON_DESC": `${couponText}`,
+                    "COUPON_ID": `${couponid}`,
+                    "COUPON_NAME": `${couponName}`,
+                    "STORE_ID": `${storeId}`
+                }
+
+                $.ajax({
+                    url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}`,
+                    method: 'PUT',
+                    contentType: "application/json",
+                    data: JSON.stringify(data),
+                    success: function (e) { alert('修改成功'); console.log(e); couponTable(); },
+                    error: function (err) {
+                        if (err.status == "500") {
+
+                            alert('名稱重複')
+                        } if (err.status == "404") {
+                            alert('請選擇欄位')
+                        }
+                    }
+
+
+                })
+
+
+            });
+            //新增
+            $('#couponInsert').on('click', function () {
+
+                // var couponid = $('input:radio:checked[name="couponRadio"]').val();
+                var couponName = document.getElementById('couponName').value;
+                var couponText = document.getElementById('couponText').value;
+                var data = {
+                    "COUPON_DESC": `${couponText}`,
+                    "COUPON_NAME": `${couponName}`,
+                    "STORE_ID": `${storeId}`
+                }
+                $.ajax({
+                    url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}`,
+                    method: 'POST',
+                    contentType: "application/json",
+                    data: JSON.stringify(data),
+                    success: function (e) { alert('新增成功'); console.log(e); couponTable(); },
+                    error: function (err) {
+                        if (err.status == "500") {
+                            alert('名稱重複')
+                        } else if (err.status == "404") {
+                            alert('新增失敗')
+                        }
+
+                    }
+
+
+                })
+
+
+            });
+            //刪除
+            $('#couponDelete').on('click', function () {
+                var couponid = $('input:radio:checked[name="couponRadio"]').val();
+
+                $.ajax({
+                    url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}&couponid=${couponid}`,
+                    method: 'DELETE',
+                    contentType: "application/json",
+                    success: function (e) { alert('刪除成功'); console.log(e); couponTable(); },
+                    error: function (err) {
+                        if (err.status == "400") {
+                            alert('請選擇欄位')
+                        } else if (err.status == "404") {
+                            alert('請選擇欄位')
+                        }
+
+                    }
+
+
+                })
+
+
+
+            });
+
         },
         error: function () {
             console.log("memberTable fail")
         }
     })
 }
+// 
+
+function broadcastTable() {
+    document.getElementById('broadcastName').value = "";
+    document.getElementById('broadcastText').value = "";
+    document.getElementById('broadcastimage').value = "";
+
+    document.getElementById('showImg').src = "";
+    document.getElementById('preview-img').src = "";
+    var broadcastid = ""
+    $.ajax({
+        //         CREATE_ID: "l3rH7uT47PTrQSteWO2V9XqbpRn1"
+        // CREATE_TIME: "2022-06-10T15:27:07.000+00:00"
+        // ID: 1
+        // MESSAGE_DESC: "廣告訊息1"
+        // MESSAGE_ID: "M202206_c966341ae8d111eca0149828a620e5eb"
+        // MESSAGE_IMAGE: "廣告訊息1"
+        // MESSAGE_NAME: "廣告訊息1"
+        // REVISE_ID: null
+        // REVISE_TIME: null
+        // STORE_ID: "l3rH7uT47PTrQSteWO2V9XqbpRn1"
+        url: `http://localhost:${localhost}/api/${storeId}/messages?token=${newToken}`,
+        method: 'GET',
+        success: function (res, status) {
+            $('#broadcastTbody').empty();
+            // console.log("couponTbody ok")
+            console.log(res)
+            $(".broadcastclass").unbind();
+            $("#broadcastSave").unbind();
+            $("#broadcastInsert").unbind();
+            $("#broadcastDelete").unbind();
+            for (var broadcast of res) {
+
+                $('#broadcastTbody').append(
+                    '<tr class="broadcastTr">' +
+                    '<td>' + `<input class="broadcastclass" type="radio" value="${broadcast.MESSAGE_ID}"
+                    name="broadcastRadio" class="form-check-input broadcastClass">` + '</td>' +
+                    '<td style="display:none;">' + `${broadcast.MESSAGE_ID}` + '</td>' +
+                    '<td class="broadcastcs" id="broadcastNAME">' + `${broadcast.MESSAGE_NAME}` + '</td>' +
+                    '<td id="broadcastDESC">' + `${broadcast.MESSAGE_DESC}` + '</td>' +
+                    '<td>' + `<img src="${broadcast.MESSAGE_IMAGE}" style="height:150px">` + '</td>' +
+                    '</tr>'
+                )
+
+
+            }
+
+
+            $('.broadcastclass').on('change', function () {
+                // var couponid = $('input:radio:checked[name="couponRadio"]').val();
+                var len = $('input:radio:checked[name="broadcastRadio"]').closest('tr').index();
+                //.innerText.split("  ")[0].split('\t');
+                //子節點集合
+
+                var Texta = $('.broadcastTr')[len].childNodes[2].innerText;
+                var Textb = $('.broadcastTr')[len].childNodes[3].innerText;
+                var Textc = $('.broadcastTr')[len].childNodes[4].childNodes[0].src
+
+
+                document.getElementById('broadcastName').value = Texta;
+                document.getElementById('broadcastText').value = Textb;
+                document.getElementById('broadcastimage').value = Textc;
+                document.getElementById('preview-img').src = Textc;
+                // console.log(Textb)
+
+            })
+            // [$(this).closest("tr").index()]
+            //修改
+            $('#broadcastSave').on('click', function () {
+                var broadcastid = $('input:radio:checked[name="broadcastRadio"]').val();
+                var broadcastName = document.getElementById('broadcastName').value;
+                var broadcastText = document.getElementById('broadcastText').value;
+                var broadcastimage = document.getElementById('broadcastimage').value;
+
+                
+                var data = {
+                    "MESSAGE_DESC": `${broadcastText}`,
+                    "MESSAGE_ID": `${broadcastid}`,
+                    "MESSAGE_NAME": `${broadcastName}`,
+                    "STORE_ID": `${storeId}`,
+                    "MESSAGE_IMAGE": `${broadcastimage}`,
+                }
+
+                $.ajax({
+                    url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}`,
+                    method: 'PUT',
+                    contentType: "application/json",
+                    data: JSON.stringify(data),
+                    success: function (e) { alert('修改成功'); console.log(e); broadcastTable(); },
+                    error: function (err) {
+                        if (err.status == "500") {
+
+                            alert('名稱重複')
+                        } if (err.status == "404") {
+                            alert('請選擇欄位')
+                        }
+                    }
+
+
+                })
+            });
 
 
 
+            //新增
+            $('#broadcastInsert').on('click', function () {
+
+                // var couponid = $('input:radio:checked[name="couponRadio"]').val();
+                var broadcastName = document.getElementById('broadcastName').value;
+                var broadcastText = document.getElementById('broadcastText').value;
+
+                var previewimg = document.getElementById('preview-img').src;
+                console.log(previewimg)
+
+                var broadcastimage = document.getElementById('broadcastimage').value;
+
+                if (broadcastimage == "") {
+                    alert('請選擇圖片')
+                } else {
+                    submit();
+                    setTimeout(function () {
+
+
+
+                        broadcastimage = document.getElementById('broadcastimage').value;
+                        var data = {
+                            "MESSAGE_DESC": `${broadcastText}`,
+                            "MESSAGE_NAME": `${broadcastName}`,
+                            "STORE_ID": `${storeId}`,
+                            "MESSAGE_IMAGE": `${broadcastimage}`
+                        }
+                        $.ajax({
+                            url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}`,
+                            method: 'POST',
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function (e) { alert('新增成功'); console.log(e); broadcastTable(); },
+                            error: function (err) {
+                                if (err.status == "500") {
+                                    broadcastTable(); alert('名稱重複')
+                                } else if (err.status == "404") {
+                                    broadcastTable(); alert('新增失敗')
+                                }
+
+                            }
+
+
+                        })
+                    }, 1500)
+                }
+
+
+
+
+
+            });
+            //刪除
+            $('#broadcastDelete').on('click', function () {
+                var broadcastid = $('input:radio:checked[name="broadcastRadio"]').val();
+
+                $.ajax({
+                    url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}&messageid=${broadcastid}`,
+                    method: 'DELETE',
+                    contentType: "application/json",
+                    success: function (e) { alert('刪除成功'); console.log(e); broadcastTable(); },
+                    error: function (err) {
+                        if (err.status == "400") {
+                            alert('請選擇欄位')
+                        } else if (err.status == "404") {
+                            alert('請選擇欄位')
+                        }
+
+                    }
+
+
+                })
+
+
+
+            });
+
+        },
+        error: function () {
+            console.log("fail")
+        }
+    })
+}
+
+
+
+
+//營養表格 菜單印出營養素 重點輸出  
+$('#ingredientsTable').bootstrapTable({
+    url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,         //請求後臺的 URL（*）
+    striped: false,
+    method: 'get',                      //請求方式（*）
+    // data: data,                      //當不使用上面的後臺請求時，使用data來接收資料
+    toolbar: '#toolbar',                //工具按鈕用哪個容器
+    showFullscreen: true,                    //全平按鈕
+    showExport: true,               //是否顯示匯出
+    showColumns: true,
+    silentSort: true,
+    showPaginationSwitch: true,
+    showButtonIcons: false,            //沒用
+    showButtonText: true,                //有用
+    striped: false,                      //是否顯示行間隔色
+    cache: false,
+    buttonsPrefix: 'btn-sm btn',                       //是否使用快取，預設為 true，所以一般情況下需要設定一下這個屬性（*）
+    pagination: true,                   //是否顯示分頁（*）
+    sortable: true,                    //是否啟用排序
+    sortOrder: "asc",                   //排序方式
+    sidePagination: "client",           //分頁方式：client 使用者端分頁，server 伺服器端分頁（*）
+    pageNumber: 1,                       //初始化載入第一頁，預設第一頁
+    pageSize: 10,                        //每頁的記錄行數（*）
+    pageList: [10, 20],        //可供選擇的每頁的行數（*）
+    search: true,                       //是否顯示錶格搜尋，此搜尋是使用者端搜尋，不會進伺服器端，所以個人感覺意義不大
+    strictSearch: false,                 //啟用嚴格搜尋。禁用比較檢查。                  //是否顯示所有的列
+    showRefresh: true,                  //是否顯示重新整理按鈕
+    minimumCountColumns: 2,             //最少允許的列數
+    clickToSelect: true,                //是否啟用點選選中行
+    // height: 400,                        //行高，如果沒有設定 height 屬性，表格自動根據記錄條數覺得表格高度
+    uniqueId: "ID",                     //每一行的唯一標識，一般為主鍵列
+    showToggle: false,                    //是否顯示詳細檢視和列表檢視的切換按鈕
+    cardView: false,                    //是否顯示詳細檢視
+    detailView: false,                  //是否顯示父子表
+
+    // exportDataType: "selected",            //basic', 'all', 'selected'.
+    exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel',],
+    exportDataType: $(this).val(),
+
+    columns: [{
+        field: 'ingredientname', title: '俗名'       //我們取json中id的值，並將表頭title設定為ID
+    }, {
+        field: 'ingredientcategory', title: '食材分類'         //我們取 json 中 username 的值，並將表頭 title 設定為使用者名稱
+    }, {
+        field: 'ingredientdesc', title: '食材描述'                //我們取 json 中 sex 的值，並將表頭 title 設定為性別
+    }, {
+        field: 'calorie', title: '熱量', formatter: function (value, row, index) {
+            // console.log(value);
+            // console.log(row);
+            // console.log(index);
+
+            return value + '(kcal)';
+        }
+    }, {
+        field: 'carb', title: '碳水化合物', formatter: function (value, row, index) {
+            // console.log(value);
+            // console.log(row);
+            // console.log(index);
+
+            return value + '(g)';
+        }
+    }, {
+        field: 'fat', title: '脂肪', formatter: function (value, row, index) {
+            // console.log(value);
+            // console.log(row);
+            // console.log(index);
+
+            return value + '(g)';
+        }
+    }, {
+        field: 'protein', title: '蛋白質', formatter: function (value, row, index) {
+            // console.log(value);
+            // console.log(row);
+            // console.log(index);
+
+            return value + '(g)';
+        }
+    },
+
+    ],
+    // responseHandler: function (res) {
+    //     return res.data      //在載入遠端資料之前，處理響應資料格式.
+    //     // 我們取的值在data欄位中，所以需要先進行處理，這樣才能獲取我們想要的結果
+    // }
+});
 
 
 
@@ -1196,68 +1643,8 @@ $("#orderBtn").on("click", function () {
     });
 });
 
-//營養表格 菜單印出營養素 重點輸出  
-$('#ingredientsTable').bootstrapTable({
-    url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,         //請求後臺的 URL（*）
-    striped: false,
-    method: 'get',                      //請求方式（*）
-    // data: data,                      //當不使用上面的後臺請求時，使用data來接收資料
-    toolbar: '#toolbar',                //工具按鈕用哪個容器
-    showFullscreen: true,                    //全平按鈕
-    showExport: true,               //是否顯示匯出
-    showColumns: true,
-    silentSort: true,
-    showPaginationSwitch: true,
-    showButtonIcons: false,            //沒用
-    showButtonText: true,                //有用
-    striped: false,                      //是否顯示行間隔色
-    cache: false,
-    buttonsPrefix: 'btn-sm btn',                       //是否使用快取，預設為 true，所以一般情況下需要設定一下這個屬性（*）
-    pagination: true,                   //是否顯示分頁（*）
-    sortable: true,                    //是否啟用排序
-    sortOrder: "asc",                   //排序方式
-    sidePagination: "client",           //分頁方式：client 使用者端分頁，server 伺服器端分頁（*）
-    pageNumber: 1,                       //初始化載入第一頁，預設第一頁
-    pageSize: 10,                        //每頁的記錄行數（*）
-    pageList: [10, 20],        //可供選擇的每頁的行數（*）
-    search: true,                       //是否顯示錶格搜尋，此搜尋是使用者端搜尋，不會進伺服器端，所以個人感覺意義不大
-    strictSearch: false,                 //啟用嚴格搜尋。禁用比較檢查。                  //是否顯示所有的列
-    showRefresh: true,                  //是否顯示重新整理按鈕
-    minimumCountColumns: 2,             //最少允許的列數
-    clickToSelect: true,                //是否啟用點選選中行
-    // height: 400,                        //行高，如果沒有設定 height 屬性，表格自動根據記錄條數覺得表格高度
-    uniqueId: "ID",                     //每一行的唯一標識，一般為主鍵列
-    showToggle: false,                    //是否顯示詳細檢視和列表檢視的切換按鈕
-    cardView: false,                    //是否顯示詳細檢視
-    detailView: false,                  //是否顯示父子表
 
-    // exportDataType: "selected",            //basic', 'all', 'selected'.
-    exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel',],
-    exportDataType: $(this).val(),
-
-    columns: [{
-        field: 'ingredientname', title: '俗名'       //我們取json中id的值，並將表頭title設定為ID
-    }, {
-        field: 'ingredientcategory', title: '食材分類'         //我們取 json 中 username 的值，並將表頭 title 設定為使用者名稱
-    }, {
-        field: 'ingredientdesc', title: '食材描述'                //我們取 json 中 sex 的值，並將表頭 title 設定為性別
-    }, {
-        field: 'calorie', title: '熱量'               //我們取 json 中 city 的值，並將表頭 title 設定為城市
-    }, {
-        field: 'carb', title: '碳水化合物'               //我們取 json 中 sign 的值，並將表頭 title 設定為簽名
-    }, {
-        field: 'fat', title: '脂肪'         //我們取 json 中 classify 的值，並將表頭 title 設定為分類
-    }, {
-        field: 'protein', title: '蛋白質'           //我們取 json 中 classify 的值，並將表頭 title 設定為分類
-    },
-
-    ],
-    // responseHandler: function (res) {
-    //     return res.data      //在載入遠端資料之前，處理響應資料格式.
-    //     // 我們取的值在data欄位中，所以需要先進行處理，這樣才能獲取我們想要的結果
-    // }
-});
-
+/*找類別*/
 $.ajax({
     url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
     method: 'GET',
@@ -1276,6 +1663,157 @@ $.ajax({
 
     }
 })
+// 輸出圖片
+const token = '22e7ba553d6239bc5de2bf1520c9187b611a760d'; // 填入 token
+
+// const actionBtn = document.getElementById("myBtn"); // 送出按鈕
+const uploadInput = document.getElementById("upload"); // upload上傳物件的地方
+const showImg = document.getElementById("showImg");
+const url = document.getElementById("url");
+
+// 建立file class物件
+class file {
+    // 建構式
+    constructor() {
+        this.uploadFile = null;
+        this.fileName = null;
+        this.fileSize = null;
+        this.fileThumbnail = null;
+        this.fileTitle = null;
+        this.fileDesc = null;
+    }
+
+    // setter
+    setuploadFile(uploadFile) {
+        this.uploadFile = uploadFile;
+    }
+    setfileName(fileName) {
+        this.fileName = fileName;
+    }
+    setfileSize(fileSize) {
+        this.fileSize = fileSize;
+    }
+    setfileThumbnail(fileThumbnail) {
+        this.fileThumbnail = fileThumbnail;
+    }
+    setfileTitle(fileTitle) {
+        this.fileTitle = fileTitle;
+    }
+    setfileDesc(fileDesc) {
+        this.fileDesc = fileDesc;
+    }
+
+    // getter
+    getuploadFile() {
+        return this.uploadFile;
+    }
+    getfileName() {
+        return this.fileName;
+    }
+    getfileSize() {
+        return this.fileSize;
+    }
+    getfileThumbnail() {
+        return this.fileThumbnail;
+    }
+    getfileTitle() {
+        return this.fileTitle;
+    }
+    getfileDesc() {
+        return this.fileDesc;
+    }
+}
+
+function addImg(imgURL) {
+    showImg.src = imgURL;
+    console.log(imgURL)
+    imgURL;
+
+    // url.innerText = '圖檔網址：' + imgURL;
+}
+
+// 上傳的function
+function submit() {
+    // api
+    let settings = {
+        async: true,
+        crossDomain: true,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: 'https://api.imgur.com/3/image',
+        headers: {
+            Authorization: 'Bearer ' + token
+        },
+        mimeType: 'multipart/form-data'
+    };
+
+    // data傳遞
+    let form = new FormData();
+    form.append('image', inputFile.getuploadFile());
+    form.append('title', inputFile.getfileTitle());
+    form.append('description', inputFile.getfileDesc());
+
+    settings.data = form;
+
+    // 傳遞資料
+    $.ajax(settings).done(function (res) {
+        const imgURL = JSON.parse(res).data.link
+        addImg(imgURL);
+        console.log(JSON.parse(res)); // 可以看見上傳成功後回傳的URL
+        console.log(JSON.parse(res).data.link)
+        // alert('上傳完成');
+        document.getElementById('broadcastimage').value = imgURL;
+    });
+    document.getElementById("preview-img").src = "";
+}
+
+// 建議物件
+const inputFile = new file();
+
+// input:file的監聽器
+uploadInput.addEventListener("change", (e) => {
+    inputFile.setuploadFile(uploadInput.files[0]); // input type="file" 的值
+    inputFile.setfileName(inputFile.uploadFile.name); // input的圖檔名稱
+    inputFile.setfileSize(Math.floor(inputFile.uploadFile.size * 0.001) + 'KB'); // input的圖片大小
+    inputFile.setfileThumbnail(window.URL.createObjectURL(inputFile.uploadFile)); // input的圖片縮圖
+    inputFile.setfileTitle(inputFile.uploadFile.name); // 預設 input 的圖檔名稱為圖片上傳時的圖片標題
+    inputFile.setfileDesc(inputFile.uploadFile.name); // 圖片描述
+    var file = uploadInput.files[0], imageType = /^image\//, reader = '';
+    // 檔案是否為圖片
+    if (!imageType.test(file.type)) {
+        alert("請選擇圖片！");
+        return;
+    }
+    // 判斷是否支援FileReader  // IE9及以下不支援FileReader
+    if (window.FileReader) {
+        reader = new FileReader();
+    } else {
+        alert("您的瀏覽器不支援圖片預覽功能，如需該功能請升級您的瀏覽器！");
+        return;
+    }
+    // 讀取完成    
+    reader.onload = function (event) {
+        // 獲取圖片DOM
+
+        var img = document.getElementById("preview-img");
+        // 圖片路徑設定為讀取的圖片    
+        img.src = event.target.result;
+        document.getElementById('broadcastimage').value=img.src;
+    };
+    reader.readAsDataURL(file);
+    document.getElementById("showImg").src = ""
+    
+});
+
+// Botton的監聽器
+// $('#actionBtn').on("click", () => {
+//     submit();
+// });
+
+
+
+
 /*utils*/
 /*畫分析圖表*/
 // const labels = [

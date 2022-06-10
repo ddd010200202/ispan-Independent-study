@@ -33,6 +33,10 @@
 
     <style>
         /*先放榮庭CSS*/
+        #tablepayments{
+            height: 100vh;
+            width: 100vw;
+        }
         body {
             font-family: 'Noto Sans TC', sans-serif;
 
@@ -676,12 +680,12 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2">
-                                                                            <input id="inputMealType" list="123"
-                                                                                placeholder="請選擇種類..."
-                                                                                style="width:50%;"></label>
-                                                                            <datalist id="123">
-                                                                                <option value="123">
-                                                                            </datalist>
+                                                                            <select id="inputMealType"
+                                                                                name="mealtypevalue"
+                                                                                style="width:50%;"></select>
+                                                                            <option value="" selected>請選擇種類...
+                                                                            </option>
+                                                                            </select>
                                                                             <span id="check1">
                                                                                 熱門:
                                                                                 <input type="checkbox" id="mealHotCheck"
@@ -689,7 +693,8 @@
                                                                             </span>
                                                                             <span>
                                                                                 素食:
-                                                                                <input type="checkbox">
+                                                                                <input type="checkbox"
+                                                                                    id="mealveganCheck" value="false">
                                                                             </span>
                                                                         </td>
                                                                     </tr>
@@ -724,7 +729,7 @@
                                                                                     <input list="mealIngredients"
                                                                                         name="ingredientsName"
                                                                                         placeholder="請選擇食材..."
-                                                                                        style="width:60%;"></label>
+                                                                                        style="width:60%;">
                                                                                     <datalist id="mealIngredients">
                                                                                         <!-- 讀取食材 -->
                                                                                     </datalist>
@@ -777,7 +782,8 @@
                                                         </div>
                                                         <div class="modal-footer  my-color1">
                                                             <div style="float:right;"><button id="add"
-                                                                    href="javascript:" onclick="saveField()">儲存</button>
+                                                                    data-bs-dismiss="modal" href="javascript:"
+                                                                    onclick="saveField()">儲存</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -990,7 +996,7 @@
                                                                             <th scope="col">餐點總計金額</th>
 
                                                                             <th scope="col">訂單建立時間</th>
-                                                                            <th scope="col">確認列印</th>
+                                                                            <th scope="col">完成訂單</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody id="orderAfteview">
@@ -1074,9 +1080,9 @@
                                         aria-labelledby="pills-broadcast-tab">
                                         <h1><i class="fa-solid fa-bullhorn"></i>廣播與優惠卷</h1>
                                         <div class="text-top">
-                                            <div class="input-group flex-nowrap" style="width:15%">
+                                            <div class="input-group flex-nowrap" style="width:250px">
 
-                                                <input type="text" class="form-control" placeholder="廣播標題   "
+                                                <input id="broadcastName" type="text" class="form-control" placeholder="廣播標題   "
                                                     aria-label="Username" aria-describedby="addon-wrapping">
                                                 <div>
                                                     <!-- 優惠卷 -->
@@ -1101,12 +1107,17 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div>
-                                                                        <form>
-                                                                            <input type="hidden">
-                                                                            <p>名稱:</p><input type="text">
-                                                                            <p>折扣內容:</p><input type="text">
-                                                                            <button>儲存</button><button>新增</button>
-                                                                        </form>
+
+                                                                        <input type="hidden">
+                                                                        <p>名稱:</p><input type="text" id="couponName">
+                                                                        <p>折扣內容:</p><input type="text" id="couponText">
+                                                                        <button class="btn btn-warning"
+                                                                            id="couponSave">修改</button>
+                                                                        <button class="btn btn-info"
+                                                                            id="couponInsert">新增</button>
+                                                                        <button class="btn btn-danger"
+                                                                            id="couponDelete">刪除 </button>
+
                                                                     </div>
                                                                     <table class="table table-warning">
                                                                         <thead>
@@ -1142,12 +1153,12 @@
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
+
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
                                                                         data-bs-dismiss="modal">退出</button>
-                                                                    <!-- <button type="button"
-                                                                        class="btn btn-primary">Understood</button> -->
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1157,49 +1168,43 @@
                                             <hr>
                                             <div class="form-floating">
                                                 <textarea class="form-control" placeholder="Leave a comment here"
-                                                    id="floatingTextarea"></textarea>
-                                                <label for="floatingTextarea">請輸入廣播訊息</label>
+                                                    id="broadcastText"></textarea>
+                                                <label  for="floatingTextarea">請輸入廣播訊息</label>
+                                                <input type="hidden" id="broadcastimage" >
                                             </div>
                                             <hr>
-
-                                            <div class="dropdown" style="padding-top: 10px; ">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                    折扣卷
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    <li><a class="dropdown-item" href="#">A折扣卷</a></li>
-                                                    <li><a class="dropdown-item" href="#">B折扣卷</a></li>
-                                                    <li><a class="dropdown-item" href="#">C折扣卷</a></li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="dropdown" style="padding-top: 10px;">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                    商品
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    <li><a class="dropdown-item" href="#">雞肉飯</a></li>
-                                                    <li><a class="dropdown-item" href="#">豬排飯</a></li>
-                                                    <li><a class="dropdown-item" href="#">壽司</a></li>
-                                                </ul>
-                                            </div>
                                             <div id="myDiv">
                                                 <label for="upload">選擇上傳圖檔</label>
 
                                                 <!-- 選取圖片的 input -->
                                                 <input id="upload" type="file" accept="image/*">
-                                                <p id="url"></p>
+                                                <p id="url"></p> <button class="btn btn-secondary" id="actionBtn" type="button">上傳圖檔</button>
                                                 <img id="preview-img" style="width: 150px;" />
                                                 <img id="showImg" src="" referrerpolicy="no-referrer"
                                                     style="width: 150px;">
-
-                                                <!-- 上傳按鈕 -->
+                                                
+                                                <!-- 新增按鈕 -->
                                             </div>
-                                            <div><button class="btn btn-secondary" id="myBtn" type="button">送出</button>
+                                            <hr>
+                                            <div>
+                                                <button class="btn btn-secondary" id="broadcastInsert" type="button">新增</button>
+                                                <button class="btn btn-secondary" id="broadcastSave" type="button">修改</button>
+                                                <button class="btn btn-secondary" id="broadcastDelete" type="button">刪除</button>
+                                            </div>
+                                            <div class="" style="margin-top:50px">
+                                                <table id="broadcastTable" class="table table-dark">
+                                                    <thead >
+                                                        <tr>
+                                                            <th scope="col"></th>
+                                                            <th scope="col" style="display:none"></th>
+                                                            <th scope="col">廣告標題</th>
+                                                            <th scope="col" >廣告內容</th>
+                                                            <th scope="col">廣告圖片網址</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table table-light" id="broadcastTbody">
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
 
@@ -1336,11 +1341,15 @@
                                     <div class="container tab-pane " id="pills-reconciliationStatement" role="tabpanel"
                                         aria-labelledby="pills-reconciliationStatement-tab">
                                         <div class="container">
-                                            <div class="row">
-                                                <div class="col-12" style="height: 600px;overflow: scroll;">
-                                                    <table id="table" class="table "></table>
-                                                </div>
-                                            </div>
+                                            
+                                                
+                                                    <table id="tablepayments" class="table table-dark ">
+                                                        <thead></thead>
+                                                        <tbody class="table table-light"></tbody>
+
+                                                    </table>
+                                                
+
                                         </div>
                                     </div>
                                 </div>
@@ -1363,17 +1372,17 @@
         crossorigin="anonymous"></script>
 
 
-        <!-- 語系 -->
-        <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
-        <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/locale/bootstrap-table-zh-CN.min.js"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table-locale-all.min.js"></script>
-    
-
-
-    
+    <!-- 語系 -->
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/locale/bootstrap-table-zh-CN.min.js"></script>
     <script
-    src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/export/bootstrap-table-export.min.js"></script>
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table-locale-all.min.js"></script>
+
+
+
+
+    <script
+        src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/export/bootstrap-table-export.min.js"></script>
     <!--PDF-->
     <!-- <script src="https://cdn.jsdelivr.net/npm/jspdf/dist/jspdf.umd.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF/jspdf.min.js"></script>
@@ -1388,13 +1397,13 @@
 
     <!-- Latest compiled and minified JavaScript -->
 
-    
+
 
     <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/tableExport.min.js"></script>
 
-    
- 
-    
+
+
+
     <!-- <script src="./app/fixedScroll.js"></script> -->
     <script type="text/javascript" src="./app/vanilla-tilt.min.js"></script>
     <script src="./app/app.js"></script>
