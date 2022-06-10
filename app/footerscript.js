@@ -111,19 +111,14 @@ $('#belltest').on('click',function(){
     Orderpage();
     
 })
-$('img[src="./img/group1.png"]').on('click', function(){
-    $('#padleft .active').removeClass('active');
-    $('#pills-tabContent>div').removeClass('active');
-    $('#pills-tabContent>div').removeClass('show');
-    $('a[data-bs-target="#pills-menu"]').attr('class','nav-link text-white bg-transparent text-start');
-    $('#pills-menu').attr('class','show active container tab-pane ');
-});
+
 $('img[src="./img/group2.png"]').on('click', function(){
     $('#padleft .active').removeClass('active');
     $('#pills-tabContent>div').removeClass('active');
     $('#pills-tabContent>div').removeClass('show');
     $('a[data-bs-target="#pills-order"]').attr('class','nav-link text-white bg-transparent text-start');
     $('#pills-order').attr('class','show active container tab-pane ');
+    Orderpage();
 });
 $('img[src="./img/group3.png"]').on('click', function(){
     $('#padleft .active').removeClass('active');
@@ -131,6 +126,7 @@ $('img[src="./img/group3.png"]').on('click', function(){
     $('#pills-tabContent>div').removeClass('show');
     $('a[data-bs-target="#pills-analyze"]').attr('class','nav-link text-white bg-transparent text-start');
     $('#pills-analyze').attr('class','show active container tab-pane ');
+    Analyzepage();
 });
 $('img[src="./img/group4.png"]').on('click', function(){
     $('#padleft .active').removeClass('active');
@@ -138,6 +134,7 @@ $('img[src="./img/group4.png"]').on('click', function(){
     $('#pills-tabContent>div').removeClass('show');
     $('a[data-bs-target="#pills-reconciliationStatement"]').attr('class','nav-link text-white bg-transparent text-start');
     $('#pills-reconciliationStatement').attr('class','show active container tab-pane ');
+    ReconciliationStatementpage();
 });
 //登出按鍵
 $('#signOutbtn').on('click', () => {

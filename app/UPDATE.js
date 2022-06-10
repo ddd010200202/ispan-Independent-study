@@ -3,6 +3,14 @@ let newToken = localStorage.getItem('storeToken');
 let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
 let localhost = 8081;
 /*---------------嘉彬------------*/
+$('img[src="./img/group1.png"]').on('click', function(){
+    $('#padleft .active').removeClass('active');
+    $('#pills-tabContent>div').removeClass('active');
+    $('#pills-tabContent>div').removeClass('show');
+    $('a[data-bs-target="#pills-menu"]').attr('class','nav-link text-white bg-transparent text-start');
+    $('#pills-menu').attr('class','show active container tab-pane ');
+    runmenu();
+});
 //新增欄位
 
 function ingredientsAppendBtn() {
