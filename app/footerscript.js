@@ -101,7 +101,7 @@ function openSwitch(isOpen) {
 document.getElementById("switch").addEventListener('click', () => {
     openSwitch($("#switch")[0].checked);
 });
-//鈴鐺
+
 $('#belltest').on('click',function(){
     $('#padleft .active').removeClass('active');
     $('#pills-tabContent>div').removeClass('active');
@@ -122,9 +122,6 @@ $('#signOutbtn').on('click', () => {
         localStorage.removeItem("openstatus");
     }, 200);
     // window.location.href = "login.html";
-
-
-
 })
 //頁面管理
 //Analyzepage Orderpage Memberpage Broadcastpage ReconciliationStatementpage
