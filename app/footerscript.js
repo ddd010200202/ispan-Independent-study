@@ -51,12 +51,6 @@ function setSignBntStatus() {
 // });
 /*------------榮庭--------------*/
 //onload
-
-
-
-
-
-
 // 拿取Token跟id
 // console.log(localStorage.getItem('storeToken'));
 // console.log(JSON.parse(localStorage.getItem('storeinfo')).STORE_ID);
@@ -77,7 +71,9 @@ if (localStorage.getItem('openstatus') == "true") {
 }
 // function openstatus() {
 
-
+$('i[class="fa-solid fa-bell"]').on('click', function () {
+    $('a[data-bs-target="#pills-order"]').trigger('click');
+})
 // };
 
 function openSwitch(isOpen) {
@@ -132,7 +128,7 @@ $('#signOutbtn').on('click', () => {
 //Analyzepage Orderpage Memberpage Broadcastpage ReconciliationStatementpage
 //#pills-analyze #pills-order #pills-member #pills-broadcast #pills-reconciliationStatement
 $("a[data-bs-target='#pills-home']").on('click', Homepage);
-$("a[data-bs-target='#pills-menu']").on('click', Mealpage);
+// $("a[data-bs-target='#pills-menu']").on('click', Mealpage);
 $("a[data-bs-target='#pills-analyze']").on('click', Analyzepage);
 $("a[data-bs-target='#pills-order']").on('click', Orderpage);
 $("a[data-bs-target='#pills-member']").on('click', Memberpage);
@@ -299,47 +295,7 @@ function Homepage() {
     });
 }
 Homepage();
-//菜單頁面處理
-function Mealpage() {
-    //菜單表格
-    $.ajax({
-        url: `http://localhost:${localhost}/api/${storeId}/vmealbom?token=${newToken}`,
-        method: 'GET',
-        success: function (res, status) {
-            $('#tableMenubody').empty();
-            console.log("menuTable ok")
-            for (var menu of res) {
-                $('#tableMenubody').append(
-                    '<tr>' +
-                    '<td class="my-td-width4">' + '<input type="checkbox">' + '</td>' +
-                    '<td class="my-td-width10">' + `${menu.mealname}` + '</td>' +
-                    '<td class="my-td-width10">' + `${menu.mealcategoryname}` + '</td>' +
-                    '<td class="my-td-width10">' + `xxxxx` + '</td>' +
-                    '<td class="my-td-width23 textBlock">' + `${menu.ingredient}` + 'kcal</td>' +
-                    '<td class="my-td-width10">' + `${menu.mealprice}` + ' TWD' + '</td>' +
-                    '<td class="my-td-width23 textBlock">' + `${menu.mealdesc}` + '</td>' +
-                    '</tr>'
-                )
 
-            }
-            $('#tableMenubody tr').on('click', function () {
-                if ($(this).find('td').css('word-break') == 'normal') {
-                    $(this).find('td').css({//可以改變多個css
-                        "word-break": "break-all",
-                        'white-space': 'normal'
-
-                    })
-                } else {
-                    $(this).find('td').css({
-                        "word-break": "normal",
-                        'white-space': 'nowrap'
-                    })
-                }
-            })
-        },
-        error: function () { }
-    })
-}
 //分析資料頁面處理
 function Analyzepage() {
     $.ajax({
@@ -765,7 +721,7 @@ function Orderpage() {
                         console.log(err)
                     },
                 })
-                $('.orderTrrcom')[$(this).closest("tr").index()].style.display='none';
+                $('.orderTrrcom')[$(this).closest("tr").index()].style.display = 'none';
             });
             //刪除
             $('.orderCBtn').click(function () {
@@ -804,7 +760,7 @@ function Orderpage() {
                         console.log(err)
                     },
                 })
-                $(' .orderTrr')[$(this).closest("tr").index()].style.display='none';
+                $(' .orderTrr')[$(this).closest("tr").index()].style.display = 'none';
             })
             //確定
             var getcompletevalue = [];
@@ -848,7 +804,7 @@ function Orderpage() {
                                 url: `http://localhost:${localhost}/api/${storeId}/orders?token=${newToken}&orderid=${orderid}`,
                                 method: 'GET',
                                 success: (res, status) => {
-                                    
+
                                     console.log("orderid")
                                     res[0].ORDER_STATUS = "3"
                                     var putres = {
@@ -880,7 +836,7 @@ function Orderpage() {
                                     console.log(err)
                                 },
                             })
-                            $('.orderTrrcom')[$(this).closest("tr").index()].style.display='none';
+                            $('.orderTrrcom')[$(this).closest("tr").index()].style.display = 'none';
                         });
                         res[0].ORDER_STATUS = "2"
                         var putres = {
@@ -912,7 +868,7 @@ function Orderpage() {
                         console.log(err)
                     },
                 })
-                $(' .orderTrr')[$(this).closest("tr").index()].style.display='none';
+                $(' .orderTrr')[$(this).closest("tr").index()].style.display = 'none';
             });
 
 
@@ -966,7 +922,7 @@ function Memberpage() {
                     '<td>' + `${member.USER_PHONE}` + '</td>' +
                     '<td class="textBlock">' + `${member.USER_MAIL}` + '</td>' +
                     '<td class="textBlock">' + `${formatDatenotime(member.USER_BIRTH)}` + '</td>' +
-                    '<td>' + `${member.USER_AGE}` + '</td>' +
+                    '<td>' + `${member.USER_AGE}歲` + '</td>' +
                     '</tr>'
                 )
 
@@ -999,12 +955,20 @@ function Broadcastpage() {
 //對帳單頁面處理
 function ReconciliationStatementpage() {
     $('#table').bootstrapTable({
-        url: 'http://localhost:8081/api/l3rH7uT47PTrQSteWO2V9XqbpRn1/orders?token=$2a$10$WcqSdkG/OIJJkkMgiSJgzONwQ5aQaXkGWcAtQXcE2HcpI5nP7Gjze',         //請求後臺的 URL（*）
+        url: `http://localhost:${localhost}/api/${storeId}/payments?token=${newToken}`,         //請求後臺的 URL（*）
+        striped: false,
         method: 'get',                      //請求方式（*）
         // data: data,                      //當不使用上面的後臺請求時，使用data來接收資料
         toolbar: '#toolbar',                //工具按鈕用哪個容器
+        showFullscreen: true,                    //全平按鈕
+        showColumns: true,
+        silentSort: true,
+        showPaginationSwitch: true,
+        showButtonIcons: false,            //沒用
+        showButtonText: true,                //有用
         striped: false,                      //是否顯示行間隔色
-        cache: false,                       //是否使用快取，預設為 true，所以一般情況下需要設定一下這個屬性（*）
+        cache: false,
+        buttonsPrefix: 'btn-sm btn',                       //是否使用快取，預設為 true，所以一般情況下需要設定一下這個屬性（*）
         pagination: true,                   //是否顯示分頁（*）
         sortable: true,                    //是否啟用排序
         sortOrder: "asc",                   //排序方式
@@ -1013,38 +977,37 @@ function ReconciliationStatementpage() {
         pageSize: 5,                        //每頁的記錄行數（*）
         pageList: [5, 10],        //可供選擇的每頁的行數（*）
         search: true,                       //是否顯示錶格搜尋，此搜尋是使用者端搜尋，不會進伺服器端，所以個人感覺意義不大
-        strictSearch: false,                 //啟用嚴格搜尋。禁用比較檢查。
-        showColumns: false,                  //是否顯示所有的列
+        strictSearch: false,                 //啟用嚴格搜尋。禁用比較檢查。                  //是否顯示所有的列
         showRefresh: true,                  //是否顯示重新整理按鈕
         minimumCountColumns: 2,             //最少允許的列數
         clickToSelect: true,                //是否啟用點選選中行
         // height: 500,                        //行高，如果沒有設定 height 屬性，表格自動根據記錄條數覺得表格高度
         uniqueId: "ID",                     //每一行的唯一標識，一般為主鍵列
-        showToggle: false,                    //是否顯示詳細檢視和列表檢視的切換按鈕
-        cardView: false,                    //是否顯示詳細檢視
+        showToggle: true,                    //是否顯示詳細檢視和列表檢視的切換按鈕
+        cardView: true,                    //是否顯示詳細檢視
         detailView: false,                  //是否顯示父子表
-        showExport: false,                   //是否顯示匯出
-        exportDataType: "selected",            //basic', 'all', 'selected'.
+        showExport: true,                   //是否顯示匯出
+        // exportDataType: "selected",            //basic', 'all', 'selected'.
         columns: [{
-            field: 'ID', title: 'ID'       //我們取json中id的值，並將表頭title設定為ID
+            field: 'USER_ID', title: '會員ID'       //我們取json中id的值，並將表頭title設定為ID
         }, {
-            field: 'ORDER_ID', title: 'aa'         //我們取 json 中 username 的值，並將表頭 title 設定為使用者名稱
+            field: 'PAYMENT_ID', title: '結帳單ID'         //我們取 json 中 username 的值，並將表頭 title 設定為使用者名稱
         }, {
-            field: 'STORE_ID', title: 'vv'                //我們取 json 中 sex 的值，並將表頭 title 設定為性別
+            field: 'ORDER_ID', title: '單據ID'                //我們取 json 中 sex 的值，並將表頭 title 設定為性別
         }, {
-            field: 'USER_ID', title: 'cc'               //我們取 json 中 city 的值，並將表頭 title 設定為城市
+            field: 'PAYMENT_PRICE', title: '價格'               //我們取 json 中 city 的值，並將表頭 title 設定為城市
         }, {
-            field: 'ORDERS_PRICE', title: 'dd'               //我們取 json 中 sign 的值，並將表頭 title 設定為簽名
+            field: 'PAYMENT_CATEGORY', title: '結帳方式'               //我們取 json 中 sign 的值，並將表頭 title 設定為簽名
         }, {
-            field: 'ORDER_STATUS', title: 'ee'           //我們取 json 中 classify 的值，並將表頭 title 設定為分類
-        }, {
-            //ormatter:function(value,row,index) 對後臺傳入資料 進行操作 對資料重新賦值 返回 return 到前臺
-            // events 觸發事件
-            // field: 'Button',title:"操作",align: 'center',events:operateEvents,formatter:function(value,row,index){
-            //     var del = '<button type="button" class="btn btn-danger delete">刪除</button>'
-            //     return del;
-            // }
-        }
+            field: 'CREATE_TIME', title: '結帳時間', formatter: function (value, row, index) {
+                console.log(value);
+                console.log(row);
+                console.log(index);
+
+                return formatDate(value);
+            }          //我們取 json 中 classify 的值，並將表頭 title 設定為分類
+        },
+
         ],
         // responseHandler: function (res) {
         //     return res.data      //在載入遠端資料之前，處理響應資料格式.
@@ -1055,12 +1018,54 @@ function ReconciliationStatementpage() {
 
 
 //顧客管理表格
-
+$("a[data-bs-target='#pills-broadcast']").on('click', couponTable);
+// $('#couponBtn').on('click',couponTable )
 //廣播與優惠卷設定
+function couponTable() {
+    $.ajax({
+        url: `http://localhost:${localhost}/api/${storeId}/users?token=${newToken}`,
+        method: 'GET',
+        success: function (res, status) {
+            $('#tableMemberbody').empty();
+            console.log("memberTable ok")
 
-//對帳單
-//BT
-// fixedScroll = data.fixedScroll ? data.fixedScroll : false;
+            for (var member of res) {
+
+                $('#tableMemberbody').append(
+                    '<tr>' +
+                    '<td class="textBlock">' + `${member.USER_ID}` + '</td>' +
+                    '<td>' + `${member.USER_NAME}` + '</td>' +
+                    '<td>' + `${member.USER_GENDER}` + '</td>' +
+                    '<td>' + `${member.USER_PHONE}` + '</td>' +
+                    '<td class="textBlock">' + `${member.USER_MAIL}` + '</td>' +
+                    '<td class="textBlock">' + `${formatDatenotime(member.USER_BIRTH)}` + '</td>' +
+                    '<td>' + `${member.USER_AGE}` + '</td>' +
+                    '</tr>'
+                )
+
+
+            }
+            $('#tableMemberbody tr').on('click', function () {
+                if ($(this).find('td').css('word-break') == 'normal') {
+                    $(this).find('td').css({//可以改變多個css
+                        "word-break": "break-all",
+                        'white-space': 'normal'
+
+                    })
+                } else {
+                    $(this).find('td').css({
+                        "word-break": "normal",
+                        'white-space': 'nowrap'
+                    })
+                }
+            })
+        },
+        error: function () {
+            console.log("memberTable fail")
+        }
+    })
+}
+
 
 
 
@@ -1069,7 +1074,10 @@ function ReconciliationStatementpage() {
 
 
 /*utils*/
-//
+
+
+//隨機顏色包
+
 var colorRandom = function (j, x) {
     var color = []
     for (var i = 0; i < j; i++) {
@@ -1165,46 +1173,103 @@ $("#orderBtn").on("click", function () {
     });
 });
 //營養表格 菜單印出營養素 重點輸出  
-$.ajax({
-    url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
-    method: 'GET',
-    success: function (res, status) {
+// $.ajax({
+//     url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
+//     method: 'GET',
+//     success: function (res, status) {
 
-        console.log("nutrientTable ok")
-        for (var nutrient of res) {
-            $('#nutrientContenttabletbody').append(
-                '<tr>' +
-                '<td>' + `${nutrient.ingredientname}` + '</td>' +
-                '<td>' + `${nutrient.ingredientcategory}` + '</td>' +
-                '<td>' + `${nutrient.ingredientdesc}` + '</td>' +
-                '<td>' + `${nutrient.calorie}` + 'kcal</td>' +
-                '<td>' + `${nutrient.carb}` + 'g</td>' +
-                '<td>' + `${nutrient.fat}` + 'g</td>' +
-                '<td>' + `${nutrient.protein}` + 'g</td>' +
-                '</tr>'
-            )
+//         console.log("nutrientTable ok")
+//         for (var nutrient of res) {
+//             $('#nutrientContenttabletbody').append(
+//                 '<tr>' +
+//                 '<td>' + `${nutrient.ingredientname}` + '</td>' +
+//                 '<td>' + `${nutrient.ingredientcategory}` + '</td>' +
+//                 '<td>' + `${nutrient.ingredientdesc}` + '</td>' +
+//                 '<td>' + `${nutrient.calorie}` + 'kcal</td>' +
+//                 '<td>' + `${nutrient.carb}` + 'g</td>' +
+//                 '<td>' + `${nutrient.fat}` + 'g</td>' +
+//                 '<td>' + `${nutrient.protein}` + 'g</td>' +
+//                 '</tr>'
+//             )
 
-        }
+//         }
+//     },
+//     error: function () { }
+// }).done(function (index) {
+//     console.log("mealIngredients ok")
+//     for (var meal of index) {
+
+//         $('#mealIngredients').append(
+//             `<option value = "${meal.ingredientname}">`
+//         )
+
+
+//     }
+// })
+//     .fail(function () {
+
+// })
+
+
+
+$('#ingredientsTable').bootstrapTable({
+    url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,         //請求後臺的 URL（*）
+    striped: false,
+    method: 'get',                      //請求方式（*）
+    // data: data,                      //當不使用上面的後臺請求時，使用data來接收資料
+    toolbar: '#toolbar',                //工具按鈕用哪個容器
+    showFullscreen: true,                    //全平按鈕
+    showColumns: true,
+    silentSort: true,
+    showPaginationSwitch: true,
+    showButtonIcons: false,            //沒用
+    showButtonText: true,                //有用
+    striped: false,                      //是否顯示行間隔色
+    cache: false,
+    buttonsPrefix: 'btn-sm btn',                       //是否使用快取，預設為 true，所以一般情況下需要設定一下這個屬性（*）
+    pagination: true,                   //是否顯示分頁（*）
+    sortable: true,                    //是否啟用排序
+    sortOrder: "asc",                   //排序方式
+    sidePagination: "client",           //分頁方式：client 使用者端分頁，server 伺服器端分頁（*）
+    pageNumber: 1,                       //初始化載入第一頁，預設第一頁
+    pageSize: 10,                        //每頁的記錄行數（*）
+    pageList: [10, 20],        //可供選擇的每頁的行數（*）
+    search: true,                       //是否顯示錶格搜尋，此搜尋是使用者端搜尋，不會進伺服器端，所以個人感覺意義不大
+    strictSearch: false,                 //啟用嚴格搜尋。禁用比較檢查。                  //是否顯示所有的列
+    showRefresh: true,                  //是否顯示重新整理按鈕
+    minimumCountColumns: 2,             //最少允許的列數
+    clickToSelect: true,                //是否啟用點選選中行
+    // height: 400,                        //行高，如果沒有設定 height 屬性，表格自動根據記錄條數覺得表格高度
+    uniqueId: "ID",                     //每一行的唯一標識，一般為主鍵列
+    showToggle: false,                    //是否顯示詳細檢視和列表檢視的切換按鈕
+    cardView: false,                    //是否顯示詳細檢視
+    detailView: false,                  //是否顯示父子表
+    showExport: true,                   //是否顯示匯出
+    // exportDataType: "selected",            //basic', 'all', 'selected'.
+    columns: [{
+        field: 'ingredientname', title: '俗名'       //我們取json中id的值，並將表頭title設定為ID
+    }, {
+        field: 'ingredientcategory', title: '食材分類'         //我們取 json 中 username 的值，並將表頭 title 設定為使用者名稱
+    }, {
+        field: 'ingredientdesc', title: '食材描述'                //我們取 json 中 sex 的值，並將表頭 title 設定為性別
+    }, {
+        field: 'calorie', title: '熱量'               //我們取 json 中 city 的值，並將表頭 title 設定為城市
+    }, {
+        field: 'carb', title: '碳水化合物'               //我們取 json 中 sign 的值，並將表頭 title 設定為簽名
+    }, {
+        field: 'fat', title: '脂肪'         //我們取 json 中 classify 的值，並將表頭 title 設定為分類
+    },{    field: 'protein', title: '蛋白質'           //我們取 json 中 classify 的值，並將表頭 title 設定為分類
     },
-    error: function () { }
-}).done(function (index) {
-    console.log("mealIngredients ok")
-    for (var meal of index) {
 
-        $('#mealIngredients').append(
-            `<option value = "${meal.ingredientname}">`
-        )
+    ],
+    // responseHandler: function (res) {
+    //     return res.data      //在載入遠端資料之前，處理響應資料格式.
+    //     // 我們取的值在data欄位中，所以需要先進行處理，這樣才能獲取我們想要的結果
+    // }
+});
 
 
-    }
-})
-    .fail(function () {
-
-    })
 /*utils*/
-
-
-
 /*畫分析圖表*/
 // const labels = [
 //     'aaaa',
@@ -1285,188 +1350,3 @@ $.ajax({
 
 
 /*---------------嘉彬------------*/
-
-
-
-
-
-//隱藏內容在欄位裡過多
-// $('tr').on('click', function () {
-//     if ($(this).find('td').css('word-break') == 'normal') {
-//         $(this).find('td').css({//可以改變多個css
-//             "word-break": "break-all",
-//             'white-space': 'normal'
-
-//         })
-//     } else {
-//         $(this).find('td').css({
-//             "word-break": "normal",
-//             'white-space': 'nowrap'
-//         })
-//     }
-// })
-
-
-//讀取餐點食材下拉選單
-// var ingredientsJS = function () {
-//     $.ajax("./Jsontest.json")//toarry
-//         .done(function (index) {
-//             for (var meal of index) {
-//                 console.log($('#mealIngredients').val())
-//                 $('#mealIngredients').append(
-//                     `<option value = "${meal.INGREDIENT_NAME}">`
-//                 )
-
-
-//             }
-//         })
-//         .fail(function () {
-//             alert("error");
-//         })
-// }();
-
-//新增欄位
-function ingredientsAppendBtn() {
-
-    $('#addIngredients').append(
-        `<li>` +
-        `${document.getElementById('examIngredients').innerHTML}` +
-        `</li>`
-    );
-}
-
-
-//刪除欄位
-function ingredientsDelBtn() {
-    var rows = $('#addIngredients li');
-    if (rows.length > 1) {
-        // change: work on filtered jQuery object
-        rows.filter(":last").html('');
-        $('#addIngredients :last').remove();
-    } else {
-        alert('Cannot remove any more rows');
-    }
-
-}
-
-
-//計算營養成份表
-function ingredientsOPA() {
-    $.ajax({
-        url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
-        method: 'GET',
-        success: function (res, status) {
-            console.log("ingredientsOPA() success");
-        },
-        error: function () { console.log("ingredientsOPA() fail"); }
-    }).done(function (index) {
-
-        var ingredientsname = document.getElementsByName('ingredientsName');
-        var ingredientsgrams = document.getElementsByName('ingredientsGrams');
-        var calorietot = 0;
-        var carbtot = 0;
-        var fattot = 0;
-        var proteintot = 0;
-        for (var i = 0; i < ingredientsname.length; i++) {
-            if (ingredientsname[i].value != "" && ingredientsgrams[i].value != "") {
-                var calorie;
-                var carb;
-                var fat;
-                var protein;
-                for (var a of index) {
-
-                    if (ingredientsname[i].value == a.ingredientname) {
-
-                        calorie = Number(a.calorie);
-                        carb = Number(a.carb);
-                        fat = Number(a.fat);
-                        protein = Number(a.protein);
-                        var inputgrams = Number(ingredientsgrams[i].value);
-
-                        calorietot += calorie;
-                        carbtot += carb;
-                        fattot += fat;
-                        proteintot += protein;
-
-                        var caloriefloat = parseFloat((inputgrams * calorietot).toFixed(2));
-                        var carbfloat = parseFloat((inputgrams * carbtot).toFixed(2));
-                        var fatfloat = parseFloat((inputgrams * fattot).toFixed(2));
-                        var proteintfloat = parseFloat((inputgrams * proteintot).toFixed(2));
-                    }
-                }
-
-                $('#nutritionOperation').html(
-                    "<hr>熱量:" + `${caloriefloat}` +
-                    "(kcal)<br>碳水化合物:" + `${carbfloat}` +
-                    "(g)<br>脂肪:" + `${fatfloat}` +
-                    "(g)<br>蛋白質:" + `${proteintfloat}` + "(g)");
-            } else {
-                alert("請輸入完整資訊");
-                $('#nutritionOperation').html(
-                    "<hr>");
-                break;
-            }
-        }
-        console.log(calorietot + ":" + carbtot)
-
-    })
-        .fail(function () {
-            alert("error");
-        })
-
-
-}
-
-// function ingredientsOPA() {
-//     $.ajax("./Jsontest.json")//toarry
-//         .done(function (index) {
-//             var ingredientsname = document.getElementsByName('ingredientsName');
-//             var ingredientsgrams = document.getElementsByName('ingredientsGrams');
-//             var calorietot = 0;
-//             var carbtot = 0;
-//             var fattot = 0;
-//             var proteintot = 0;
-//             for (var i = 0; i < ingredientsname.length; i++) {
-//                 if (ingredientsname[i].value != "" && ingredientsgrams[i].value != "") {
-//                     var calorie;
-//                     var carb;
-//                     var fat;
-//                     var protein;
-//                     for (var a of index) {
-//                         if (ingredientsname[i].value == a.INGREDIENT_NAME) {
-//                             calorie = a.CALORIE;
-//                             carb = a.CARB;
-//                             fat = a.FAT;
-//                             protein = a.PROTEIN;
-//                             var inputgrams = Number(ingredientsgrams[i].value);
-
-//                             calorietot += calorie;
-//                             carbtot += carb;
-//                             fattot += fat;
-//                             proteintot += protein;
-
-//                             var caloriefloat =parseFloat((inputgrams * calorietot).toFixed(2));
-//                             var carbfloat = parseFloat((inputgrams * carbtot).toFixed(2));
-//                             var fatfloat = parseFloat((inputgrams * fattot).toFixed(2));
-//                             var proteintfloat = parseFloat((inputgrams * proteintot).toFixed(2));
-//                         }
-//                     }
-//                     $('#nutritionOperation').html(
-//                         "<hr>熱量:" + `${caloriefloat}` +
-//                         "(kcal)<br>碳水化合物:" + `${carbfloat}` +
-//                         "(g)<br>脂肪:" + `${fatfloat}` +
-//                         "(g)<br>蛋白質:" + `${proteintfloat}` + "(g)");
-//                 }else{
-//                     alert("請輸入完整資訊");
-//                     $('#nutritionOperation').html(
-//                         "<hr>");
-//                         break;
-//                 }
-//             }
-
-//         })
-//         .fail(function () {
-//             alert("error");
-//         })
-// }
-//今天更新0606還沒給榮庭

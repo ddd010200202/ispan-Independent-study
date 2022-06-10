@@ -528,7 +528,7 @@
                                 <!--上頭nav bar-->
 
                                 <nav class="navbar navbar-light  justify-content-end">
-                                    <ul class="nav justify-content-end">
+                                    <ul class="nav justify-content-end nav-pills">
 
                                         <li class="nav-item">
                                             <input type="checkbox" id="switch" class="switch-input" />
@@ -539,9 +539,13 @@
                                             <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip"
                                                 data-bs-placement="left" title='聯絡資訊:aaa@gmail.com'></i>
                                         </li>
-                                        <li class="nav-item">
+                                        <li class="nav-item" role="presentation">
                                             <!-- 訂單提示 -->
-                                            <i class="fa-solid fa-bell"></i>
+                                            <a href="#pills-order" data-bs-target="#pills-order" data-bs-toggle="pill">
+                                                <i class="fa-solid fa-bell"></i></a>
+
+
+
                                         </li>
                                         <li class="nav-item">
                                             <!-- 寄信給我們 -->
@@ -565,7 +569,7 @@
                                 <!-- 首頁 -->
                                 <div class="col-md-12 tab-content" id="pills-tabContent">
                                     <!-- 首頁 -->
-                                    
+
                                     <div class="container tab-pane  show active" id="pills-home" role="tabpanel"
                                         aria-labelledby="pills-home-tab">
                                         <div id="quickLink" class="row tab-content">
@@ -638,11 +642,12 @@
                                     <div class="container tab-pane " id="pills-menu" role="tabpanel"
                                         aria-labelledby="pills-menu-tab">
                                         <div class="row tab-content">
+                                            <!-- alert 1-->
                                             <div class="modal fade" id="exampleModal" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true"
                                                 data-bs-backdrop="static">
                                                 <div class="modal-dialog modal-dialog-scrollable">
-                                                    <div class="modal-content">
+                                                    <div class="modal-content" style="border-right-width: 0px;">
                                                         <div class=" modal-header my-color1">
                                                             <span class="modal-title my-title-css-2"
                                                                 id="exampleModalLabel">新增菜單</span>
@@ -659,16 +664,31 @@
                                                                         <th colspan="2">餐點名稱 :</th>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td colspan="2"><input type="text"
-                                                                                class="my-input" placeholder="輸入餐點名稱">
+                                                                        <td colspan="2"><input id="inputMealName"
+                                                                                type="text" class="my-input"
+                                                                                placeholder="請輸入餐點名稱...">
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th colspan="2">餐點種類 :</th>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td colspan="2"><input type="text"
-                                                                                class="my-input" placeholder="輸入餐點種類">
+                                                                        <td colspan="2">
+                                                                            <input id="inputMealType" list="123"
+                                                                                placeholder="請選擇種類..."
+                                                                                style="width:50%;"></label>
+                                                                            <datalist id="123">
+                                                                                <option value="123">
+                                                                            </datalist>
+                                                                            <span id="check1">
+                                                                                熱門:
+                                                                                <input type="checkbox" id="mealHotCheck"
+                                                                                    value="false">
+                                                                            </span>
+                                                                            <span>
+                                                                                素食:
+                                                                                <input type="checkbox">
+                                                                            </span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -677,7 +697,7 @@
                                                                     <tr>
                                                                         <td colspan="2">
                                                                             <!--還不能上傳圖檔-->
-                                                                            <input type="button"
+                                                                            <input id="inputMealImage" type="button"
                                                                                 class="my-append-btn my-right-radius my-left-radius"
                                                                                 value="上傳">
                                                                         </td>
@@ -686,9 +706,10 @@
                                                                         <th colspan="2">售價 :</th>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td colspan="2"><span><input type="number"
-                                                                                    class="my-input"
-                                                                                    placeholder="輸入售價">TWD</span></td>
+                                                                        <td colspan="2"><span><input id="inputMealPrice"
+                                                                                    type="number" class="my-input"
+                                                                                    placeholder="請輸入售價...">TWD</span>
+                                                                        </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>餐點食材 :
@@ -700,15 +721,15 @@
                                                                                 <li id="examIngredients">
                                                                                     <input list="mealIngredients"
                                                                                         name="ingredientsName"
-                                                                                        placeholder="選擇食材"
-                                                                                        style="width:70%;"></label>
+                                                                                        placeholder="請選擇食材..."
+                                                                                        style="width:60%;"></label>
                                                                                     <datalist id="mealIngredients">
                                                                                         <!-- 讀取食材 -->
                                                                                     </datalist>
                                                                                     <input type="number"
-                                                                                        name="ingredientsGrams"
-                                                                                        placeholder="輸入克數"
-                                                                                        style="width:20%;"><span>(g)</span>
+                                                                                        name="ingredientsGrams" min="0"
+                                                                                        placeholder="請輸入克數..."
+                                                                                        style="width:30%;"><span>(g)</span>
                                                                                 </li>
 
                                                                             </ol>
@@ -744,15 +765,18 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2">
-                                                                            <textarea style="width:100%"
-                                                                                class="my-input" rows="4"
-                                                                                placeholder="輸入餐點描述"></textarea>
+                                                                            <textarea id="inputMealDesc"
+                                                                                style="width:100%" class="my-input"
+                                                                                rows="4"
+                                                                                placeholder="請輸入餐點描述..."></textarea>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-
+                                                        <div class="modal-footer  my-color1">
+                                                            <div style="float:right;"><button id="add"
+                                                                    href="javascript:" onclick="saveField()">儲存</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -770,7 +794,7 @@
                                                             <span style="float:right;">
                                                                 <div class="my-btn-box">
                                                                     <button type="button"
-                                                                        class=" my-btn-color my-left-radius"
+                                                                        class=" my-btn-color my-left-radius appendMenu"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#exampleModal">
                                                                         新增菜單
@@ -798,13 +822,15 @@
                                                     <thead>
 
                                                         <tr>
-                                                            <th class="my-td-width4"></th>
-                                                            <th class="my-td-width10">餐點名稱</th>
+                                                            <th class="my-td-width14">餐點名稱</th>
+                                                            <th class="my-td-width4">熱賣</th>
                                                             <th class="my-td-width10">餐點種類</th>
                                                             <th class="my-td-width10">餐點圖檔</th>
-                                                            <th class="my-td-width28">餐點食材</th>
+                                                            <th class="my-td-width22">餐點食材</th>
                                                             <th class="my-td-width10">售價</th>
-                                                            <th class="my-td-width28">餐點描述</th>
+                                                            <th class="my-td-width22">餐點描述</th>
+                                                            <th class="my-td-width4">修改</th>
+                                                            <th class="my-td-width4">刪除</th>
 
                                                         </tr>
 
@@ -812,29 +838,46 @@
                                                     <tbody id="tableMenubody">
 
                                                         <tr>
-                                                            <td class="my-td-width4"><input type="checkbox"></td>
-                                                            <td class="my-td-width10">雞腿便當</td>
+                                                            <td class="my-td-width14">雞腿便當</td>
+                                                            <td class="my-td-width4"></td>
                                                             <td class="my-td-width10">便當類</td>
                                                             <td class="my-td-width10">XXXXXX</td>
-                                                            <td class="my-td-width23 textBlock">
+                                                            <td class="my-td-width22 textBlock">
                                                                 土雞腿肉1盒干貝4顆永心鳳茶剝皮辣椒4條剝皮辣椒汁4匙水1500ml脆瓜條10條脆瓜汁4匙魚丸5顆貢丸5顆調味鹽適量麵關廟麵4片煮麵水適量鹽
                                                             </td>
                                                             <td class="my-td-width10">100.00TWD</td>
-                                                            <td class="my-td-width23 textBlock">
+                                                            <td class="my-td-width22 textBlock">
                                                                 雞腿也是相當大隻呢！！雞腿經特製醬汁滷至而成，帶有淡雅的鹹甜滋味，肉質紮實不乾柴，大口啃食整個超過癮！吃過就回味無窮呢😍
+                                                            </td>
+                                                            <td class="my-td-width4">
+                                                                <input type='button' value='修改' id='modifyMenuBtn'
+                                                                    data-bs-toggle='modal'
+                                                                    data-bs-target='#exampleModal'>
+                                                            </td>
+                                                            <td class="my-td-width4">
+                                                                <input type='button' value='刪除'
+                                                                    onclick='javascript:delField(this);'>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="my-td-width4"><input type="checkbox"></td>
-                                                            <td class="my-td-width10">三杯雞米便當</td>
+                                                            <td class="my-td-width14">三杯雞米便當</td>
+                                                            <td class="my-td-width4"></td>
+
                                                             <td class="my-td-width10">便當類</td>
                                                             <td class="my-td-width10">YYYYYY</td>
-                                                            <td class="my-td-width23 textBlock">香煎豆皮 豆皮 2 片 三杯雞 帶骨雞肉塊
-                                                                500 g 豆干 10 片 九層塔 適量 米酒 醬油 蠔油 香菇炒芹菜 鮮香菇 4 朵 芹菜 200 g 鹽
-                                                            </td>
+                                                            <td class="my-td-width22 textBlock">香煎豆皮 豆皮 2 片 三杯雞 帶骨雞肉塊500
+                                                                g 豆干 10 片 九層塔 適量 米酒 醬油 蠔油 香菇炒芹菜 鮮香菇 4 朵 芹菜 200 g 鹽</td>
                                                             <td class="my-td-width10">85.00TWD</td>
-                                                            <td class="my-td-width23 textBlock">
-                                                                溫體雞肉扎實Q嫩，包覆著特製的醬汁鹹甜夠味！帶有淡雅的麻油香氣非常銷魂！會讓人忍不住一口接一口呢🥰
+                                                            <td class="my-td-width22 textBlock">
+                                                                溫體雞肉扎實Q嫩，包覆著特製的醬汁鹹甜夠味！帶有淡雅的麻油香氣非常銷魂！會讓人忍不住一口接一口呢🥰</td>
+                                                            <td class="my-td-width4">
+                                                                <input type='button' value='修改' id='modifyMenuBtn'
+                                                                    data-bs-toggle='modal'
+                                                                    data-bs-target='#exampleModal'>
+                                                            </td>
+                                                            <td class="my-td-width4">
+                                                                <input type='button' value='刪除'
+                                                                    onclick='javascript:delField(this);'>
                                                             </td>
                                                         </tr>
 
@@ -1033,6 +1076,66 @@
 
                                                 <input type="text" class="form-control" placeholder="廣播標題   "
                                                     aria-label="Username" aria-describedby="addon-wrapping">
+                                                <div>
+                                                    <!-- 優惠卷 -->
+                                                    <button id="couponBtn" type="button" class="btn btn-warning"
+                                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                        優惠卷管理
+                                                    </button>
+
+                                                    <!-- 優惠卷Modal -->
+                                                    <div class="modal fade" id="staticBackdrop"
+                                                        data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="staticBackdropLabel">
+                                                                        優惠卷管理
+                                                                    </h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div>
+                                                                        <input type="hidden">
+                                                                        <p>名稱:</p><input type="text">
+                                                                        <p>折扣內容:</p><input type="text">
+                                                                        <button>儲存</button><button>新增</button>
+                                                                    </div>
+                                                                    <table class="table table-warning">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>選擇</th>
+                                                                                <th style="display:none;">優惠卷id</th>
+
+                                                                                <th>優惠卷名稱</th>
+                                                                                <th>優惠卷內容</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody class="table table-white"
+                                                                            id="couponTbody">
+                                                                            <tr>
+                                                                                <td><input type="checkbox"></td>
+                                                                                <td style="display:none;">優惠卷id</td>
+                                                                                <td>COUPON_NAME</td>
+                                                                                <td>COUPON_DESC</td>
+
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">退出</button>
+                                                                    <!-- <button type="button"
+                                                                        class="btn btn-primary">Understood</button> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <hr>
                                             <div class="form-floating">
@@ -1041,6 +1144,7 @@
                                                 <label for="floatingTextarea">請輸入廣播訊息</label>
                                             </div>
                                             <hr>
+
                                             <div class="dropdown" style="padding-top: 10px; ">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
                                                     id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -1053,6 +1157,7 @@
                                                     <li><a class="dropdown-item" href="#">C折扣卷</a></li>
                                                 </ul>
                                             </div>
+
                                             <div class="dropdown" style="padding-top: 10px;">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
                                                     id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -1144,14 +1249,10 @@
                                     <div class="container tab-pane " id="pills-nutrientContent" role="tabpanel"
                                         aria-labelledby="pills-nutrientContent-tab">
                                         <h1><i class="fa-solid fa-magnifying-glass-chart"></i>營養成分表</h1>
-                                        <div>
-                                            <input id="nutrientContentsearch">
-                                            <div class="div1"></div></input>
-                                            <!-- <input type="submit"  onclick="b()" value="確認"> -->
-                                        </div>
 
-                                        <table class="table table-dark table-hover" id="nutrientContenttable">
-                                            <thead>
+
+                                        <table class="table table-dark table-hover" id="ingredientsTable">
+                                            <!-- <thead>
                                                 <tr>
                                                     <th>俗名</th>
                                                     <th>食材分類</th>
@@ -1162,7 +1263,7 @@
                                                     <th>蛋白質</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="nutrientContenttabletbody" class="table-light">
+                                            <tbody  class="table-light">
 
                                             </tbody>
                                             <tfoot>
@@ -1170,7 +1271,7 @@
                                                 <tr></tr>
 
                                                 <tr></tr>
-                                            </tfoot>
+                                            </tfoot> -->
                                         </table>
                                     </div>
                                     <!-- analyze -->
@@ -1219,8 +1320,8 @@
                                         aria-labelledby="pills-reconciliationStatement-tab">
                                         <div class="container">
                                             <div class="row">
-                                                <div class="col-12" style="height: 600px;overflow: scroll;">  
-                                                    <table id="table"></table>  
+                                                <div class="col-12" style="height: 600px;overflow: scroll;">
+                                                    <table id="table" class="table "></table>
                                                 </div>
                                             </div>
                                         </div>
@@ -1235,6 +1336,7 @@
         </div>
         </div>
     </section>
+
     <!--jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -1243,16 +1345,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified JavaScript -->
     <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
     <!-- Latest compiled and minified Locales -->
     <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/locale/bootstrap-table-zh-CN.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table-locale-all.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table-locale-all.min.js"></script>
 
     <!-- <script src="./app/fixedScroll.js"></script> -->
     <script type="text/javascript" src="./app/vanilla-tilt.min.js"></script>
     <script src="./app/app.js"></script>
     <script type="module" src="./app/footerscript.js"></script>
+    <script src="./app/UPDATE.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+
 
 </body>
 

@@ -1,3 +1,4 @@
+
 const token = '22e7ba553d6239bc5de2bf1520c9187b611a760d'; // 填入 token
 
 const actionBtn = document.getElementById("myBtn"); // 送出按鈕
@@ -92,6 +93,7 @@ function submit() {
         const imgURL = JSON.parse(res).data.link
         addImg(imgURL);
         console.log(JSON.parse(res)); // 可以看見上傳成功後回傳的URL
+        console.log(JSON.parse(res).data.link)
         alert('上傳完成');
     });
     document.getElementById("preview-img").src="";
@@ -136,3 +138,4 @@ uploadInput.addEventListener("change", (e) => {
 actionBtn.addEventListener("click", () => {
     submit();
 });
+
