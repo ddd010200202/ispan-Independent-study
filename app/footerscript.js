@@ -102,38 +102,38 @@ document.getElementById("switch").addEventListener('click', () => {
     openSwitch($("#switch")[0].checked);
 });
 
-$('#belltest').on('click',function(){
+$('#belltest').on('click', function () {
     $('#padleft .active').removeClass('active');
     $('#pills-tabContent>div').removeClass('active');
     $('#pills-tabContent>div').removeClass('show');
-    $('#ordera').attr('class','nav-link text-white bg-transparent text-start');
-    $('#pills-order').attr('class','show active container tab-pane ');
+    $('#ordera').attr('class', 'nav-link text-white bg-transparent text-start');
+    $('#pills-order').attr('class', 'show active container tab-pane ');
     Orderpage();
-    
+
 })
 
-$('img[src="./img/group2.png"]').on('click', function(){
+$('img[src="./img/group2.png"]').on('click', function () {
     $('#padleft .active').removeClass('active');
     $('#pills-tabContent>div').removeClass('active');
     $('#pills-tabContent>div').removeClass('show');
-    $('a[data-bs-target="#pills-order"]').attr('class','nav-link text-white bg-transparent text-start');
-    $('#pills-order').attr('class','show active container tab-pane ');
+    $('a[data-bs-target="#pills-order"]').attr('class', 'nav-link text-white bg-transparent text-start');
+    $('#pills-order').attr('class', 'show active container tab-pane ');
     Orderpage();
 });
-$('img[src="./img/group3.png"]').on('click', function(){
+$('img[src="./img/group3.png"]').on('click', function () {
     $('#padleft .active').removeClass('active');
     $('#pills-tabContent>div').removeClass('active');
     $('#pills-tabContent>div').removeClass('show');
-    $('a[data-bs-target="#pills-analyze"]').attr('class','nav-link text-white bg-transparent text-start');
-    $('#pills-analyze').attr('class','show active container tab-pane ');
+    $('a[data-bs-target="#pills-analyze"]').attr('class', 'nav-link text-white bg-transparent text-start');
+    $('#pills-analyze').attr('class', 'show active container tab-pane ');
     Analyzepage();
 });
-$('img[src="./img/group4.png"]').on('click', function(){
+$('img[src="./img/group4.png"]').on('click', function () {
     $('#padleft .active').removeClass('active');
     $('#pills-tabContent>div').removeClass('active');
     $('#pills-tabContent>div').removeClass('show');
-    $('a[data-bs-target="#pills-reconciliationStatement"]').attr('class','nav-link text-white bg-transparent text-start');
-    $('#pills-reconciliationStatement').attr('class','show active container tab-pane ');
+    $('a[data-bs-target="#pills-reconciliationStatement"]').attr('class', 'nav-link text-white bg-transparent text-start');
+    $('#pills-reconciliationStatement').attr('class', 'show active container tab-pane ');
     ReconciliationStatementpage();
 });
 //登出按鍵
@@ -156,7 +156,7 @@ $("a[data-bs-target='#pills-home']").on('click', Homepage);
 $("a[data-bs-target='#pills-analyze']").on('click', Analyzepage);
 $("a[data-bs-target='#pills-order']").on('click', Orderpage);
 $("a[data-bs-target='#pills-member']").on('click', Memberpage);
-$("a[data-bs-target='#pills-broadcast']").on('click', Broadcastpage);
+// $("a[data-bs-target='#pills-broadcast']").on('click', Broadcastpage);
 $("a[data-bs-target='#pills-reconciliationStatement']").on('click', ReconciliationStatementpage);
 
 var Chart3;
@@ -813,7 +813,12 @@ function Orderpage() {
 
                     '</tr>'
                 )
+                var doc = new jsPDF();
 
+                doc.addFont('SourceHanSans-Normal.ttf', 'SourceHanSans-Normal', 'normal');
+                doc.setFont('SourceHanSans-Normal');
+                doc.text(20, 20, `會員id:${selectData[0]}\r會員姓名:${selectData[2]}\r點餐時間${nowTime}\r餐點內容:${selectData[4]}`);
+                doc.save('已完成確認.pdf');
 
 
                 $.ajax({
@@ -973,9 +978,7 @@ function Memberpage() {
     })
 }
 //廣播訊息設定頁面處理
-function Broadcastpage() {
 
-}
 //對帳單頁面處理
 function ReconciliationStatementpage() {
     $('#table').bootstrapTable({
@@ -1011,6 +1014,7 @@ function ReconciliationStatementpage() {
         cardView: true,                    //是否顯示詳細檢視
         detailView: false,                  //是否顯示父子表
         showExport: true,                   //是否顯示匯出
+        exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel'],
         // exportDataType: "selected",            //basic', 'all', 'selected'.
         columns: [{
             field: 'USER_ID', title: '會員ID'       //我們取json中id的值，並將表頭title設定為ID
@@ -1227,8 +1231,8 @@ $('#ingredientsTable').bootstrapTable({
     cardView: false,                    //是否顯示詳細檢視
     detailView: false,                  //是否顯示父子表
 
-    exportDataType: "selected",            //basic', 'all', 'selected'.
-    exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel', 'pdf'],
+    // exportDataType: "selected",            //basic', 'all', 'selected'.
+    exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel',],
     exportDataType: $(this).val(),
 
     columns: [{
