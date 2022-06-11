@@ -184,45 +184,55 @@ function Homepage() {
             var labels = [];
             var data = [];
             console.log("vsalerankHomepage ok")
-            console.log(res)
-            
+            // console.log(res)
+            var backgroundColor = colorRandom(res.length, 0.5)
+
             for (var salserank of res) {
-                console.log(salserank   )
+                // console.log(salserank   )
                 $('#vsalerankHomepage').append(
                     '<li>' + `${salserank.mealname}` + ":" + `${salserank.count}` + '</li>'
                 )
-                labels.push(salserank.mealname)
-                data.push(salserank.count)
+
 
             }
-            console.log(data.slice(0,2))
-            var datarank= data.slice(0,3)
-            var labelsrank=labels.slice(0,3)
+            //排序 10名作輸出
+            function res_count(a, b) {
+                if (a.count < b.count) {
+                    return 1;
+                }
+                if (a.count > b.count) {
+                    return -1;
+                }
+                return 0;
+            };
+            console.log(res)
+            res.sort(res_count);
+            
+            var rankdata=res.slice(0,10);
+            console.log(rankdata);
+            for(var i=0; i<rankdata.length; i++) {
+                labels.push(rankdata[i].mealname);
+                data.push(rankdata[i].count)
+            }
+            
             // console.log(document.getElementsByClassName('Chart3'))
             if (Chart3 instanceof Chart) {
                 Chart3.destroy();
             }
             Chart3 = new Chart(document.getElementsByClassName('Chart3')[0], {
-                type: 'pie', //圖表類型
+                type: 'bar', //圖表類型
                 data: {
-                    labels: labelsrank,
+                    labels: labels,
                     datasets: [{
-                        label: '銷售前10', //這些資料都是在講什麼，也就是data 300 500 100是什麼
-                        data: datarank, //每一塊的資料分別是什麼，台北：300、台中：50..
-                        backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                        ],
+                        label: '', //這些資料都是在講什麼，也就是data 300 500 100是什麼
+                        data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
+                        backgroundColor: backgroundColor,
                         hoverOffset: 4
                     }]
                 }, //設定圖表資料
                 options: {} //圖表的一些其他設定，像是hover時外匡加粗
             })
             Chart3.clear();
-
-
-
         },
         error: err => {
             console.log("vsalerankHomepage fale")
@@ -275,7 +285,8 @@ function Homepage() {
                 }
 
             }
-
+            var datarank = data.slice(0, 3)
+            var labelsrank = labels.slice(0, 3)
             // console.log(document.getElementsByClassName('Chart3'))
             if (Chart4 instanceof Chart) {
                 Chart4.destroy();
@@ -283,10 +294,10 @@ function Homepage() {
             Chart4 = new Chart(document.getElementsByClassName('Chart4')[0], {
                 type: 'line', //圖表類型
                 data: {
-                    labels: labels,
+                    labels: labelsrank,
                     datasets: [{
                         label: '今年營收', //這些資料都是在講什麼，也就是data 300 500 100是什麼
-                        data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
+                        data: datarank, //每一塊的資料分別是什麼，台北：300、台中：50..
                         backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
                             'rgb(255, 255, 255)',
                             // 'rgb(54, 162, 235)',
@@ -335,38 +346,44 @@ function Analyzepage() {
             var data = [];
             console.log("vsalerankHomepage ok")
             // console.log(res)
-            for (var salserank of res) {
-                // $('#vsalerankHomepage').append(
-                //     '<li>' + `${salserank.mealname}` + ":" + `${salserank.count}` + '</li>'
-                // )
-                labels.push(salserank.mealname)
-                data.push(salserank.count)
+            var backgroundColor = colorRandom(res.length, 0.5)
+            //排序 10名作輸出
+            function res_count(a, b) {
+                if (a.count < b.count) {
+                    return 1;
+                }
+                if (a.count > b.count) {
+                    return -1;
+                }
+                return 0;
             }
-            // console.log(labels)
-
+            res.sort(res_count);
+            console.log(res);
+            var rankdata=res.slice(0,10);
+            console.log(rankdata);
+            for(var i=0; i<rankdata.length; i++) {
+                labels.push(rankdata[i].mealname);
+                data.push(rankdata[i].count)
+            }
+            
+            // console.log(document.getElementsByClassName('Chart3'))
             if (Chart3 instanceof Chart) {
                 Chart3.destroy();
             }
             Chart3 = new Chart(document.getElementsByClassName('Chart3')[1], {
-                type: 'pie', //圖表類型
+                type: 'bar', //圖表類型
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: '銷售前10', //這些資料都是在講什麼，也就是data 300 500 100是什麼
+                        label: '', //這些資料都是在講什麼，也就是data 300 500 100是什麼
                         data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
-                        backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                        ],
+                        backgroundColor: backgroundColor,
                         hoverOffset: 4
                     }]
                 }, //設定圖表資料
                 options: {} //圖表的一些其他設定，像是hover時外匡加粗
             })
-
-
-
+            Chart3.clear();
         },
         error: err => {
             console.log("vsalerankHomepage fale")
@@ -646,7 +663,7 @@ function Analyzepage() {
 }
 //訂單管理頁面處理
 function Orderpage() {
-    //訂單管理TODO
+    
     //1:orderPreview 2:orderAfteview 4:orderCancel 3:orderComplete
     $.ajax({
         url: `http://localhost:${localhost}/api/${storeId}/vorderdisplay?token=${newToken}`,
@@ -662,25 +679,25 @@ function Orderpage() {
 
                 if (orderInfo.orderstatus == "1") {
                     $('#orderPreview').append(
-                        '<tr class="orderTrr">' +
-                        '<td class="orderTr" style="display: none;">' + `${orderInfo.orderid}` + '</td>' +
-                        '<td>' + `未確認定單` + '</td>' +
+                        '<tr class=" orderTrr">' +
+                        '<td class="textBlock orderTr" style="display: none;">' + `${orderInfo.orderid}` + '</td>' +
+                        '<td class="textBlock">' + `未確認定單` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td >' + `${orderInfo.userphone}` + '</td>' +
-                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
                         '<td >' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
-                        '<td ><button  class="orderBtn btn btn-primary">確認</button><br><button  class="orderCBtn btn btn-danger">取消</button></td>' +
+                        '<td class="textBlock"><button  class="orderBtn btn btn-primary">確認</button><button  class="orderCBtn btn btn-danger">取消</button></td>' +
                         '</tr>'
                     )
                 } else if (orderInfo.orderstatus == "2") {
                     $('#orderAfteview').append(
                         '<tr  class="orderTrrcom">' +
                         '<td class="orderTrcom" style="display: none;">' + `${orderInfo.orderid}` + '</td>' +
-                        '<td >' + `已確認定單` + '</td>' +
+                        '<td  class="textBlock">' + `已確認定單` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
-                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '<td><button class="ordercomBtn btn btn-dark">完成</button></td>' +
@@ -690,10 +707,10 @@ function Orderpage() {
                 } else if (orderInfo.orderstatus == "4") {
                     $('#orderCancel').append(
                         '<tr>' +
-                        '<td>' + `已取消訂單` + '</td>' +
+                        '<td  class="textBlock">' + `已取消訂單` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
-                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '</tr>'
@@ -701,10 +718,10 @@ function Orderpage() {
                 } else if (orderInfo.orderstatus == "3") {
                     $('#orderComplete').append(
                         '<tr>' +
-                        '<td>' + `已完成訂單` + '</td>' +
+                        '<td  class="textBlock">' + `已完成訂單` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
-                        '<td class="textBlock">' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '</tr>'
@@ -713,20 +730,20 @@ function Orderpage() {
 
             }
             //縮放
-            $('#orderPreview tr').on('click', function () {
-                if ($(this).find('td').css('word-break') == 'normal') {
-                    $(this).find('td').css({//可以改變多個css
-                        "word-break": "break-all",
-                        'white-space': 'normal'
+            // $('#orderPreview tr').on('click', function () {
+            //     if ($(this).find('td').css('word-break') == 'normal') {
+            //         $(this).find('td').css({//可以改變多個css
+            //             "word-break": "break-all",
+            //             'white-space': 'normal'
 
-                    })
-                } else {
-                    $(this).find('td').css({
-                        "word-break": "normal",
-                        'white-space': 'nowrap'
-                    })
-                }
-            });
+            //         })
+            //     } else {
+            //         $(this).find('td').css({
+            //             "word-break": "normal",
+            //             'white-space': 'nowrap'
+            //         })
+            //     }
+            // });
             // $('#orderAfteview tr').on('click', function () {
             //     if ($(this).find('td').css('word-break') == 'normal') {
             //         $(this).find('td').css({//可以改變多個css
@@ -891,7 +908,10 @@ function Orderpage() {
 
                 doc.addFont('SourceHanSans-Normal.ttf', 'SourceHanSans-Normal', 'normal');
                 doc.setFont('SourceHanSans-Normal');
-                doc.text(20, 20, `會員id:${selectData[0]}\r會員姓名:${selectData[2]}\r點餐時間${nowTime}\r餐點內容:${selectData[4]}\r餐點總金額:${selectData[5]}`);
+                var order =selectData[4]
+                var orders=order.replace(/,/g,`\r`)
+                console.log(orders)
+                doc.text(20, 20, `訂單單號:${selectData[0]}\r會員姓名:${selectData[2]}\r點餐時間:${nowTime}\r餐點內容:\r${orders}\r餐點總金額:${selectData[5]}`);
                 doc.save(`${selectData[2]}的點單.pdf`);
 
 
@@ -1153,7 +1173,7 @@ function couponTable() {
                     name="couponRadio"
                     class="form-check-input couponClass">` + '</td>' +
                     '<td style="display:none;">' + `${coupon.COUPON_ID}` + '</td>' +
-                    '<td class="teet" id="couponNAME">' + `${coupon.COUPON_NAME}` + '</td>' +
+                    '<td class="teet" id="couponNAME" style="word-break: break-all;min-width: 50px;max-width: 200px;">' + `${coupon.COUPON_NAME}` + '</td>' +
                     '<td id="couponDESC">' + `${coupon.COUPON_DESC}` + '</td>' +
                     '</tr>'
                 )
@@ -1169,7 +1189,7 @@ function couponTable() {
                 //子節點集合
                 var Texta = $('.couponTr')[len].childNodes[2].innerText;
                 var Textb = $('.couponTr')[len].childNodes[3].innerText;
-                
+
                 document.getElementById('couponName').value = Texta;
                 document.getElementById('couponText').value = Textb;
 
@@ -1314,12 +1334,12 @@ function broadcastTable() {
 
                 $('#broadcastTbody').append(
                     '<tr class="broadcastTr">' +
-                    '<td>' + `<input class="broadcastclass" type="radio" value="${broadcast.MESSAGE_ID}"
+                    '<td class="text-center">' + `<input class="broadcastclass " type="radio" value="${broadcast.MESSAGE_ID}"
                     name="broadcastRadio" class="form-check-input broadcastClass">` + '</td>' +
                     '<td style="display:none;">' + `${broadcast.MESSAGE_ID}` + '</td>' +
                     '<td class="broadcastcs" id="broadcastNAME">' + `${broadcast.MESSAGE_NAME}` + '</td>' +
-                    '<td id="broadcastDESC">' + `${broadcast.MESSAGE_DESC}` + '</td>' +
-                    '<td>' + `<img src="${broadcast.MESSAGE_IMAGE}" style="height:150px">` + '</td>' +
+                    '<td id="broadcastDESC" style="word-break: break-all;min-width: 50px;max-width: 200px;">' + `${broadcast.MESSAGE_DESC}` + '</td>' +
+                    '<td>' + `<img src="${broadcast.MESSAGE_IMAGE}"  referrerpolicy="no-referrer" style="height:150px">` + '</td>' +
                     '</tr>'
                 )
 

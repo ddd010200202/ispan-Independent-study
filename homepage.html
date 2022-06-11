@@ -33,10 +33,11 @@
 
     <style>
         /*先放榮庭CSS*/
-        #tablepayments{
+        #tablepayments {
             height: 100vh;
             width: 100vw;
         }
+
         body {
             font-family: 'Noto Sans TC', sans-serif;
 
@@ -234,6 +235,9 @@
 
         }
 
+        .rongTingtableset-a {
+            width: 96px;
+        }
 
 
         /*營業開關*/
@@ -682,7 +686,8 @@
                                                                         <td colspan="2">
                                                                             <select id="inputMealType"
                                                                                 name="mealtypevalue" style="width:40%;">
-                                                                                <option value="" disabled>請選擇種類...</option>
+                                                                                <option value="" disabled>請選擇種類...
+                                                                                </option>
                                                                             </select>
                                                                             <span id="check1">
                                                                                 熱門:
@@ -712,7 +717,8 @@
                                                                             <div>
                                                                                 <button
                                                                                     class="my-append-btn my-right-radius my-left-radius"
-                                                                                    id="saveImageBtn" type="button">送出</button>
+                                                                                    id="saveImageBtn"
+                                                                                    type="button">送出</button>
                                                                             </div>
                                                                             <!--還不能上傳圖檔-->
                                                                             <!-- <input id="inputMealImage" type="button"
@@ -830,7 +836,7 @@
                                                                         data-bs-target="#exampleModal">
                                                                         新增菜單
                                                                     </button>
-                                                                    
+
                                                                     <input type="text" id="searchMenu"
                                                                         class="my-search-css my-right-radius"
                                                                         placeholder="搜尋餐點">
@@ -979,10 +985,11 @@
                                                                 <table class="table table-hover table-light">
                                                                     <thead class="table-dark">
                                                                         <tr id="testtr">
-                                                                            <th scope="col">訂單狀態</th>
+                                                                            <th  class="rongTingtableset-a" scope="col">
+                                                                                訂單狀態</th>
                                                                             <th scope="col">會員姓名</th>
                                                                             <th scope="col">電話</th>
-                                                                            <th scope="col">餐點名稱/餐點數量</th>
+                                                                            <th scope="col" >餐點名稱/餐點數量</th>
                                                                             <th scope="col">餐點總計金額</th>
                                                                             <th scope="col">訂單建立時間</th>
                                                                             <th scope="col">確認/取消</th>
@@ -1101,8 +1108,9 @@
                                         <div class="text-top">
                                             <div class="input-group flex-nowrap" style="width:250px">
 
-                                                <input id="broadcastName" type="text" class="form-control" placeholder="廣播標題   "
-                                                    aria-label="Username" aria-describedby="addon-wrapping">
+                                                <input id="broadcastName" type="text" class="form-control"
+                                                    placeholder="廣播標題   " aria-label="Username"
+                                                    aria-describedby="addon-wrapping">
                                                 <div>
                                                     <!-- 優惠卷 -->
                                                     <button id="couponBtn" type="button" class="btn btn-warning"
@@ -1148,7 +1156,7 @@
                                                                                 <th>優惠卷內容</th>
                                                                             </tr>
                                                                         </thead>
-                                                                        <tbody class="table table-white"
+                                                                        <tbody class="table table-warning"
                                                                             id="couponTbody">
                                                                             <tr>
                                                                                 <td><input type="radio"
@@ -1188,8 +1196,8 @@
                                             <div class="form-floating">
                                                 <textarea class="form-control" placeholder="Leave a comment here"
                                                     id="broadcastText"></textarea>
-                                                <label  for="floatingTextarea">請輸入廣播訊息</label>
-                                                <input type="hidden" id="broadcastimage" >
+                                                <label for="floatingTextarea">請輸入廣播訊息</label>
+                                                <input type="hidden" id="broadcastimage">
                                             </div>
                                             <hr>
                                             <div id="myDiv">
@@ -1197,27 +1205,30 @@
 
                                                 <!-- 選取圖片的 input -->
                                                 <input id="upload" type="file" accept="image/*">
-                                                <p id="url"></p> 
+                                                <p id="url"></p>
                                                 <img id="preview-img" style="width: 150px;" />
                                                 <img id="showImg" src="" referrerpolicy="no-referrer"
                                                     style="width: 150px;">
-                                                
+
                                                 <!-- 新增按鈕 -->
                                             </div>
-                                            
+
                                             <div>
-                                                <button class="btn btn-secondary" id="broadcastInsert" type="button">新增</button>
-                                                <button class="btn btn-secondary" id="broadcastSave" type="button">修改</button>
-                                                <button class="btn btn-secondary" id="broadcastDelete" type="button">刪除</button>
+                                                <button class="btn btn-secondary" id="broadcastInsert"
+                                                    type="button">新增</button>
+                                                <button class="btn btn-secondary" id="broadcastSave"
+                                                    type="button">修改</button>
+                                                <button class="btn btn-secondary" id="broadcastDelete"
+                                                    type="button">刪除</button>
                                             </div>
                                             <div class="" style="margin-top:50px">
                                                 <table id="broadcastTable" class="table table-dark">
-                                                    <thead >
+                                                    <thead>
                                                         <tr>
                                                             <th scope="col"></th>
                                                             <th scope="col" style="display:none"></th>
                                                             <th scope="col">廣告標題</th>
-                                                            <th scope="col" >廣告內容</th>
+                                                            <th scope="col">廣告內容</th>
                                                             <th scope="col">廣告圖片網址</th>
                                                         </tr>
                                                     </thead>
@@ -1360,14 +1371,14 @@
                                     <div class="container tab-pane " id="pills-reconciliationStatement" role="tabpanel"
                                         aria-labelledby="pills-reconciliationStatement-tab">
                                         <div class="container">
-                                            
-                                                
-                                                    <table id="tablepayments" class="table table-dark ">
-                                                        <thead></thead>
-                                                        <tbody class="table table-light"></tbody>
 
-                                                    </table>
-                                                
+
+                                            <table id="tablepayments" class="table table-dark ">
+                                                <thead></thead>
+                                                <tbody class="table table-light"></tbody>
+
+                                            </table>
+
 
                                         </div>
                                     </div>
@@ -1425,7 +1436,6 @@
 
     <!-- <script src="./app/fixedScroll.js"></script> -->
     <script type="text/javascript" src="./app/vanilla-tilt.min.js"></script>
-    <script src="./app/app.js"></script>
     <script type="module" src="./app/footerscript.js"></script>
     <script src="./app/UPDATE.js"></script>
 

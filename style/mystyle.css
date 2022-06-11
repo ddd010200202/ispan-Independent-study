@@ -157,9 +157,9 @@ td{
     width: 10%;
 }
 .textBlock {
-    overflow: hidden;
-    text-overflow : ellipsis;
-    white-space: nowrap; 
+    overflow: hidden ;
+    text-overflow : ellipsis ;
+    white-space: nowrap ;
 }
 .my-append-btn{
     color:rgb(240, 240, 240);
