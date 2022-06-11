@@ -93,7 +93,7 @@ td{
 }
 .my-btn-box{
     text-align: center;
-    width: 507px;
+    /* width: 507px; */
     height: 55px;
     background-color: #6f6f6fbd;
     border-radius:3px;

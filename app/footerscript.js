@@ -185,8 +185,9 @@ function Homepage() {
             var data = [];
             console.log("vsalerankHomepage ok")
             console.log(res)
+            
             for (var salserank of res) {
-
+                console.log(salserank   )
                 $('#vsalerankHomepage').append(
                     '<li>' + `${salserank.mealname}` + ":" + `${salserank.count}` + '</li>'
                 )
@@ -194,8 +195,9 @@ function Homepage() {
                 data.push(salserank.count)
 
             }
-            // console.log(labels)
-
+            console.log(data.slice(0,2))
+            var datarank= data.slice(0,3)
+            var labelsrank=labels.slice(0,3)
             // console.log(document.getElementsByClassName('Chart3'))
             if (Chart3 instanceof Chart) {
                 Chart3.destroy();
@@ -203,10 +205,10 @@ function Homepage() {
             Chart3 = new Chart(document.getElementsByClassName('Chart3')[0], {
                 type: 'pie', //圖表類型
                 data: {
-                    labels: labels,
+                    labels: labelsrank,
                     datasets: [{
                         label: '銷售前10', //這些資料都是在講什麼，也就是data 300 500 100是什麼
-                        data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
+                        data: datarank, //每一塊的資料分別是什麼，台北：300、台中：50..
                         backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
                             'rgb(255, 99, 132)',
                             'rgb(54, 162, 235)',
@@ -1167,7 +1169,7 @@ function couponTable() {
                 //子節點集合
                 var Texta = $('.couponTr')[len].childNodes[2].innerText;
                 var Textb = $('.couponTr')[len].childNodes[3].innerText;
-                d
+                
                 document.getElementById('couponName').value = Texta;
                 document.getElementById('couponText').value = Textb;
 
