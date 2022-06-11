@@ -184,13 +184,15 @@ function Homepage() {
             var labels = [];
             var data = [];
             console.log("vsalerankHomepage ok")
-            // console.log(res)
+            console.log(res)
             for (var salserank of res) {
+
                 $('#vsalerankHomepage').append(
                     '<li>' + `${salserank.mealname}` + ":" + `${salserank.count}` + '</li>'
                 )
                 labels.push(salserank.mealname)
                 data.push(salserank.count)
+
             }
             // console.log(labels)
 
@@ -1028,6 +1030,7 @@ function Memberpage() {
 
             }
             $('#tableMemberbody tr').on('click', function () {
+                console.log($(this))
                 if ($(this).find('td').css('word-break') == 'normal') {
                     $(this).find('td').css({//可以改變多個css
                         "word-break": "break-all",
@@ -1135,7 +1138,7 @@ function couponTable() {
         success: function (res, status) {
             $('#couponTbody').empty();
             console.log("couponTbody ok")
-            console.log(res)
+            // console.log(res)
             $(".couponclass").unbind();
             $("#couponDelete").unbind();
             $("#couponSave").unbind();
@@ -1164,7 +1167,7 @@ function couponTable() {
                 //子節點集合
                 var Texta = $('.couponTr')[len].childNodes[2].innerText;
                 var Textb = $('.couponTr')[len].childNodes[3].innerText;
-
+                d
                 document.getElementById('couponName').value = Texta;
                 document.getElementById('couponText').value = Textb;
 
@@ -1172,65 +1175,74 @@ function couponTable() {
             // [$(this).closest("tr").index()]
             //修改
             $('#couponSave').on('click', function () {
+                if (document.getElementById('couponName').value == "" || document.getElementById('couponText').value == "") {
+                    alert('請輸入完整值')
+                } else {
 
-                couponid = $('input:radio:checked[name="couponRadio"]').val();
-                var couponName = document.getElementById('couponName').value;
-                var couponText = document.getElementById('couponText').value;
-                var data = {
-                    "COUPON_DESC": `${couponText}`,
-                    "COUPON_ID": `${couponid}`,
-                    "COUPON_NAME": `${couponName}`,
-                    "STORE_ID": `${storeId}`
-                }
-
-                $.ajax({
-                    url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}`,
-                    method: 'PUT',
-                    contentType: "application/json",
-                    data: JSON.stringify(data),
-                    success: function (e) { alert('修改成功'); console.log(e); couponTable(); },
-                    error: function (err) {
-                        if (err.status == "500") {
-
-                            alert('名稱重複')
-                        } if (err.status == "404") {
-                            alert('請選擇欄位')
-                        }
+                    couponid = $('input:radio:checked[name="couponRadio"]').val();
+                    var couponName = document.getElementById('couponName').value;
+                    var couponText = document.getElementById('couponText').value;
+                    var data = {
+                        "COUPON_DESC": `${couponText}`,
+                        "COUPON_ID": `${couponid}`,
+                        "COUPON_NAME": `${couponName}`,
+                        "STORE_ID": `${storeId}`
                     }
 
+                    $.ajax({
+                        url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}`,
+                        method: 'PUT',
+                        contentType: "application/json",
+                        data: JSON.stringify(data),
+                        success: function (e) { alert('修改成功'); console.log(e); couponTable(); },
+                        error: function (err) {
+                            if (err.status == "500") {
 
-                })
+                                alert('修改錯誤')
+                            } if (err.status == "404") {
+                                alert('請選擇欄位')
+                            }
+                        }
+
+
+                    })
+                }
+
 
 
             });
             //新增
             $('#couponInsert').on('click', function () {
+                if (document.getElementById('couponName').value == "" || document.getElementById('couponText').value == "") {
+                    alert('請輸入完整值')
+                } else {
+                    // var couponid = $('input:radio:checked[name="couponRadio"]').val();
+                    var couponName = document.getElementById('couponName').value;
+                    var couponText = document.getElementById('couponText').value;
+                    var data = {
+                        "COUPON_DESC": `${couponText}`,
+                        "COUPON_NAME": `${couponName}`,
+                        "STORE_ID": `${storeId}`
+                    }
+                    $.ajax({
+                        url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}`,
+                        method: 'POST',
+                        contentType: "application/json",
+                        data: JSON.stringify(data),
+                        success: function (e) { alert('新增成功'); console.log(e); couponTable(); },
+                        error: function (err) {
+                            if (err.status == "500") {
+                                alert('名稱重複')
+                            } else if (err.status == "404") {
+                                alert('新增失敗')
+                            }
 
-                // var couponid = $('input:radio:checked[name="couponRadio"]').val();
-                var couponName = document.getElementById('couponName').value;
-                var couponText = document.getElementById('couponText').value;
-                var data = {
-                    "COUPON_DESC": `${couponText}`,
-                    "COUPON_NAME": `${couponName}`,
-                    "STORE_ID": `${storeId}`
-                }
-                $.ajax({
-                    url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}`,
-                    method: 'POST',
-                    contentType: "application/json",
-                    data: JSON.stringify(data),
-                    success: function (e) { alert('新增成功'); console.log(e); couponTable(); },
-                    error: function (err) {
-                        if (err.status == "500") {
-                            alert('名稱重複')
-                        } else if (err.status == "404") {
-                            alert('新增失敗')
                         }
 
-                    }
 
+                    })
 
-                })
+                }
 
 
             });
@@ -1271,10 +1283,10 @@ function broadcastTable() {
     document.getElementById('broadcastName').value = "";
     document.getElementById('broadcastText').value = "";
     document.getElementById('broadcastimage').value = "";
-
+    // document.getElementById('')
     document.getElementById('showImg').src = "";
     document.getElementById('preview-img').src = "";
-    var broadcastid = ""
+    // var broadcastid = ""
     $.ajax({
         //         CREATE_ID: "l3rH7uT47PTrQSteWO2V9XqbpRn1"
         // CREATE_TIME: "2022-06-10T15:27:07.000+00:00"
@@ -1291,7 +1303,7 @@ function broadcastTable() {
         success: function (res, status) {
             $('#broadcastTbody').empty();
             // console.log("couponTbody ok")
-            console.log(res)
+            // console.log(res)
             $(".broadcastclass").unbind();
             $("#broadcastSave").unbind();
             $("#broadcastInsert").unbind();
@@ -1334,62 +1346,73 @@ function broadcastTable() {
             // [$(this).closest("tr").index()]
             //修改
             $('#broadcastSave').on('click', function () {
-                var broadcastid = $('input:radio:checked[name="broadcastRadio"]').val();
-                var broadcastName = document.getElementById('broadcastName').value;
-                var broadcastText = document.getElementById('broadcastText').value;
-                var broadcastimage = document.getElementById('broadcastimage').value;
+                if (document.getElementById('broadcastName').value == "" || document.getElementById('broadcastText').value == "") {
+                    alert('請輸入完整值')
+                } else {
+                    var broadcastid = $('input:radio:checked[name="broadcastRadio"]').val();
+                    var broadcastName = document.getElementById('broadcastName').value;
+                    var broadcastText = document.getElementById('broadcastText').value;
+                    var broadcastimage = document.getElementById('broadcastimage').value;
+                    console.log(broadcastimage)
+                    submit();
 
-                
-                var data = {
-                    "MESSAGE_DESC": `${broadcastText}`,
-                    "MESSAGE_ID": `${broadcastid}`,
-                    "MESSAGE_NAME": `${broadcastName}`,
-                    "STORE_ID": `${storeId}`,
-                    "MESSAGE_IMAGE": `${broadcastimage}`,
-                }
+                    setTimeout(function () {
+                        broadcastimage = document.getElementById('broadcastimage').value;
 
-                $.ajax({
-                    url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}`,
-                    method: 'PUT',
-                    contentType: "application/json",
-                    data: JSON.stringify(data),
-                    success: function (e) { alert('修改成功'); console.log(e); broadcastTable(); },
-                    error: function (err) {
-                        if (err.status == "500") {
 
-                            alert('名稱重複')
-                        } if (err.status == "404") {
-                            alert('請選擇欄位')
+
+                        console.log(broadcastimage)
+                        console.log(document.getElementById("showImg").src)
+
+                        console.log(document.getElementById('preview-img').src)
+                        console.log(document.getElementById('broadcastimage').value)
+
+                        var data = {
+                            "MESSAGE_DESC": `${broadcastText}`,
+                            "MESSAGE_ID": `${broadcastid}`,
+                            "MESSAGE_NAME": `${broadcastName}`,
+                            "STORE_ID": `${storeId}`,
+                            "MESSAGE_IMAGE": `${broadcastimage}`,
                         }
-                    }
+
+                        $.ajax({
+                            url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}`,
+                            method: 'PUT',
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function (e) { alert('修改成功'); console.log(e); broadcastTable(); },
+                            error: function (err) {
+                                if (err.status == "500") {
+
+                                    alert('名稱重複')
+                                } if (err.status == "404") {
+                                    alert('請選擇欄位')
+                                }
+                            }
 
 
-                })
+                        })
+                    }, 2000)
+                }
             });
 
 
 
             //新增
             $('#broadcastInsert').on('click', function () {
-
-                // var couponid = $('input:radio:checked[name="couponRadio"]').val();
-                var broadcastName = document.getElementById('broadcastName').value;
-                var broadcastText = document.getElementById('broadcastText').value;
-
-                var previewimg = document.getElementById('preview-img').src;
-                console.log(previewimg)
-
-                var broadcastimage = document.getElementById('broadcastimage').value;
-
-                if (broadcastimage == "") {
-                    alert('請選擇圖片')
+                if (document.getElementById('broadcastName').value == "" || document.getElementById('broadcastText').value == "") {
+                    alert('請輸入完整值')
                 } else {
+                    // var couponid = $('input:radio:checked[name="couponRadio"]').val();
+                    var broadcastName = document.getElementById('broadcastName').value;
+                    var broadcastText = document.getElementById('broadcastText').value; var previewimg = document.getElementById('preview-img').src;
+                    // console.log(previewimg)
                     submit();
                     setTimeout(function () {
 
+                        var broadcastimage = document.getElementById('broadcastimage').value;
 
 
-                        broadcastimage = document.getElementById('broadcastimage').value;
                         var data = {
                             "MESSAGE_DESC": `${broadcastText}`,
                             "MESSAGE_NAME": `${broadcastName}`,
@@ -1413,8 +1436,10 @@ function broadcastTable() {
 
 
                         })
-                    }, 1500)
+                    }, 2000)
+
                 }
+
 
 
 
@@ -1606,11 +1631,12 @@ $("#menuBtn").on("click", function () {
         });
     });
 });
-var eleval1 = document.getElementById("searchMember");
+
+var eleval2 = document.getElementById("searchMember");
 $("#memberBtn").on("click", function () {
-    console.log(eleval1.value);
+    console.log(eleval2.value);
     //將輸入值轉為小寫去除前後空格
-    var keyword = eleval1.value.toLowerCase().trim();
+    var keyword = eleval2.value.toLowerCase().trim();
 
     $("#tableMember tr").each(function (index) {
         if (!index) return;
@@ -1624,6 +1650,7 @@ $("#memberBtn").on("click", function () {
         });
     });
 });
+
 var eleval1 = document.getElementById("searchOrder");
 $("#orderBtn").on("click", function () {
     console.log(eleval1.value);
@@ -1758,12 +1785,14 @@ function submit() {
 
     // 傳遞資料
     $.ajax(settings).done(function (res) {
-        const imgURL = JSON.parse(res).data.link
-        addImg(imgURL);
-        console.log(JSON.parse(res)); // 可以看見上傳成功後回傳的URL
-        console.log(JSON.parse(res).data.link)
-        // alert('上傳完成');
+        const imgURL = JSON.parse(res).data.link;
         document.getElementById('broadcastimage').value = imgURL;
+        addImg(imgURL);
+        console.log(document.getElementById('broadcastimage').value);
+        console.log(JSON.parse(res)); // 可以看見上傳成功後回傳的URL
+        // console.log(JSON.parse(res).data.link)
+        // alert('上傳完成');
+
     });
     document.getElementById("preview-img").src = "";
 }
@@ -1782,7 +1811,7 @@ uploadInput.addEventListener("change", (e) => {
     var file = uploadInput.files[0], imageType = /^image\//, reader = '';
     // 檔案是否為圖片
     if (!imageType.test(file.type)) {
-        alert("請選擇圖片！");
+        alert("請選擇圖片檔案！");
         return;
     }
     // 判斷是否支援FileReader  // IE9及以下不支援FileReader
@@ -1798,12 +1827,16 @@ uploadInput.addEventListener("change", (e) => {
 
         var img = document.getElementById("preview-img");
         // 圖片路徑設定為讀取的圖片    
+        // console.log(img.src)
+        // document.getElementById('broadcastimage').value=img.src;
         img.src = event.target.result;
-        document.getElementById('broadcastimage').value=img.src;
+        console.log(img)
+        // var img = document.getElementById("preview-img");
+
     };
     reader.readAsDataURL(file);
     document.getElementById("showImg").src = ""
-    
+
 });
 
 // Botton的監聽器
