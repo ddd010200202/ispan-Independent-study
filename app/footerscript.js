@@ -136,6 +136,16 @@ $('img[src="./img/group4.png"]').on('click', function () {
     $('#pills-reconciliationStatement').attr('class', 'show active container tab-pane ');
     ReconciliationStatementpage();
 });
+//img src="./img/456.png"
+//首頁TODO
+$('#orderhippo').on('click', function () {
+    $('#padleft .active').removeClass('active');
+    $('#pills-tabContent>div').removeClass('active');
+    $('#pills-tabContent>div').removeClass('show');
+    $('a[data-bs-target="#pills-home"]').attr('class', 'nav-link text-white  bg-transparent text-start');
+    $('#pills-home').attr('class', 'container tab-pane  show active');
+    Homepage();
+});
 //登出按鍵
 $('#signOutbtn').on('click', () => {
 
@@ -201,44 +211,42 @@ function Homepage() {
 
             }
             console.log(output[0])
-            
-            if(output[0]!=undefined) {  
+
+            if (output[0] != undefined) {
                 $('#vsalerankHomepage-fst').append(`${output[0]}`)
-            }else{
+            } else {
                 $('#vsalerankHomepage-fst').append('沒有資料')
             }
-            if(output[1]!=undefined) {
+            if (output[1] != undefined) {
                 $('#vsalerankHomepage-sed').append(`${output[1]}`)
-            }else{
+            } else {
                 $('#vsalerankHomepage-sed').append('沒有資料')
             }
-            if(output[2]!=undefined) {
+            if (output[2] != undefined) {
                 $('#vsalerankHomepage-thr').append(`${output[2]}`)
-            }else{
+            } else {
                 $('#vsalerankHomepage-thr').append('沒有資料')
             }
-            
-            
+
+
             //排序 10名作輸出
-
-            console.log(res)
+            function res_count(a, b) {
+                if (a.count < b.count) {
+                    return 1;
+                }
+                if (a.count > b.count) {
+                    return -1;
+                }
+                return 0;
+            }
             res.sort(res_count);
-
+            console.log(res);
             var rankdata = res.slice(0, 10);
             console.log(rankdata);
             for (var i = 0; i < rankdata.length; i++) {
                 labels.push(rankdata[i].mealname);
                 data.push(rankdata[i].count)
             }
-            function res_count(a, b) {
-                if (a.count < b.count) {
-                    return -1;
-                }
-                if (a.count > b.count) {
-                    return 1;
-                }
-                return 0;
-            };
 
 
 
@@ -283,22 +291,22 @@ function Homepage() {
                 if (vorder.orderstatus == "1") {
                     ranka = vorder.ordercount
                 }
-                if (vorder.orderstatus == "3") {
-                    rankb = vorder.ordercount
-                }
+                // if (vorder.orderstatus == "3") {
+                //     rankb = vorder.ordercount
+                // }
             }
-            console.log("ranka="+ranka)
-            console.log("ranka="+rankb)
+            console.log("ranka=" + ranka)
+            console.log("ranka=" + rankb)
             if (ranka != "") {
                 $('#ordercomranka').append(ranka);
             } else {
                 $('#ordercomranka').append("0");
             }
-            if (rankb != "") {
-                $('#ordercomrankb').append(rankb);
-            } else {
-                $('#ordercomranka').append("0");
-            }
+            // if (rankb != "") {
+            //     $('#ordercomrankb').append(rankb);
+            // } else {
+            //     $('#ordercomranka').append("0");
+            // }
 
         },
 
@@ -323,7 +331,7 @@ function Homepage() {
             var monthEnglish = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Spt", "Oct", "Nov", "Dec"];
             for (var vmonth of res) {
                 if (vmonth.month == nowMonth) {
-
+                    $('#nowMon').prepend(`${vmonth.month}`)
                     $('#vmonthreveueHompage').append(
                         // '<li>' + `${vmonth.year}` + "年" + `${vmonth.month}` + '月目前總營收:' + `${vmonth.revenueofmonth}` + '</li>'
                         `$${vmonth.revenueofmonth}`
@@ -353,11 +361,11 @@ function Homepage() {
                         backgroundColor: backgroundColor,
                         lineTension: 0,//曲線哲度
                         hoverOffset: 4
-                    },{
+                    }, {
                         type: 'line',
                         label: '',
                         data: datarank
-                      }]
+                    }]
                 }, //設定圖表資料
                 //圖表的一些其他設定，像是hover時外匡加粗
                 options: {
@@ -402,10 +410,10 @@ function Analyzepage() {
             //排序 10名作輸出
             function res_count(a, b) {
                 if (a.count < b.count) {
-                    return -1;
+                    return 1;
                 }
                 if (a.count > b.count) {
-                    return 1;
+                    return -1;
                 }
                 return 0;
             }
@@ -477,7 +485,7 @@ function Analyzepage() {
             Chart4 = new Chart(document.getElementsByClassName('Chart4')[1], {
                 type: 'bar', //圖表類型
                 data: {
-                    labels: labels,
+                    labels: monthEnglish,
                     datasets: [{
                         label: '今年營收', //這些資料都是在講什麼，也就是data 300 500 100是什麼
                         data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
@@ -535,7 +543,7 @@ function Analyzepage() {
                 Chart5.destroy();
             }
             Chart5 = new Chart(document.getElementsByClassName('Chart5'), {
-                type: 'bar', //圖表類型
+                type: 'pie', //圖表類型
                 data: {
                     labels: labels,
                     datasets: [{
@@ -543,12 +551,17 @@ function Analyzepage() {
                         data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
                         backgroundColor: backgroundColor,
                         borderColor: backgroundColor,
-
+                        Position: 'left'
                     }]
                 }, //設定圖表資料
                 options: {
-
-                } //圖表的一些其他設定，像是hover時外匡加粗
+                    plugins: {
+                        legend: {
+                            position: 'left',
+                        }
+                    }
+                },
+                //圖表的一些其他設定，像是hover時外匡加粗
             })
         },
         error: err => {
@@ -621,7 +634,13 @@ function Analyzepage() {
                         hoverOffset: 4
                     }]
                 }, //設定圖表資料
-                options: {} //圖表的一些其他設定，像是hover時外匡加粗
+                options: {
+                    plugins:{
+                        legend:{
+                            position:'left',
+                        }
+                    }
+                } //圖表的一些其他設定，像是hover時外匡加粗
             })
             Chart7 = new Chart(document.getElementsByClassName('Chart7'), {
                 type: 'pie', //圖表類型
@@ -634,7 +653,13 @@ function Analyzepage() {
                         hoverOffset: 4
                     }]
                 }, //設定圖表資料
-                options: {} //圖表的一些其他設定，像是hover時外匡加粗
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'left',
+                        }
+                    }
+                } //圖表的一些其他設定，像是hover時外匡加粗
             })
             Chart8 = new Chart(document.getElementsByClassName('Chart8'), {
                 type: 'pie', //圖表類型
@@ -647,7 +672,13 @@ function Analyzepage() {
                         hoverOffset: 4
                     }]
                 }, //設定圖表資料
-                options: {} //圖表的一些其他設定，像是hover時外匡加粗
+                options: {
+                    plugins:{
+                        legend:{
+                            position:'left',
+                        }
+                    }
+                } //圖表的一些其他設定，像是hover時外匡加粗
             })
             Chart9 = new Chart(document.getElementsByClassName('Chart9'), {
                 type: 'pie', //圖表類型
@@ -660,7 +691,13 @@ function Analyzepage() {
                         hoverOffset: 4
                     }]
                 }, //設定圖表資料
-                options: {} //圖表的一些其他設定，像是hover時外匡加粗
+                options: {
+                    plugins:{
+                        legend:{
+                            position:'left',
+                        }
+                    }
+                } //圖表的一些其他設定，像是hover時外匡加粗
             })
         },
         error: err => {
@@ -700,7 +737,11 @@ function Analyzepage() {
                     }]
                 }, //設定圖表資料
                 options: {
-
+                    plugins:{
+                        legend:{
+                            position:'left',
+                        }
+                    }
                 } //圖表的一些其他設定，像是hover時外匡加粗
             })
         },
