@@ -29,17 +29,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css">
+
 
 
     <style>
         /*先放榮庭CSS*/
-        #tablepayments {
+        #tablepayments{
             height: 100vh;
             width: 100vw;
         }
-
         body {
             font-family: 'Noto Sans TC', sans-serif;
+            /* font-family:'cwTeXYen', sans-serif;
+            font-size:20px; */
+
+
+
 
         }
 
@@ -89,7 +95,7 @@
                 100vh;
         }
 
-        div[id="padleft"] {
+        /* div[id="padleft"] {
             padding:
                 0;
             box-shadow:
@@ -99,7 +105,7 @@
             height:
                 100vh;
             ;
-        }
+        } */
 
         div[id="padright"] {
             height:
@@ -112,10 +118,10 @@
                 100vh;
         }
 
-        #Padright_navbar {
+        /* #Padright_navbar {
             height:
                 8vh;
-        }
+        } */
 
         div[id="pills-home"] div[class="row tab-content"] img {
             height:
@@ -126,7 +132,7 @@
         #pills-tabContent {
             overflow-y: auto;
             height: 90vh;
-            background: linear-gradient(to bottom, rgba(93, 121, 154, 0.563) 0%, rgb(255, 255, 255) 100%);
+            background: linear-gradient(to bottom, rgba(93, 121, 154, 0.271) 0%, rgb(255, 255, 255) 100%);
         }
 
         #bulletinBoard {
@@ -166,11 +172,11 @@
         #bulletinBoardinfoa {
             /* width: 200px; */
             /* height: 200px; */
-            background-color: rgb(190, 174, 226);
+            background-color: #081925;
             border-radius: 10px 10px 0px 0px;
-            border-right: 5px solid rgb(190, 174, 226);
-            border-left: 5px solid rgb(190, 174, 226);
-            border-bottom: 5px solid rgb(190, 174, 226);
+            border-right: 5px solid #081925;
+            border-left: 5px solid #081925;
+            border-bottom: 5px solid #081925;
             padding: 0px;
         }
 
@@ -178,22 +184,25 @@
             width: 100%;
             margin: 0px;
             /* height: 40px; */
-            background-color: rgb(190, 174, 226);
+            background-color: #081925;
             border-radius: 10px 10px 0px 0px;
         }
 
         #bulletinBoardinfoa-b {
             width: 100%;
             height: 175px;
+            
             background-color: rgb(255, 255, 255);
         }
-
+        #bulletinBoardinfoa-b>span{
+            font-size: 20px;
+        }
         #bulletinBoardinfob {
-            background-color: rgb(183, 229, 221);
+            background-color: #081925;
             border-radius: 10px 10px 0px 0px;
-            border-right: 5px solid rgb(183, 229, 221);
-            border-left: 5px solid rgb(183, 229, 221);
-            border-bottom: 5px solid rgb(183, 229, 221);
+            border-right: 5px solid #081925;
+            border-left: 5px solid #081925;
+            border-bottom: 5px solid #081925;
             padding: 0px;
         }
 
@@ -201,7 +210,7 @@
             width: 100%;
             margin: 0px;
             /* height: 20px; */
-            background-color: rgb(183, 229, 221);
+            background-color: #081925;
             border-radius: 10px 10px 0px 0px;
         }
 
@@ -212,11 +221,11 @@
         }
 
         #bulletinBoardinfoc {
-            background-color: rgb(244, 191, 191);
+            background-color: #081925;
             border-radius: 10px 10px 0px 0px;
-            border-right: 5px solid rgb(244, 191, 191);
-            border-left: 5px solid rgb(244, 191, 191);
-            border-bottom: 5px solid rgb(244, 191, 191);
+            border-right: 5px solid #081925;
+            border-left: 5px solid #081925;
+            border-bottom: 5px solid #081925;
             padding: 0px;
         }
 
@@ -224,7 +233,7 @@
             width: 100%;
             margin: 0px;
             /* height: 20px; */
-            background-color: rgb(244, 191, 191);
+            background-color: #081925;
             border-radius: 10px 10px 0px 0px;
         }
 
@@ -232,12 +241,9 @@
             width: 100%;
             height: 175px;
             background-color: rgb(255, 255, 255);
-
+            
         }
 
-        .rongTingtableset-a {
-            width: 96px;
-        }
 
 
         /*營業開關*/
@@ -584,48 +590,51 @@
                                         aria-labelledby="pills-home-tab">
                                         <div id="quickLink" class="row tab-content">
                                             <div class="col-md-3" data-tilt data-tilt-max="50">
-                                                <a id="test123"><img src="./img/group1.png"></a>
+                                                <a id="test123"><img src="./img/group1.png" class="cav-box"></a>
                                             </div>
                                             <div class="col-md-3" data-tilt data-tilt-max="50">
-                                                <img src="./img/group2.png">
+                                                <img src="./img/group2.png"class="cav-box">
                                             </div>
                                             <div class="col-md-3" data-tilt data-tilt-max="50">
-                                                <img src="./img/group3.png">
+                                                <img src="./img/group3.png"class="cav-box">
                                             </div>
                                             <div class="col-md-3" data-tilt data-tilt-max="50">
-                                                <img src="./img/group4.png">
+                                                <img src="./img/group4.png"class="cav-box">
                                             </div>
                                         </div>
                                         <div class="container">
                                             <div class="row" id="bulletinBoard">
-                                                <div id="bulletinBoardinfoa" class="col-md-3 m-5" data-tilt
+                                                <div id="bulletinBoardinfoa" class="col-md-3 m-3" data-tilt
                                                     data-tilt-max="10">
                                                     <div id="bulletinBoardinfoa-a">
                                                         <h3 style="color:white;">每月銷售前三名</h3>
                                                     </div>
-                                                    <div id="bulletinBoardinfoa-b" class="text-left">
+                                                    <div id="bulletinBoardinfoa-b" style="" class="text-center">
 
-                                                        <ol id="vsalerankHomepage"></ol>
+                                                        
+                                                        <span>第一名:</span><span id="vsalerankHomepage-fst"></span><br>
+                                                        <span>第二名:</span><span id="vsalerankHomepage-sed"></span><br>
+                                                        <span>第三名:</span><span id="vsalerankHomepage-thr"></span><br>
                                                     </div>
                                                 </div>
-                                                <div id="bulletinBoardinfob" class="col-md-3 m-5" data-tilt
+                                                <div id="bulletinBoardinfob" class="col-md-3 m-3" data-tilt
                                                     data-tilt-max="10">
                                                     <div id="bulletinBoardinfob-a">
                                                         <h3 style="color:white;">訂單管理</h3>
                                                     </div>
                                                     <div id="bulletinBoardinfob-b" class="text-center">
-
-                                                        <ul id="vorderstatuscountHomepage"></ul>
+                                                        <h4 >未完成訂單:<p id="ordercomranka" style="font-size: 50px;color:red;"></p></h4>
+                                                        <h4 >已完成訂單:</h4><p id="ordercomrankb"></p>
                                                     </div>
                                                 </div>
-                                                <div id="bulletinBoardinfoc" class="col-md-3 m-5" data-tilt
+                                                <div id="bulletinBoardinfoc" class="col-md-3 m-3" data-tilt
                                                     data-tilt-max="10">
                                                     <div id="bulletinBoardinfoc-a">
                                                         <h3 style="color:white;">這個月目前總營收</h3>
                                                     </div>
-                                                    <div id="bulletinBoardinfoc-b" class="text-center">
-
-                                                        <ul id="vmonthreveueHompage" style="list-style-type: none;">
+                                                    <div id="bulletinBoardinfoc-b" style="line-height:175px" class="text-center ">
+                                                        <span style="font-size:30px" id="vmonthreveueHompage"></span>
+                                                        
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -686,8 +695,7 @@
                                                                         <td colspan="2">
                                                                             <select id="inputMealType"
                                                                                 name="mealtypevalue" style="width:40%;">
-                                                                                <option value="" disabled>請選擇種類...
-                                                                                </option>
+                                                                                <option value="" disabled>請選擇種類...</option>
                                                                             </select>
                                                                             <span id="check1">
                                                                                 熱門:
@@ -717,8 +725,7 @@
                                                                             <div>
                                                                                 <button
                                                                                     class="my-append-btn my-right-radius my-left-radius"
-                                                                                    id="saveImageBtn"
-                                                                                    type="button">送出</button>
+                                                                                    id="saveImageBtn" type="button">送出</button>
                                                                             </div>
                                                                             <!--還不能上傳圖檔-->
                                                                             <!-- <input id="inputMealImage" type="button"
@@ -836,7 +843,7 @@
                                                                         data-bs-target="#exampleModal">
                                                                         新增菜單
                                                                     </button>
-
+                                                                    
                                                                     <input type="text" id="searchMenu"
                                                                         class="my-search-css my-right-radius"
                                                                         placeholder="搜尋餐點">
@@ -985,11 +992,10 @@
                                                                 <table class="table table-hover table-light">
                                                                     <thead class="table-dark">
                                                                         <tr id="testtr">
-                                                                            <th  class="rongTingtableset-a" scope="col">
-                                                                                訂單狀態</th>
+                                                                            <th scope="col">訂單狀態</th>
                                                                             <th scope="col">會員姓名</th>
                                                                             <th scope="col">電話</th>
-                                                                            <th scope="col" >餐點名稱/餐點數量</th>
+                                                                            <th scope="col">餐點名稱/餐點數量</th>
                                                                             <th scope="col">餐點總計金額</th>
                                                                             <th scope="col">訂單建立時間</th>
                                                                             <th scope="col">確認/取消</th>
@@ -1108,9 +1114,8 @@
                                         <div class="text-top">
                                             <div class="input-group flex-nowrap" style="width:250px">
 
-                                                <input id="broadcastName" type="text" class="form-control"
-                                                    placeholder="廣播標題   " aria-label="Username"
-                                                    aria-describedby="addon-wrapping">
+                                                <input id="broadcastName" type="text" class="form-control" placeholder="廣播標題   "
+                                                    aria-label="Username" aria-describedby="addon-wrapping">
                                                 <div>
                                                     <!-- 優惠卷 -->
                                                     <button id="couponBtn" type="button" class="btn btn-warning"
@@ -1156,7 +1161,7 @@
                                                                                 <th>優惠卷內容</th>
                                                                             </tr>
                                                                         </thead>
-                                                                        <tbody class="table table-warning"
+                                                                        <tbody class="table table-white"
                                                                             id="couponTbody">
                                                                             <tr>
                                                                                 <td><input type="radio"
@@ -1196,8 +1201,8 @@
                                             <div class="form-floating">
                                                 <textarea class="form-control" placeholder="Leave a comment here"
                                                     id="broadcastText"></textarea>
-                                                <label for="floatingTextarea">請輸入廣播訊息</label>
-                                                <input type="hidden" id="broadcastimage">
+                                                <label  for="floatingTextarea">請輸入廣播訊息</label>
+                                                <input type="hidden" id="broadcastimage" >
                                             </div>
                                             <hr>
                                             <div id="myDiv">
@@ -1205,30 +1210,27 @@
 
                                                 <!-- 選取圖片的 input -->
                                                 <input id="upload" type="file" accept="image/*">
-                                                <p id="url"></p>
+                                                <p id="url"></p> 
                                                 <img id="preview-img" style="width: 150px;" />
                                                 <img id="showImg" src="" referrerpolicy="no-referrer"
                                                     style="width: 150px;">
-
+                                                
                                                 <!-- 新增按鈕 -->
                                             </div>
-
+                                            
                                             <div>
-                                                <button class="btn btn-secondary" id="broadcastInsert"
-                                                    type="button">新增</button>
-                                                <button class="btn btn-secondary" id="broadcastSave"
-                                                    type="button">修改</button>
-                                                <button class="btn btn-secondary" id="broadcastDelete"
-                                                    type="button">刪除</button>
+                                                <button class="btn btn-secondary" id="broadcastInsert" type="button">新增</button>
+                                                <button class="btn btn-secondary" id="broadcastSave" type="button">修改</button>
+                                                <button class="btn btn-secondary" id="broadcastDelete" type="button">刪除</button>
                                             </div>
                                             <div class="" style="margin-top:50px">
                                                 <table id="broadcastTable" class="table table-dark">
-                                                    <thead>
+                                                    <thead >
                                                         <tr>
                                                             <th scope="col"></th>
                                                             <th scope="col" style="display:none"></th>
                                                             <th scope="col">廣告標題</th>
-                                                            <th scope="col">廣告內容</th>
+                                                            <th scope="col" >廣告內容</th>
                                                             <th scope="col">廣告圖片網址</th>
                                                         </tr>
                                                     </thead>
@@ -1328,42 +1330,57 @@
                                     </div>
                                     <!-- analyze -->
                                     <!--銷售統計 商品銷量:圓餅 消費者年齡範圍 銀收:折線圖-->
-                                    <div class="container tab-pane " id="pills-analyze" role="tabpanel"
+                                    <div class="container tab-pane " style="font-family:'cwTeXYen', sans-serif;" id="pills-analyze" role="tabpanel"
                                         aria-labelledby="pills-analyze-tab">
                                         <h1 style="color:rgb(34, 46, 60)white; padding-top: 50px;"><i
-                                                class="fa-solid fa-chart-line"></i></i>分析資料表</h1>
-                                        <div class="row">
+                                                class="fa-solid fa-chart-line"></i><strong> 分析資料表</strong></h1>
+                                        <div class="row" style="font-size: 25px;font-weight: 600;">
 
                                             <div class="col-md-6"
-                                                style="width: 600px;margin-top: 45px;margin-bottom: 75px;">
-                                                <canvas class="Chart3"
-                                                    style="background-color: rgb(219, 223, 253);"></canvas>
+                                                style="margin-top: 45px;margin-bottom: 75px;">
+                                                <h4><strong ><i class="fa-solid fa-crown text-warning"></i>Top10 </strong>熱銷餐點</h4>
+                                                <canvas class="Chart3 cav-box"
+                                                    style="height: 669px; background-color: rgb(219, 223, 253);"></canvas>
                                             </div>
                                             <div class="col-md-6"
-                                                style="width: 600px;margin-top: 45px;margin-bottom: 75px;">
-                                                <canvas class="Chart4" style="background-color: white;"></canvas>
+                                                style="margin-top: 45px;margin-bottom: 75px;">
+                                                <h4><strong>年營業額</strong></h4>
+
+                                                <canvas class="Chart4 cav-box" style="background-color: white;"></canvas>
                                                 <hr>
-                                                <canvas class="Chart5" style="background-color: white;"></canvas>
+                                                <h4><strong>年齡層客群</strong></h4>
+
+                                                <canvas class="Chart5 cav-box" style="background-color: white;"></canvas>
                                             </div>
                                             <!-- <div class="col-md-6"
                                                 style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
                                                 
                                             </div> -->
-                                            <div class="col-md-3" style="margin-top: 75px;margin-bottom: 75px;">
-                                                <canvas class="Chart6" style="background-color: white;"></canvas>
+                                            <div class="col-md-6" style="margin-top: 75px;margin-bottom: 75px;">
+                                                <h4><strong><img src="./img/bibimbap.png" style="width:25px;height: 25px;">健康餐盒類</strong></h4>
+
+                                                <canvas class="Chart6 cav-box" style="background-color: white;"></canvas>
                                             </div>
-                                            <div class="col-md-3" style="margin-top: 75px;margin-bottom: 75px;">
-                                                <canvas class="Chart7" style="background-color: white;"></canvas>
+                                            <div class="col-md-6" style="margin-top: 75px;margin-bottom: 75px;">
+                                                <h4><strong><img src="./img/salad.png" style="width:25px;height: 25px;"> 沙拉類</strong></h4>
+
+                                                <canvas class="Chart7 cav-box" style="background-color: white;"></canvas>
                                             </div>
-                                            <div class="col-md-3" style="margin-top: 75px;margin-bottom: 75px;">
-                                                <canvas class="Chart8" style="background-color: white;"></canvas>
+                                            <div class="col-md-6" style="margin-top: 75px;margin-bottom: 75px;">
+                                                <h4><strong><img src="./img/pasta.png" style="width:25px;height: 25px;">義大利麵類</strong></h4>
+
+                                                <canvas class="Chart8 cav-box" style="background-color: white;"></canvas>
                                             </div>
-                                            <div class="col-md-3" style="margin-top: 75px;margin-bottom: 75px;">
-                                                <canvas class="Chart9" style="background-color: white;"></canvas>
+                                            <div class="col-md-6" style="margin-top: 75px;margin-bottom: 75px;">
+                                                <h4><strong><img src="./img/drink.png" style="width:25px;height: 25px;">飲料類</strong></h4>
+
+                                                <canvas class="Chart9 cav-box" style="background-color: white;"></canvas>
                                             </div>
-                                            <div class="col-md-6"
+                                            <div class="col-12"
                                                 style="width: 600px;margin-top: 75px;margin-bottom: 75px;">
-                                                <canvas class="Chart10" style="background-color: white;"></canvas>
+                                                <h4><strong>性別客群</strong></h4>
+
+                                                <canvas class="Chart10 cav-box" style="background-color: white;"></canvas>
                                             </div>
                                         </div>
                                     </div>
@@ -1371,14 +1388,14 @@
                                     <div class="container tab-pane " id="pills-reconciliationStatement" role="tabpanel"
                                         aria-labelledby="pills-reconciliationStatement-tab">
                                         <div class="container">
+                                            
+                                                
+                                                    <table id="tablepayments" class="table table-dark ">
+                                                        <thead></thead>
+                                                        <tbody class="table table-light"></tbody>
 
-
-                                            <table id="tablepayments" class="table table-dark ">
-                                                <thead></thead>
-                                                <tbody class="table table-light"></tbody>
-
-                                            </table>
-
+                                                    </table>
+                                                
 
                                         </div>
                                     </div>
@@ -1436,6 +1453,7 @@
 
     <!-- <script src="./app/fixedScroll.js"></script> -->
     <script type="text/javascript" src="./app/vanilla-tilt.min.js"></script>
+   
     <script type="module" src="./app/footerscript.js"></script>
     <script src="./app/UPDATE.js"></script>
 

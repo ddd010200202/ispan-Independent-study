@@ -176,45 +176,72 @@ function Homepage() {
     $('#pills-home ol').empty();
     $('#pills-home ul').empty();
     // $('.Chart3').empty();
-
+    $('#vsalerankHomepage-fst').empty();
+    $('#vsalerankHomepage-sed').empty();
+    $('#vsalerankHomepage-thr').empty();
+    $('#ordercomranka').empty();
+    $('#ordercomrankb').empty();
+    $('#vmonthreveueHompage').empty();
     $.ajax({
         url: `http://localhost:${localhost}/api/${storeId}/vsalerank?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
             var labels = [];
             var data = [];
+            var output = [];
             console.log("vsalerankHomepage ok")
             // console.log(res)
             var backgroundColor = colorRandom(res.length, 0.5)
-
-            for (var salserank of res) {
+            var rankdata = res.slice(0, 3)
+            console.log(rankdata)
+            for (var salserank of rankdata) {
                 // console.log(salserank   )
-                $('#vsalerankHomepage').append(
-                    '<li>' + `${salserank.mealname}` + ":" + `${salserank.count}` + '</li>'
-                )
 
+                output.push(`${salserank.mealname}`)
 
             }
+            console.log(output[0])
+            
+            if(output[0]!=undefined) {  
+                $('#vsalerankHomepage-fst').append(`${output[0]}`)
+            }else{
+                $('#vsalerankHomepage-fst').append('沒有資料')
+            }
+            if(output[1]!=undefined) {
+                $('#vsalerankHomepage-sed').append(`${output[1]}`)
+            }else{
+                $('#vsalerankHomepage-sed').append('沒有資料')
+            }
+            if(output[2]!=undefined) {
+                $('#vsalerankHomepage-thr').append(`${output[2]}`)
+            }else{
+                $('#vsalerankHomepage-thr').append('沒有資料')
+            }
+            
+            
             //排序 10名作輸出
-            function res_count(a, b) {
-                if (a.count < b.count) {
-                    return 1;
-                }
-                if (a.count > b.count) {
-                    return -1;
-                }
-                return 0;
-            };
+
             console.log(res)
             res.sort(res_count);
-            
-            var rankdata=res.slice(0,10);
+
+            var rankdata = res.slice(0, 10);
             console.log(rankdata);
-            for(var i=0; i<rankdata.length; i++) {
+            for (var i = 0; i < rankdata.length; i++) {
                 labels.push(rankdata[i].mealname);
                 data.push(rankdata[i].count)
             }
-            
+            function res_count(a, b) {
+                if (a.count < b.count) {
+                    return -1;
+                }
+                if (a.count > b.count) {
+                    return 1;
+                }
+                return 0;
+            };
+
+
+
             // console.log(document.getElementsByClassName('Chart3'))
             if (Chart3 instanceof Chart) {
                 Chart3.destroy();
@@ -244,15 +271,37 @@ function Homepage() {
         url: `http://localhost:${localhost}/api/${storeId}/vorderstatuscount?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
-            // console.log(res)
+            console.log(res)
+            var ranka = "";
+            var rankb = "";
             console.log("vorderstatuscountHomepage ok")
-            for (var vorder of res) {
-                $('#vorderstatuscountHomepage').append(
-                    '<li>' + `${vorder.orderstatusdesc}` + ":" + `${vorder.ordercount}` + '</li>'
-                )
 
+            for (var vorder of res) {
+                // $('#vorderstatuscountHomepage').append(
+                //     '<li>' + `${vorder.orderstatusdesc}` + ":" + `${vorder.ordercount}` + '</li>'
+                // )
+                if (vorder.orderstatus == "1") {
+                    ranka = vorder.ordercount
+                }
+                if (vorder.orderstatus == "3") {
+                    rankb = vorder.ordercount
+                }
             }
+            console.log("ranka="+ranka)
+            console.log("ranka="+rankb)
+            if (ranka != "") {
+                $('#ordercomranka').append(ranka);
+            } else {
+                $('#ordercomranka').append("0");
+            }
+            if (rankb != "") {
+                $('#ordercomrankb').append(rankb);
+            } else {
+                $('#ordercomranka').append("0");
+            }
+
         },
+
         error: err => {
             console.log("vorderstatuscountHomepage fale")
             console.log(err)
@@ -276,7 +325,8 @@ function Homepage() {
                 if (vmonth.month == nowMonth) {
 
                     $('#vmonthreveueHompage').append(
-                        '<li>' + `${vmonth.year}` + "年" + `${vmonth.month}` + '月目前總營收:' + `${vmonth.revenueofmonth}` + '</li>'
+                        // '<li>' + `${vmonth.year}` + "年" + `${vmonth.month}` + '月目前總營收:' + `${vmonth.revenueofmonth}` + '</li>'
+                        `$${vmonth.revenueofmonth}`
                     )
 
                 }
@@ -286,6 +336,7 @@ function Homepage() {
                 }
 
             }
+
             var datarank = data.slice(0, 3)
             var labelsrank = labels.slice(0, 3)
             // console.log(document.getElementsByClassName('Chart3'))
@@ -302,7 +353,11 @@ function Homepage() {
                         backgroundColor: backgroundColor,
                         lineTension: 0,//曲線哲度
                         hoverOffset: 4
-                    }]
+                    },{
+                        type: 'line',
+                        label: '',
+                        data: datarank
+                      }]
                 }, //設定圖表資料
                 //圖表的一些其他設定，像是hover時外匡加粗
                 options: {
@@ -347,22 +402,22 @@ function Analyzepage() {
             //排序 10名作輸出
             function res_count(a, b) {
                 if (a.count < b.count) {
-                    return 1;
+                    return -1;
                 }
                 if (a.count > b.count) {
-                    return -1;
+                    return 1;
                 }
                 return 0;
             }
             res.sort(res_count);
             console.log(res);
-            var rankdata=res.slice(0,10);
+            var rankdata = res.slice(0, 10);
             console.log(rankdata);
-            for(var i=0; i<rankdata.length; i++) {
+            for (var i = 0; i < rankdata.length; i++) {
                 labels.push(rankdata[i].mealname);
                 data.push(rankdata[i].count)
             }
-            
+
             // console.log(document.getElementsByClassName('Chart3'))
             if (Chart3 instanceof Chart) {
                 Chart3.destroy();
@@ -657,7 +712,7 @@ function Analyzepage() {
 }
 //訂單管理頁面處理
 function Orderpage() {
-    
+
     //1:orderPreview 2:orderAfteview 4:orderCancel 3:orderComplete
     $.ajax({
         url: `http://localhost:${localhost}/api/${storeId}/vorderdisplay?token=${newToken}`,
@@ -902,8 +957,8 @@ function Orderpage() {
 
                 doc.addFont('SourceHanSans-Normal.ttf', 'SourceHanSans-Normal', 'normal');
                 doc.setFont('SourceHanSans-Normal');
-                var order =selectData[4]
-                var orders=order.replace(/,/g,`\r`)
+                var order = selectData[4]
+                var orders = order.replace(/,/g, `\r`)
                 console.log(orders)
                 doc.text(20, 20, `訂單單號:${selectData[0]}\r會員姓名:${selectData[2]}\r點餐時間:${nowTime}\r餐點內容:\r${orders}\r餐點總金額:${selectData[5]}`);
                 doc.save(`${selectData[2]}的點單.pdf`);

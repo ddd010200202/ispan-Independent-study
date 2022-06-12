@@ -160,9 +160,7 @@ actionBtn.addEventListener("click", () => {
 
 
 //新增欄位
-
 function ingredientsAppendBtn() {
-
     $('#addIngredients').append(
         `<li class="dele">` +
         `${document.getElementById('examIngredients').innerHTML}` +
@@ -173,12 +171,14 @@ function ingredientsAppendBtn() {
 
 //刪除欄位
 // var rows = $('#addIngredients li');
-function ingredientsDelBtn() {
+function ingredientsDelBtn(obj) {
+    var row = obj.closest('li');
     var rows = $('#addIngredients li');
+    console.log(rows);
     if (rows.length > 1) {
         // change: work on filtered jQuery object
-        rows.filter(":last").html('');
-        $('#addIngredients :last').remove();
+        // rows.filter(":last").html('');
+        row.remove();
     } else {
         alert('Cannot remove any more rows');
     }
@@ -715,7 +715,7 @@ function saveField() {
                             data: JSON.stringify(
                                 {
 
-                                    "MEAL_NAME": `${document.getElementById('inputMealName').value}` + `${$(`#mealHotCheck`)[0].checked ? "(素)" : ""}`,
+                                    "MEAL_NAME": `${document.getElementById('inputMealName').value}` + `${$(`#mealveganCheck`)[0].checked ? "(素)" : ""}`,
                                     "MEAL_CATEGORY_ID": `${mealcategoryid}`,
                                     "MEAL_CATEGORY_NAME": `${document.getElementById('inputMealType').value}`,
                                     "STORE_ID": "l3rH7uT47PTrQSteWO2V9XqbpRn1",
