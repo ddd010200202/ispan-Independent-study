@@ -270,6 +270,7 @@ function Homepage() {
             console.log("vmonthreveueHompage ok")
             var labels = [];//月份
             var data = [];//金額
+            var backgroundColor = colorRandom(res.length, 0.5)
             var monthEnglish = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Spt", "Oct", "Nov", "Dec"];
             for (var vmonth of res) {
                 if (vmonth.month == nowMonth) {
@@ -292,17 +293,13 @@ function Homepage() {
                 Chart4.destroy();
             }
             Chart4 = new Chart(document.getElementsByClassName('Chart4')[0], {
-                type: 'line', //圖表類型
+                type: 'bar', //圖表類型
                 data: {
                     labels: labelsrank,
                     datasets: [{
                         label: '今年營收', //這些資料都是在講什麼，也就是data 300 500 100是什麼
                         data: datarank, //每一塊的資料分別是什麼，台北：300、台中：50..
-                        backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
-                            'rgb(255, 255, 255)',
-                            // 'rgb(54, 162, 235)',
-                            // 'rgb(255, 205, 86)'
-                        ],
+                        backgroundColor: backgroundColor,
                         lineTension: 0,//曲線哲度
                         hoverOffset: 4
                     }]
@@ -399,6 +396,7 @@ function Analyzepage() {
             var nowYear = date.getFullYear();
             var nowMonth = date.getMonth() + 1;
             // console.log(res)
+            var backgroundColor = colorRandom(res.length, 0.5);
             console.log("vmonthreveueHompage ok")
             var labels = [];//月份
             var data = [];//金額
@@ -422,17 +420,13 @@ function Analyzepage() {
                 Chart4.destroy();
             }
             Chart4 = new Chart(document.getElementsByClassName('Chart4')[1], {
-                type: 'line', //圖表類型
+                type: 'bar', //圖表類型
                 data: {
                     labels: labels,
                     datasets: [{
                         label: '今年營收', //這些資料都是在講什麼，也就是data 300 500 100是什麼
                         data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
-                        backgroundColor: [ //設定每一塊的顏色，可以用rgba來寫
-                            'rgb(255, 255, 255)',
-                            // 'rgb(54, 162, 235)',
-                            // 'rgb(255, 205, 86)'
-                        ],
+                        backgroundColor: backgroundColor,
                         lineTension: 0,//曲線哲度
                         hoverOffset: 4
                     }]
