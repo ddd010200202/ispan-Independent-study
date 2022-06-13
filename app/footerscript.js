@@ -205,6 +205,8 @@ $("a[data-bs-target='#pills-member']").on('click', Memberpage);
 $("a[data-bs-target='#pills-broadcast']").on('click', couponTable);
 $("a[data-bs-target='#pills-reconciliationStatement']").on('click', ReconciliationStatementpage);
 $("a[data-bs-target='#pills-broadcast']").on('click', broadcastTable);
+$("a[data-bs-target='#pills-nutrientContent']").on('click', ingredientsTable);
+$("a[data-bs-target='#pills-menu']").on('click', mealIngredients);
 
 var Chart3;
 var Chart4;
@@ -1704,90 +1706,93 @@ function broadcastTable() {
 
 
 //營養表格 菜單印出營養素 重點輸出  
-$('#ingredientsTable').bootstrapTable({
-    url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,         //請求後臺的 URL（*）
-    striped: false,
-    method: 'get',                      //請求方式（*）
-    // data: data,                      //當不使用上面的後臺請求時，使用data來接收資料
-    toolbar: '#toolbar',                //工具按鈕用哪個容器
-    showFullscreen: true,                    //全平按鈕
-    showExport: true,               //是否顯示匯出
-    showColumns: true,
-    silentSort: true,
-    showPaginationSwitch: true,
-    showButtonIcons: false,            //沒用
-    showButtonText: true,                //有用
-    striped: false,                      //是否顯示行間隔色
-    cache: false,
-    buttonsPrefix: 'btn-sm btn',                       //是否使用快取，預設為 true，所以一般情況下需要設定一下這個屬性（*）
-    pagination: true,                   //是否顯示分頁（*）
-    sortable: true,                    //是否啟用排序
-    sortOrder: "asc",                   //排序方式
-    sidePagination: "client",           //分頁方式：client 使用者端分頁，server 伺服器端分頁（*）
-    pageNumber: 1,                       //初始化載入第一頁，預設第一頁
-    pageSize: 10,                        //每頁的記錄行數（*）
-    pageList: [10, 20],        //可供選擇的每頁的行數（*）
-    search: true,                       //是否顯示錶格搜尋，此搜尋是使用者端搜尋，不會進伺服器端，所以個人感覺意義不大
-    strictSearch: false,                 //啟用嚴格搜尋。禁用比較檢查。                  //是否顯示所有的列
-    showRefresh: true,                  //是否顯示重新整理按鈕
-    minimumCountColumns: 2,             //最少允許的列數
-    clickToSelect: true,                //是否啟用點選選中行
-    // height: 400,                        //行高，如果沒有設定 height 屬性，表格自動根據記錄條數覺得表格高度
-    uniqueId: "ID",                     //每一行的唯一標識，一般為主鍵列
-    showToggle: false,                    //是否顯示詳細檢視和列表檢視的切換按鈕
-    cardView: false,                    //是否顯示詳細檢視
-    detailView: false,                  //是否顯示父子表
-
-    // exportDataType: "selected",            //basic', 'all', 'selected'.
-    exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel',],
-    exportDataType: $(this).val(),
-
-    columns: [{
-        field: 'ingredientname', title: '俗名'       //我們取json中id的值，並將表頭title設定為ID
-    }, {
-        field: 'ingredientcategory', title: '食材分類'         //我們取 json 中 username 的值，並將表頭 title 設定為使用者名稱
-    }, {
-        field: 'ingredientdesc', title: '食材描述'                //我們取 json 中 sex 的值，並將表頭 title 設定為性別
-    }, {
-        field: 'calorie', title: '熱量', formatter: function (value, row, index) {
-            // console.log(value);
-            // console.log(row);
-            // console.log(index);
-
-            return value + '(kcal)';
-        }
-    }, {
-        field: 'carb', title: '碳水化合物', formatter: function (value, row, index) {
-            // console.log(value);
-            // console.log(row);
-            // console.log(index);
-
-            return value + '(g)';
-        }
-    }, {
-        field: 'fat', title: '脂肪', formatter: function (value, row, index) {
-            // console.log(value);
-            // console.log(row);
-            // console.log(index);
-
-            return value + '(g)';
-        }
-    }, {
-        field: 'protein', title: '蛋白質', formatter: function (value, row, index) {
-            // console.log(value);
-            // console.log(row);
-            // console.log(index);
-
-            return value + '(g)';
-        }
-    },
-
-    ],
-    // responseHandler: function (res) {
-    //     return res.data      //在載入遠端資料之前，處理響應資料格式.
-    //     // 我們取的值在data欄位中，所以需要先進行處理，這樣才能獲取我們想要的結果
-    // }
-});
+function ingredientsTable(){
+    $('#ingredientsTable').bootstrapTable({
+        url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,         //請求後臺的 URL（*）
+        striped: false,
+        method: 'get',                      //請求方式（*）
+        // data: data,                      //當不使用上面的後臺請求時，使用data來接收資料
+        toolbar: '#toolbar',                //工具按鈕用哪個容器
+        showFullscreen: true,                    //全平按鈕
+        showExport: true,               //是否顯示匯出
+        showColumns: true,
+        silentSort: true,
+        showPaginationSwitch: true,
+        showButtonIcons: false,            //沒用
+        showButtonText: true,                //有用
+        striped: false,                      //是否顯示行間隔色
+        cache: false,
+        buttonsPrefix: 'btn-sm btn',                       //是否使用快取，預設為 true，所以一般情況下需要設定一下這個屬性（*）
+        pagination: true,                   //是否顯示分頁（*）
+        sortable: true,                    //是否啟用排序
+        sortOrder: "asc",                   //排序方式
+        sidePagination: "client",           //分頁方式：client 使用者端分頁，server 伺服器端分頁（*）
+        pageNumber: 1,                       //初始化載入第一頁，預設第一頁
+        pageSize: 10,                        //每頁的記錄行數（*）
+        pageList: [10, 20],        //可供選擇的每頁的行數（*）
+        search: true,                       //是否顯示錶格搜尋，此搜尋是使用者端搜尋，不會進伺服器端，所以個人感覺意義不大
+        strictSearch: false,                 //啟用嚴格搜尋。禁用比較檢查。                  //是否顯示所有的列
+        showRefresh: true,                  //是否顯示重新整理按鈕
+        minimumCountColumns: 2,             //最少允許的列數
+        clickToSelect: true,                //是否啟用點選選中行
+        // height: 400,                        //行高，如果沒有設定 height 屬性，表格自動根據記錄條數覺得表格高度
+        uniqueId: "ID",                     //每一行的唯一標識，一般為主鍵列
+        showToggle: false,                    //是否顯示詳細檢視和列表檢視的切換按鈕
+        cardView: false,                    //是否顯示詳細檢視
+        detailView: false,                  //是否顯示父子表
+    
+        // exportDataType: "selected",            //basic', 'all', 'selected'.
+        exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel',],
+        exportDataType: $(this).val(),
+    
+        columns: [{
+            field: 'ingredientname', title: '俗名'       //我們取json中id的值，並將表頭title設定為ID
+        }, {
+            field: 'ingredientcategory', title: '食材分類'         //我們取 json 中 username 的值，並將表頭 title 設定為使用者名稱
+        }, {
+            field: 'ingredientdesc', title: '食材描述'                //我們取 json 中 sex 的值，並將表頭 title 設定為性別
+        }, {
+            field: 'calorie', title: '熱量', formatter: function (value, row, index) {
+                // console.log(value);
+                // console.log(row);
+                // console.log(index);
+    
+                return value + '(kcal)';
+            }
+        }, {
+            field: 'carb', title: '碳水化合物', formatter: function (value, row, index) {
+                // console.log(value);
+                // console.log(row);
+                // console.log(index);
+    
+                return value + '(g)';
+            }
+        }, {
+            field: 'fat', title: '脂肪', formatter: function (value, row, index) {
+                // console.log(value);
+                // console.log(row);
+                // console.log(index);
+    
+                return value + '(g)';
+            }
+        }, {
+            field: 'protein', title: '蛋白質', formatter: function (value, row, index) {
+                // console.log(value);
+                // console.log(row);
+                // console.log(index);
+    
+                return value + '(g)';
+            }
+        },
+    
+        ],
+        // responseHandler: function (res) {
+        //     return res.data      //在載入遠端資料之前，處理響應資料格式.
+        //     // 我們取的值在data欄位中，所以需要先進行處理，這樣才能獲取我們想要的結果
+        // }
+    });
+    
+}
 
 
 
@@ -1894,24 +1899,27 @@ $("#orderBtn").on("click", function () {
 
 
 /*找類別*/
-$.ajax({
-    url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
-    method: 'GET',
-    success: function (res, status) {
+function mealIngredients() {
+    $.ajax({
+        url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
+        method: 'GET',
+        success: function (res, status) {
+    
+        },
+        error: function () { }
+    }).done(function (index) {
+        console.log("mealIngredients ok")
+        for (var meal of index) {
+    
+            $('#mealIngredients').append(
+                `<option value = "${meal.ingredientname}">`
+            )
+    
+    
+        }
+    })
+}
 
-    },
-    error: function () { }
-}).done(function (index) {
-    console.log("mealIngredients ok")
-    for (var meal of index) {
-
-        $('#mealIngredients').append(
-            `<option value = "${meal.ingredientname}">`
-        )
-
-
-    }
-})
 // 輸出圖片
 const token = '22e7ba553d6239bc5de2bf1520c9187b611a760d'; // 填入 token
 
