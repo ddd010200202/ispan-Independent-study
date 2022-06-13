@@ -434,10 +434,10 @@
     <link rel="stylesheet" href="./style/mystyle.css">
 </head>
 
-<body>
+<body class="text-center" style="line-height: 100vh;">
     <!-- 整塊板子 -->
-    <section>
-        <div class="conatiner">
+    <section style="width: 6rem; height: 6rem;" class="spinner-border text-secondary  " role="status">
+        <div class="conatiner visually-hidden ">
             <div class="row" style="margin: 0px;">
                 <!-- 畫面比例 :2 導覽nav-->
                 <div id="padleft" class="col-md-2">
@@ -554,10 +554,7 @@
                                             <label for="switch" class="switch"> </label>
                                         </li>
                                         <!-- 聯絡資訊 -->
-                                        <li class="nav-item">
-                                            <i class="fa-solid fa-circle-question" data-bs-toggle="tooltip"
-                                                data-bs-placement="left" title='聯絡資訊:aaa@gmail.com'></i>
-                                        </li>
+
                                         <li class="nav-item" role="presentation">
                                             <!-- 訂單提示 -->
                                             <a id="belltest"><i class="fa-solid fa-bell"></i></a>
@@ -568,7 +565,7 @@
                                         </li>
                                         <li class="nav-item">
                                             <!-- 寄信給我們 -->
-                                            <a href="mailto:xxx@gmail.com   " id="mailUs"> <i
+                                            <a href="mailto:eeit42orderhippo@gmail.com  " id="mailUs"> <i
                                                     class="fa-solid fa-envelope"></i></a>
 
                                         </li>
@@ -610,7 +607,7 @@
                                                 <div id="bulletinBoardinfoa" class="col-md-3 m-3" data-tilt
                                                     data-tilt-max="10">
                                                     <div id="bulletinBoardinfoa-a">
-                                                        <h3 style="color:white;">每月銷售前三名</h3>
+                                                        <h3 style="color:white;">銷售前三名</h3>
                                                     </div>
                                                     <div id="bulletinBoardinfoa-b" style="padding-top:23px ;"
                                                         class="text-center">
@@ -702,8 +699,7 @@
                                                                         <td colspan="2">
                                                                             <select id="inputMealType"
                                                                                 name="mealtypevalue" style="width:40%;">
-                                                                                <option value="" disabled>請選擇種類...
-                                                                                </option>
+                                                                                <option value="" disabled>請選擇種類...</option>
                                                                             </select>
                                                                             <span id="check1">
                                                                                 熱門:
@@ -723,7 +719,7 @@
                                                                     <tr>
                                                                         <td colspan="1">
                                                                             <!-- 選取圖片的 input -->
-                                                                            <span>
+                                                                            <span >
                                                                                 <input id="uploadImage" type="file"
                                                                                     accept="image/*">
                                                                                 <div id="makerUrl"></div>
@@ -733,8 +729,7 @@
                                                                             <div>
                                                                                 <button
                                                                                     class="my-append-btn my-right-radius my-left-radius"
-                                                                                    id="saveImageBtn"
-                                                                                    type="button">送出</button>
+                                                                                    id="saveImageBtn" type="button">送出</button>
                                                                             </div>
                                                                             <!--還不能上傳圖檔-->
                                                                             <!-- <input id="inputMealImage" type="button"
@@ -780,10 +775,10 @@
                                                                                         name="ingredientsGrams" min="0"
                                                                                         placeholder="輸入克數"
                                                                                         style="width:25%;"><span>(g)
-                                                                                        <input class="btn-danger"
-                                                                                            type="button"
-                                                                                            onclick="javascript:ingredientsDelBtn(this)"
-                                                                                            value="刪除">
+                                                                                        <button class="btn btn-light" onclick="javascript:ingredientsDelBtn(this)">
+                                                                                            <i class="fa-solid fa-trash" style="color: red;"></i>
+                                                                                        </button>
+                                                                                            
                                                                                     </span>
                                                                                 </li>
 
@@ -826,9 +821,8 @@
                                                         </div>
                                                         <div class="modal-footer  my-color1">
                                                             <div style="float:right;">
-                                                                <button id="add" class="btn btn-light"
-                                                                    data-bs-dismiss="modal" href="javascript:"
-                                                                    onclick="saveField()">儲存</button>
+                                                                <button id="add" class="btn btn-light my-right-radius my-left-radius"
+                                                                    onclick="saveField()"><strong >儲存</strong> </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -852,7 +846,7 @@
                                                                         data-bs-target="#exampleModal">
                                                                         新增菜單
                                                                     </button>
-
+                                                                    
                                                                     <input type="text" id="searchMenu"
                                                                         class="my-search-css my-right-radius"
                                                                         placeholder="搜尋餐點">
@@ -870,11 +864,11 @@
                                                     <thead>
 
                                                         <tr>
-                                                            <th class="my-td-width14">餐點名稱</th>
+                                                            <th class="my-td-width14" style="padding:10px">餐點名稱</th>
                                                             <th class="my-td-width4">熱賣</th>
-                                                            <th class="my-td-width10">餐點種類</th>
-                                                            <th class="my-td-width10">餐點圖檔</th>
-                                                            <th class="my-td-width22">餐點食材</th>
+                                                            <th class="my-td-width10"style="padding:10px">餐點種類</th>
+                                                            <th class="my-td-width10"style="padding:10px">餐點圖檔</th>
+                                                            <th class="my-td-width22"style="padding:10px">餐點食材</th>
                                                             <th class="my-td-width10">售價</th>
                                                             <th class="my-td-width22">餐點描述</th>
                                                             <th class="my-td-width4">修改</th>
@@ -1006,6 +1000,7 @@
                                                                                 <th scope="col">會員姓名</th>
                                                                                 <th scope="col">電話</th>
                                                                                 <th scope="col">餐點名稱/餐點數量</th>
+                                                                                <th scope="col">餐點備註</th>
                                                                                 <th scope="col">餐點總計金額</th>
                                                                                 <th scope="col">訂單建立時間</th>
                                                                                 <th scope="col">確認/取消</th>
@@ -1037,6 +1032,7 @@
                                                                                 <th scope="col">會員姓名</th>
                                                                                 <th scope="col">電話</th>
                                                                                 <th scope="col">餐點名稱/餐點數量</th>
+                                                                                <th scope="col">餐點備註</th>
                                                                                 <th scope="col">餐點總計金額</th>
 
                                                                                 <th scope="col">訂單建立時間</th>
@@ -1071,6 +1067,7 @@
                                                                                 <th scope="col">會員姓名</th>
                                                                                 <th scope="col">電話</th>
                                                                                 <th scope="col">餐點名稱/餐點數量</th>
+                                                                                <th scope="col">餐點備註</th>
                                                                                 <th scope="col">餐點總計金額</th>
                                                                                 <th scope="col">訂單取消時間</th>
                                                                             </tr>
@@ -1100,6 +1097,7 @@
                                                                                 <th scope="col">會員姓名</th>
                                                                                 <th scope="col">電話</th>
                                                                                 <th scope="col">餐點名稱/餐點數量</th>
+                                                                                <th scope="col">餐點備註</th>
                                                                                 <th scope="col">餐點總計金額</th>
                                                                                 <th scope="col">訂單完成時間</th>
                                                                             </tr>
@@ -1229,10 +1227,10 @@
                                             </div>
                                             <hr>
                                             <div id="myDiv">
-                                                <label for="upload">選擇上傳圖檔</label>
+                                                <label  for="upload">選擇上傳圖檔</label>
 
                                                 <!-- 選取圖片的 input -->
-                                                <input id="upload" type="file" accept="image/*">
+                                                <input  id="upload" type="file" accept="image/*">
                                                 <p id="url"></p>
                                                 <img id="preview-img" style="width: 150px;" />
                                                 <img id="showImg" src="" referrerpolicy="no-referrer"
@@ -1257,7 +1255,7 @@
                                                             <th scope="col" style="display:none"></th>
                                                             <th scope="col">廣告標題</th>
                                                             <th scope="col">廣告內容</th>
-                                                            <th scope="col">廣告圖片網址</th>
+                                                            <th scope="col">廣告圖片</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="table table-light" id="broadcastTbody">
@@ -1374,7 +1372,7 @@
                                                     style="background-color: white;"></canvas>
                                             </div>
                                             <div class="col-md-6" style="margin-top: 45px;margin-bottom: 75px;">
-                                                <h4><strong>年營業額</strong></h4>
+                                                <h4><strong>月營業額</strong></h4>
 
                                                 <canvas class="Chart4 cav-box"
                                                     style="background-color: white;"></canvas>
@@ -1447,6 +1445,7 @@
         </div>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!--jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"

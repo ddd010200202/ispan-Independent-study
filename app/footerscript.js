@@ -37,6 +37,7 @@ function storeSignOut() {
 
 
 function setSignBntStatus() {
+
     const auth = getAuth();
     // const signBnt = document.getElementById("signBnt");
     auth.onAuthStateChanged((store) => {
@@ -44,6 +45,7 @@ function setSignBntStatus() {
             window.location.href = "login.html";
         }
     });
+
 }
 
 // signBnt.addEventListener("click", (e) => {
@@ -66,14 +68,29 @@ window.onload = function () {
             console.log(err)
         },
     }).fail(function () { });
+    broadcastTable();
 
 }
+$(document).ready(function () {
+    setTimeout(function () {
+        $('body').removeAttr('class')
+        $('body').removeAttr('style')
+        $('section').removeAttr('class')
+        $('section').removeAttr('style')
+        $('section').removeAttr('role')
+        $('section>div').removeClass('visually-hidden')
+    }, 500)
+
+
+})
 //onload
 // 拿取Token跟id
 // console.log(localStorage.getItem('storeToken'));
 // console.log(JSON.parse(localStorage.getItem('storeinfo')).STORE_ID);
+
+
 let newToken = localStorage.getItem('storeToken');
-// localStorage.getItem('storeToken') == null ? function () { alert("請先登入"); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
+localStorage.getItem('storeToken') == null ? function () { alert("請先登入"); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
 let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
 let localhost = 8081;
 //總開關處理
@@ -210,6 +227,8 @@ function Homepage() {
     $('#ordercomranka').empty();
     $('#ordercomrankb').empty();
     $('#vmonthreveueHompage').empty();
+
+
     $.ajax({
         url: `http://localhost:${localhost}/api/${storeId}/vsalerank?token=${newToken}`,
         method: 'GET',
@@ -254,11 +273,11 @@ function Homepage() {
                 }
                 if (a.count > b.count) {
                     return -1;
-                }
+                }X
                 return 0;
             }
             res.sort(res_count);
-            console.log(res);
+            console.log("rES="+res);
             var rankdata = res.slice(0, 10);
             console.log(rankdata);
             for (var i = 0; i < rankdata.length; i++) {
@@ -275,7 +294,7 @@ function Homepage() {
             Chart3 = new Chart(document.getElementsByClassName('Chart3')[0], {
                 type: 'bar', //圖表類型
                 data: {
-                    
+
                     labels: labels,
                     datasets: [{
                         label: '', //這些資料都是在講什麼，也就是data 300 500 100是什麼
@@ -285,13 +304,13 @@ function Homepage() {
                     }]
                 }, //設定圖表資料
                 options: {
-                    plugins:{
-                        title:{
+                    plugins: {
+                        title: {
                             display: true,
-                            text:''
+                            text: ''
                         }
                     }
-                    
+
                 } //圖表的一些其他設定，像是hover時外匡加粗
             })
             Chart3.clear();
@@ -347,6 +366,7 @@ function Homepage() {
         url: `http://localhost:${localhost}/api/${storeId}/vmonthreveue?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
+            $('#nowMon').empty();
             var date = new Date()
             var nowYear = date.getFullYear();
             var nowMonth = date.getMonth() + 1;
@@ -359,7 +379,7 @@ function Homepage() {
             for (var vmonth of res) {
                 if (nowYear == vmonth.year) {
                     if (vmonth.month == nowMonth) {
-                        $('#nowMon').prepend(`${vmonth.month}`)
+                        $('#nowMon').prepend(`${vmonth.month}月目前總營收`)
                         $('#vmonthreveueHompage').append(
                             // '<li>' + `${vmonth.year}` + "年" + `${vmonth.month}` + '月目前總營收:' + `${vmonth.revenueofmonth}` + '</li>'
                             `$${vmonth.revenueofmonth}`
@@ -388,10 +408,6 @@ function Homepage() {
                         backgroundColor: backgroundColor,
                         lineTension: 0,//曲線哲度
                         hoverOffset: 4
-                    }, {
-                        type: 'line',
-                        label: '',
-                        data: data
                     }]
                 }, //設定圖表資料
                 //圖表的一些其他設定，像是hover時外匡加粗
@@ -517,10 +533,6 @@ function Analyzepage() {
                         backgroundColor: backgroundColor,
                         lineTension: 0,//曲線哲度
                         hoverOffset: 4
-                    }, {
-                        type: 'line',
-                        label: '',
-                        data: data
                     }]
                 }, //設定圖表資料
                 //圖表的一些其他設定，像是hover時外匡加粗
@@ -580,7 +592,7 @@ function Analyzepage() {
 
                 //圖表的一些其他設定，像是hover時外匡加粗
             })
-            
+
         },
         error: err => {
             console.log("vagechart fale")
@@ -734,14 +746,14 @@ function Analyzepage() {
             var labels = [];
             var data = [];
             var backgroundColor = colorRandom(3, 0.5);
-             
+
             for (var vgender of res) {
 
                 data.push(vgender.percentage)
             }
-            labels.push(`男顧客佔比${data[0]}%`); 
-            labels.push(`女顧客佔比${data[1]}%`); 
-            labels.push(`中性顧客佔比${data[2]}%`); 
+            labels.push(`男顧客佔比${data[0]}%`);
+            labels.push(`女顧客佔比${data[1]}%`);
+            labels.push(`中性顧客佔比${data[2]}%`);
             if (Chart10 instanceof Chart) {
                 Chart10.destroy();
             }
@@ -796,6 +808,7 @@ function Orderpage() {
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td >' + `${orderInfo.userphone}` + '</td>' +
                         '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.orderdesc}` + '</td>' +
                         '<td >' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '<td class="textBlock"><button  class="orderBtn btn btn-primary">確認</button><button  class="orderCBtn btn btn-danger">取消</button></td>' +
@@ -809,9 +822,10 @@ function Orderpage() {
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
                         '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.orderdesc}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
-                        '<td><button class="ordercomBtn btn btn-dark">完成</button></td>' +
+                        '<td class="textBlock"><button class="ordercomBtn btn btn-dark">完成</button></td>' +
 
                         '</tr>'
                     )
@@ -822,6 +836,7 @@ function Orderpage() {
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
                         '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.orderdesc}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '</tr>'
@@ -833,6 +848,7 @@ function Orderpage() {
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
                         '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
+                        '<td >' + `${orderInfo.orderdesc}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.ordersprice}` + '</td>' +
                         '<td class="textBlock">' + `${formatDate(orderInfo.createtime)}` + '</td>' +
                         '</tr>'
@@ -845,7 +861,7 @@ function Orderpage() {
             //     if ($(this).find('td').css('word-break') == 'normal') {
             //         $(this).find('td').css({//可以改變多個css
             //             "word-break": "break-all",
-            //             'white-space': 'normal'
+            //             'white-spㄌace': 'normal'
 
             //         })
             //     } else {
@@ -996,6 +1012,7 @@ function Orderpage() {
                     selectData.push($(this).closest("tr")[0].children[i].innerText)
 
                 }
+                console.log(selectData)
                 var nowDate = new Date();
                 var nowTime = nowDate.getFullYear() + "年" + (nowDate.getMonth() + 1) + "月" +
                     nowDate.getDate() + "日" + nowDate.getHours() + "時" + nowDate.getMinutes() +
@@ -1010,6 +1027,7 @@ function Orderpage() {
                     '<td>' + `${selectData[3]}` + '</td>' +
                     '<td>' + `${selectData[4]}` + '</td>' +
                     '<td>' + `${selectData[5]}` + '</td>' +
+                    '<td>' + `${selectData[6]}` + '</td>' +
                     '<td>' + `${nowTime}` + '</td>' +
                     '<td><button  class="ordercomBtn btn btn-dark">完成</button></td>' +
 
@@ -1022,7 +1040,7 @@ function Orderpage() {
                 var order = selectData[4]
                 var orders = order.replace(/,/g, `\r`)
                 console.log(orders)
-                doc.text(20, 20, `訂單單號:${selectData[0]}\r會員姓名:${selectData[2]}\r點餐時間:${nowTime}\r餐點內容:\r${orders}\r餐點總金額:${selectData[5]}`);
+                doc.text(20, 20, `訂單單號:${selectData[0]}\r會員姓名:${selectData[2]}\r點餐時間:${nowTime}\r餐點內容:\r${orders}\r餐點備註:${selectData[5]}\r餐點總金額:${selectData[6]}`);
                 doc.save(`${selectData[2]}的點單.pdf`);
 
 
@@ -1463,7 +1481,7 @@ function broadcastTable() {
                 var len = $('input:radio:checked[name="broadcastRadio"]').closest('tr').index();
                 //.innerText.split("  ")[0].split('\t');
                 //子節點集合
-
+                document.getElementById('broadcastimage').value = "";
                 var Texta = $('.broadcastTr')[len].childNodes[2].innerText;
                 var Textb = $('.broadcastTr')[len].childNodes[3].innerText;
                 var Textc = $('.broadcastTr')[len].childNodes[4].childNodes[0].src
@@ -1473,59 +1491,100 @@ function broadcastTable() {
                 document.getElementById('broadcastText').value = Textb;
                 document.getElementById('broadcastimage').value = Textc;
                 document.getElementById('preview-img').src = Textc;
-                // console.log(Textb)
+                console.log(Textc)
 
             })
             // [$(this).closest("tr").index()]
             //修改
+            var flag = false;
+            $('#upload').on('change', function () {
+                flag = true
+            })
             $('#broadcastSave').on('click', function () {
+                $('#myDiv').attr({ "class": "spinner-border", "role": "status" });
+                $('#myDiv>label').attr("class", "visually-hidden");
+                $('#myDiv>input').attr("class", "visually-hidden");
+                $('#myDiv>img[id="preview-img"]').attr("class", "visually-hidden");
+
+
+
+
                 if (document.getElementById('broadcastName').value == "" || document.getElementById('broadcastText').value == "") {
-                    alert('請輸入完整值')
+                    alert('請輸入完整值');
+                    $('#myDiv').removeAttr("class", "spinner-border")
+                    $('#myDiv').removeAttr("role", "status")
+
+                    $('#myDiv>label').removeAttr("class", "visually-hidden")
+                    $('#myDiv>input').removeAttr("class", "visually-hidden")
+                    $('#myDiv>img[id="preview-img"]').removeAttr("class", "visually-hidden");
                 } else {
                     var broadcastid = $('input:radio:checked[name="broadcastRadio"]').val();
                     var broadcastName = document.getElementById('broadcastName').value;
                     var broadcastText = document.getElementById('broadcastText').value;
                     var broadcastimage = document.getElementById('broadcastimage').value;
-                    console.log(broadcastimage)
-                    submit();
+                    console.log(broadcastimage);
+
+                    var completesbmit = false;
+                    if (flag) {
+                        completesbmit=submit();
+                    }
+                    
 
                     setTimeout(function () {
-                        broadcastimage = document.getElementById('broadcastimage').value;
+                        if (completesbmit) {
 
 
+                            console.log("注意=" + broadcastimage)
+                            console.log(document.getElementById("showImg").src)
 
-                        console.log(broadcastimage)
-                        console.log(document.getElementById("showImg").src)
+                            console.log(document.getElementById('preview-img').src)
+                            console.log(document.getElementById('broadcastimage').value)
 
-                        console.log(document.getElementById('preview-img').src)
-                        console.log(document.getElementById('broadcastimage').value)
-
-                        var data = {
-                            "MESSAGE_DESC": `${broadcastText}`,
-                            "MESSAGE_ID": `${broadcastid}`,
-                            "MESSAGE_NAME": `${broadcastName}`,
-                            "STORE_ID": `${storeId}`,
-                            "MESSAGE_IMAGE": `${broadcastimage}`,
-                        }
-
-                        $.ajax({
-                            url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}`,
-                            method: 'PUT',
-                            contentType: "application/json",
-                            data: JSON.stringify(data),
-                            success: function (e) { alert('修改成功'); console.log(e); broadcastTable(); },
-                            error: function (err) {
-                                if (err.status == "500") {
-
-                                    alert('名稱重複')
-                                } if (err.status == "404") {
-                                    alert('請選擇欄位')
-                                }
+                            var data = {
+                                "MESSAGE_DESC": `${broadcastText}`,
+                                "MESSAGE_ID": `${broadcastid}`,
+                                "MESSAGE_NAME": `${broadcastName}`,
+                                "STORE_ID": `${storeId}`,
+                                "MESSAGE_IMAGE": `${broadcastimage}`,
                             }
 
+                            $.ajax({
+                                url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}`,
+                                method: 'PUT',
+                                contentType: "application/json",
+                                data: JSON.stringify(data),
+                                success: function (e) {
+                                    flag = false;
+                                    $('#myDiv').removeAttr("class", "spinner-border")
+                                    $('#myDiv').removeAttr("role", "status")
 
-                        })
-                    }, 2000)
+                                    $('#myDiv>label').removeAttr("class", "visually-hidden")
+                                    $('#myDiv>input').removeAttr("class", "visually-hidden")
+                                    $('#myDiv>img[id="preview-img"]').removeAttr("class", "visually-hidden")
+                                    alert('修改成功'); console.log(e); broadcastTable();
+                                },
+                                error: function (err) {
+                                    if (err.status == "500") {
+
+                                        alert('名稱重複')
+                                    } if (err.status == "404") {
+                                        alert('請選擇欄位')
+                                    }
+                                    $('#myDiv').removeAttr("class", "spinner-border")
+                                    $('#myDiv').removeAttr("role", "status")
+
+                                    $('#myDiv>label').removeAttr("class", "visually-hidden")
+                                    $('#myDiv>input').removeAttr("class", "visually-hidden")
+                                    $('#myDiv>img[id="preview-img"]').removeAttr("class", "visually-hidden");
+                                }
+
+
+                            })
+                        } else { alert('修改失敗(檔案太大/網速太慢)') }
+                    }, 5000)
+
+
+
                 }
             });
 
@@ -1533,43 +1592,73 @@ function broadcastTable() {
 
             //新增
             $('#broadcastInsert').on('click', function () {
+                $('#myDiv').attr({ "class": "spinner-border", "role": "status" });
+                $('#myDiv>label').attr("class", "visually-hidden");
+                $('#myDiv>input').attr("class", "visually-hidden");
+                $('#myDiv>img[id="preview-img"]').attr("class", "visually-hidden");
                 if (document.getElementById('broadcastName').value == "" || document.getElementById('broadcastText').value == "") {
                     alert('請輸入完整值')
+                    $('#myDiv').removeAttr("class", "spinner-border");
+                    $('#myDiv').removeAttr("role", "status");
+                    $('#myDiv>label').removeAttr("class", "visually-hidden");
+                    $('#myDiv>input').removeAttr("class", "visually-hidden");
+                    $('#myDiv>img[id="preview-img"]').removeAttr("class", "visually-hidden");
+
                 } else {
                     // var couponid = $('input:radio:checked[name="couponRadio"]').val();
                     var broadcastName = document.getElementById('broadcastName').value;
-                    var broadcastText = document.getElementById('broadcastText').value; var previewimg = document.getElementById('preview-img').src;
+                    var broadcastText = document.getElementById('broadcastText').value;
+                    var previewimg = document.getElementById('preview-img').src;
+                    var broadcastimage = document.getElementById('broadcastimage').value;
                     // console.log(previewimg)
-                    submit();
+                    var completesbmit = false;
+                    completesbmit=submit();
+
                     setTimeout(function () {
+                        if (completesbmit) {
+                            broadcastimage = document.getElementById('broadcastimage').value;
 
-                        var broadcastimage = document.getElementById('broadcastimage').value;
 
+                            var data = {
+                                "MESSAGE_DESC": `${broadcastText}`,
+                                "MESSAGE_NAME": `${broadcastName}`,
+                                "STORE_ID": `${storeId}`,
+                                "MESSAGE_IMAGE": `${broadcastimage}`
+                            }
+                            $.ajax({
+                                url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}`,
+                                method: 'POST',
+                                contentType: "application/json",
+                                data: JSON.stringify(data),
+                                success: function (e) {
 
-                        var data = {
-                            "MESSAGE_DESC": `${broadcastText}`,
-                            "MESSAGE_NAME": `${broadcastName}`,
-                            "STORE_ID": `${storeId}`,
-                            "MESSAGE_IMAGE": `${broadcastimage}`
-                        }
-                        $.ajax({
-                            url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}`,
-                            method: 'POST',
-                            contentType: "application/json",
-                            data: JSON.stringify(data),
-                            success: function (e) { alert('新增成功'); console.log(e); broadcastTable(); },
-                            error: function (err) {
-                                if (err.status == "500") {
-                                    broadcastTable(); alert('名稱重複')
-                                } else if (err.status == "404") {
-                                    broadcastTable(); alert('新增失敗')
+                                    $('#myDiv').removeAttr("class", "spinner-border")
+                                    $('#myDiv').removeAttr("role", "status")
+
+                                    $('#myDiv>label').removeAttr("class", "visually-hidden")
+                                    $('#myDiv>input').removeAttr("class", "visually-hidden")
+                                    $('#myDiv>img[id="preview-img"]').removeAttr("class", "visually-hidden");
+                                    alert('新增成功'); console.log(e); broadcastTable();
+                                },
+                                error: function (err) {
+                                    if (err.status == "500") {
+                                        broadcastTable(); alert('名稱重複')
+                                    } else if (err.status == "404") {
+                                        broadcastTable(); alert('新增失敗')
+                                    }
+                                    $('#myDiv').removeAttr("class", "spinner-border");
+                                    $('#myDiv').removeAttr("role", "status");
+                                    $('#myDiv>label').removeAttr("class", "visually-hidden");
+                                    $('#myDiv>input').removeAttr("class", "visually-hidden");
+                                    $('#myDiv>img[id="preview-img"]').removeAttr("class", "visually-hidden");
                                 }
 
-                            }
+
+                            })
+                        } else { alert('新增失敗(檔案太大/網速太慢)') }
+                    }, 5000)
 
 
-                        })
-                    }, 2000)
 
                 }
 
@@ -1885,7 +1974,7 @@ class file {
 }
 
 function addImg(imgURL) {
-    showImg.src = imgURL;
+    // showImg.src = imgURL;
     console.log(imgURL)
     imgURL;
 
@@ -1893,7 +1982,7 @@ function addImg(imgURL) {
 }
 
 // 上傳的function
-function submit() {
+async function submit() {
     // api
     let settings = {
         async: true,
@@ -1917,7 +2006,7 @@ function submit() {
     settings.data = form;
 
     // 傳遞資料
-    $.ajax(settings).done(function (res) {
+  await $.ajax(settings).done(function (res) {
         const imgURL = JSON.parse(res).data.link;
         document.getElementById('broadcastimage').value = imgURL;
         addImg(imgURL);
@@ -1925,9 +2014,10 @@ function submit() {
         console.log(JSON.parse(res)); // 可以看見上傳成功後回傳的URL
         // console.log(JSON.parse(res).data.link)
         // alert('上傳完成');
-
+        
     });
     document.getElementById("preview-img").src = "";
+    return true;
 }
 
 // 建議物件

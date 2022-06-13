@@ -126,6 +126,8 @@ uploadInput.addEventListener("change", (e) => {
     inputFile.setfileTitle(inputFile.uploadFile.name); // 預設 input 的圖檔名稱為圖片上傳時的圖片標題
     inputFile.setfileDesc(inputFile.uploadFile.name); // 圖片描述
     var file = uploadInput.files[0], imageType = /^image\//, reader = '';
+    document.getElementById('makerUrl').innerText = "";
+
     // 檔案是否為圖片
     if (!imageType.test(file.type)) {
         alert("請選擇圖片！");
@@ -151,6 +153,7 @@ uploadInput.addEventListener("change", (e) => {
 
 // Botton的監聽器
 actionBtn.addEventListener("click", () => {
+
     submit();
 });
 
@@ -266,7 +269,7 @@ function ingredientsOPA() {
 
 
             } else {
-                alert("請輸入完整資訊");
+                alert("食材輸入不完整");
                 $('#nutritionOperation').html(
                     "<hr>");
                 break;
@@ -303,19 +306,19 @@ function runmenu() {
                         '<tr>' +
                         `<td style="display:none">` + `${menu.mealid}` + '</td>' +
                         '<td class="my-td-width14">' + `${menu.mealname}` + `${menu.mealvegan ? "(素)" : ""}` + '</td>' +
-                        `<td class="my-td-width4">` + `${menu.mealhot ? 'HOT' : ''}` + `</td>` +
+                        `<td class="my-td-width4" style="padding: 10px;">` + `${menu.mealhot ? '<i class="fa-solid fa-fire"></i>' : ''}` + `</td>` +
                         '<td class="my-td-width10">' + `${menu.mealcategoryname}` + '</td>' +
                         '<td class="my-td-width10 textBlock">' + `<img style="height:50px" src="${menu.mealimage}">` + '</td>' +
-                        '<td class="my-td-width22 textBlock">' + `${menu.ingredient}` + '</td>' +
-                        '<td class="my-td-width10">' + `${menu.mealprice}` + '</td>' +
+                        '<td class="my-td-width22 textBlock" style="padding: 10px;">' + `${menu.ingredient}` + '</td>' +
+                        '<td class="my-td-width10" style="padding: 10px;">' + `${menu.mealprice}` + '</td>' +
                         '<td class="my-td-width22 textBlock">' + `${menu.mealdesc}` + '</td>' +
-                        `<td class="my-td-width4">` + "<input type='button' class='btn   btn-success' value='修改' onclick='javascript:modifyMenuBtn(this)' data-bs-toggle='modal' data-bs-target='#exampleModal'>" + `</td>` +
-                        `<td class="my-td-width4">` + "<input type='button' class='btn  btn-danger' value='刪除' onclick='javascript:delField(this);'>" + `</td>` +
+                        `<td class="my-td-width4" style="padding: 10px;">` + `<i class="fa-solid fa-pencil" onclick='javascript:modifyMenuBtn(this)' data-bs-toggle='modal' data-bs-target='#exampleModal'></i>` + `</td>` +
+                        `<td class="my-td-width4" style="padding: 10px;">` + `<i class="fa-solid fa-trash" onclick='javascript:delField(this);'></i>` + `</td>` +
                         '</tr>'
                     )
 
             }
-            // console.log(res);
+            console.log(res);
             vmealjson = res;
 
 
@@ -346,6 +349,7 @@ function delField(obj) {
 
 
 
+    // function deleteMeal(){
     $.ajax({
         url: `http://localhost:${localhost}/api/${storeId}/meals?token=${newToken}`,
         method: 'GET',
@@ -360,27 +364,46 @@ function delField(obj) {
             console.log(selectmealname[0].MEAL_DESC);
             selectmealname[0].MEAL_STATUS = false;
 
-            $.ajax({
-                url: `http://localhost:${localhost}/api/${storeId}/meal?token=${newToken}`,
-                method: 'PUT',
-                contentType: "application/json",
-                data: JSON.stringify(
-                    selectmealname[0]
+            Swal.fire({
+                title: "是否要刪除",
+                text: `${row.cells[1].textContent}`,
+                imageUrl: `${selectmealname[0].MEAL_IMAGE}`,
+                icon: 'warning',
+                showCancelButton: true
+            }).then(function (result) {
+                if (result.value) {
+                    Swal.fire("刪除成功");
+                    // $("#exampleModal").modal('hide');
+                    // deleteMeal();
+                    $.ajax({
+                        url: `http://localhost:${localhost}/api/${storeId}/meal?token=${newToken}`,
+                        method: 'PUT',
+                        contentType: "application/json",
+                        data: JSON.stringify(
+                            selectmealname[0]
 
-                ),
-                success: function () {
+                        ),
+                        success: function () {
 
-                    $('#tableMenubody').empty();
-                    runmenu();
+                            $('#tableMenubody').empty();
+                            runmenu();
 
-                },
-                error: function () { }
-            })
+                        },
+                        error: function () { }
+                    })
+                }
+                else {
+                    Swal.fire("請繼續編輯菜單");
+                }
+            });
+
         },
         error: err => {
 
         },
     })
+    // }
+
 
 
 
@@ -544,12 +567,122 @@ var ismealvegan = $(`#mealveganCheck`).is(':checked').toString();
 
 
 function saveField() {
-    console.log(document.getElementById('inputMealType').value);
+
+    // console.log(document.getElementById('inputMealType').value);
 
     ingredientsOPA();
 
 
-    //如果有MEALID 做PUT更改
+    Swal.fire({
+        title: "是否要儲存",
+        text: "",
+        imageUrl: `${document.getElementById('makerUrl').innerText}`,
+        // icon: 'warning',
+        showCancelButton: true
+    }).then(function (result) {
+
+        if (result.value) {
+            if (document.getElementById('inputMealName').value == ""
+                || document.getElementById('inputMealType').value == ""
+                || document.getElementById('inputMealPrice').value == "") {
+                Swal.fire("菜單資訊不完整，請繼續編輯");
+
+            } else {
+                if (document.getElementById('makerUrl').innerText == "") {
+                    Swal.fire("餐點圖檔未上傳");
+
+                } else {
+                    Swal.fire("儲存成功");
+                    $("#exampleModal").modal('hide');
+                    saveAppendMenu();
+                }
+
+
+            }
+        }
+        else {
+            Swal.fire("請繼續編輯菜單");
+        }
+    });
+    // alert("圖片未上傳");
+
+
+}
+
+
+//GET餐點種類  
+$.ajax({
+    url: `http://localhost:${localhost}/api/${storeId}/mealcategorys?token=${newToken}`,
+    method: 'GET',
+    success: function (res, status) {
+
+        for (var meal of res) {
+
+
+            $('#inputMealType').append(
+                `<option value = "${meal.MEAL_CATEGORY_NAME}">` + `${meal.MEAL_CATEGORY_NAME}` + `</option>`
+            )
+
+            console.log(meal.MEAL_CATEGORY_ID);
+            console.log(document.getElementById('inputMealType').value);
+
+
+        }
+    },
+    error: function () {
+        console.log("餐點種類讀取錯誤");
+    }
+})
+
+// $(`#mealHotCheck`).on(`change`, function () {
+//     if ($(this).is(':checked')) {
+//         $(this).attr('value', 'true');
+//       } else {
+//         $(this).attr('value', 'false');
+//       }
+//       console.log($('#mealHotCheck').val());
+//     //   ismealhot = $('#mealHotCheck').val();
+//     var ismealhot =$(`#mealHotCheck`).is(':checked').toString();
+//     })
+
+
+
+// $(`#check1`).on(`click`,function(){
+//    $(`#check1 input`).on(`change`, function () {
+
+//     console.log($(`#mealHotCheck`).is(':checked').toString());
+//     console.log(typeof($(`#mealHotCheck`).is(':checked')));
+//    })
+
+// })
+
+
+
+
+$('#myBtn').on('click', function () {
+    console.log($('#url').innerText);
+    console.log(document.getElementById('url').innerText);
+
+    console.log($('#myBtn')); // 可以看見上傳成功後回傳的URL
+    console.log($('#showImg'));
+    console.log($('#preview-img'));
+    console.log($('#showImg')[0].src);
+    // console.log(obj);
+
+})
+$('#xxx').on('click', function () {
+    console.log(document.getElementById('url').innerText);
+
+
+
+
+})
+
+
+
+
+function saveAppendMenu() {
+    // 如果有MEALID 做PUT更改
     if (unitmealid != "") {
 
         $.ajax({
@@ -674,7 +807,7 @@ function saveField() {
                                     })
 
                                 } else {
-                                    alert("請輸入完整資訊");
+                                    alert("食材輸入不完整");
                                     $('#nutritionOperation').html(
                                         "<hr>");
                                     break;
@@ -805,7 +938,7 @@ function saveField() {
                                                         })
 
                                                     } else {
-                                                        alert("請輸入完整資訊");
+                                                        alert("食材輸入不完整");
                                                         $('#nutritionOperation').html(
                                                             "<hr>");
                                                         break;
@@ -852,70 +985,7 @@ function saveField() {
 }
 
 
-//GET餐點種類  
-$.ajax({
-    url: `http://localhost:${localhost}/api/${storeId}/mealcategorys?token=${newToken}`,
-    method: 'GET',
-    success: function (res, status) {
-
-        for (var meal of res) {
-
-
-            $('#inputMealType').append(
-                `<option value = "${meal.MEAL_CATEGORY_NAME}">` + `${meal.MEAL_CATEGORY_NAME}` + `</option>`
-            )
-
-            // console.log(meal.MEAL_CATEGORY_ID);
-            // console.log(document.getElementById('inputMealType').value);
-
-
-        }
-    },
-    error: function () {
-        console.log("餐點種類讀取錯誤");
-    }
-})
-
-// $(`#mealHotCheck`).on(`change`, function () {
-//     if ($(this).is(':checked')) {
-//         $(this).attr('value', 'true');
-//       } else {
-//         $(this).attr('value', 'false');
-//       }
-//       console.log($('#mealHotCheck').val());
-//     //   ismealhot = $('#mealHotCheck').val();
-//     var ismealhot =$(`#mealHotCheck`).is(':checked').toString();
-//     })
-
-
-
-// $(`#check1`).on(`click`,function(){
-//    $(`#check1 input`).on(`change`, function () {
-
-//     console.log($(`#mealHotCheck`).is(':checked').toString());
-//     console.log(typeof($(`#mealHotCheck`).is(':checked')));
-//    })
-
-// })
 
 
 
 
-$('#myBtn').on('click', function () {
-    console.log($('#url').innerText);
-    console.log(document.getElementById('url').innerText);
-
-    console.log($('#myBtn')); // 可以看見上傳成功後回傳的URL
-    console.log($('#showImg'));
-    console.log($('#preview-img'));
-    console.log($('#showImg')[0].src);
-    // console.log(obj);
-
-})
-$('#xxx').on('click', function () {
-    console.log(document.getElementById('url').innerText);
-
-
-
-
-})
