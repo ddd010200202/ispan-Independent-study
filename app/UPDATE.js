@@ -305,7 +305,7 @@ function runmenu() {
                         '<td class="my-td-width14">' + `${menu.mealname}` + `${menu.mealvegan ? "(素)" : ""}` + '</td>' +
                         `<td class="my-td-width4">` + `${menu.mealhot ? 'HOT' : ''}` + `</td>` +
                         '<td class="my-td-width10">' + `${menu.mealcategoryname}` + '</td>' +
-                        '<td class="my-td-width10 textBlock">' + `${menu.mealimage}` + '</td>' +
+                        '<td class="my-td-width10 textBlock">' + `<img style="height:50px" src="${menu.mealimage}">` + '</td>' +
                         '<td class="my-td-width22 textBlock">' + `${menu.ingredient}` + '</td>' +
                         '<td class="my-td-width10">' + `${menu.mealprice}` + '</td>' +
                         '<td class="my-td-width22 textBlock">' + `${menu.mealdesc}` + '</td>' +
@@ -315,7 +315,7 @@ function runmenu() {
                     )
 
             }
-            console.log(res);
+            // console.log(res);
             vmealjson = res;
 
 
@@ -865,8 +865,8 @@ $.ajax({
                 `<option value = "${meal.MEAL_CATEGORY_NAME}">` + `${meal.MEAL_CATEGORY_NAME}` + `</option>`
             )
 
-            console.log(meal.MEAL_CATEGORY_ID);
-            console.log(document.getElementById('inputMealType').value);
+            // console.log(meal.MEAL_CATEGORY_ID);
+            // console.log(document.getElementById('inputMealType').value);
 
 
         }

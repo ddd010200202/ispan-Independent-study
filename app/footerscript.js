@@ -50,6 +50,24 @@ function setSignBntStatus() {
 
 // });
 /*------------榮庭--------------*/
+window.onload = function () {
+
+    $.ajax({
+        url: `http://localhost:${localhost}/api/${storeId}/stores?token=${newToken}`,
+        method: 'GET',
+        success: (res, status) => {
+            console.log(res[0].STORE_OPEN_STATUS)
+
+
+
+        },
+        error: err => {
+            console.log('status change fail')
+            console.log(err)
+        },
+    }).fail(function () { });
+
+}
 //onload
 // 拿取Token跟id
 // console.log(localStorage.getItem('storeToken'));
@@ -257,6 +275,7 @@ function Homepage() {
             Chart3 = new Chart(document.getElementsByClassName('Chart3')[0], {
                 type: 'bar', //圖表類型
                 data: {
+                    
                     labels: labels,
                     datasets: [{
                         label: '', //這些資料都是在講什麼，也就是data 300 500 100是什麼
@@ -265,7 +284,15 @@ function Homepage() {
                         hoverOffset: 4
                     }]
                 }, //設定圖表資料
-                options: {} //圖表的一些其他設定，像是hover時外匡加粗
+                options: {
+                    plugins:{
+                        title:{
+                            display: true,
+                            text:''
+                        }
+                    }
+                    
+                } //圖表的一些其他設定，像是hover時外匡加粗
             })
             Chart3.clear();
         },
@@ -323,24 +350,24 @@ function Homepage() {
             var date = new Date()
             var nowYear = date.getFullYear();
             var nowMonth = date.getMonth() + 1;
-            // console.log(res)
+            console.log(res)
             console.log("vmonthreveueHompage ok")
             var labels = [];//月份
-            var data = [];//金額
+            var data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];//金額
             var backgroundColor = colorRandom(res.length, 0.5)
             var monthEnglish = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Spt", "Oct", "Nov", "Dec"];
             for (var vmonth of res) {
-                if (vmonth.month == nowMonth) {
-                    $('#nowMon').prepend(`${vmonth.month}`)
-                    $('#vmonthreveueHompage').append(
-                        // '<li>' + `${vmonth.year}` + "年" + `${vmonth.month}` + '月目前總營收:' + `${vmonth.revenueofmonth}` + '</li>'
-                        `$${vmonth.revenueofmonth}`
-                    )
-
-                }
                 if (nowYear == vmonth.year) {
-                    labels.push(monthEnglish[vmonth.month]);
-                    data.push(vmonth.revenueofmonth)
+                    if (vmonth.month == nowMonth) {
+                        $('#nowMon').prepend(`${vmonth.month}`)
+                        $('#vmonthreveueHompage').append(
+                            // '<li>' + `${vmonth.year}` + "年" + `${vmonth.month}` + '月目前總營收:' + `${vmonth.revenueofmonth}` + '</li>'
+                            `$${vmonth.revenueofmonth}`
+                        )
+
+                    }
+
+                    data.splice(vmonth.month - 1, 1, vmonth.revenueofmonth)
                 }
 
             }
@@ -354,36 +381,29 @@ function Homepage() {
             Chart4 = new Chart(document.getElementsByClassName('Chart4')[0], {
                 type: 'bar', //圖表類型
                 data: {
-                    labels: labelsrank,
+                    labels: monthEnglish,
                     datasets: [{
                         label: '今年營收', //這些資料都是在講什麼，也就是data 300 500 100是什麼
-                        data: datarank, //每一塊的資料分別是什麼，台北：300、台中：50..
+                        data: data, //每一塊的資料分別是什麼，台北：300、台中：50..
                         backgroundColor: backgroundColor,
                         lineTension: 0,//曲線哲度
                         hoverOffset: 4
                     }, {
                         type: 'line',
                         label: '',
-                        data: datarank
+                        data: data
                     }]
                 }, //設定圖表資料
                 //圖表的一些其他設定，像是hover時外匡加粗
                 options: {
                     // responsive: true,
-                    // legend: { //是否要顯示圖示
-                    //     display: true,
-                    // },
-                    // tooltips: { //是否要顯示 tooltip
-                    //     enabled: true
-                    // },
-                    // scales: {  //是否要顯示 x、y 軸
-                    //     xAxes: [{
-                    //         display: true
-                    //     }],
-                    //     yAxes: [{
-                    //         display: true
-                    //     }]
-                    // },
+                    legend: { //是否要顯示圖示
+                        display: true,
+                    },
+                    tooltips: { //是否要顯示 tooltip
+                        enabled: true
+                    },
+
                 }
             })
 
@@ -462,23 +482,28 @@ function Analyzepage() {
             var backgroundColor = colorRandom(res.length, 0.5);
             console.log("vmonthreveueHompage ok")
             var labels = [];//月份
-            var data = [];//金額
+            var data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];//金額
+            var backgroundColor = colorRandom(res.length, 0.5)
             var monthEnglish = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Spt", "Oct", "Nov", "Dec"];
             for (var vmonth of res) {
-                if (vmonth.month == nowMonth) {
-
-                    // $('#vmonthreveueHompage').append(
-                    //     '<li>' + `${vmonth.year}` + "年" + `${vmonth.month}` + '月目前總營收:' + `${vmonth.revenueofmonth}` + '</li>'
-                    // )
-
-                }
                 if (nowYear == vmonth.year) {
-                    labels.push(monthEnglish[vmonth.month]);
-                    data.push(vmonth.revenueofmonth)
+                    if (vmonth.month == nowMonth) {
+                        $('#nowMon').prepend(`${vmonth.month}`)
+                        $('#vmonthreveueHompage').append(
+                            // '<li>' + `${vmonth.year}` + "年" + `${vmonth.month}` + '月目前總營收:' + `${vmonth.revenueofmonth}` + '</li>'
+                            `$${vmonth.revenueofmonth}`
+                        )
+
+                    }
+
+                    data.splice(vmonth.month - 1, 1, vmonth.revenueofmonth)
                 }
 
             }
 
+            var datarank = data.slice(0, 3)
+            var labelsrank = labels.slice(0, 3)
+            // console.log(document.getElementsByClassName('Chart3'))
             if (Chart4 instanceof Chart) {
                 Chart4.destroy();
             }
@@ -492,25 +517,15 @@ function Analyzepage() {
                         backgroundColor: backgroundColor,
                         lineTension: 0,//曲線哲度
                         hoverOffset: 4
+                    }, {
+                        type: 'line',
+                        label: '',
+                        data: data
                     }]
                 }, //設定圖表資料
                 //圖表的一些其他設定，像是hover時外匡加粗
                 options: {
-                    // responsive: true,
-                    // legend: { //是否要顯示圖示
-                    //     display: true,
-                    // },
-                    // tooltips: { //是否要顯示 tooltip
-                    //     enabled: true
-                    // },
-                    // scales: {  //是否要顯示 x、y 軸
-                    //     xAxes: [{
-                    //         display: true
-                    //     }],
-                    //     yAxes: [{
-                    //         display: true
-                    //     }]
-                    // },
+                    responsive: true
                 }
             })
 
@@ -536,7 +551,7 @@ function Analyzepage() {
             var backgroundColor = colorRandom(res.length, 0.2)
 
             for (var vage of res) {
-                labels.push(vage.agerange + '歲')
+                labels.push(vage.agerange + `歲:${vage.qty}人`)
                 data.push(vage.qty)
             }
             if (Chart5 instanceof Chart) {
@@ -555,14 +570,17 @@ function Analyzepage() {
                     }]
                 }, //設定圖表資料
                 options: {
+                    responsive: true,
                     plugins: {
                         legend: {
                             position: 'left',
                         }
                     }
                 },
+
                 //圖表的一些其他設定，像是hover時外匡加粗
             })
+            
         },
         error: err => {
             console.log("vagechart fale")
@@ -587,19 +605,19 @@ function Analyzepage() {
             var drinkData = [];
             var backgroundColor = colorRandom(res.length, 0.5)
             console.log("vsalerankHomepage ok")
-            // console.log(res)
+            console.log(res)
             for (var salecategory of res) {
                 if (salecategory.mealcategoryname == '健康餐盒') {
-                    healthmealLabels.push(salecategory.mealname + '(%)');
+                    healthmealLabels.push(salecategory.mealname + `${salecategory.percentage}%`);
                     healthmealData.push(salecategory.percentage);
                 } else if (salecategory.mealcategoryname == '沙拉') {
-                    saladLabels.push(salecategory.mealname + '(%)');
+                    saladLabels.push(salecategory.mealname + `${salecategory.percentage}%`);
                     saladData.push(salecategory.percentage);
                 } else if (salecategory.mealcategoryname == '義大利麵') {
-                    pastaLabels.push(salecategory.mealname + '(%)');
+                    pastaLabels.push(salecategory.mealname + `${salecategory.percentage}%`);
                     pastaData.push(salecategory.percentage);
                 } else if (salecategory.mealcategoryname == '飲料') {
-                    drinkLabels.push(salecategory.mealname + '(%)');
+                    drinkLabels.push(salecategory.mealname + `${salecategory.percentage}%`);
                     drinkData.push(salecategory.percentage);
                 } else {
                     console.log('mealcategoryname return error')
@@ -635,9 +653,9 @@ function Analyzepage() {
                     }]
                 }, //設定圖表資料
                 options: {
-                    plugins:{
-                        legend:{
-                            position:'left',
+                    plugins: {
+                        legend: {
+                            position: 'left',
                         }
                     }
                 } //圖表的一些其他設定，像是hover時外匡加粗
@@ -673,9 +691,9 @@ function Analyzepage() {
                     }]
                 }, //設定圖表資料
                 options: {
-                    plugins:{
-                        legend:{
-                            position:'left',
+                    plugins: {
+                        legend: {
+                            position: 'left',
                         }
                     }
                 } //圖表的一些其他設定，像是hover時外匡加粗
@@ -692,9 +710,9 @@ function Analyzepage() {
                     }]
                 }, //設定圖表資料
                 options: {
-                    plugins:{
-                        legend:{
-                            position:'left',
+                    plugins: {
+                        legend: {
+                            position: 'left',
                         }
                     }
                 } //圖表的一些其他設定，像是hover時外匡加粗
@@ -716,11 +734,14 @@ function Analyzepage() {
             var labels = [];
             var data = [];
             var backgroundColor = colorRandom(3, 0.5);
-            labels.push('男顧客佔比(%)'); labels.push('女顧客佔比(%)'); labels.push('中性顧客佔比(%)');
+             
             for (var vgender of res) {
 
                 data.push(vgender.percentage)
             }
+            labels.push(`男顧客佔比${data[0]}%`); 
+            labels.push(`女顧客佔比${data[1]}%`); 
+            labels.push(`中性顧客佔比${data[2]}%`); 
             if (Chart10 instanceof Chart) {
                 Chart10.destroy();
             }
@@ -737,9 +758,9 @@ function Analyzepage() {
                     }]
                 }, //設定圖表資料
                 options: {
-                    plugins:{
-                        legend:{
-                            position:'left',
+                    plugins: {
+                        legend: {
+                            position: 'left',
                         }
                     }
                 } //圖表的一些其他設定，像是hover時外匡加粗
