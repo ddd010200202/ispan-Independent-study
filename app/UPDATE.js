@@ -308,7 +308,7 @@ function runmenu() {
                         '<td class="my-td-width14">' + `${menu.mealname}` + `${menu.mealvegan ? "(素)" : ""}` + '</td>' +
                         `<td class="my-td-width4" style="padding: 10px;">` + `${menu.mealhot ? '<i class="fa-solid fa-fire"></i>' : ''}` + `</td>` +
                         '<td class="my-td-width10">' + `${menu.mealcategoryname}` + '</td>' +
-                        '<td class="my-td-width10 textBlock">' + `<img style="height:50px" src="${menu.mealimage}">` + '</td>' +
+                        '<td class="my-td-width10 textBlock">' + `<img referrerpolicy="no-referrer" style="height:50px" src="${menu.mealimage}">` + '</td>' +
                         '<td class="my-td-width22 textBlock" style="padding: 10px;">' + `${menu.ingredient}` + '</td>' +
                         '<td class="my-td-width10" style="padding: 10px;">' + `${menu.mealprice}` + '</td>' +
                         '<td class="my-td-width22 textBlock">' + `${menu.mealdesc}` + '</td>' +
