@@ -90,9 +90,9 @@ $(document).ready(function () {
 
 
 let newToken = localStorage.getItem('storeToken');
-localStorage.getItem('storeToken') == null ? function () { alert("請先登入"); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
+localStorage.getItem('storeToken') == null ? function () { Swal.fire('Any fool can use a computer'); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
 let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
-let localhost = 8081;
+let localhost = 8080;
 //總開關處理
 $("#switch")[0].checked = false;
 // window.onload = openstatus;
@@ -275,11 +275,11 @@ function Homepage() {
                 }
                 if (a.count > b.count) {
                     return -1;
-                }X
+                }
                 return 0;
             }
             res.sort(res_count);
-            console.log("rES="+res);
+            // console.log("rES="+res);
             var rankdata = res.slice(0, 10);
             console.log(rankdata);
             for (var i = 0; i < rankdata.length; i++) {
@@ -820,7 +820,7 @@ function Orderpage() {
                     $('#orderAfteview').append(
                         '<tr  class="orderTrrcom">' +
                         '<td class="orderTrcom" style="display: none;">' + `${orderInfo.orderid}` + '</td>' +
-                        '<td  class="textBlock">' + `已確認定單` + '</td>' +
+                        '<td class="textBlock">' + `已確認定單` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.username}` + '</td>' +
                         '<td class="textBlock">' + `${orderInfo.userphone}` + '</td>' +
                         '<td >' + `${orderInfo.mealorderqty}` + '</td>' +
@@ -1024,14 +1024,14 @@ function Orderpage() {
                 $('#orderAfteview').append(
                     '<tr  class="orderTrrcom">' +
                     '<td class="orderTrcom" style="display: none;">' + `${selectData[0]}` + '</td>' +
-                    '<td>' + `已確認定單` + '</td>' +
-                    '<td>' + `${selectData[2]}` + '</td>' +
-                    '<td>' + `${selectData[3]}` + '</td>' +
+                    '<td class="textBlock">' + `已確認定單` + '</td>' +
+                    '<td class="textBlock">' + `${selectData[2]}` + '</td>' +
+                    '<td class="textBlock">' + `${selectData[3]}` + '</td>' +
                     '<td>' + `${selectData[4]}` + '</td>' +
                     '<td>' + `${selectData[5]}` + '</td>' +
-                    '<td>' + `${selectData[6]}` + '</td>' +
-                    '<td>' + `${nowTime}` + '</td>' +
-                    '<td><button  class="ordercomBtn btn btn-dark">完成</button></td>' +
+                    '<td class="textBlock">' + `${selectData[6]}` + '</td>' +
+                    '<td class="textBlock">' + `${nowTime}` + '</td>' +
+                    '<td class="textBlock"><button  class="ordercomBtn btn btn-dark">完成</button></td>' +
 
                     '</tr>'
                 )
@@ -1329,7 +1329,8 @@ function couponTable() {
             //修改
             $('#couponSave').on('click', function () {
                 if (document.getElementById('couponName').value == "" || document.getElementById('couponText').value == "") {
-                    alert('請輸入完整值')
+                    Swal.fire('請輸入完整值');
+                    
                 } else {
 
                     couponid = $('input:radio:checked[name="couponRadio"]').val();
@@ -1347,13 +1348,13 @@ function couponTable() {
                         method: 'PUT',
                         contentType: "application/json",
                         data: JSON.stringify(data),
-                        success: function (e) { alert('修改成功'); console.log(e); couponTable(); },
+                        success: function (e) { Swal.fire('修改成功'); console.log(e); couponTable(); },
                         error: function (err) {
                             if (err.status == "500") {
 
-                                alert('修改錯誤')
+                                Swal.fire('修改錯誤')
                             } if (err.status == "404") {
-                                alert('請選擇欄位')
+                                Swal.fire('請選擇欄位')
                             }
                         }
 
@@ -1367,7 +1368,7 @@ function couponTable() {
             //新增
             $('#couponInsert').on('click', function () {
                 if (document.getElementById('couponName').value == "" || document.getElementById('couponText').value == "") {
-                    alert('請輸入完整值')
+                    Swal.fire('請輸入完整值')
                 } else {
                     // var couponid = $('input:radio:checked[name="couponRadio"]').val();
                     var couponName = document.getElementById('couponName').value;
@@ -1382,12 +1383,12 @@ function couponTable() {
                         method: 'POST',
                         contentType: "application/json",
                         data: JSON.stringify(data),
-                        success: function (e) { alert('新增成功'); console.log(e); couponTable(); },
+                        success: function (e) { Swal.fire('新增成功'); console.log(e); couponTable(); },
                         error: function (err) {
                             if (err.status == "500") {
-                                alert('名稱重複')
+                                Swal.fire('名稱重複')
                             } else if (err.status == "404") {
-                                alert('新增失敗')
+                                Swal.fire('新增失敗')
                             }
 
                         }
@@ -1407,12 +1408,12 @@ function couponTable() {
                     url: `http://localhost:${localhost}/api/${storeId}/coupon?token=${newToken}&couponid=${couponid}`,
                     method: 'DELETE',
                     contentType: "application/json",
-                    success: function (e) { alert('刪除成功'); console.log(e); couponTable(); },
+                    success: function (e) { Swal.fire('刪除成功'); console.log(e); couponTable(); },
                     error: function (err) {
                         if (err.status == "400") {
-                            alert('請選擇欄位')
+                            Swal.fire('請選擇欄位')
                         } else if (err.status == "404") {
-                            alert('請選擇欄位')
+                            Swal.fire('請選擇欄位')
                         }
 
                     }
@@ -1500,7 +1501,7 @@ function broadcastTable() {
             //修改
             var flag = false;
             $('#upload').on('change', function () {
-                flag = true
+                flag = true;
             })
             $('#broadcastSave').on('click', function () {
                 $('#myDiv').attr({ "class": "spinner-border", "role": "status" });
@@ -1512,7 +1513,7 @@ function broadcastTable() {
 
 
                 if (document.getElementById('broadcastName').value == "" || document.getElementById('broadcastText').value == "") {
-                    alert('請輸入完整值');
+                    Swal.fire('請輸入完整值');
                     $('#myDiv').removeAttr("class", "spinner-border")
                     $('#myDiv').removeAttr("role", "status")
 
@@ -1529,12 +1530,13 @@ function broadcastTable() {
                     var completesbmit = false;
                     if (flag) {
                         completesbmit=submit();
+                        console.log("ok")
                     }
-                    
+                    console.log(submit())
 
                     setTimeout(function () {
                         if (completesbmit) {
-
+                            broadcastimage = document.getElementById('broadcastimage').value;
 
                             console.log("注意=" + broadcastimage)
                             console.log(document.getElementById("showImg").src)
@@ -1563,14 +1565,14 @@ function broadcastTable() {
                                     $('#myDiv>label').removeAttr("class", "visually-hidden")
                                     $('#myDiv>input').removeAttr("class", "visually-hidden")
                                     $('#myDiv>img[id="preview-img"]').removeAttr("class", "visually-hidden")
-                                    alert('修改成功'); console.log(e); broadcastTable();
+                                    Swal.fire('修改成功'); console.log(e); broadcastTable();
                                 },
                                 error: function (err) {
                                     if (err.status == "500") {
 
-                                        alert('名稱重複')
+                                        Swal.fire('名稱重複')
                                     } if (err.status == "404") {
-                                        alert('請選擇欄位')
+                                        Swal.fire('請選擇欄位')
                                     }
                                     $('#myDiv').removeAttr("class", "spinner-border")
                                     $('#myDiv').removeAttr("role", "status")
@@ -1582,7 +1584,14 @@ function broadcastTable() {
 
 
                             })
-                        } else { alert('修改失敗(檔案太大/網速太慢)') }
+                        } else {
+                            $('#myDiv').removeAttr("class", "spinner-border");
+                            $('#myDiv').removeAttr("role", "status");
+
+                            $('#myDiv>label').removeAttr("class", "visually-hidden");
+                            $('#myDiv>input').removeAttr("class", "visually-hidden");
+                            $('#myDiv>img[id="preview-img"]').removeAttr("class", "visually-hidden"); 
+                            Swal.fire('修改失敗(檔案太大/網速太慢)') }
                     }, 5000)
 
 
@@ -1599,7 +1608,7 @@ function broadcastTable() {
                 $('#myDiv>input').attr("class", "visually-hidden");
                 $('#myDiv>img[id="preview-img"]').attr("class", "visually-hidden");
                 if (document.getElementById('broadcastName').value == "" || document.getElementById('broadcastText').value == "") {
-                    alert('請輸入完整值')
+                    Swal.fire('請輸入完整值')
                     $('#myDiv').removeAttr("class", "spinner-border");
                     $('#myDiv').removeAttr("role", "status");
                     $('#myDiv>label').removeAttr("class", "visually-hidden");
@@ -1640,13 +1649,13 @@ function broadcastTable() {
                                     $('#myDiv>label').removeAttr("class", "visually-hidden")
                                     $('#myDiv>input').removeAttr("class", "visually-hidden")
                                     $('#myDiv>img[id="preview-img"]').removeAttr("class", "visually-hidden");
-                                    alert('新增成功'); console.log(e); broadcastTable();
+                                    Swal.fire('新增成功'); console.log(e); broadcastTable();
                                 },
                                 error: function (err) {
                                     if (err.status == "500") {
-                                        broadcastTable(); alert('名稱重複')
+                                        broadcastTable(); Swal.fire('名稱重複')
                                     } else if (err.status == "404") {
-                                        broadcastTable(); alert('新增失敗')
+                                        broadcastTable(); Swal.fire('新增失敗')
                                     }
                                     $('#myDiv').removeAttr("class", "spinner-border");
                                     $('#myDiv').removeAttr("role", "status");
@@ -1657,7 +1666,7 @@ function broadcastTable() {
 
 
                             })
-                        } else { alert('新增失敗(檔案太大/網速太慢)') }
+                        } else { Swal.fire('新增失敗(檔案太大/網速太慢)') }
                     }, 5000)
 
 
@@ -1678,12 +1687,12 @@ function broadcastTable() {
                     url: `http://localhost:${localhost}/api/${storeId}/message?token=${newToken}&messageid=${broadcastid}`,
                     method: 'DELETE',
                     contentType: "application/json",
-                    success: function (e) { alert('刪除成功'); console.log(e); broadcastTable(); },
+                    success: function (e) { Swal.fire('刪除成功'); console.log(e); broadcastTable(); },
                     error: function (err) {
                         if (err.status == "400") {
-                            alert('請選擇欄位')
+                            Swal.fire('請選擇欄位')
                         } else if (err.status == "404") {
-                            alert('請選擇欄位')
+                            Swal.fire('請選擇欄位')
                         }
 
                     }
@@ -2021,7 +2030,7 @@ async function submit() {
         console.log(document.getElementById('broadcastimage').value);
         console.log(JSON.parse(res)); // 可以看見上傳成功後回傳的URL
         // console.log(JSON.parse(res).data.link)
-        // alert('上傳完成');
+        // Swal.fire('上傳完成');
         
     });
     document.getElementById("preview-img").src = "";
@@ -2042,14 +2051,14 @@ uploadInput.addEventListener("change", (e) => {
     var file = uploadInput.files[0], imageType = /^image\//, reader = '';
     // 檔案是否為圖片
     if (!imageType.test(file.type)) {
-        alert("請選擇圖片檔案！");
+        Swal.fire("請選擇圖片檔案！");
         return;
     }
     // 判斷是否支援FileReader  // IE9及以下不支援FileReader
     if (window.FileReader) {
         reader = new FileReader();
     } else {
-        alert("您的瀏覽器不支援圖片預覽功能，如需該功能請升級您的瀏覽器！");
+        Swal.fire("您的瀏覽器不支援圖片預覽功能，如需該功能請升級您的瀏覽器！");
         return;
     }
     // 讀取完成    

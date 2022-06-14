@@ -1,7 +1,7 @@
 let newToken = localStorage.getItem('storeToken');
-// localStorage.getItem('storeToken') == null ? function () { alert("請先登入"); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
+// localStorage.getItem('storeToken') == null ? function () { Swal.fire("請先登入"); window.location.href = "login.html" }() : newToken = localStorage.getItem('storeToken');
 let storeId = JSON.parse(localStorage.getItem('storeinfo')).STORE_ID;
-let localhost = 8081;
+let localhost = 8080;
 /*---------------嘉彬------------*/
 $('img[src="./img/group1.png"]').on('click', function () {
     $('#padleft .active').removeClass('active');
@@ -109,7 +109,7 @@ function submit() {
         addImg(imgURL);
         console.log(JSON.parse(res)); // 可以看見上傳成功後回傳的URL
         console.log(JSON.parse(res).data.link)
-        alert('上傳完成');
+        Swal.fire('上傳完成');
     });
     document.getElementById("preview-image").src = "";
 }
@@ -130,14 +130,14 @@ uploadInput.addEventListener("change", (e) => {
 
     // 檔案是否為圖片
     if (!imageType.test(file.type)) {
-        alert("請選擇圖片！");
+        Swal.fire("請選擇圖片！");
         return;
     }
     // 判斷是否支援FileReader  // IE9及以下不支援FileReader
     if (window.FileReader) {
         reader = new FileReader();
     } else {
-        alert("您的瀏覽器不支援圖片預覽功能，如需該功能請升級您的瀏覽器！");
+        Swal.fire("您的瀏覽器不支援圖片預覽功能，如需該功能請升級您的瀏覽器！");
         return;
     }
     // 讀取完成    
@@ -183,7 +183,7 @@ function ingredientsDelBtn(obj) {
         // rows.filter(":last").html('');
         row.remove();
     } else {
-        alert('Cannot remove any more rows');
+        Swal.fire('Cannot remove any more rows');
     }
 
 }
@@ -269,7 +269,7 @@ function ingredientsOPA() {
 
 
             } else {
-                alert("食材輸入不完整");
+                Swal.fire("食材輸入不完整");
                 $('#nutritionOperation').html(
                     "<hr>");
                 break;
@@ -280,7 +280,7 @@ function ingredientsOPA() {
 
     })
         .fail(function () {
-            alert("error");
+            Swal.fire("error");
         })
 
 
@@ -468,7 +468,7 @@ function modifyMenuBtn(obj) {
                 error: function () { }
             })
                 .fail(function () {
-                    alert("請先登入/資料庫OR後端有誤");
+                    Swal.fire("請先登入/資料庫OR後端有誤");
                     window.location.href = "login.html"
                 })
             // var ingredientarray = new Array();
@@ -604,7 +604,7 @@ function saveField() {
             Swal.fire("請繼續編輯菜單");
         }
     });
-    // alert("圖片未上傳");
+    // Swal.fire("圖片未上傳");
 
 
 }
@@ -736,7 +736,7 @@ function saveAppendMenu() {
             error: function () { }
         }).done()
             .fail(function () {
-                alert("請先登入/資料庫OR後端有誤");
+                Swal.fire("請先登入/資料庫OR後端有誤");
                 window.location.href = "login.html"
             })
 
@@ -807,7 +807,7 @@ function saveAppendMenu() {
                                     })
 
                                 } else {
-                                    alert("食材輸入不完整");
+                                    Swal.fire("食材輸入不完整");
                                     $('#nutritionOperation').html(
                                         "<hr>");
                                     break;
@@ -938,7 +938,7 @@ function saveAppendMenu() {
                                                         })
 
                                                     } else {
-                                                        alert("食材輸入不完整");
+                                                        Swal.fire("食材輸入不完整");
                                                         $('#nutritionOperation').html(
                                                             "<hr>");
                                                         break;
@@ -952,7 +952,7 @@ function saveAppendMenu() {
                                         }).done(function (index) { })
 
                                             .fail(function () {
-                                                alert("error");
+                                                Swal.fire("error");
                                             })
 
                                     },
