@@ -58,10 +58,8 @@ window.onload = function () {
         url: `http://localhost:${localhost}/api/${storeId}/stores?token=${newToken}`,
         method: 'GET',
         success: (res, status) => {
-            console.log(res[0].STORE_OPEN_STATUS)
-
-
-
+            console.log("STATUS=")
+            $("#switch")[0].checked = res[0].STORE_OPEN_STATUS;
         },
         error: err => {
             console.log('status change fail')
@@ -106,7 +104,7 @@ if (localStorage.getItem('openstatus') == "true") {
 }
 
 
-function openSwitch(isOpen) {
+async function openSwitch(isOpen) {
     $.ajax({
         url: `http://localhost:${localhost}/api/${storeId}/stores?token=${newToken}`,
         method: 'GET',
@@ -218,6 +216,7 @@ var Chart9;
 var Chart10;
 
 //首頁頁面處理
+
 function Homepage() {
     //首頁銷售前三//分析資料-前10熱賣
     $('#pills-home ol').empty();
@@ -1907,8 +1906,9 @@ $("#orderBtn").on("click", function () {
 });
 
 
-/*找類別*/
+
 function mealIngredients() {
+
     $.ajax({
         url: `http://localhost:${localhost}/api/${storeId}/ingredients?token=${newToken}`,
         method: 'GET',
@@ -1918,8 +1918,13 @@ function mealIngredients() {
         error: function () { }
     }).done(function (index) {
         console.log("mealIngredients ok")
+        if($('#mealIngredients>option').val()==""){
+            console.log("ok")
+        }else{
+            console.log("no ok")
+        }
         for (var meal of index) {
-    
+            
             $('#mealIngredients').append(
                 `<option value = "${meal.ingredientname}">`
             )
@@ -2165,6 +2170,35 @@ uploadInput.addEventListener("change", (e) => {
 //     options: {} //圖表的一些其他設定，像是hover時外匡加粗
 // })
 /*畫分析圖表*/
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-top-center",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "1000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
 
+$('a[data-bs-target="#pills-home"]').on('click',function () {
+    //可以放一些和資料庫連接的東西
+    toastr.info("您有一筆新訂單");
+     console.log('訂閱成功')
+})
 
+// if(msg="有一筆新訂單"){
+//     $('a[data-bs-target="#pills-home"]').on('click',function () {
+//     //可以放一些和資料庫連接的東西
+     
+//      console.log('訂閱成功')
+//     })
+// }
 /*---------------嘉彬------------*/
